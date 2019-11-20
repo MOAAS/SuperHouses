@@ -11,7 +11,7 @@ CREATE TABLE User (
   name VARCHAR
 );
 
-CREATE TABLE Location (
+CREATE TABLE PlaceLocation (
     id INTEGER PRIMARY KEY,
     country VARCHAR,
     city VARCHAR,
@@ -20,7 +20,7 @@ CREATE TABLE Location (
 
 CREATE TABLE Place (
     id INTEGER PRIMARY KEY,
-    location REFERENCES Location UNIQUE,
+    location REFERENCES PlaceLocation UNIQUE,
     owner REFERENCES User,
     title VARCHAR,
     description VARCHAR,
@@ -44,11 +44,11 @@ INSERT INTO User VALUES ("zaccOld", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", 
 INSERT INTO User VALUES ("alHammy", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Alicia Hamilton");
 INSERT INTO User VALUES ("coolApril", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Abril Cooley");
 
-INSERT INTO Location VALUES (1, "PORTUGAL", "Porto", "Rua Joao Carlos, 123");
-INSERT INTO Location VALUES (2, "PORTUGAL", "Faro", "Rua Lelelelele, 898");
-INSERT INTO Location VALUES (3, "PORTUGAL", "Faro", "Rua Falso 332");
-INSERT INTO Location VALUES (4, "PORTUGAL", "Faro", "Rua do lixo, 2");
-INSERT INTO Location VALUES (5, "PORTUGAL", "Faro", "Rua debaixo da praia, 1");
+INSERT INTO PlaceLocation VALUES (1, "PORTUGAL", "Porto", "Rua Joao Carlos, 123");
+INSERT INTO PlaceLocation VALUES (2, "PORTUGAL", "Faro", "Rua Lelelelele, 898");
+INSERT INTO PlaceLocation VALUES (3, "PORTUGAL", "Faro", "Rua Falso 332");
+INSERT INTO PlaceLocation VALUES (4, "PORTUGAL", "Faro", "Rua do lixo, 2");
+INSERT INTO PlaceLocation VALUES (5, "PORTUGAL", "Faro", "Rua debaixo da praia, 1");
 
 INSERT INTO Place VALUES (1, 1, "zaccOld", "The good place", "A great place", 96.25);
 INSERT INTO Place VALUES (2, 2, "alHammy", "Cute house near the beach", "But this one's cuter", 50.00);
