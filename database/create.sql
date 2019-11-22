@@ -7,8 +7,8 @@ DROP TABLE IF EXISTS Reservation;
 
 CREATE TABLE User (
   username VARCHAR PRIMARY KEY,
-  password VARCHAR,
-  name VARCHAR
+  password VARCHAR NOT NULL,
+  name VARCHAR NOT NULL
 );
 
 CREATE TABLE PlaceLocation (
@@ -20,8 +20,8 @@ CREATE TABLE PlaceLocation (
 
 CREATE TABLE Place (
     id INTEGER PRIMARY KEY,
-    location REFERENCES PlaceLocation UNIQUE,
-    owner REFERENCES User,
+    location REFERENCES PlaceLocation UNIQUE NOT NULL,
+    owner REFERENCES User NOT NULL,
     title VARCHAR,
     description VARCHAR,
     price REAL
@@ -30,14 +30,15 @@ CREATE TABLE Place (
 
 CREATE TABLE Reservation (
     id INTEGER PRIMARY KEY,
-    dateStart DATE,
-    dateEnd DATE,
-    user REFERENCES User,
-    place REFERENCES Place
+    dateStart DATE NOT NULL,
+    dateEnd DATE NOT NULL,
+    user REFERENCES User NOT NULL,
+    place REFERENCES Place NOT NULL
 );
 
 PRAGMA foreign_keys = ON;
 
+/*
 -- All passwords are 1234 in SHA-1 format
 INSERT INTO User VALUES ("dommyWoods", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods");
 INSERT INTO User VALUES ("zaccOld", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Zachary Young");
@@ -59,3 +60,4 @@ INSERT INTO Place VALUES (5, 5, "coolApril", "The perfect house under the beach"
 
 INSERT INTO Reservation VALUES (1, "2019-11-07", "2019-11-11", "dommyWoods", 1);
 INSERT INTO Reservation VALUES (2, "2019-11-07", "2019-11-12", "zaccOld", 4);
+*/

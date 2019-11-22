@@ -1,0 +1,164 @@
+/* Page header and body */
+
+body {
+    margin: 0;
+
+    --bg-color: rgb(244, 247, 252);
+    --main-color: rgb(37, 71, 46);
+    --main-color-hl: rgb(64, 116, 75);
+
+    --main-color-light: rgb(90, 160, 105);
+    --main-color-light-hl: rgb(64, 116, 75);
+
+    --input-bg-color: rgb(220, 220, 220);
+    --input-hint-color: rgb(80, 80, 80);
+    --accent-color: rgb(165, 244, 255);
+
+    --success-color: rgb(97, 187, 61);
+    --error-color: rgb(255, 0, 0);
+  
+  
+    background-color: var(--bg-color);
+    /*background-image: url("icon.png");*/
+
+    font-family: sans-serif;
+}
+
+#pagetop {
+    background-color: var(--main-color);
+}
+
+#pagetop h1 {
+    padding: 0.5em;
+}
+
+#pagetop a {
+    color: white;
+    font-weight: bold;
+}
+
+#pagetop span {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    max-width: 80em;    
+}
+
+#pagetop #loggeduser {
+    color: var(--accent-color);
+    font-weight: bold;
+}
+
+#pagetop nav li {
+    display: inline;
+    list-style-type: none;
+    color: white;
+    margin: 0.5em;
+}
+
+#pagetop nav a {
+    padding: 0.5em;
+    background-color: var(--main-color-light);
+
+    transition: background-color 200ms ease-in-out;
+}
+
+#pagetop nav a:hover {
+    background-color: var(--main-color-light-hl);
+}
+
+#messages {
+    text-align: center;
+    font-weight: bold;
+    margin: 1em;
+    font-size: 1.25em;
+}
+
+#messages .success {
+    color: var(--success-color);
+}
+
+#messages .error {
+    color: var(--error-color);
+}
+
+
+/* Generic */
+
+h1, h2 {
+    margin: 0;
+}
+
+a {
+    text-decoration: none;
+}
+
+input, label {
+    display: block;
+}
+
+input[type="text"], input[type="password"]  {
+    box-sizing: border-box;  
+    font-size: 1em;
+    padding: 0.75em;
+    background-color:  var(--input-bg-color);
+    border-radius: 10px;
+    border: none;
+}
+
+input::placeholder {
+    color:  var(--input-hint-color);
+}
+
+input:focus {
+    outline: none;
+}
+
+/* Authentication */
+
+#login, #signup {
+    box-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    background-color: white;
+    width: 30em;
+    padding: 1em 2em;
+    margin: 1em auto;
+}
+
+#login header, #signup header {
+    text-align: center;
+    padding: 1em;
+}
+
+#login label, #signup label {
+    font-weight: bold;
+}
+
+#login input, #signup input {
+    width: 100%;   
+    margin-bottom: 3em; 
+    margin-top: 0.5em;
+}
+
+#login input[type="submit"], #signup input[type="submit"] {
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 999px;
+    font-size: 1.5em;
+    text-transform: uppercase;
+    margin-bottom: 1em;
+    padding: 0.25em;
+
+    transition: background-color 200ms ease-in-out;
+}
+
+#login input[type="submit"]:hover, #signup input[type="submit"]:hover {
+    background-color: var(--main-color-hl);
+    cursor: pointer;
+}
+
+#login footer a, #signup footer a {
+    color: var(--main-color);
+    font-weight: bold;
+}
