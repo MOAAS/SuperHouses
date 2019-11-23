@@ -6,9 +6,10 @@ DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Reservation;
 
 CREATE TABLE User (
-  username VARCHAR PRIMARY KEY,
-  password VARCHAR NOT NULL,
-  name VARCHAR NOT NULL
+    id INTEGER PRIMARY KEY,
+    username VARCHAR UNIQUE NOT NULL,
+    passwordHash VARCHAR NOT NULL,
+    name VARCHAR NOT NULL
 );
 
 CREATE TABLE PlaceLocation (

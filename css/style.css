@@ -45,42 +45,44 @@ body {
     max-width: 80em;    
 }
 
+#pagetop nav li {
+    display: inline;
+    list-style-type: none;
+    color: white;
+    margin: 0.25em;
+}
+
 #pagetop #loggeduser {
     color: var(--accent-color);
     font-weight: bold;
 }
 
-#pagetop nav li {
-    display: inline;
-    list-style-type: none;
-    color: white;
-    margin: 0.5em;
-}
-
-#pagetop nav a {
+#pagetop #logoutbutton {
     padding: 0.5em;
     background-color: var(--main-color-light);
-
     transition: background-color 200ms ease-in-out;
 }
 
-#pagetop nav a:hover {
+#pagetop #logoutbutton:hover {
     background-color: var(--main-color-light-hl);
 }
 
 #messages {
+    color: white;
     text-align: center;
     font-weight: bold;
-    margin: 1em;
     font-size: 1.25em;
+    
 }
 
 #messages .success {
-    color: var(--success-color);
+    padding: 0.5em;
+    background-color: var(--success-color);
 }
 
 #messages .error {
-    color: var(--error-color);
+    padding: 0.5em;
+    background-color: var(--error-color);
 }
 
 
@@ -118,14 +120,36 @@ input:focus {
     outline: none;
 }
 
+/* Forms */
+
+.genericForm {
+    box-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    background-color: white;
+    padding: 1em 2em;
+}
+
+.genericForm input[type="submit"] {
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+    border-radius: 999px;
+    margin-bottom: 1em;
+    padding: 0.25em;
+
+    transition: background-color 200ms ease-in-out;
+}
+
+.genericForm input[type="submit"]:hover {
+    background-color: var(--main-color-hl);
+    cursor: pointer;
+}
+
+
 /* Authentication */
 
 #login, #signup {
-    box-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
-    background-color: white;
-    width: 30em;
-    padding: 1em 2em;
     margin: 1em auto;
+    max-width: 30em;
 }
 
 #login header, #signup header {
@@ -144,21 +168,8 @@ input:focus {
 }
 
 #login input[type="submit"], #signup input[type="submit"] {
-    color: white;
-    background-color: var(--main-color);
-    border: none;
-    border-radius: 999px;
     font-size: 1.5em;
     text-transform: uppercase;
-    margin-bottom: 1em;
-    padding: 0.25em;
-
-    transition: background-color 200ms ease-in-out;
-}
-
-#login input[type="submit"]:hover, #signup input[type="submit"]:hover {
-    background-color: var(--main-color-hl);
-    cursor: pointer;
 }
 
 #login footer a, #signup footer a {
@@ -237,3 +248,9 @@ input:focus {
 
 
 
+/* Edit profile */
+
+#editProfile {
+    margin: 1em auto;
+    max-width: 60em;
+}
