@@ -11,6 +11,7 @@
       <title>Super Houses</title>
       <meta charset="utf-8">
       <link rel="stylesheet" href="../css/style.css">
+      <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
       <script src="../js/main.js" defer></script>
     </head>
@@ -23,8 +24,8 @@
           <?php if ($username != NULL) { ?>
             <nav>
               <ul>
-                <li>Signed in as <strong id="loggeduser"><?=$username?></strong></li>
-                <li><a href="../actions/action_logout.php">Logout</a></li>
+                <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>
+                <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
               </ul>
             </nav>
           <?php } ?>

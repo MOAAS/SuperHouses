@@ -1,5 +1,5 @@
 <?php function draw_login() { ?>
-  <section id="login">
+  <section id="login" class="genericForm">
     
     <header><h2>Welcome Back!</h2></header>
 
@@ -21,7 +21,7 @@
 <?php } ?>
 
 <?php function draw_signup() { ?>
-  <section id="signup">
+  <section id="signup" class="genericForm">
 
     <header><h2>Create New Account</h2></header>
 
@@ -34,6 +34,9 @@
 
       <label for="password">Password</label>
       <input id="password" type="password" name="password" placeholder="Pick a password" required>
+
+      <label for="confirmPassword">Confirm Password</label>
+      <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm your password" required>
 
       <input type="submit" value="Signup">
     </form>
