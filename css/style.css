@@ -1,5 +1,4 @@
 /* Page header and body */
-
 body {
     margin: 0;
 
@@ -23,6 +22,7 @@ body {
 
     font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
+  
 
 #pagetop {
     background-color: var(--main-color);
@@ -87,6 +87,9 @@ body {
 
 
 /* Generic */
+html {
+    scroll-behavior: smooth;
+}
 
 h1, h2 {
     margin: 0;
@@ -173,6 +176,77 @@ input:focus {
     color: var(--main-color);
     font-weight: bold;
 }
+
+/* Houses */
+
+#houses{
+    padding: 2em;
+}
+
+#houses > ul{
+    padding-left: 0px;
+    list-style-type: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-gap: 1em;
+}
+
+#houses > ul > li {
+    background-color: white;
+    border: 1px solid var(--main-color);
+    border-radius: .5em;
+    
+}
+
+#houses > ul > li > figure{
+    margin:0;
+}
+
+#houses > ul > li > figure{
+    max-height: 220px;
+    overflow: hidden;
+    border-top-left-radius: .5em;
+    border-top-right-radius: .5em;
+    position: relative;
+}
+
+#houses > ul > li > figure > img {
+    width: 100%;
+}
+
+#houses > ul > li > figure > figcaption {
+    position: absolute;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    width: 100%;
+}
+
+#houses > ul > li > figure > figcaption > h3 {
+    white-space: nowrap; 
+    text-overflow: ellipsis;
+    overflow: hidden;
+    margin:0;
+    color: white;
+    padding: .75em;
+    font-size: 1.25em;
+}
+#houses > ul > li > figure > figcaption > h3:hover {
+    white-space: normal; 
+}
+#houses > ul > li > p {
+    margin :0;
+    padding: .75em;
+}
+
+#houses > ul > li > .price:after{
+    content:"€/day";
+}
+
+
+
+
+
+
 
 /* Edit profile */
 
