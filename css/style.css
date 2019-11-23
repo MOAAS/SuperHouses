@@ -103,7 +103,8 @@ input, label {
     display: block;
 }
 
-input[type="text"], input[type="password"]  {
+
+input[type="text"], input[type="password"], select{
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
@@ -128,7 +129,17 @@ input:focus {
     padding: 1em 2em;
 }
 
+.genericForm header {
+    text-align: center;
+    padding: 1em;
+}
+
+.genericForm label {
+    font-weight: bold;
+}
+
 .genericForm input[type="submit"] {
+    cursor: pointer;
     color: white;
     background-color: var(--main-color);
     border: none;
@@ -141,7 +152,6 @@ input:focus {
 
 .genericForm input[type="submit"]:hover {
     background-color: var(--main-color-hl);
-    cursor: pointer;
 }
 
 
@@ -150,15 +160,6 @@ input:focus {
 #login, #signup {
     margin: 1em auto;
     max-width: 30em;
-}
-
-#login header, #signup header {
-    text-align: center;
-    padding: 1em;
-}
-
-#login label, #signup label {
-    font-weight: bold;
 }
 
 #login input, #signup input {
@@ -176,6 +177,44 @@ input:focus {
     color: var(--main-color);
     font-weight: bold;
 }
+
+/* Edit profile */
+
+#editProfile {
+    display: grid;
+    margin: 1em auto;
+    max-width: 60em;
+}
+
+#editProfile header {
+    grid-column: 1 / span 2;
+    grid-row: 1;
+}
+
+#editProfile #editInfo {
+    grid-column: 1;
+    grid-row: 2;
+}
+
+#editProfile #editCredentials {
+    grid-column: 2;
+    grid-row: 2;
+}
+
+#editProfile input, #editProfile select {
+    width: 50%;
+    margin-bottom: 0.75em; 
+    margin-top: 0.3em;
+}
+
+#editProfile label {
+    text-decoration: underline;
+}
+
+#editProfile input[type="submit"] {
+    font-size: 1.25em;
+}
+
 
 /* Houses */
 
@@ -242,15 +281,3 @@ input:focus {
     content:"€/day";
 }
 
-
-
-
-
-
-
-/* Edit profile */
-
-#editProfile {
-    margin: 1em auto;
-    max-width: 60em;
-}
