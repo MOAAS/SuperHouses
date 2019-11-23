@@ -1,7 +1,8 @@
 PRAGMA foreign_keys = OFF;
 
 DROP TABLE IF EXISTS User;
-DROP TABLE IF EXISTS Location;
+DROP TABLE IF EXISTS PlaceLocation;
+DROP TABLE IF EXISTS Country;
 DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Reservation;
 
@@ -9,12 +10,19 @@ CREATE TABLE User (
     id INTEGER PRIMARY KEY,
     username VARCHAR UNIQUE NOT NULL,
     passwordHash VARCHAR NOT NULL,
-    name VARCHAR NOT NULL
+    displayname VARCHAR NOT NULL,
+    country VARCHAR REFERENCES Country,
+    city VARCHAR
+);
+
+CREATE TABLE Country (
+    id INTEGER PRIMARY KEY,
+    countryName VARCHAR UNIQUE NOT NULL
 );
 
 CREATE TABLE PlaceLocation (
     id INTEGER PRIMARY KEY,
-    country VARCHAR,
+    country REFERENCES Country,
     city VARCHAR,
     address VARCHAR
 );
@@ -39,6 +47,32 @@ CREATE TABLE Reservation (
 
 PRAGMA foreign_keys = ON;
 
+INSERT INTO Country VALUES (NULL, 'Portugal');
+INSERT INTO Country VALUES (NULL, 'France');
+INSERT INTO Country VALUES (NULL, 'Spain');
+INSERT INTO Country VALUES (NULL, 'Italy');
+INSERT INTO Country VALUES (NULL, 'Denmark');
+INSERT INTO Country VALUES (NULL, 'United Kingdom');
+INSERT INTO Country VALUES (NULL, 'Ireland');
+INSERT INTO Country VALUES (NULL, 'IKEA Land');
+INSERT INTO Country VALUES (NULL, 'Finland');
+INSERT INTO Country VALUES (NULL, 'Norway');
+INSERT INTO Country VALUES (NULL, 'Germany');
+INSERT INTO Country VALUES (NULL, 'Poland');
+INSERT INTO Country VALUES (NULL, 'Croatia');
+INSERT INTO Country VALUES (NULL, 'Latvia');
+INSERT INTO Country VALUES (NULL, 'Estonia');
+INSERT INTO Country VALUES (NULL, 'Lithuania');
+INSERT INTO Country VALUES (NULL, 'Austria');
+INSERT INTO Country VALUES (NULL, 'Switzerland');
+INSERT INTO Country VALUES (NULL, 'Netherlands');
+INSERT INTO Country VALUES (NULL, 'Belgium');
+INSERT INTO Country VALUES (NULL, 'Russia');
+INSERT INTO Country VALUES (NULL, 'Ukraine');
+INSERT INTO Country VALUES (NULL, 'Bulgaria');
+INSERT INTO Country VALUES (NULL, 'Belarus');
+INSERT INTO Country VALUES (NULL, 'Greece');
+INSERT INTO Country VALUES (NULL, 'Turkey');
 /*
 -- All passwords are 1234 in SHA-1 format
 INSERT INTO User VALUES ("dommyWoods", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods");

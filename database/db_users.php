@@ -1,5 +1,35 @@
 <?php
     include_once('../includes/database.php');
+    include_once('../includes/userinfo.php');
+    include_once('../database/db_countries.php');
+
+    function updateUserInfo($userInfo) {
+        $db = Database::instance()->db();
+
+        $countryID = getCountryID($userInfo->country);
+
+        print_r($countryID);
+        if ($countryID == false)
+            $countryID = NULL;
+
+        $statement = $db->prepare('UPDATE User SET displayname = ?, country = ?, city = ? WHERE username = ?');
+        $statement->execute(array($userInfo->displayname, $countryID, $userInfo->city, $userInfo->username));
+    }
+
+    function getUserInfo($username) {
+        $db = Database::instance()->db();
+
+        $statement = $db->prepare('SELECT username, displayname, country, city FROM User WHERE username = ?');
+        $statement->execute(array($username));
+
+        $user = $statement->fetch();
+
+        if ($user['country'] == NULL)
+            $country = "";
+        else $country = getCountryByID($user['country']);
+
+        return new UserInfo($user['username'], $user['displayname'], $country, $user['city']);
+    }
 
     function userExists($username) {
         $db = Database::instance()->db();
@@ -21,7 +51,7 @@
     function addUser($username, $password, $name) {
         $db = Database::instance()->db();
 
-        $statement = $db->prepare('INSERT INTO User Values (?, ?, ?, ?)');
+        $statement = $db->prepare('INSERT INTO User Values (?, ?, ?, ?, NULL, NULL)');
         $statement->execute(array(NULL, $username, password_hash($password, PASSWORD_DEFAULT), $name));
     }
 

@@ -1,1 +1,1 @@
-sqlite3 houses.db
+sqlite3 houses.db -header -column -nullvalue NULL
