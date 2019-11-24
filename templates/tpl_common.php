@@ -20,7 +20,10 @@
 
       <header id="pagetop">
         <span>
-          <h1><a href="login.php">Super Houses</a></h1>
+          <h1>
+            <a href="login.php">Super Houses</a>
+            <small>We rent.</small>
+          </h1>
           <?php if ($username != NULL) { ?>
             <nav>
               <ul>

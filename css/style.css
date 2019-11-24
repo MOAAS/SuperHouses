@@ -15,12 +15,14 @@ body {
 
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(255, 0, 0);
+
+    --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
   
   
     background-color: var(--bg-color);
     /*background-image: url("icon.png");*/
 
-    font-family: Verdana, Geneva, Tahoma, sans-serif;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
   
 
@@ -30,6 +32,12 @@ body {
 
 #pagetop h1 {
     padding: 0.5em;
+    color: white;
+}
+
+#pagetop h1 small {
+    display: block;
+    font-size: 0.5em;
 }
 
 #pagetop a {
@@ -71,8 +79,7 @@ body {
     color: white;
     text-align: center;
     font-weight: bold;
-    font-size: 1.25em;
-    
+    font-size: 1.25em;    
 }
 
 #messages .success {
@@ -91,7 +98,8 @@ html {
     scroll-behavior: smooth;
 }
 
-h1, h2 {
+h1, h2, h3 {
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
     margin: 0;
 }
 
@@ -124,7 +132,7 @@ input:focus {
 /* Forms */
 
 .genericForm {
-    box-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    box-shadow: var(--simple-shadow);
     background-color: white;
     padding: 1em 2em;
 }
@@ -186,6 +194,10 @@ input:focus {
     max-width: 60em;
 }
 
+#editProfile h3 {
+    margin: 0.75em 0;
+}
+
 #editProfile header {
     grid-column: 1 / span 2;
     grid-row: 1;
@@ -222,62 +234,62 @@ input:focus {
     padding: 2em;
 }
 
-#houses > ul{
+#houses > ul {
     padding-left: 0px;
     list-style-type: none;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-    grid-gap: 1em;
+    gap: 1em;
 }
 
-#houses > ul > li {
+#houses li {
+    box-shadow: var(--simple-shadow); /** pode ser q fique bem **/
     background-color: white;
-    border: 1px solid var(--main-color);
-    border-radius: .5em;
-    
+    border: 2px solid var(--main-color);
+    border-radius: 1em;    
 }
 
-#houses > ul > li > figure{
+#houses figure {
     margin:0;
-}
-
-#houses > ul > li > figure{
-    max-height: 220px;
     overflow: hidden;
-    border-top-left-radius: .5em;
-    border-top-right-radius: .5em;
     position: relative;
+    border-radius: 0.85em 0.85em 0 0;
 }
 
-#houses > ul > li > figure > img {
+#houses img {
     width: 100%;
 }
 
-#houses > ul > li > figure > figcaption {
+#houses figcaption {
     position: absolute;
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
 }
 
-#houses > ul > li > figure > figcaption > h3 {
+#houses figcaption h3 {
     white-space: nowrap; 
     text-overflow: ellipsis;
     overflow: hidden;
-    margin:0;
     color: white;
-    padding: .75em;
+    padding: 0.75em;
     font-size: 1.25em;
 }
-#houses > ul > li > figure > figcaption > h3:hover {
+
+#houses figcaption h3:hover {
     white-space: normal; 
 }
-#houses > ul > li > p {
-    margin :0;
-    padding: .75em;
+
+#houses p {
+    padding: 0 0.75em;
 }
 
-#houses > ul > li > .price:after{
-    content:"€/day";
+#houses .price {
+    font-size: 1.25em;
+}
+
+#houses .price:after{
+    font-size: 0.75em;
+    content:"€ / day";
 }
 
