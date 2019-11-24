@@ -73,8 +73,23 @@ INSERT INTO Country VALUES (NULL, 'Bulgaria');
 INSERT INTO Country VALUES (NULL, 'Belarus');
 INSERT INTO Country VALUES (NULL, 'Greece');
 INSERT INTO Country VALUES (NULL, 'Turkey');
-/*
+
+INSERT INTO User VALUES(1,"Marco","7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Marco321",1,"Lisbon");
+
+INSERT INTO PlaceLocation VALUES (1, NULL, "Porto", "Rua Joao Carlos, 123");
+INSERT INTO PlaceLocation VALUES (2, NULL, "Faro", "Rua Lelelelele, 898");
+INSERT INTO PlaceLocation VALUES (3, NULL, "Faro", "Rua Falso 332");
+INSERT INTO PlaceLocation VALUES (4, NULL, "Faro", "Rua do lixo, 2");
+INSERT INTO PlaceLocation VALUES (5, NULL, "Faro", "Rua debaixo da praia, 1");
+
+INSERT INTO Place VALUES (1, 1, 1, "The good place", "A great place", 96.25);
+INSERT INTO Place VALUES (2, 2, 1, "Cute house near the beach", "But this one's cuter", 50.00);
+INSERT INTO Place VALUES (3, 3, 1, "Cute house near the beach", "But this one's nearer", 1000.00);
+INSERT INTO Place VALUES (4, 4, 1, "Awful house on the beach", "A great place", 75.00);
+INSERT INTO Place VALUES (5, 5, 1, "The perfect house under the beach", "You won't enjoy this", 4.00);
+
 -- All passwords are 1234 in SHA-1 format
+/*
 INSERT INTO User VALUES ("dommyWoods", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Dominic Woods");
 INSERT INTO User VALUES ("zaccOld", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Zachary Young");
 INSERT INTO User VALUES ("alHammy", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Alicia Hamilton");
@@ -91,7 +106,6 @@ INSERT INTO Place VALUES (2, 2, "alHammy", "Cute house near the beach", "But thi
 INSERT INTO Place VALUES (3, 3, "coolApril", "Cute house near the beach", "But this one's nearer", 1000.00);
 INSERT INTO Place VALUES (4, 4, "coolApril", "Awful house on the beach", "A great place", 75.00);
 INSERT INTO Place VALUES (5, 5, "coolApril", "The perfect house under the beach", "You won't enjoy this", 4.00);
-
 
 INSERT INTO Reservation VALUES (1, "2019-11-07", "2019-11-11", "dommyWoods", 1);
 INSERT INTO Reservation VALUES (2, "2019-11-07", "2019-11-12", "zaccOld", 4);
