@@ -79,7 +79,7 @@ INSERT INTO User VALUES ("dommyWoods", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220
 INSERT INTO User VALUES ("zaccOld", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Zachary Young");
 INSERT INTO User VALUES ("alHammy", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Alicia Hamilton");
 INSERT INTO User VALUES ("coolApril", "7110eda4d09e062aa5e4a390b0a572ac0d2c0220", "Abril Cooley");
-
+*
 INSERT INTO PlaceLocation VALUES (1, "PORTUGAL", "Porto", "Rua Joao Carlos, 123");
 INSERT INTO PlaceLocation VALUES (2, "PORTUGAL", "Faro", "Rua Lelelelele, 898");
 INSERT INTO PlaceLocation VALUES (3, "PORTUGAL", "Faro", "Rua Falso 332");

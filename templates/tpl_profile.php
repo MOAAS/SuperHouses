@@ -3,7 +3,7 @@
     <header><h2><?=$user->username?>'s Profile</h2></header>
     <div id="editInfo">
       <h3>Personal Information</h3>
-      <form id="editSelfForm" method="post" action="../actions/action_editProfile.php">
+      <form method="post" action="../actions/action_editProfile.php">
         <label for="displayname">Display Name</label>
         <input id="displayname" type="text" name="displayname" value="<?=$user->displayname?>">  
 
@@ -25,7 +25,7 @@
 
     <div id="editCredentials">
       <h3>Edit Username</h3>
-      <form id="editUsernameForm" method="post" action="../actions/action_editUsername.php">
+      <form method="post" action="../actions/action_editUsername.php">
         <label for="currPassword1">Current Password</label>
         <input id="currPassword1" type="password" name="currPassword" required>  
 

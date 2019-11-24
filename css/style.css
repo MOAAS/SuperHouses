@@ -17,6 +17,7 @@ body {
     --error-color: rgb(255, 0, 0);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
   
   
     background-color: var(--bg-color);
@@ -112,7 +113,7 @@ input, label {
 }
 
 
-input[type="text"], input[type="password"], select{
+input[type="text"], input[type="password"], input[type="date"], select{
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
@@ -128,6 +129,25 @@ input::placeholder {
 input:focus {
     outline: none;
 }
+
+
+input[type="submit"] {
+    cursor: pointer;
+    color: white;
+    background-color: var(--main-color);
+    border: none;
+
+    transition: background-color 200ms ease-in-out;
+}
+
+input[type="submit"]:hover {
+    background-color: var(--main-color-hl);
+}
+
+.hidden {
+    display: none;
+}
+
 
 /* Forms */
 
@@ -146,22 +166,11 @@ input:focus {
     font-weight: bold;
 }
 
-.genericForm input[type="submit"] {
-    cursor: pointer;
-    color: white;
-    background-color: var(--main-color);
-    border: none;
+.genericForm  input[type="submit"] {
     border-radius: 999px;
     margin-bottom: 1em;
     padding: 0.25em;
-
-    transition: background-color 200ms ease-in-out;
 }
-
-.genericForm input[type="submit"]:hover {
-    background-color: var(--main-color-hl);
-}
-
 
 /* Authentication */
 
@@ -199,18 +208,15 @@ input:focus {
 }
 
 #editProfile header {
-    grid-column: 1 / span 2;
-    grid-row: 1;
+    grid-area: 1 / 1 / span 1 / span 2;
 }
 
 #editProfile #editInfo {
-    grid-column: 1;
-    grid-row: 2;
+    grid-area: 2 / 1;
 }
 
 #editProfile #editCredentials {
-    grid-column: 2;
-    grid-row: 2;
+    grid-area: 2 / 2;
 }
 
 #editProfile input, #editProfile select {
@@ -231,14 +237,15 @@ input:focus {
 /* Houses */
 
 #houses{
-    padding: 2em;
+    margin: 1em auto;
+    max-width: 80em;
 }
 
 #houses > ul {
     padding-left: 0px;
     list-style-type: none;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     gap: 1em;
 }
 
@@ -293,3 +300,134 @@ input:focus {
     content:"€ / day";
 }
 
+/* Search functionality */
+
+#searchButton {
+    position: fixed;
+    z-index: 2;
+    bottom: 2em;    
+    right: 3em;
+
+    padding: 1em;
+    font-size: 1.25em;
+    background-color: var(--accent-color);
+    
+    border-radius: 10px;
+    border: 2px solid black;
+    box-shadow: var(--strong-shadow);
+    cursor: pointer;
+}
+
+
+#searchBackground {
+    display: none;
+    position: fixed;
+    z-index: 99999;
+    left: 0;
+    top: 0;
+    width: 100%; 
+    height: 100%; 
+    overflow: auto;
+    background-color: rgb(0,0,0); 
+    background-color: rgba(0,0,0,0.4);
+}
+
+#searchDialog {
+    max-width: 30em;
+    margin: 10% auto;
+    border-radius: 3px;
+    padding: 2em;
+    background-color: #fefefe;
+    box-shadow: var(--strong-shadow);
+}
+
+
+#searchDialog h3 {
+    margin: 0 0 1em 0;
+}
+
+#searchDialog form {
+    display: grid;
+}
+
+#searchDialog #locationField {
+    grid-area: 1 / 1 / span 1 / span 2;
+}
+
+#searchDialog #startDateField {
+    border-radius: 0;
+    grid-area: 2 / 1;
+}
+
+#searchDialog #endDateField {
+    grid-area: 2 / 2;
+}
+
+#searchDialog #countAdults {
+    grid-area: 3 / 1;
+}
+
+#searchDialog #countChildren {
+    grid-area: 4 / 1;
+}
+
+#searchDialog #countBabies {
+    grid-area: 5 / 1;
+}
+
+#searchDialog input {
+    width: 100%;
+    margin-top: 0.25em;
+    margin-bottom: 1em;
+}
+
+#searchDialog input[type="submit"] {
+    grid-area: 6 / 1 / span 1 / span 2;
+
+    width: auto;
+    padding: 0.5em 1em;
+    margin: 1em auto 0 auto;
+    border-radius: 3px;
+    font-size: 1.25em;
+}
+
+#startDate {
+    border-bottom-right-radius: 0;
+    border-top-right-radius: 0;
+    border-right: 1px solid gray;
+}
+
+#endDate {
+    border-bottom-left-radius: 0;
+    border-top-left-radius: 0;
+}
+
+.guestCounter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.guestCounter .counterManager {
+    grid-area: 1 / 2;
+    display: flex;
+    align-items: center;
+}
+
+.guestCounter .count {
+    width: 1em;
+    text-align: center;
+}
+
+.guestCounter .increaseNum, .guestCounter .decreaseNum {
+    width: 1em;
+    height: 1em;
+    border-radius: 50%;  
+    text-align: center;
+
+    border: 2px solid var(--main-color);
+    color:  var(--main-color);
+    font-size: 0.6em;    
+    padding: 1em;
+    margin: 0 1em;    
+}

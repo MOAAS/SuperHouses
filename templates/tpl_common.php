@@ -18,12 +18,12 @@
 
     <body>
 
-      <header id="pagetop">
+      <header id="pagetop">        
         <span>
           <h1>
-            <a href="login.php">Super Houses</a>
+            <a href="../index.php">Super Houses</a>
             <small>We rent.</small>
-          </h1>
+          </h1>          
           <?php if ($username != NULL) { ?>
             <nav>
               <ul>
