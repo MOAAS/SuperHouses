@@ -11,7 +11,7 @@ CREATE TABLE User (
     username VARCHAR UNIQUE NOT NULL,
     passwordHash VARCHAR NOT NULL,
     displayname VARCHAR NOT NULL,
-    country VARCHAR REFERENCES Country,
+    country INTEGER REFERENCES Country,
     city VARCHAR
 );
 
