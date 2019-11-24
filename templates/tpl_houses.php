@@ -14,3 +14,19 @@
     </ul>
 </section>
 <?php } ?>
+
+<?php function draw_house($house, $pictures) {?>
+  <section id="house">
+    <ul class="photoCarousel">
+    <?php foreach($pictures as $picture){?>
+      <li>
+        <img src=<?=$picture?>>
+      </li>
+    <?php } ?>
+    </ul>
+    <button onclick="advancePhotos(-1)">&#10094;</button>
+    <button onclick="advancePhotos(1)">&#10095;</button>
+    <p><?=$house->address?>, <?=$house->city?>, <?=$house->country?></p>
+    <p class="price"><?=$house->price?></p>
+  </section>
+<?php } ?>

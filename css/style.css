@@ -293,3 +293,9 @@ input:focus {
     content:"€ / day";
 }
 
+/* House Page */
+
+#house .photoCarousel img{
+    width: 20em;
+    margin: auto;
+}
