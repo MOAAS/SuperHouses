@@ -1,47 +1,16 @@
-<?php function draw_houselist() { ?>
-  <section id="houses">
+<?php function draw_houselist($houseList) {?>
+<section id="houses">
     <ul>
-    <li>
+    <?php foreach($houseList as $house){?>
+      <li>
         <figure>
           <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-          <figcaption><h3>Casa a beira da praia</h3></figcaption>
+          <figcaption><h3><?=$house['title']?></h3></figcaption>
         </figure>
-        <p>Rua blablabla 34 blabla</p>
-        <p class="price">94</p>
-    </li>
-    <li>
-        <figure>
-          <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-          <figcaption><h3>Casa a beira da praia muito fixe a pois</h3></figcaption>
-        </figure>
-        <p>Rua blablabla 34 </p>
-        <p class="price">500</p>
-    </li>
-    <li>
-        <figure>
-          <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-          <figcaption><h3>Casa a beira da praia</h3></figcaption>
-        </figure>
-        <p>Rua blablabla 34 blabla</p>
-        <p class="price">94</p>
-    </li>
-    <li>
-        <figure>
-          <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-          <figcaption><h3>Casa a beira da praia</h3></figcaption>
-        </figure>
-        <p>Rua blablabla 34 blabla</p>
-        <p class="price">94</p>
-    </li>
-    <li>
-        <figure>
-          <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-          <figcaption><h3>Casa a beira da praia</h3></figcaption>
-        </figure>
-        <p>Rua blablabla 34 blabla</p>
-        <p class="price">94</p>
-    </li>
-       
+        <p><?=$house['address']?>, <?=$house['city']?>, <?=$house['countryName']?></p>
+        <p class="price"><?=$house['price']?></p>
+      </li>
+    <?php } ?>
     </ul>
-  </section>
+</section>
 <?php } ?>
