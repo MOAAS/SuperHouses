@@ -8,7 +8,7 @@
           <figcaption><h3><?=$house['title']?></h3></figcaption>
         </figure>
         <p><?=$house['address']?>, <?=$house['city']?>, <?=$house['countryName']?></p>
-        <p class="price"><?=$house['price']?></p>
+        <p class="priceTag"><?=$house['price']?></p>
       </li>
     <?php } ?>
     </ul>

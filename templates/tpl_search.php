@@ -19,6 +19,13 @@
             <input id="endDate" type="date" name="endDate" required>  
         </div>
 
+        <div id="maxPriceSlider">
+            <label for="maxPrice">Maximum Price:</label>
+            <input id="maxPrice" type="range" min="1" max="9999" value="500" name="maxPrice">
+            <p class="priceTag">0</p>
+        </div>
+
+
         <input type="number" name="numAdults" class="hidden"/>
         <input type="number" name="numChildren" class="hidden"/>
         <input type="number" name="numBabies" class="hidden"/>
@@ -48,7 +55,7 @@
                 <p class="count">0</p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div> 
             </div>         
-        </div>
+        </div>      
 
         <input type="submit" value="Search">
       </form>

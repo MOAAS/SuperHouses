@@ -14,6 +14,13 @@ window.addEventListener('click', event => {
         searchBackground.style.display = "none";
 });
 
+let priceTag = document.querySelector('#maxPriceSlider .priceTag');
+let maxPriceSlider = document.getElementById('maxPrice')
+maxPriceSlider.addEventListener('input', () => {
+    priceTag.textContent = maxPriceSlider.value;
+});
+priceTag.textContent = maxPriceSlider.value;
+
 
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {
