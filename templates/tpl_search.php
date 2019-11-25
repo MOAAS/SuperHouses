@@ -21,7 +21,7 @@
 
         <div id="maxPriceSlider">
             <label for="maxPrice">Maximum Price:</label>
-            <input id="maxPrice" type="range" min="1" max="9999" value="500" name="maxPrice">
+            <input id="maxPrice" type="range" min="1" max="999" value="100" name="maxPrice">
             <p class="priceTag">0</p>
         </div>
 
