@@ -33,7 +33,11 @@ CREATE TABLE Place (
     owner REFERENCES User NOT NULL,
     title VARCHAR,
     description VARCHAR,
-    price REAL
+    price REAL,
+    minPeople INTEGER,
+    maxPeople INTEGER,
+    CONSTRAINT CHK_people CHECK (minPeople <= maxPeople),
+    CONSTRAINT CHK_price CHECK (price >= 0)
 );
 
 
@@ -82,11 +86,11 @@ INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua Falso 332");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua do lixo, 2");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua debaixo da praia, 1");
 
-INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "A great place", 96.25);
-INSERT INTO Place VALUES (NULL, 2, 1, "Cute house near the beach", "But this one's cuter", 50.00);
-INSERT INTO Place VALUES (NULL, 3, 1, "Cute house near the beach", "But this one's nearer", 1000.00);
-INSERT INTO Place VALUES (NULL, 4, 1, "Awful house on the beach", "A great place", 75.00);
-INSERT INTO Place VALUES (NULL, 5, 1, "The perfect house under the beach", "You won't enjoy this", 4.00);
+INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "A great place", 96.25, 3, 5);
+INSERT INTO Place VALUES (NULL, 2, 1, "CUTE house near the beach", "But this one's cuter", 50.00, 3, 5);
+INSERT INTO Place VALUES (NULL, 3, 1, "Cute house NEAR the beach", "But this one's nearer", 400.00, 8, 10);
+INSERT INTO Place VALUES (NULL, 4, 1, "Awful house on the beach", "A great place", 75.00, 3,5);
+INSERT INTO Place VALUES (NULL, 5, 1, "The perfect house under the beach", "You won't enjoy this", 4.00, 1,2);
 
 -- All passwords are 1234 in SHA-1 format
 /*

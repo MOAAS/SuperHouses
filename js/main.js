@@ -1,5 +1,10 @@
 "use strict"
 
+let priceTags = document.querySelectorAll('.priceTag .priceValue');
+priceTags.forEach(element => {
+    element.textContent = parseFloat(element.textContent).toFixed(2);
+});
+
 // coisas do search
 
 let searchButton = document.getElementById('searchButton');
@@ -14,12 +19,12 @@ window.addEventListener('click', event => {
         searchBackground.style.display = "none";
 });
 
-let priceTag = document.querySelector('#maxPriceSlider .priceTag');
+let sliderPriceTag = document.querySelector('#maxPriceSlider .priceTag .priceValue');
 let maxPriceSlider = document.getElementById('maxPrice')
 maxPriceSlider.addEventListener('input', () => {
-    priceTag.textContent = maxPriceSlider.value;
+    sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 });
-priceTag.textContent = maxPriceSlider.value;
+sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 
 
 let guestCounters = document.querySelectorAll(".guestCounter");

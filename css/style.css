@@ -11,7 +11,8 @@ body {
 
     --input-bg-color: rgb(220, 220, 220);
     --input-hint-color: rgb(80, 80, 80);
-    --accent-color: rgb(165, 244, 255);
+    --accent-color-hl: rgb(165, 244, 255);
+    --accent-color: rgb(102, 219, 235);
 
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(255, 0, 0);
@@ -181,6 +182,15 @@ input[type="submit"]:hover {
     display: none;
 }
 
+.priceTag .priceValue {
+    display: inline;
+    font-size: 1.25em;
+}
+
+.priceTag .priceCurrency {
+    display: inline;
+    font-size: 1em;
+}
 
 /* Forms */
 
@@ -275,10 +285,10 @@ input[type="submit"]:hover {
 }
 
 #houses > ul {
-    padding-left: 0px;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
     gap: 1em;
+    padding: 0;
 }
 
 #houses li {
@@ -304,6 +314,7 @@ input[type="submit"]:hover {
     bottom: 0;
     background-color: rgba(0, 0, 0, 0.5);
     width: 100%;
+    font-size: 0.75em;
 }
 
 #houses figcaption h3 {
@@ -319,18 +330,35 @@ input[type="submit"]:hover {
     white-space: normal; 
 }
 
-#houses p {
+#houses .houseInfo > * {
     padding: 0 0.75em;
 }
 
-.priceTag {
-    font-size: 1.25em;
+.houseInfo {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
 }
 
-.priceTag:after{
-    font-size: 0.75em;
-    content:"€ / day";
+.houseInfo .priceTag {
+    grid-area: 1 / 1 / 1 / span 2;
+    justify-self: center;
+    margin: 0.5em 0 0 0;
 }
+
+.houseInfo .houseLocation {
+    grid-area: 2 / 1;    
+    margin: 0.75em 0;
+    justify-self: start;
+}
+
+.houseInfo .guestLimit {
+    grid-area: 2 / 2;    
+    margin: 0.75em 0;
+    justify-self: end;
+}
+
+
 
 /* Search functionality */
 
@@ -343,11 +371,16 @@ input[type="submit"]:hover {
     padding: 1em;
     font-size: 1.25em;
     background-color: var(--accent-color);
+    transition: background-color 200ms ease-in-out;
     
     border-radius: 10px;
     border: 2px solid black;
     box-shadow: var(--strong-shadow);
     cursor: pointer;
+}
+
+#searchButton:hover {
+    background-color: var(--accent-color-hl);
 }
 
 
@@ -373,13 +406,13 @@ input[type="submit"]:hover {
     box-shadow: var(--strong-shadow);
 }
 
-
 #searchDialog h3 {
     margin: 0 0 1em 0;
 }
 
 #searchDialog form {
     display: grid;
+    grid-template-columns: 1fr 1fr;
 }
 
 #searchDialog #locationField {

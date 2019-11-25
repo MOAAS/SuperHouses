@@ -1,4 +1,4 @@
-<?php function draw_search() { ?>
+<?php function draw_search($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies) { ?>
   <i id="searchButton" class="fas fa-search"></i>
   <div id="searchBackground">
     <div id="searchDialog">
@@ -6,25 +6,27 @@
       <form method="get" action="../pages/search_houses.php">
         <div id="locationField">
             <label for="location">Where?</label>
-            <input id="location" type="text" name="location" required>  
+            <input id="location" type="text" name="location" value="<?=$location?>">  
         </div>
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="date" name="startDate" required>  
+            <input id="startDate" type="date" name="startDate" value="<?=$startDate?>">  
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="date" name="endDate" required>  
+            <input id="endDate" type="date" name="endDate" value="<?=$endDate?>">  
         </div>
 
         <div id="maxPriceSlider">
             <label for="maxPrice">Maximum Price:</label>
-            <input id="maxPrice" type="range" min="1" max="999" value="100" name="maxPrice">
-            <p class="priceTag">0</p>
+            <input id="maxPrice" type="range" min="1" max="1000" name="maxPrice" value="<?=$maxPrice?>">
+            <div class="priceTag">
+                <p class="priceValue">0</p>
+                <p class="priceCurrency"> € / day</p>
+            </div>
         </div>
-
 
         <input type="number" name="numAdults" class="hidden"/>
         <input type="number" name="numChildren" class="hidden"/>
@@ -34,7 +36,7 @@
             <label>Adults</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count">0</p>
+                <p class="count"><?=$numAdults?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div>            
             </div>         
         </div>
@@ -43,7 +45,7 @@
             <label>Children</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count">0</p>
+                <p class="count"><?=$numChildren?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div>            
             </div>         
         </div>
@@ -52,7 +54,7 @@
             <label>Babies</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count">0</p>
+                <p class="count"><?=$numBabies?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div> 
             </div>         
         </div>      
