@@ -8,7 +8,7 @@
   if (validCredentials($username, $password)) {
     $_SESSION['username'] = $username;
     $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully logged in!');
-    header('Location: ../pages/houses.php');
+    header('Location: ../pages/search_houses.php');
   } 
   else {
     $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Login failed! Username and password do not match.');

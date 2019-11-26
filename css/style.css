@@ -281,17 +281,19 @@ input[type="submit"]:hover {
 
 #houses{
     margin: 1em auto;
-    max-width: 80em;
+    max-width: 85em;
 }
 
 #houses > ul {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(18em, 1fr));
+    justify-content: center;
+    grid-template-columns: repeat(auto-fit, 20em);
     gap: 1em;
     padding: 0;
 }
 
 #houses li {
+
     box-shadow: var(--simple-shadow); /** pode ser q fique bem **/
     background-color: white;
     border: 2px solid var(--main-color);
@@ -341,19 +343,20 @@ input[type="submit"]:hover {
 }
 
 .houseInfo .priceTag {
-    grid-area: 1 / 1 / 1 / span 2;
-    justify-self: center;
+    grid-area: 1 / 1;
+    justify-self: start;
+
     margin: 0.5em 0 0 0;
 }
 
 .houseInfo .houseLocation {
-    grid-area: 2 / 1;    
-    margin: 0.75em 0;
+    grid-area: 2 / 1 / 2 / span 2;   
     justify-self: start;
+    margin: 0.75em 0;
 }
 
 .houseInfo .guestLimit {
-    grid-area: 2 / 2;    
+    grid-area: 1 / 2;    
     margin: 0.75em 0;
     justify-self: end;
 }
@@ -440,7 +443,7 @@ input[type="submit"]:hover {
 }
 
 #searchDialog #maxPriceSlider {
-    grid-area: 3 / 2;
+    grid-area: 3 / 2 / span 3 / 2;
 }
 
 #searchDialog input {

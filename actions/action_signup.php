@@ -19,6 +19,6 @@
     addUser($username, $password, $fullName);
     $_SESSION['username'] = $username;
     $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully signed up!');
-    header('Location: ../pages/houses.php');
+    header('Location: ../pages/search_houses.php');
   }
 ?>
