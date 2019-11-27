@@ -14,12 +14,12 @@
     function getHouseByID($house_id) {
         $db = Database::instance()->db();
 
-        $statement = $db->prepare('SELECT countryName,PlaceLocation.city,address,owner,title,description,price FROM Place, PlaceLocation, Country, User WHERE Place.location=PlaceLocation.id AND PlaceLocation.country = Country.id AND Place.owner=User.id AND Place.id = ?');
+        $statement = $db->prepare('SELECT countryName,PlaceLocation.city,address,username,displayname,title,description,price FROM Place, PlaceLocation, Country, User WHERE Place.location=PlaceLocation.id AND PlaceLocation.country = Country.id AND Place.owner=User.id AND Place.id = ?');
         $statement->execute(array($house_id));
 
         $place = $statement->fetch();
 
-        return new Place($house_id, $place['countryName'], $place['city'], $place['address'], $place['owner'], $place['title'], $place['description'], $place['price']);
+        return new Place($house_id, $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price']);
     }
 
     function getHousePhotoPathsByID($house_id) {

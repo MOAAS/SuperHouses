@@ -7,7 +7,7 @@ function advancePhotos(n) {
 
 function showPhotos(n) {
   var i;
-  let photos = document.getElementsByClassName("photoCarousel")[0].children;
+  let photos = document.getElementById("photoCarousel").children;
   if (n > photos.length) {slideIndex = 1}
   if (n < 1) {slideIndex = photos.length}
   for (i = 0; i < photos.length; i++) {
@@ -15,3 +15,6 @@ function showPhotos(n) {
   }
   photos[slideIndex-1].style.display = "block";  
 }
+
+document.getElementById("photoLeftButton").addEventListener("click", function(){advancePhotos(-1)}, false);
+document.getElementById("photoRightButton").addEventListener("click", function(){advancePhotos(1)}, false);

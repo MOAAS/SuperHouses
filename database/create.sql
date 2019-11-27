@@ -82,7 +82,7 @@ INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua Falso 332");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua do lixo, 2");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua debaixo da praia, 1");
 
-INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "A great place", 96.25);
+INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "When I was just a little boy, my parents would take me to a cozy house in Porto in the cold Winter. I have many fond memories of sitting around the fireplace with my parents, drinking whiskey and getting extra close to my uncle for warmth. And now you can too!", 96.25);
 INSERT INTO Place VALUES (NULL, 2, 1, "Cute house near the beach", "But this one's cuter", 50.00);
 INSERT INTO Place VALUES (NULL, 3, 1, "Cute house near the beach", "But this one's nearer", 1000.00);
 INSERT INTO Place VALUES (NULL, 4, 1, "Awful house on the beach", "A great place", 75.00);
