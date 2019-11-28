@@ -507,3 +507,79 @@ input[type="submit"]:hover {
     padding: 1em;
     margin: 0 1em;    
 }
+
+/* House Page */
+
+#house {
+	margin: auto;
+	max-width: 80em;
+}
+
+#house .title {
+	margin: 0.2em 0.5em;
+	font-weight: bold;
+	font-size: 3em; 
+	color: #333;
+}
+
+#house .host {
+	font-weight: bold;
+	margin: 0.2em 0.5em;
+}
+
+#house .description {
+	background-color: white;
+	padding: 2em;
+	border-radius: 1em;
+}
+
+#house #photoCarousel img{
+    height: 20em;
+	width: 40em;
+}
+
+#house #photos {
+	position: relative;
+	display: inline-block;
+	margin: 0 1em 1em 1em;
+}
+
+#house #photoCarousel {
+	padding: 0;
+	margin: 0;
+}
+
+#house #photoCarousel img {
+	animation: fade 0.4s linear;
+}
+
+@keyframes fade {
+  0% { opacity: 0.5 }
+  100% { opacity: 1 }
+}
+
+#house #photoLeftButton, #house #photoRightButton{
+	position: absolute;
+    bottom: 45%;
+	color: white;
+	font-size: 16px;
+	padding: 12px 24px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+	background-color: rgba(0,0,0,0.2);
+}
+
+#house #photoLeftButton:hover, #house #photoRightButton:hover {
+	background-color: rgba(0,0,0,0.8);
+}
+
+#house #photoLeftButton{
+	left:0%;
+	border-radius: 0 3px 3px 0;
+}
+
+#house #photoRightButton{
+	right:0%;
+	border-radius: 3px 0 0 3px;
+}

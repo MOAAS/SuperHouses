@@ -20,3 +20,28 @@
     </ul>
 </section>
 <?php } ?>
+
+<?php function draw_house($house, $pictures) {?>
+  <section id="house">
+	<p class="title"><?=$house->title?></p>
+	<div style="padding: 0 0 0 0; font-size: 48px; color: orange;">
+		<i class="far fa-star"></i>
+		<span>5.0</span>
+	</div>
+	<div id="photos">
+		<ul id="photoCarousel">
+		<?php foreach($pictures as $picture){?>
+		  <li>
+			<img src=<?=$picture?>>
+		  </li>
+		<?php } ?>
+		</ul>
+		<button id="photoLeftButton">&#10094;</button>
+		<button id="photoRightButton">&#10095;</button>
+	</div>
+	<p class="host">Hóspede: <?=$house->ownerDisplayname?></p>
+	<p class="description"><?=$house->description?></p>
+    <p><?=$house->address?>, <?=$house->city?>, <?=$house->country?></p>
+    <p class="price"><?=$house->price?></p>
+  </section>
+<?php } ?>
