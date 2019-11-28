@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 "use strict"
 
 let priceTags = document.querySelectorAll('.priceTag .priceValue');
@@ -79,8 +78,8 @@ searchForm.addEventListener('submit', () => {
     document.querySelector('#searchDialog input[name="numBabies"]').value = document.querySelector('#countBabies .count').textContent;
     searchForm.submit();
 });
-=======
-var slideIndex = 1;
+
+let slideIndex = 1;
 showPhotos(slideIndex);
 
 function advancePhotos(n) {
@@ -88,7 +87,7 @@ function advancePhotos(n) {
 }
 
 function showPhotos(n) {
-  var i;
+  let i;
   let photos = document.getElementById("photoCarousel").children;
   if (n > photos.length) {slideIndex = 1}
   if (n < 1) {slideIndex = photos.length}
@@ -100,4 +99,3 @@ function showPhotos(n) {
 
 document.getElementById("photoLeftButton").addEventListener("click", function(){advancePhotos(-1)}, false);
 document.getElementById("photoRightButton").addEventListener("click", function(){advancePhotos(1)}, false);
->>>>>>> feature/housePage
