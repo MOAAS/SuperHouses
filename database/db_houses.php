@@ -1,6 +1,7 @@
 <?php
     include_once('../includes/database.php');
     include_once('../includes/place.php');
+    include_once('../database/db_countries.php');
 
     function getAllHouses() {
         $db = Database::instance()->db();
@@ -68,5 +69,38 @@
         }
 
         return $places;
+    }
+
+    function getNewHouseId() {
+        $db = Database::instance()->db();
+
+        $statement = $db->prepare( "SELECT max(ID) FROM Place;");
+        $statement->execute();
+        $id = $statement->fetch();
+        if($id['max(ID)']==null)
+            return 0;
+        return $id['max(ID)']+1;
+    }
+
+    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max) {
+        $db = Database::instance()->db();
+
+        $statement1 = $db->prepare( "SELECT max(ID) FROM PlaceLocation;");
+        $statement1->execute();
+        $oldplaceid = $statement1->fetch();
+        if($oldplaceid['max(ID)']==null)
+            $newplaceid = 0;
+        else $newplaceid = $oldplaceid['max(ID)']+1;
+
+        $countryID = getCountryID($country);
+        echo $countryID;
+
+        $statement2 = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
+        $statement2->execute(array($newplaceid,$countryID,$city,$address));
+        //$statement2->execute(array(5,1,'teste','23sadas'));
+
+        $statement3 = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement3->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max));
+        //$statement3->execute(array(12, 1, 1, 'casa','sssss', 32, 1, 2));
     }
 ?>

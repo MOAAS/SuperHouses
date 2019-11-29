@@ -47,3 +47,46 @@
     <p class="price"><?=$house->price?></p>
   </section>
 <?php } ?>
+
+
+<?php function draw_addHouse($countryOptions){?>
+  <section id="addhouse" class="genericForm">
+
+    <header><h2>Add your place!</h2></header>
+    
+    <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
+      <label for="title">Title</label>      
+      <input id="title" type="text" name="title" placeholder="Name your place" required>
+
+      <label for="description">Description</label>
+      <input id="description" type="text" name="description" placeholder="Descrive your place" required>
+
+      <label for="country">Country</label>
+        <select id="country" name="country">
+          <option value=""></option>
+          <?php foreach ($countryOptions as $country) { ?>
+            <option value="<?=$country?>"><?=$country?></option>
+          <?php } ?>
+        </select>
+
+      <label for="city">City</label>
+      <input id="city" type="text" name="city" placeholder="City" required>
+
+      <label for="address">Address</label>
+      <input id="address" type="text" name="address" placeholder="Address" required>
+
+      <label for="min">Min</label>
+      <input id="min" type="number" name="min" placeholder="0" required>
+      <label for="max">Man</label>
+      <input id="max" type="number" name="max" placeholder="2" required>
+      <label for="price">Price</label>
+      <input id="price" type="numbher" name="price" placeholder="50" required>
+      
+      <label for="file">Upload Images</label>
+      <input type="file" name="fileUpload[]" multiple >
+
+      <input type="submit" value="Save">
+    </form>
+  </section>
+
+<?php } ?>

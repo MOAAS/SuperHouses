@@ -69,4 +69,12 @@
         $statement->execute(array(password_hash($newPassword, PASSWORD_DEFAULT), $username));
     }
 
+    function getUserId($username) {
+        $db = Database::instance()->db();
+
+        $statement = $db->prepare('SELECT id FROM User WHERE username = ?');
+        $statement->execute(array($username));
+        return $statement->fetch()['id'];
+    }
+
 ?>
