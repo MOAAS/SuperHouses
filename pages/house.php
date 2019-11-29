@@ -11,8 +11,10 @@
 
   draw_header($_SESSION['username'], "../js/house.js");
   $house = getHouseByID($id);
-  if($house->title==null)
+  if($house->title==null) {
+    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'The house you searched for is no longer available.');
     die(header('Location: search_houses.php'));
+  }
   $pictures = getHousePhotoPathsByID($id);
   draw_house($house, $pictures);
   draw_footer();
