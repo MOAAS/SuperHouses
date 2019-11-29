@@ -6,8 +6,8 @@
   // Verify if user is logged in
   if (isset($_SESSION['username']))
     die(header('Location: search_houses.php'));
-    
-  draw_header(null);
+
+  draw_header(null, null);
   draw_login();
   draw_footer();
 ?>

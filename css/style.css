@@ -534,8 +534,9 @@ input[type="submit"]:hover {
 }
 
 #house #photoCarousel img{
+    animation: fade 0.4s linear;
     height: 20em;
-	width: 40em;
+    width: 40em;
 }
 
 #house #photos {
@@ -545,16 +546,14 @@ input[type="submit"]:hover {
 }
 
 #house #photoCarousel {
+    height: 20em;
+    width: 40em;
 	padding: 0;
 	margin: 0;
 }
 
-#house #photoCarousel img {
-	animation: fade 0.4s linear;
-}
-
 @keyframes fade {
-  0% { opacity: 0.5 }
+  0% { opacity: 0.8 }
   100% { opacity: 1 }
 }
 

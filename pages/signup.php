@@ -7,7 +7,7 @@
   if (isset($_SESSION['username']))
     die(header('Location: search_houses.php'));
 
-  draw_header(null);
+  draw_header(null, null);
   draw_signup();
   draw_footer();
 ?>

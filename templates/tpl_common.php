@@ -1,4 +1,4 @@
-<?php function draw_header($username) { 
+<?php function draw_header($username, $script) { 
 /**
  * Draws the header for all pages. Receives an username
  * if the user is logged in in order to draw the logout
@@ -13,7 +13,9 @@
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
-      <script src="../js/main.js" defer></script>
+      <?php if ($script != null) { ?>
+        <script src=<?=$script?> defer></script>
+      <?php } ?>
     </head>
 
     <body>

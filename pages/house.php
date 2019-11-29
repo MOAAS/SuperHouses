@@ -7,9 +7,13 @@
   if (!isset($_SESSION['username']))
     die(header('Location: login.php'));
 
-  draw_header($_SESSION['username']);
-  $house = getHouseByID(1);
-  $pictures = getHousePhotoPathsByID(1);
+  $id = $_GET['id'];
+
+  draw_header($_SESSION['username'], "../js/house.js");
+  $house = getHouseByID($id);
+  if($house->title==null)
+    die(header('Location: search_houses.php'));
+  $pictures = getHousePhotoPathsByID($id);
   draw_house($house, $pictures);
   draw_footer();
 ?>
