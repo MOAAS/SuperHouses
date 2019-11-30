@@ -27,6 +27,15 @@
           <?php if ($username != NULL) { ?>
             <nav>
               <ul>
+                <li id="notifications">
+                  <i id="notificationBell" class="far fa-bell"></i>
+                  <span id="notificationNum">3</span>
+                  <ul id="notificationList">
+                    <li>N ot i f i c a tion1</li>
+                    <li>Notification2</li>
+                    <li>Notification3</li>
+                  </ul>
+                </li>
                 <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>
                 <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
               </ul>

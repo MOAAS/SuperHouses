@@ -1,5 +1,13 @@
 "use strict"
 
+let notificationBell = document.getElementById('notificationBell');
+let notificationList = document.getElementById('notificationBell');
+notificationBell.addEventListener('click', () => {
+    if (notificationList.style.display == "block")
+        notificationList.style.display = "none";
+    else notificationList.style.display = "block";
+});
+
 let priceTags = document.querySelectorAll('.priceTag .priceValue');
 priceTags.forEach(element => {
     element.textContent = parseFloat(element.textContent).toFixed(2);
