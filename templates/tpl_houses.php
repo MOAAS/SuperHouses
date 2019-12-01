@@ -5,16 +5,16 @@
       <li>
         <a href="house.php?id=<?=$house->place_id?>">
           <figure>
-            <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House">
-            <figcaption><h3><?=$house->title?></h3></figcaption>
+            <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House image">
+            <figcaption><h3><?=toHTML($house->title)?></h3></figcaption>
           </figure>
           <div class="houseInfo">
             <div class="priceTag">
               <p class="priceValue"><?=$house->price?></p> 
               <p class="priceCurrency"> € / day</p>
             </div>
-            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=htmlspecialchars($house->city)?>, <?=htmlspecialchars($house->country)?></p>
-            <p class="guestLimit"><i class="fas fa-users"></i> <?=htmlspecialchars($house->minPeople)?> - <?=htmlspecialchars($house->maxPeople)?> people</p>
+            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=toHTML($house->city)?>, <?=toHTML($house->country)?></p>
+            <p class="guestLimit"><i class="fas fa-users"></i> <?=toHTML($house->minPeople)?> - <?=toHTML($house->maxPeople)?> people</p>
           </div>
         </a>
       </li>
@@ -25,26 +25,26 @@
 
 <?php function draw_house($house, $pictures) {?>
   <section id="house">
-	<p class="title"><?=$house->title?></p>
-	<div style="padding: 0 0 0 0; font-size: 48px; color: orange;"> <!-- W T F ?????????? -->
-		<i class="far fa-star"></i>
-		<span>5.0</span>
-	</div>
-	<div id="photos">
-		<ul id="photoCarousel">
-		<?php foreach($pictures as $picture){?>
-		  <li>
-			<img src=<?=$picture?>>
-		  </li>
-		<?php } ?>
-		</ul>
-		<button id="photoLeftButton">&#10094;</button>
-		<button id="photoRightButton">&#10095;</button>
-	</div>
-	<p class="host">Hóspede: <?=$house->ownerDisplayname?></p>
-	<p class="description"><?=$house->description?></p>
-    <p><?=htmlspecialchars($house->address)?>, <?=htmlspecialchars($house->city)?>, <?=htmlspecialchars($house->country)?></p>
-    <p class="price"><?=htmlspecialchars($house->price)?></p>
+    <h2 class="title"><?=toHTML($house->title)?></h2>
+    <div style="padding: 0 0 0 0; font-size: 48px; color: orange;"> <!-- W T F ?????????? -->
+      <i class="far fa-star"></i>
+      <span>5.0</span>
+    </div>
+    <div id="photos">
+      <ul id="photoCarousel">
+      <?php foreach($pictures as $picture){?>
+        <li>
+        <img src=<?=$picture?> alt="<?=toHTML($house->title)?>">
+        </li>
+      <?php } ?>
+      </ul>
+      <button id="photoLeftButton">&#10094;</button>
+      <button id="photoRightButton">&#10095;</button>
+    </div>
+    <p class="host">Hóspede: <?=toHTML($house->ownerDisplayname)?></p>
+    <p class="description"><?=toHTML($house->description)?></p>
+    <p><?=toHTML($house->address)?>, <?=toHTML($house->city)?>, <?=toHTML($house->country)?></p>
+    <p class="price"><?=$house->price?></p>
   </section>
 <?php } ?>
 
@@ -59,12 +59,12 @@
       <input id="title" type="text" name="title" placeholder="Name your place" required>
 
       <label for="description">Description</label>
-      <textarea rows="4" id="description" type="text" name="description" placeholder="Describe your place" required></textarea>
+      <textarea rows="4" id="description" name="description" placeholder="Describe your place" required></textarea>
       <div id="localization">
         <div>
           <label for="country">Country</label>
           <select id="country" name="country">
-            <option value=""></option>
+            <option value="">None</option>
             <?php foreach ($countryOptions as $country) { ?>
               <option value="<?=$country?>"><?=$country?></option>
             <?php } ?>
@@ -83,7 +83,7 @@
       <div id="details">
         <div>
           <label for="min">Min</label>
-          <input id="min" type="number" name="min" placeholder="min" min="1" max="20"required>
+          <input id="min" type="number" name="min" placeholder="min" min="1" max="20" required>
         </div>
         <div>
           <label for="max">Max</label>
@@ -96,7 +96,7 @@
       </div>
       
       <div>
-        <label for="file">Choose images</label>
+        <label for="files">Choose images</label>
         <input id="files" type="file" name="fileUpload[]" multiple required>        
         <ul id="result"></ul>
       </div>

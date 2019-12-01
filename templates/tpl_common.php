@@ -3,7 +3,7 @@
   $notifications = getUnseenNotifications($username);
 ?>
   <!DOCTYPE html>
-  <html>
+  <html lang="en">
 
     <head>
       <title>Super Houses</title>
@@ -21,8 +21,8 @@
 
     <body>
 
-      <header id="pagetop">        
-        <span>
+      <header id="pagebanner">        
+        <section id="pagetop">
           <h1>
             <a href="../index.php">Super Houses</a>
             <small>We rent.</small>
@@ -40,7 +40,7 @@
               </ul>
             </nav>
           <?php } ?>
-        </span>
+        </section>
       </header>
       <?php if (isset($_SESSION['messages'])) {?>
         <section id="messages">
@@ -71,8 +71,8 @@
       <li class="<?=$notif['seen']?'notifSeen':'notifUnseen'?>">
         <span class="notifId hidden"><?=$notif['id']?></span>
         <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
-          <p class="notifContent"><?=htmlspecialchars($notif['content'])?></p>
-          <span class="notifDate"><?=htmlspecialchars($notif['dateTime'])?></span>
+          <p class="notifContent"><?=toHTML($notif['content'])?></p>
+          <span class="notifDate"><?=toHTML($notif['dateTime'])?></span>
         </a>
         <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
       </li>

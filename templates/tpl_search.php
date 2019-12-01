@@ -6,22 +6,22 @@
       <form method="get" action="../pages/search_houses.php">
         <div id="locationField">
             <label for="location">Where?</label>
-            <input id="location" type="text" name="location" value="<?=htmlspecialchars($location)?>">  
+            <input id="location" type="text" name="location" value="<?=toHTML($location)?>">  
         </div>
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="date" name="startDate" value="<?=htmlspecialchars($startDate)?>">  
+            <input id="startDate" type="date" name="startDate" value="<?=toHTML($startDate)?>">  
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="date" name="endDate" value="<?=htmlspecialchars($endDate)?>">  
+            <input id="endDate" type="date" name="endDate" value="<?=toHTML($endDate)?>">  
         </div>
 
         <div id="maxPriceSlider">
             <label for="maxPrice">Maximum Price:</label>
-            <input id="maxPrice" type="range" min="1" max="1000" name="maxPrice" value="<?=htmlspecialchars($maxPrice)?>">
+            <input id="maxPrice" type="range" min="1" max="1000" name="maxPrice" value="<?=toHTML($maxPrice)?>">
             <div class="priceTag">
                 <p class="priceValue">0</p>
                 <p class="priceCurrency"> € / day</p>
@@ -36,7 +36,7 @@
             <label>Adults</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=htmlspecialchars($numAdults)?></p>
+                <p class="count"><?=toHTML($numAdults)?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div>            
             </div>         
         </div>
@@ -44,7 +44,7 @@
             <label>Children</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=htmlspecialchars($numChildren)?></p>
+                <p class="count"><?=toHTML($numChildren)?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div>            
             </div>         
         </div>
@@ -53,7 +53,7 @@
             <label>Babies</label>
             <div class="counterManager">
                 <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=htmlspecialchars($numBabies)?></p>
+                <p class="count"><?=toHTML($numBabies)?></p>
                 <div class="increaseNum"><i class="fas fa-plus"></i></div> 
             </div>         
         </div>      

@@ -1,15 +1,15 @@
 <?php function draw_profileedit($user, $countryOptions) { ?>
   <section id="editProfile" class="genericForm">
     <header><h2><?=$user->username?>'s Profile</h2></header>
-    <div id="editInfo">
+    <section id="editInfo">
       <h3>Personal Information</h3>
       <form method="post" action="../actions/action_editProfile.php">
         <label for="displayname">Display Name</label>
-        <input id="displayname" type="text" name="displayname" value="<?=htmlspecialchars($user->displayname)?>">  
+        <input id="displayname" type="text" name="displayname" value="<?=toHTML($user->displayname)?>">  
 
         <label for="country">Country</label>
         <select id="country" name="country">
-          <option value=""></option>
+          <option value="">None</option>
           <?php foreach ($countryOptions as $country) { ?>
             <option value="<?=$country?>" <?=$country==$user->country?'selected':''?>><?=$country?></option>
           <?php } ?>
@@ -17,13 +17,13 @@
         </select>
 
         <label for="city">City</label>
-        <input id="city" type="text" name="city" value="<?=htmlspecialchars($user->city)?>">  
+        <input id="city" type="text" name="city" value="<?=toHTML($user->city)?>">  
 
         <input type="submit" value="Save">
       </form>
-    </div>
+    </section>
 
-    <div id="editCredentials">
+    <section id="editCredentials">
       <h3>Edit Username</h3>
       <form method="post" action="../actions/action_editUsername.php">
         <label for="currPassword1">Current Password</label>
@@ -48,6 +48,6 @@
 
         <input type="submit" value="Save">
       </form>
-    </div>
+    </section>
   </section>
 <?php } ?>
