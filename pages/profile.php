@@ -13,6 +13,6 @@
   $countryOptions = getAllCountries();
 
   draw_header($user->username, null);
-  draw_profileedit($user, $countryOptions);
+  draw_profile($user, $countryOptions);
   draw_footer();
 ?>

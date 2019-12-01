@@ -35,7 +35,7 @@
                   <span id="notificationNum"><?=count($notifications)?></span>
                   <?=drawNotificationList($notifications)?> 
                 </li>
-                <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>
+                <li>Signed in as <a id="loggeduser" href="profile.php"><?=$username?></a></li>
                 <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
               </ul>
             </nav>
@@ -57,12 +57,6 @@
  */ ?>
   </body>
 </html>
-<?php } ?>
-
-<?php function drawEmptyNotificationList() { ?>
-  <ul id="notificationList">
-    <li><p class="notifContent">No notifications</p></li>
-  </ul>
 <?php } ?>
 
 <?php function drawNotificationList($notifications) { ?>

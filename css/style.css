@@ -205,6 +205,7 @@ a {
 
 ul {
     list-style-type: none;
+    padding: 0;
 }
 
 input, label {
@@ -344,12 +345,54 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
+/* Profile  */
+
+#profile {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 1fr 4fr;
+    margin: 1em auto;
+    width: 80em;
+
+}
+
+#profile header {
+    grid-area: 1 / 1;
+    justify-self: center;
+    align-self: end;
+}
+
+#profile nav {
+    grid-area: 2 / 1;
+    justify-self: center;
+}
+
+#profile section:not([id="profile"]) {
+    grid-area: 1 / 2 / span 2 / span 1;
+}
+
+#profile nav ul {
+    border-radius: 5px;
+    background-color: var(--input-bg-color);
+}
+
+#profile nav li {
+    font-size: 1.25em;
+    padding: 1em;
+    cursor: pointer;
+    color: black;
+}
+
+#profile li.selected {
+    background-color: var(--main-color);
+    color: white;
+}
+
 /* Edit profile */
 
 #editProfile {
     display: grid;
-    margin: 1em auto;
-    max-width: 60em;
+    margin: 1em;
 }
 
 #editProfile h3 {
