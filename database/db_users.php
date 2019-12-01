@@ -2,13 +2,12 @@
     include_once('../includes/database.php');
     include_once('../includes/userinfo.php');
     include_once('../database/db_countries.php');
-
+    
     function updateUserInfo($userInfo) {
         $db = Database::instance()->db();
 
         $countryID = getCountryID($userInfo->country);
 
-        print_r($countryID);
         if ($countryID == false)
             $countryID = NULL;
 

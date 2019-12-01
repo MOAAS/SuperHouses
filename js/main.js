@@ -1,12 +1,36 @@
 "use strict"
 
+// notificationes 
 let notificationBell = document.getElementById('notificationBell');
-let notificationList = document.getElementById('notificationBell');
+let notificationList = document.getElementById('notificationList');
+let notificationNum = document.getElementById('notificationNum');
+
+if (notificationNum.textContent == "0")
+    notificationNum.style.display = "none";
+
+notificationNum.addEventListener('click', () => {
+    if (notificationList.style.display == "block")
+        notificationList.style.display = "none";
+    else notificationList.style.display = "block";
+});
+
 notificationBell.addEventListener('click', () => {
     if (notificationList.style.display == "block")
         notificationList.style.display = "none";
     else notificationList.style.display = "block";
 });
+
+let notifications = document.querySelectorAll('#notificationList li');
+notifications.forEach(notification => {
+    let markSeen = notification.querySelector('.notifMarkAsSeen');
+    markSeen.addEventListener('click', () => {
+        notification.classList.toggle('notifUnseen');
+        //ajaxblablabla
+        //atualizar contador (notifnum)
+    });
+});
+
+// preços com 2 casas decimais
 
 let priceTags = document.querySelectorAll('.priceTag .priceValue');
 priceTags.forEach(element => {

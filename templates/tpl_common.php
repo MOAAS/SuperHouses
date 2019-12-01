@@ -1,9 +1,9 @@
-<?php function draw_header($username) { 
-/**
- * Draws the header for all pages. Receives an username
- * if the user is logged in in order to draw the logout
- * link.
- */?>
+<?php
+  include_once('../database/db_notifications.php');
+
+ function draw_header($username) { 
+  $notifications = getUnseenNotifications($username);
+?>
   <!DOCTYPE html>
   <html>
 
@@ -29,11 +29,17 @@
               <ul>
                 <li id="notifications">
                   <i id="notificationBell" class="far fa-bell"></i>
-                  <span id="notificationNum">3</span>
+                  <span id="notificationNum"><?=count($notifications)?></span>
                   <ul id="notificationList">
-                    <li>N ot i f i c a tion1</li>
-                    <li>Notification2</li>
-                    <li>Notification3</li>
+                    <?php foreach ($notifications as $notif) { ?>
+                      <li class="<?=$notif['seen']?'':'notifUnseen'?>">
+                        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
+                          <p class="notifContent"><?=$notif['content']?></p>
+                          <span class="notifDate"><?=$notif['dateTime']?></span>
+                        </a>
+                        <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
+                      </li>
+                    <?php } ?>
                   </ul>
                 </li>
                 <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>

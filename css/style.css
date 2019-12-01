@@ -48,7 +48,7 @@ body {
 }
 
 #pagetop a {
-    color: white;
+    color: inherit;
     font-weight: bold;
 }
 
@@ -75,7 +75,6 @@ body {
 #pagetop #notificationBell {
     font-size: 1.5em;   
     cursor: pointer;
-
 }
 
 #pagetop #notificationNum {
@@ -83,11 +82,13 @@ body {
     top: -20px; right: -10px;
     padding: 0.25em 0.55em;
     border-radius: 50%;
+    cursor: pointer;
     color: white;
     background-color: rgba(255, 0, 0, 1);
 }
 
 #pagetop #notificationList {
+    display: none;
     position: absolute;
     top: 20px; right: 10px;
     z-index: 3;
@@ -99,16 +100,52 @@ body {
     background-color: var(--bg-color);
 }
 
-#pagetop #notificationList li {
-
-    padding: 0.5em;
-
+#notificationList li {
+    display: grid;
+    align-items: center;
     border-bottom: 1px solid black;
+    grid-template-columns: 4fr 1fr;    
+    color: black;
 }
 
-#pagetop #notificationList li:last-child {
+#notificationList li:last-child {
     border-bottom: none;
 }
+
+#notificationList .notifClickable {    
+    justify-self: stretch;
+    padding: 0.5em;
+    border-right: 1px solid grey;
+}
+
+#notificationList .notifClickable:hover {
+    color: var(--main-color-light);
+}
+
+#notificationList .notifMarkAsSeen {
+    justify-self: center;
+    cursor: pointer;
+    color: black;
+}
+
+#notificationList .notifMarkAsSeen:hover {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen:hover {
+    color: black;
+}
+
+
+#notificationList .notifUnseen {
+    background-color: var(--input-bg-color);
+
+}
+
 
 #pagetop #loggeduser {
     color: var(--accent-color);
