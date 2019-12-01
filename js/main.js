@@ -1,23 +1,42 @@
 "use strict"
 
+
+function encodeForAjax(data) {
+    return Object.keys(data).map(function(k){
+      return encodeURIComponent(k) + '=' + encodeURIComponent(data[k])
+    }).join('&');
+}
+
+  
+function updateNotificationNum() {
+    let notificationNum = document.getElementById('notificationNum');
+    if (notificationNum.textContent == "0")
+        notificationNum.style.display = "none";
+    else notificationNum.style.display = "block";
+}
+
 // notificationes 
-let notificationBell = document.getElementById('notificationBell');
-let notificationList = document.getElementById('notificationList');
-let notificationNum = document.getElementById('notificationNum');
-
-if (notificationNum.textContent == "0")
-    notificationNum.style.display = "none";
-
-notificationNum.addEventListener('click', () => {
-    if (notificationList.style.display == "block")
+function toggleNotificationList() {
+    let notificationList = document.getElementById('notificationList');
+    if (notificationList.style.display == "block") {
         notificationList.style.display = "none";
-    else notificationList.style.display = "block";
-});
+        let seenNotifs = document.querySelectorAll('#notificationList li:not(.notifUnseen)')
+        seenNotifs.forEach(notif => {
+            let notifID = notif.querySelector('.notifId').textContent;  
+            notif.remove();
 
-notificationBell.addEventListener('click', () => {
-    if (notificationList.style.display == "block")
-        notificationList.style.display = "none";
+            let request = new XMLHttpRequest();
+            request.open('POST', '../actions/action_set_notif_seen.php', true);
+            request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
+            request.send(encodeForAjax({notif_id: notifID}));      
+        });
+    }
     else notificationList.style.display = "block";
+}
+
+updateNotificationNum();
+document.querySelectorAll('#notificationBell, #notificationNum').forEach(element => {
+    element.addEventListener('click', toggleNotificationList);
 });
 
 let notifications = document.querySelectorAll('#notificationList li');
@@ -25,8 +44,12 @@ notifications.forEach(notification => {
     let markSeen = notification.querySelector('.notifMarkAsSeen');
     markSeen.addEventListener('click', () => {
         notification.classList.toggle('notifUnseen');
+        if (notification.classList.contains('notifUnseen'))
+            notificationNum.textContent++;
+        else notificationNum.textContent--;
+        updateNotificationNum();
+
         //ajaxblablabla
-        //atualizar contador (notifnum)
     });
 });
 

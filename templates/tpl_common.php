@@ -3,6 +3,7 @@
 
  function draw_header($username) { 
   $notifications = getUnseenNotifications($username);
+
 ?>
   <!DOCTYPE html>
   <html>
@@ -30,17 +31,11 @@
                 <li id="notifications">
                   <i id="notificationBell" class="far fa-bell"></i>
                   <span id="notificationNum"><?=count($notifications)?></span>
-                  <ul id="notificationList">
-                    <?php foreach ($notifications as $notif) { ?>
-                      <li class="<?=$notif['seen']?'':'notifUnseen'?>">
-                        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
-                          <p class="notifContent"><?=$notif['content']?></p>
-                          <span class="notifDate"><?=$notif['dateTime']?></span>
-                        </a>
-                        <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
-                      </li>
-                    <?php } ?>
-                  </ul>
+                  <?php 
+                    if (count($notifications) == 0) 
+                      drawEmptyNotificationList();
+                    else drawNotificationList($notifications);
+                  ?> 
                 </li>
                 <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>
                 <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
@@ -64,4 +59,25 @@
  */ ?>
   </body>
 </html>
+<?php } ?>
+
+<?php function drawEmptyNotificationList() { ?>
+  <ul id="notificationList">
+    <li><p>No notifications</p></li>
+  </ul>
+<?php } ?>
+
+<?php function drawNotificationList($notifications) { ?>
+  <ul id="notificationList">
+    <?php foreach ($notifications as $notif) { ?>
+      <li class="<?=$notif['seen']?'':'notifUnseen'?>">
+        <span class="notifId hidden"><?=$notif['id']?></span>
+        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
+          <p class="notifContent"><?=$notif['content']?></p>
+          <span class="notifDate"><?=$notif['dateTime']?></span>
+        </a>
+        <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
+      </li>
+    <?php } ?>
+  </ul>
 <?php } ?>
