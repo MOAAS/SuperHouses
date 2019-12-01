@@ -18,6 +18,7 @@ body {
     --error-color: rgb(225, 0, 0);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
   
   
@@ -498,12 +499,27 @@ input[type=number] {
 }
 
 #houses li {
-
-    box-shadow: var(--simple-shadow); /** pode ser q fique bem **/
     background-color: white;
     border: 2px solid var(--main-color);
-    border-radius: 1em;    
+    border-radius: 1em; 
+    box-shadow: var(--simple-shadow); 
+    transition: all 0.2s ease-in-out;
 }
+
+#houses li:hover {
+    box-shadow: var(--simple-shadow-hl);
+    transform: scale(1.05);
+}
+
+#houses li > a {
+    color: black;
+    transition: color 0.2s ease-in-out;
+}
+
+#houses li > a:hover {
+    color: var(--main-color-hl);
+}
+
 
 #houses figure {
     margin:0;
@@ -537,11 +553,8 @@ input[type=number] {
     white-space: normal; 
 }
 
-#houses .houseInfo > * {
+#houses .houseInfo {
     padding: 0 0.75em;
-}
-
-.houseInfo {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr;
@@ -550,8 +563,6 @@ input[type=number] {
 .houseInfo .priceTag {
     grid-area: 1 / 1;
     justify-self: start;
-
-    margin: 0.5em 0 0 0;
 }
 
 .houseInfo .houseLocation {
