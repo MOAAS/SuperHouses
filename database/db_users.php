@@ -57,7 +57,6 @@
     }
 
     function addUser($username, $password, $name) {
-        // todo: verify weird characters
         $db = Database::instance()->db();
 
         $statement = $db->prepare('INSERT INTO User Values (?, ?, ?, ?, NULL, NULL)');

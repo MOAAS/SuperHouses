@@ -63,7 +63,9 @@
             "           
         );
 
-        // todo: escape % and _
+        $location = str_replace("\\", "\\\\", $location);;
+        $location = str_replace("%", "\%", $location);;
+        $location = str_replace("_", "\_", $location);;
         
         $statement->execute(array($maxPrice, $numGuests + $numBabies / 2, "%" . $location . "%", "%" . $location . "%", $endDate, $startDate));
         
@@ -92,19 +94,20 @@
 
         $statement = $db->prepare( "SELECT max(ID) FROM PlaceLocation;");
         $statement->execute();
-        $oldplaceid = $statement->fetch();
-        if($oldplaceid['max(ID)']==null)
-            $newplaceid = 0;
-        else $newplaceid = $oldplaceid['max(ID)']+1;
+        $maxplaceid = $statement->fetch();
+        if($maxplaceid['max(ID)']==null)
+            return 0;
+        return $maxplaceid['max(ID)']+1;
     }
 
     function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max) {
-        // todo: verify weird characters
         $db = Database::instance()->db();
 
         $newplaceid = getNewPlaceLocId();
 
         $countryID = getCountryID($country);
+        if ($countryID == false)
+            return false;
        // echo $countryID;
 
         $statement2 = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');

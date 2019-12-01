@@ -24,6 +24,11 @@
   $numChildren = $_GET['numChildren'];
   $numBabies = $_GET['numBabies'];
 
+  if (!is_numeric($maxPrice)) $maxPrice = 500;
+  if (!is_numeric($numAdults)) $numAdults = 0;
+  if (!is_numeric($numChildren)) $numChildren = 0;
+  if (!is_numeric($numBabies)) $numBabies = 0;
+
   $places = searchHouses($location, $startDate, $endDate, $maxPrice, $numAdults + $numChildren, $numBabies);
 
   draw_header($_SESSION['username'], "../js/search.js");

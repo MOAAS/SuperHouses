@@ -3,8 +3,6 @@
     include_once('../database/db_users.php');
 
     function sendNotification($username, $content) {
-        // todo: verify weird characters
-
         $db = Database::instance()->db();
 
         $statement = $db->prepare('INSERT INTO UserNotification VALUES (NULL, ?, ?, ?, 0)');

@@ -5,7 +5,7 @@
       <h3>Personal Information</h3>
       <form method="post" action="../actions/action_editProfile.php">
         <label for="displayname">Display Name</label>
-        <input id="displayname" type="text" name="displayname" value="<?=$user->displayname?>">  
+        <input id="displayname" type="text" name="displayname" value="<?=htmlspecialchars($user->displayname)?>">  
 
         <label for="country">Country</label>
         <select id="country" name="country">
@@ -17,7 +17,7 @@
         </select>
 
         <label for="city">City</label>
-        <input id="city" type="text" name="city" value="<?=$user->city?>">  
+        <input id="city" type="text" name="city" value="<?=htmlspecialchars($user->city)?>">  
 
         <input type="submit" value="Save">
       </form>

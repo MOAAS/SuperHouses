@@ -1,5 +1,6 @@
 <?php
-  include_once('../includes/session.php');
+  include_once('../includes/session.php');   
+  include_once('../includes/messages.php');
   include_once('../database/db_users.php');
   
   $username = $_POST['username'];
@@ -7,18 +8,23 @@
   $confirmPassword = $_POST['confirmPassword'];
   $fullName = $_POST['fullName'];
 
-  if ($password != $confirmPassword) {
-    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Sign up failed! Passwords do not match!');
+
+  if ( !preg_match ("/^[a-zA-Z0-9]+$/", $username)) {
+    addErrorMessage('Sign up failed! Username can only contain letters and numbers!');
+    header('Location: ../pages/signup.php');
+  }
+  else if ($password != $confirmPassword) {
+    addErrorMessage('Sign up failed! Passwords do not match!');
     header('Location: ../pages/signup.php');
   }
   else if (userExists($username)) {
-    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Sign up failed! Username already exists!');
+    addErrorMessage('Sign up failed! Username already exists!');
     header('Location: ../pages/signup.php');
   }
   else {
     addUser($username, $password, $fullName);
     $_SESSION['username'] = $username;
-    $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully signed up!');
+    addSuccessMessage('Successfully signed up!');
     header('Location: ../pages/search_houses.php');
   }
 ?>

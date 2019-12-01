@@ -12,7 +12,7 @@
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
       <?php if ($script != null) { ?>
-        <script src=<?=$script?> defer></script>
+        <script src="<?=$script?>" defer></script>
       <?php } ?>
       <script src="../js/ajax.js" defer></script>
       <script src="../js/general.js" defer></script>
@@ -71,8 +71,8 @@
       <li class="<?=$notif['seen']?'notifSeen':'notifUnseen'?>">
         <span class="notifId hidden"><?=$notif['id']?></span>
         <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
-          <p class="notifContent"><?=$notif['content']?></p>
-          <span class="notifDate"><?=$notif['dateTime']?></span>
+          <p class="notifContent"><?=htmlspecialchars($notif['content'])?></p>
+          <span class="notifDate"><?=htmlspecialchars($notif['dateTime'])?></span>
         </a>
         <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
       </li>

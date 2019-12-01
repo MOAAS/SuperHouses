@@ -1,10 +1,11 @@
 <?php
-  include_once('../includes/session.php');
+  include_once('../includes/session.php');   
+  include_once('../includes/messages.php');
   
   session_destroy();
   session_start();
 
-  $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully logged out!');
+  addSuccessMessage('Successfully logged out!');
 
   header('Location: ../pages/login.php');
 ?>

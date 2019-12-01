@@ -13,8 +13,8 @@
               <p class="priceValue"><?=$house->price?></p> 
               <p class="priceCurrency"> € / day</p>
             </div>
-            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=$house->city?>, <?=$house->country?></p>
-            <p class="guestLimit"><i class="fas fa-users"></i> <?=$house->minPeople?> - <?=$house->maxPeople?> people</p>
+            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=htmlspecialchars($house->city)?>, <?=htmlspecialchars($house->country)?></p>
+            <p class="guestLimit"><i class="fas fa-users"></i> <?=htmlspecialchars($house->minPeople)?> - <?=htmlspecialchars($house->maxPeople)?> people</p>
           </div>
         </a>
       </li>
@@ -26,7 +26,7 @@
 <?php function draw_house($house, $pictures) {?>
   <section id="house">
 	<p class="title"><?=$house->title?></p>
-	<div style="padding: 0 0 0 0; font-size: 48px; color: orange;">
+	<div style="padding: 0 0 0 0; font-size: 48px; color: orange;"> <!-- W T F ?????????? -->
 		<i class="far fa-star"></i>
 		<span>5.0</span>
 	</div>
@@ -43,8 +43,8 @@
 	</div>
 	<p class="host">Hóspede: <?=$house->ownerDisplayname?></p>
 	<p class="description"><?=$house->description?></p>
-    <p><?=$house->address?>, <?=$house->city?>, <?=$house->country?></p>
-    <p class="price"><?=$house->price?></p>
+    <p><?=htmlspecialchars($house->address)?>, <?=htmlspecialchars($house->city)?>, <?=htmlspecialchars($house->country)?></p>
+    <p class="price"><?=htmlspecialchars($house->price)?></p>
   </section>
 <?php } ?>
 
@@ -60,7 +60,7 @@
 
       <label for="description">Description</label>
       <textarea rows="4" id="description" type="text" name="description" placeholder="Describe your place" required></textarea>
-      <div id=localization>
+      <div id="localization">
         <div>
           <label for="country">Country</label>
           <select id="country" name="country">
@@ -80,7 +80,7 @@
         </div>
       </div>
       
-      <div id=details>
+      <div id="details">
         <div>
           <label for="min">Min</label>
           <input id="min" type="number" name="min" placeholder="min" min="1" max="20"required>
@@ -95,12 +95,11 @@
         </div>
       </div>
       
-      <article>
-        <input id="files" type="file" name="fileUpload[]" multiple>
+      <div>
         <label for="file">Choose images</label>
-        
+        <input id="files" type="file" name="fileUpload[]" multiple required>        
         <ul id="result"></ul>
-      </article>
+      </div>
 
       <input type="submit" value="Save">
     </form>

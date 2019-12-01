@@ -1,5 +1,6 @@
 <?php
-  include_once('../includes/session.php');
+  include_once('../includes/session.php');   
+  include_once('../includes/messages.php');
   include_once('../database/db_houses.php');
   include_once('../database/db_users.php');
   
@@ -13,6 +14,12 @@
   $price = $_POST['price'];
   $min = $_POST['min'];
   $max = $_POST['max'];
+
+  // verificar se price > 0
+  // verificar se price min max sao numeros
+  // verificar se min <= max
+  // verificar se addhouse retorna false
+  addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
@@ -46,10 +53,8 @@
       }
       
     }
-}
-
-addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);
-
-header('Location: ../pages/search_houses.php');
+  }
+  
+  header('Location: ../pages/search_houses.php');
 
 ?>
