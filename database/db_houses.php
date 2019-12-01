@@ -32,6 +32,9 @@
         $statement->execute(array($house_id));
 
         $place = $statement->fetch();
+        
+        if ($place == false)
+            return null;
 
         return new Place($house_id, $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']);
     }
@@ -59,6 +62,8 @@
             ORDER BY price
             "           
         );
+
+        // todo: escape % and _
         
         $statement->execute(array($maxPrice, $numGuests + $numBabies / 2, "%" . $location . "%", "%" . $location . "%", $endDate, $startDate));
         
@@ -81,19 +86,26 @@
             return 0;
         return $id['max(ID)']+1;
     }
-
-    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max) {
+    
+    function getNewPlaceLocId() {
         $db = Database::instance()->db();
 
-        $statement1 = $db->prepare( "SELECT max(ID) FROM PlaceLocation;");
-        $statement1->execute();
-        $oldplaceid = $statement1->fetch();
+        $statement = $db->prepare( "SELECT max(ID) FROM PlaceLocation;");
+        $statement->execute();
+        $oldplaceid = $statement->fetch();
         if($oldplaceid['max(ID)']==null)
             $newplaceid = 0;
         else $newplaceid = $oldplaceid['max(ID)']+1;
+    }
+
+    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max) {
+        // todo: verify weird characters
+        $db = Database::instance()->db();
+
+        $newplaceid = getNewPlaceLocId();
 
         $countryID = getCountryID($country);
-        echo $countryID;
+       // echo $countryID;
 
         $statement2 = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
         $statement2->execute(array($newplaceid,$countryID,$city,$address));

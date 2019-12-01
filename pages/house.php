@@ -8,12 +8,13 @@
     die(header('Location: login.php'));
 
   $id = $_GET['id'];
+  $house = getHouseByID($id);
+  if($house ==null)
+    die(header('Location: search_houses.php'));
+    
+  $pictures = getHousePhotoPathsByID($id);
 
   draw_header($_SESSION['username'], "../js/house.js");
-  $house = getHouseByID($id);
-  if($house->title==null)
-    die(header('Location: search_houses.php'));
-  $pictures = getHousePhotoPathsByID($id);
   draw_house($house, $pictures);
   draw_footer();
 ?>

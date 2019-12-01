@@ -1,20 +1,23 @@
-let slideIndex = 1;
-showPhotos(slideIndex);
+
+"use strict"
+
+let slideIndex = 0;
+showPhotos();
 
 function advancePhotos(n) {
-    showPhotos(slideIndex += n);
+  let photos = document.getElementById("photoCarousel").children;
+  slideIndex = (slideIndex + n) % photos.length;
+  while (slideIndex < 0)
+    slideIndex += photos.length;
+  showPhotos();
 }
 
-function showPhotos(n) {
-  let i;
+function showPhotos() {
   let photos = document.getElementById("photoCarousel").children;
-  console.log(photos.length);
-  if (n > photos.length) {slideIndex = 1}
-  if (n < 1) {slideIndex = photos.length}
-  for (i = 0; i < photos.length; i++) {
+  for (let i = 0; i < photos.length; i++) {
     photos[i].style.display = "none";  
   }
-  photos[slideIndex-1].style.display = "block";  
+  photos[slideIndex].style.display = "block";  
 }
 
 document.getElementById("photoLeftButton").addEventListener("click", function(){advancePhotos(-1)}, false);
