@@ -59,31 +59,48 @@
       <input id="title" type="text" name="title" placeholder="Name your place" required>
 
       <label for="description">Description</label>
-      <input id="description" type="text" name="description" placeholder="Descrive your place" required>
-
-      <label for="country">Country</label>
-        <select id="country" name="country">
-          <option value=""></option>
-          <?php foreach ($countryOptions as $country) { ?>
-            <option value="<?=$country?>"><?=$country?></option>
-          <?php } ?>
-        </select>
-
-      <label for="city">City</label>
-      <input id="city" type="text" name="city" placeholder="City" required>
-
-      <label for="address">Address</label>
-      <input id="address" type="text" name="address" placeholder="Address" required>
-
-      <label for="min">Min</label>
-      <input id="min" type="number" name="min" placeholder="0" required>
-      <label for="max">Man</label>
-      <input id="max" type="number" name="max" placeholder="2" required>
-      <label for="price">Price</label>
-      <input id="price" type="numbher" name="price" placeholder="50" required>
+      <textarea rows="4" id="description" type="text" name="description" placeholder="Describe your place" required></textarea>
+      <div id=localization>
+        <div>
+          <label for="country">Country</label>
+          <select id="country" name="country">
+            <option value=""></option>
+            <?php foreach ($countryOptions as $country) { ?>
+              <option value="<?=$country?>"><?=$country?></option>
+            <?php } ?>
+          </select>
+        </div>
+        <div>
+          <label for="city">City</label>
+          <input id="city" type="text" name="city" placeholder="City" required>
+        </div>
+        <div>
+          <label for="address">Address</label>
+          <input id="address" type="text" name="address" placeholder="Address" required>
+        </div>
+      </div>
       
-      <label for="file">Upload Images</label>
-      <input type="file" name="fileUpload[]" multiple >
+      <div id=details>
+        <div>
+          <label for="min">Min</label>
+          <input id="min" type="number" name="min" placeholder="min" min="1" max="20"required>
+        </div>
+        <div>
+          <label for="max">Max</label>
+          <input id="max" type="number" name="max" placeholder="max" min="1" max="20" required>
+        </div>
+        <div>
+          <label for="price">Price</label>
+          <input id="price" type="number" name="price" placeholder="50" required>
+        </div>
+      </div>
+      
+      <article>
+        <input id="files" type="file" name="fileUpload[]" multiple>
+        <label for="file">Choose images</label>
+        
+        <ul id="result"></ul>
+      </article>
 
       <input type="submit" value="Save">
     </form>

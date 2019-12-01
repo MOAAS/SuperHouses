@@ -117,7 +117,7 @@ input, label {
 }
 
 
-input[type="text"], input[type="password"], input[type="date"], select{
+input[type="text"], input[type="password"], input[type="date"],input[type="number"], textarea, select{
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
@@ -276,6 +276,104 @@ input[type="submit"]:hover {
     font-size: 1.25em;
 }
 
+/*Add House*/
+
+#addhouse{
+    margin: 1em auto;
+    max-width: 50em;
+}
+
+#addhouse [type="text"],[type="number"],select,textarea{
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+#addhouse #localization{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+#addhouse #details{
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+#addhouse #description{
+    height:5em;
+    box-sizing: border-box;
+    resize: none;
+}
+
+#addhouse input[type="submit"] {
+    font-size: 1.25em;
+    width: 25%;
+    margin-bottom: 0.75em;
+    margin-top: 0.3em;
+
+
+}
+
+/*Remove arrows from input type number*/
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; /* Firefox */
+}
+
+/*
+[type="file"] {
+    border: 0;
+    clip: rect(0, 0, 0, 0);
+    height: 1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute !important;
+    white-space: nowrap;
+    width: 1px;
+  }
+   
+  [type="file"] + label {
+    background-color: #000;
+    border-radius: 4rem;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    padding: 1em;
+
+  }
+    
+  [type="file"]:focus + label,
+  [type="file"] + label:hover {
+      background-color: #f15d22;
+  }
+    
+  [type="file"]:focus + label {
+    outline: 1px dotted #000;
+  }
+*/
+
+  
+  
+
+#result {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 9em);
+    grid-gap: 10px;
+    align-items: center;
+    padding:0;
+}
+#result img{
+    width:9em;
+    height:9em;
+    vertical-align: top;
+}
+ 
 
 /* Houses */
 

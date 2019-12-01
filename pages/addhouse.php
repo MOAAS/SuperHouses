@@ -11,7 +11,7 @@
 
     $countryOptions = getAllCountries();
     $user = getUserInfo($_SESSION['username']);
-    draw_header($user->username, null);
+    draw_header($user->username, "../js/addhouse.js");
 
     draw_addHouse($countryOptions);
     draw_footer();
