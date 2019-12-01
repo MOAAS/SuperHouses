@@ -1,12 +1,5 @@
 "use strict"
 
-let priceTags = document.querySelectorAll('.priceTag .priceValue');
-priceTags.forEach(element => {
-    element.textContent = parseFloat(element.textContent).toFixed(2);
-});
-
-// coisas do search
-
 let searchButton = document.getElementById('searchButton');
 let searchBackground = document.getElementById('searchBackground');
 

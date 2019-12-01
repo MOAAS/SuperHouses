@@ -17,8 +17,8 @@
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
 
-  print_r($ownerId);
-  echo $ownerId;
+  //print_r($ownerId);
+  //echo $ownerId;
 
   //save files
   mkdir( '../database/houseImages/' . $id);

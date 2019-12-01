@@ -15,14 +15,19 @@ body {
     --accent-color: rgb(102, 219, 235);
 
     --success-color: rgb(97, 187, 61);
-    --error-color: rgb(255, 0, 0);
+    --error-color: rgb(225, 0, 0);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
   
   
     background-color: var(--bg-color);
-    /*background-image: url("icon.png");*/
+    /*
+    background-image: url("hoss.jpg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    */
 
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
@@ -43,11 +48,11 @@ body {
 }
 
 #pagetop a {
-    color: white;
+    color: inherit;
     font-weight: bold;
 }
 
-#pagetop span {
+#pagetop > span {
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -55,11 +60,100 @@ body {
     max-width: 80em;    
 }
 
-#pagetop nav li {
+#pagetop nav > ul > li {
     display: inline;
     color: white;
     margin: 0.25em;
 }
+
+#pagetop #notifications {
+    color: white;
+    position: relative;
+    margin: 0 1em; 
+}
+
+#pagetop #notificationBell {
+    font-size: 1.75em;   
+    cursor: pointer;
+}
+
+#pagetop #notificationNum {
+    position: absolute;
+    top: -20px; right: -10px;  
+    border-radius: 50%;
+    padding: 0.2em;
+    width: 1.5em; height: 1.5em; line-height: 1.5em;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#pagetop #notificationList {
+    display: none;
+    position: absolute;
+    top: 20px; right: 10px;
+    z-index: 3;
+    width: 25em;
+    max-height: 40em;
+    overflow: auto;
+    padding: 0;   
+    
+    color: black;
+    box-shadow: var(--simple-shadow);
+    background-color: var(--bg-color);
+}
+
+#notificationList li {
+    display: grid;
+    align-items: center;
+    border-bottom: 1px solid black;
+    grid-template-columns: 4fr 1fr;    
+    color: black;
+}
+
+#notificationList .notifClickable {    
+    justify-self: stretch;
+    border-right: 1px solid grey;
+}
+
+#notificationList .notifClickable:hover {
+    color: var(--main-color-light);
+}
+
+#notificationList .notifContent {
+    margin: 1em;
+}
+
+#notificationList .notifDate {
+    display: block;
+    text-align: right;
+    margin: 0.75em;
+    font-size: 0.75em;
+}
+
+#notificationList .notifMarkAsSeen {
+    justify-self: center;
+    cursor: pointer;
+    color: black;
+}
+
+#notificationList .notifMarkAsSeen:hover {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen:hover {
+    color: black;
+}
+
+#notificationList .notifUnseen {
+    background-color: rgb(225, 225,225)
+}
+
 
 #pagetop #loggeduser {
     color: var(--accent-color);
@@ -466,8 +560,7 @@ input[type=number] {
 #searchButton {
     position: fixed;
     z-index: 2;
-    bottom: 2em;    
-    right: 3em;
+    bottom: 2em; right: 3em;
 
     padding: 1em;
     font-size: 1.25em;
@@ -489,8 +582,7 @@ input[type=number] {
     display: none;
     position: fixed;
     z-index: 99999;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     width: 100%; 
     height: 100%; 
     overflow: auto;
@@ -561,14 +653,12 @@ input[type=number] {
 }
 
 #startDate {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 3px 0 0 3px;
     border-right: 1px solid gray;
 }
 
 #endDate {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    border-radius: 0 3px 3px 0;
 }
 
 #maxPriceSlider .priceTag {

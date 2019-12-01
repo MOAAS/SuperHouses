@@ -1,9 +1,7 @@
 <?php function draw_header($username, $script) { 
-/**
- * Draws the header for all pages. Receives an username
- * if the user is logged in in order to draw the logout
- * link.
- */?>
+  include_once('../database/db_notifications.php');
+  $notifications = getUnseenNotifications($username);
+?>
   <!DOCTYPE html>
   <html>
 
@@ -16,6 +14,9 @@
       <?php if ($script != null) { ?>
         <script src=<?=$script?> defer></script>
       <?php } ?>
+      <script src="../js/ajax.js" defer></script>
+      <script src="../js/general.js" defer></script>
+      <script src="../js/notifications.js" defer></script>
     </head>
 
     <body>
@@ -29,6 +30,11 @@
           <?php if ($username != NULL) { ?>
             <nav>
               <ul>
+                <li id="notifications">
+                  <i id="notificationBell" class="far fa-bell"></i>
+                  <span id="notificationNum"><?=count($notifications)?></span>
+                  <?=drawNotificationList($notifications)?> 
+                </li>
                 <li>Signed in as <a id="loggeduser" href="editprofile.php"><?=$username?></a></li>
                 <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
               </ul>
@@ -51,4 +57,25 @@
  */ ?>
   </body>
 </html>
+<?php } ?>
+
+<?php function drawEmptyNotificationList() { ?>
+  <ul id="notificationList">
+    <li><p class="notifContent">No notifications</p></li>
+  </ul>
+<?php } ?>
+
+<?php function drawNotificationList($notifications) { ?>
+  <ul id="notificationList">
+    <?php foreach ($notifications as $notif) { ?>
+      <li class="<?=$notif['seen']?'notifSeen':'notifUnseen'?>">
+        <span class="notifId hidden"><?=$notif['id']?></span>
+        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
+          <p class="notifContent"><?=$notif['content']?></p>
+          <span class="notifDate"><?=$notif['dateTime']?></span>
+        </a>
+        <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
+      </li>
+    <?php } ?>
+  </ul>
 <?php } ?>
