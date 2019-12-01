@@ -5,6 +5,7 @@ DROP TABLE IF EXISTS PlaceLocation;
 DROP TABLE IF EXISTS Country;
 DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Reservation;
+DROP TABLE IF EXISTS UserNotification;
 
 CREATE TABLE User (
     id INTEGER PRIMARY KEY,
@@ -47,6 +48,15 @@ CREATE TABLE Reservation (
     dateEnd DATE NOT NULL,
     user REFERENCES User NOT NULL,
     place REFERENCES Place NOT NULL
+);
+
+CREATE TABLE UserNotification (
+    id INTEGER PRIMARY KEY,
+    content VARCHAR,
+    dateTime DATE NOT NULL,
+    user REFERENCES User NOT NULL,
+    seen INTEGER,
+    CONSTRAINT CHK_seen CHECK (seen = 0 OR seen = 1)
 );
 
 PRAGMA foreign_keys = ON;
