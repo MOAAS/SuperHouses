@@ -1,3 +1,5 @@
+//coisas do nao doni
+
 function hideAllTabs() {
     document.querySelectorAll('#profile .profileTab').forEach(tab => {
         tab.style.display = "none";
@@ -21,7 +23,7 @@ function updateTabs() {
     hideAllTabs();
     switch (selected) {
         case '#Profile': document.getElementById('editProfile').style.display = ""; break;
-        case '#Your places': document.getElementById('editProfile').style.display = ""; break;
+        case '#Your places': document.getElementById('yourPlaces').style.display = ""; break;
         case '#Add Place': document.getElementById('addHouse').style.display = ""; break;
         case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
         case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
@@ -68,3 +70,11 @@ filesInput.addEventListener("change", function (event) {
     }
 
 });
+
+const addHouseButton = document.getElementById('addHouseButton');
+function selectAddPlace(){
+    selectTabItem('Add Place')
+}
+addHouseButton.addEventListener('click',selectAddPlace, false);
+
+

@@ -1,4 +1,4 @@
-<?php function draw_profile($user, $countryOptions) { ?>
+<?php function draw_profile($user, $countryOptions,$houseList) { ?>
   <section id="profile">
     <header><h2><?=toHTML($user->username)?></h2></header>
     <nav>
@@ -12,6 +12,7 @@
       </ul>
     </nav>
     <?php draw_profileedit($user, $countryOptions) ?>
+    <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
       
   </section>
@@ -75,6 +76,21 @@
   </select>
 <?php } ?>
 
+
+<?php function draw_yourListing($houseList){?>
+  <section id="yourPlaces" class="genericForm profileTab">
+    <?php
+      if(count($houseList)>0)
+        draw_houselist($houseList);
+      else{ ?>
+      <div id="noPlaces">
+       <p>Looks like you dont have any place yet!</p>
+       <button id="addHouseButton" type="button">Add a Place</button>
+      </div> 
+      <?php } ?>
+  </section>
+<?php } ?>
+
 <?php function draw_addHouse($countryOptions){?>
   <section id="addHouse" class="genericForm profileTab">
 
@@ -101,18 +117,19 @@
         </div>
       </div>
       
+      <p>Recomended Capacity</p>
       <div id="details">
         <div>
-          <label for="min">Min</label>
-          <input id="min" type="number" name="min" placeholder="min" min="1" max="20" required>
+          <label for="min">Minimum</label>
+          <input id="min" type="number" name="min" placeholder="Minimum" min="1" max="20" required>
         </div>
         <div>
-          <label for="max">Max</label>
-          <input id="max" type="number" name="max" placeholder="max" min="1" max="20" required>
+          <label for="max">Maximum</label>
+          <input id="max" type="number" name="max" placeholder="Maximum" min="1" max="20" required>
         </div>
         <div>
           <label for="price">Price</label>
-          <input id="price" type="number" name="price" placeholder="50" required>
+          <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000"  required>
         </div>
       </div>
       
@@ -125,5 +142,7 @@
       <input type="submit" value="Save">
     </form>
   </section>
+
+
 
 <?php } ?>

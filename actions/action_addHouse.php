@@ -18,15 +18,28 @@
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
   // verificar se price > 0
-  // verificar se price min max sao numeros
-  // verificar se min <= max
-  // verificar se addhouse retorna false
+  if ($price <= 0 || !is_numeric($price)) {
+    addErrorMessage('Adding place failed! Price invalid!');
+    header('Location: ../pages/profile.php#Add Place');
+  }
+  if ($min <= 0 || !is_numeric($min)) {
+    addErrorMessage('Adding place failed! Minimum capacity invalid!');
+    header('Location: ../pages/profile.php#Add Place');
+  }
+
+  if ($max <= 0 || !is_numeric($max)) {
+    addErrorMessage('Adding place failed! Maximum capacity invalid!');
+    header('Location: ../pages/profile.php#Add Place');
+  }
+
+  if ($min >= $max) {
+    addErrorMessage('Adding place failed! Minimum capacity is bigger than Maximum!');
+    header('Location: ../pages/profile.php#Add Place');
+  }
+  
   addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);
-
-
-  //print_r($ownerId);
-  //echo $ownerId;
-
+  // verificar se addhouse retorna false// como?/pq?
+    
   //save files
   mkdir( '../database/houseImages/' . $id);
   $target_dir = '../database/houseImages/' . $id .'/' ;

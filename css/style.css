@@ -5,6 +5,7 @@
     --bg-color: rgb(244, 247, 252);
     --bg-color-2: rgb(220, 220, 220);
     --main-color: #455A64;
+    --topbar-color: #455A64;
     --main-color-hl: #78909c;
 
     --main-color-light: #546e7a;
@@ -12,8 +13,8 @@
 
     --input-bg-color: rgb(200, 200, 200);
     --input-hint-color: rgb(80, 80, 80);
-    --secondary-color-hl: rgb(179, 149, 137);
-    --secondary-color: #966c57;
+    --secondary-color-hl: #ffbe99;
+    --secondary-color: #d48253;
 
     --text-color:rgb(0,0,0);
     --text-color-2:rgb(240,240,240);
@@ -30,19 +31,21 @@
 [data-theme="dark"] {
     --bg-color: rgb(12, 12, 12);
     --bg-color-2: rgb(30, 30, 30);
-    --main-color: rgb(40, 40, 40);;
-    --main-color-hl: #b0bec5;
 
-    --main-color-light: #546e7a;
+    --topbar-color: rgb(40, 40, 40);
+    --main-color: #9dcbe2;
+    --main-color-hl: #acc7d4;
+
+    --main-color-light: #7e9dac;
     --main-color-light-hl: #37474f;
 
     --input-bg-color: rgb(50, 50, 50);
     --input-hint-color: rgb(80, 80, 80);
-    --secondary-color-hl: rgb(179, 149, 137);
-    --secondary-color: #966c57;
+    --secondary-color-hl: #ffc7a7;
+    --secondary-color: #ffae80;
 
     --text-color:rgb(240,240,240);
-    --text-color-2:rgb(240,240,240);
+    --text-color-2:rgb(0,0,0);
 
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(225, 0, 0);
@@ -68,7 +71,7 @@ body{
 
 
 #pagebanner {
-    background-color: var(--main-color);
+    background-color: var(--topbar-color);
 }
 
 #pagetop {
@@ -81,7 +84,7 @@ body{
 
 #pagetop h1 {
     padding: 0.5em;
-    color: var(--text-color-2);
+    color: rgb(225, 225,225);
 }
 
 #pagetop h1 small {
@@ -95,7 +98,7 @@ body{
 
 #pagetop nav > ul > li {
     display: inline;
-    color: var(--text-color-2);
+    color: rgb(225, 225,225);
     margin: 0.25em;
 }
 
@@ -189,7 +192,7 @@ body{
 
 
 #pagetop #loggeduser {
-    color: var(--secondary-color-hl);
+    color: var(--secondary-color);
     font-weight: bold;
 }
 
@@ -238,7 +241,7 @@ body{
   }
   
   .slider {
-    background-color: #ccc;
+    background-color: var(--bg-color);
     bottom: 0;
     cursor: pointer;
     left: 0;
@@ -249,7 +252,7 @@ body{
   }
   
   .slider:before {
-    background-color: #fff;
+    background-color: var(--main-color);
     bottom: 4px;
     content: "";
     height: 26px;
@@ -260,7 +263,7 @@ body{
   }
   
   input:checked + .slider {
-    background-color: #66bb6a;
+    background-color: var(--bg-color);
   }
   
   input:checked + .slider:before {
@@ -305,7 +308,8 @@ input, label, select, textarea {
 input[type="text"], 
 input[type="password"], 
 input[type="date"],
-input[type="number"], 
+input[type="number"],
+button, 
 textarea, 
 select {
     box-sizing: border-box;  
@@ -346,7 +350,7 @@ input[type="range"]:hover {
 
 input[type="range"]::-webkit-slider-thumb{
     -webkit-appearance: none;
-    background: var(--main-color-hl);
+    background: var(--main-color);
     width: 1.5em; 
     height: 1.5em;
     border-radius: 50%;
@@ -361,7 +365,8 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-input[type="submit"] {
+input[type="submit"],
+button {
     cursor: pointer;
     color: white;
     background-color: var(--main-color-light);
@@ -370,7 +375,8 @@ input[type="submit"] {
     transition: background-color 200ms ease-in-out;
 }
 
-input[type="submit"]:hover {
+input[type="submit"]:hover,
+button:hover {
     background-color: var(--main-color-light-hl);
 }
 
@@ -430,7 +436,7 @@ input[type="submit"]:hover {
 }
 
 #login footer a, #signup footer a {
-    color: var(--main-color-hl);
+    color: var(--main-color);
     font-weight: bold;
 }
 
@@ -469,7 +475,7 @@ input[type="submit"]:hover {
     font-size: 1.25em;
     padding: 1em;
     cursor: pointer;
-    color: black;
+    color: var(--text-color);
     transition: all 0.2s ease-in-out;
     font-weight: bold;
     background-color: var(--input-bg-color);
@@ -485,7 +491,7 @@ input[type="submit"]:hover {
 
 #profile nav li:hover,
 #profile nav li.selectedTab {
-    color: white;
+    color: var(--text-color-2);
     background-color: var(--main-color);    
 }
 
@@ -532,6 +538,18 @@ input[type="submit"]:hover {
     font-size: 1.25em;
 }
 
+/* Your Places*/
+
+#yourPlaces #houses > ul {
+    grid-template-columns: repeat(auto-fit, 16em);
+    gap: 0.8em;
+}
+
+#yourPlaces #noPlaces{
+  padding: 170px 0;
+  text-align: center;
+  }
+
 /*Add House*/
 
 #addHouse input[type="text"],
@@ -567,7 +585,6 @@ input[type="submit"]:hover {
 
 /*Remove arrows from input type number*/
 
-/*
 input::-webkit-outer-spin-button,
 input::-webkit-inner-spin-button {
     -webkit-appearance: none;
@@ -577,8 +594,10 @@ input::-webkit-inner-spin-button {
 input[type=number] {
     -moz-appearance:textfield; 
 }
-*/
+
+/*file upload*/
 [type="file"] {
+    margin:1em;
     height: 0;
     overflow: hidden;
     width: 0;
@@ -587,36 +606,58 @@ input[type=number] {
 [type="file"] + label {
     border: none;
     border-radius: 5px;
-    color: #fff;
+    color: #000000;
     cursor: pointer;
     display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: inherit;
+    font-weight: 600;
     margin-bottom: 1rem;
     outline: none;
-    padding: 0.4em;
+    padding: 0.5em 2em;
     position: relative;
     transition: all 0.3s;
     vertical-align: middle;
-}   
+}
+
 [type="file"] + label {
-    background-color: var(--main-color-light);
+    background-color: var(--secondary-color);
     border-radius: 50px;
     overflow: hidden;
 }
-
-[type="file"] + label:hover {
-    background-color: var(--main-color-light-hl);
+[type="file"] + label::before {
+    color: #000000;
+    content: "\f382";
+    font-family: "Font Awesome 5 Free";
+    font-size: 100%;
+    height: 100%;
+    right: 130%;
+    line-height: 3.3;
+    position: absolute;
+    top: -9px;
+    transition: all 0.3s;
 }
-
+[type="file"] + label:hover {
+    background-color: var(--secondary-color-hl);
+}
+[type="file"] + label:hover::before {
+    right: 85%;
+}
 
   
   
 
 #result {
+    background-color: var(--bg-color);
+    min-height: 9em;
+    border-radius: 1em; 
     display: grid;
     grid-template-columns: repeat(auto-fit, 9em);
     grid-gap: 10px;
     align-items: center;
-    padding:0;
+    padding:1em;
+    margin-top:0em;
+    margin-bottom: 2em;
 }
 #result img{
     width:9em;
@@ -642,7 +683,7 @@ input[type=number] {
 
 #houses li {
     background-color: var(--bg-color-2);
-    border: 2px solid var(--main-color);
+    border: 2px solid var(--topbar-color);
     border-radius: 1em; 
     box-shadow: var(--simple-shadow); 
     transition: all 0.2s ease-in-out;
@@ -650,7 +691,7 @@ input[type=number] {
 
 #houses li:hover {
     box-shadow: var(--simple-shadow-hl);    
-    color: var(--main-color-hl);
+    color: var(--main-color);
     transform: scale(1.05);
 }
 
@@ -718,6 +759,7 @@ input[type=number] {
 /* Search functionality */
 
 #searchButton {
+    color:var(--text-color-2);
     position: fixed;
     z-index: 2;
     bottom: 2em; right: 3em;
@@ -847,8 +889,8 @@ input[type=number] {
     border-radius: 50%;  
     text-align: center;
 
-    border: 2px solid var(--main-color-hl);
-    color:  var(--main-color-hl);
+    border: 2px solid var(--main-color);
+    color:  var(--main-color);
     font-size: 0.6em;    
     padding: 1em;
     margin: 0 1em;    
@@ -865,7 +907,7 @@ input[type=number] {
 	margin: 0.2em 0.5em;
 	font-weight: bold;
 	font-size: 3em; 
-	color: var(--main-color-hl);
+	color: var(--main-color);
 }
 
 #house .host {
