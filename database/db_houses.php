@@ -7,7 +7,7 @@
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
-            "SELECT Place.id,countryName,PlaceLocation.city,address,owner,title,description,price,minPeople,maxPeople
+            "SELECT Place.id,countryName,PlaceLocation.city,username,displayname,title,description,price,minPeople,maxPeople
             FROM Place, PlaceLocation, Country, User 
             WHERE Place.location=PlaceLocation.id AND PlaceLocation.country = Country.id"
         );
@@ -21,7 +21,25 @@
         return $places;
     }
 
-    function getHouseByID($house_id) {
+    function getHousesFromOwner($username) {
+        $db = Database::instance()->db();
+
+        $statement = $db->prepare(
+            "SELECT Place.id,countryName,PlaceLocation.city,address,username,displayname,title,description,price,minPeople,maxPeople
+            FROM Place, PlaceLocation, Country, User 
+            WHERE Place.location = PlaceLocation.id AND PlaceLocation.country = Country.id AND Place.owner = User.id AND User.username = ?"
+        );
+        $statement->execute(array($username));
+
+        $places = array();
+        foreach($statement->fetchAll() as $place) {
+            array_push($places, new Place($place['id'], $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']));
+        }
+
+        return $places;
+    }
+
+    function getHouseById($house_id) {
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
