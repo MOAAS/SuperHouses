@@ -3,7 +3,7 @@
     margin: 0;
 
     --bg-color: rgb(244, 247, 252);
-    --bg-color-2: rgb(220, 220, 220);
+    --bg-color-2: rgb(235, 235, 235);
     --main-color: #455A64;
     --topbar-color: #455A64;
     --main-color-hl: #78909c;
@@ -797,7 +797,6 @@ input[type=number] {
     margin: 10% auto;
     border-radius: 3px;
     padding: 2em;
-    box-shadow: var(--strong-shadow);
 }
 
 #searchDialog h3 {
@@ -884,8 +883,6 @@ input[type=number] {
 }
 
 .guestCounter .increaseNum, .guestCounter .decreaseNum {
-    width: 1em;
-    height: 1em;
     border-radius: 50%;  
     text-align: center;
 
