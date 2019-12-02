@@ -345,7 +345,7 @@ input[type="range"]:hover {
 
 input[type="range"]::-webkit-slider-thumb{
     -webkit-appearance: none;
-    background: var(--main-color);
+    background: var(--main-color-hl);
     width: 1.5em; 
     height: 1.5em;
     border-radius: 50%;
