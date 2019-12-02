@@ -1,11 +1,13 @@
 <?php function draw_houselist($houseList) {?>
 <section id="houses">
     <ul>
-    <?php foreach($houseList as $house){?>
+    <?php foreach($houseList as $house)
+    
+    {?>
       <li>
         <a href="house.php?id=<?=$house->place_id?>">
           <figure>
-            <img src="https://freshome.com/wp-content/uploads/2018/09/contemporary-exterior.jpg" alt="House image">
+            <img src="../database/houseImages/<?=$house->place_id?>/0" alt="House image">
             <figcaption><h3><?=toHTML($house->title)?></h3></figcaption>
           </figure>
           <div class="houseInfo">
@@ -96,8 +98,8 @@
       </div>
       
       <div>
-        <label for="files">Choose images</label>
         <input id="files" type="file" name="fileUpload[]" multiple required>        
+        <label for="files">Choose images</label>
         <ul id="result"></ul>
       </div>
 

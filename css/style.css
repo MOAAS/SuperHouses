@@ -1,18 +1,22 @@
 /* Page header and body */
-body {
+:root {
     margin: 0;
 
     --bg-color: rgb(244, 247, 252);
-    --main-color: rgb(37, 71, 46);
-    --main-color-hl: rgb(64, 116, 75);
+    --bg-color-2: rgb(220, 220, 220);
+    --main-color: #455A64;
+    --main-color-hl: #78909c;
 
-    --main-color-light: rgb(90, 160, 105);
-    --main-color-light-hl: rgb(64, 116, 75);
+    --main-color-light: #546e7a;
+    --main-color-light-hl: #37474f;
 
-    --input-bg-color: rgb(220, 220, 220);
+    --input-bg-color: rgb(200, 200, 200);
     --input-hint-color: rgb(80, 80, 80);
-    --accent-color-hl: rgb(165, 244, 255);
-    --accent-color: rgb(102, 219, 235);
+    --secondary-color-hl: rgb(179, 149, 137);
+    --secondary-color: #966c57;
+
+    --text-color:rgb(0,0,0);
+    --text-color-2:rgb(240,240,240);
 
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(225, 0, 0);
@@ -20,8 +24,37 @@ body {
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
-  
-  
+
+}
+
+[data-theme="dark"] {
+    --bg-color: rgb(12, 12, 12);
+    --bg-color-2: rgb(30, 30, 30);
+    --main-color: rgb(40, 40, 40);;
+    --main-color-hl: #b0bec5;
+
+    --main-color-light: #546e7a;
+    --main-color-light-hl: #37474f;
+
+    --input-bg-color: rgb(50, 50, 50);
+    --input-hint-color: rgb(80, 80, 80);
+    --secondary-color-hl: rgb(179, 149, 137);
+    --secondary-color: #966c57;
+
+    --text-color:rgb(240,240,240);
+    --text-color-2:rgb(240,240,240);
+
+    --success-color: rgb(97, 187, 61);
+    --error-color: rgb(225, 0, 0);
+
+    --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
+    --strong-shadow: 0px 0px 10px  rgba(68, 47, 47, 0.5);
+}
+
+body{
+    margin:0;
+    color: var(--text-color);
     background-color: var(--bg-color);
     /*
     background-image: url("hoss.jpg");
@@ -32,7 +65,7 @@ body {
 
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-  
+
 
 #pagebanner {
     background-color: var(--main-color);
@@ -48,7 +81,7 @@ body {
 
 #pagetop h1 {
     padding: 0.5em;
-    color: white;
+    color: var(--text-color-2);
 }
 
 #pagetop h1 small {
@@ -62,7 +95,7 @@ body {
 
 #pagetop nav > ul > li {
     display: inline;
-    color: white;
+    color: var(--text-color-2);
     margin: 0.25em;
 }
 
@@ -99,7 +132,7 @@ body {
     overflow: auto;
     padding: 0;   
     
-    color: black;
+    color: var(--text-color);
     box-shadow: var(--simple-shadow);
     background-color: var(--bg-color);
 }
@@ -109,7 +142,7 @@ body {
     align-items: center;
     border-bottom: 1px solid black;
     grid-template-columns: 4fr 1fr;    
-    color: black;
+    color: var(--text-color);
 }
 
 #notificationList .notifClickable {    
@@ -156,7 +189,7 @@ body {
 
 
 #pagetop #loggeduser {
-    color: var(--accent-color);
+    color: var(--secondary-color-hl);
     font-weight: bold;
 }
 
@@ -187,6 +220,61 @@ body {
     background-color: var(--error-color);
 }
 
+/*Dark theme switch*/
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    
+  }
+  .theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+  }
+  
+  .theme-switch input {
+    display:none;
+  }
+  
+  .slider {
+    background-color: #ccc;
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    background-color: #fff;
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+  }
+  
+  input:checked + .slider {
+    background-color: #66bb6a;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
 
 /* Generic */
 html {
@@ -207,8 +295,9 @@ ul {
     list-style-type: none;
 }
 
-input, label {
+input, label, select, textarea {
     display: block;
+    color:var(--text-color);
 }
 
 
@@ -233,7 +322,7 @@ textarea:-moz-placeholder,
 textarea::-moz-placeholder,
 textarea:-ms-input-placeholder {
     font-size: 1em;
-    color: var(--input-hint-color);
+    color: var(--text-color);
 }
 
 input:focus {
@@ -274,14 +363,14 @@ input[type="range"]::-moz-range-thumb {
 input[type="submit"] {
     cursor: pointer;
     color: white;
-    background-color: var(--main-color);
+    background-color: var(--main-color-light);
     border: none;
 
     transition: background-color 200ms ease-in-out;
 }
 
 input[type="submit"]:hover {
-    background-color: var(--main-color-hl);
+    background-color: var(--main-color-light-hl);
 }
 
 .hidden {
@@ -302,7 +391,7 @@ input[type="submit"]:hover {
 
 .genericForm {
     box-shadow: var(--simple-shadow);
-    background-color: white;
+    background-color: var(--bg-color-2);
     padding: 1em 2em;
 }
 
@@ -340,7 +429,7 @@ input[type="submit"]:hover {
 }
 
 #login footer a, #signup footer a {
-    color: var(--main-color);
+    color: var(--main-color-hl);
     font-weight: bold;
 }
 
@@ -433,38 +522,35 @@ input[type=number] {
     -moz-appearance:textfield; 
 }
 */
-
-/*
 [type="file"] {
-    border: 0;
-    clip: rect(0, 0, 0, 0);
-    height: 1px;
+    height: 0;
     overflow: hidden;
-    padding: 0;
-    position: absolute !important;
-    white-space: nowrap;
-    width: 1px;
+    width: 0;
   }
-   
-  [type="file"] + label {
-    background-color: #000;
-    border-radius: 4rem;
+
+[type="file"] + label {
+    border: none;
+    border-radius: 5px;
     color: #fff;
     cursor: pointer;
     display: inline-block;
-    padding: 1em;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 0.4em;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}   
+[type="file"] + label {
+    background-color: var(--main-color-light);
+    border-radius: 50px;
+    overflow: hidden;
+}
 
-  }
-    
-  [type="file"]:focus + label,
-  [type="file"] + label:hover {
-      background-color: #f15d22;
-  }
-    
-  [type="file"]:focus + label {
-    outline: 1px dotted #000;
-  }
-*/
+[type="file"] + label:hover {
+    background-color: var(--main-color-light-hl);
+}
+
 
   
   
@@ -499,7 +585,7 @@ input[type=number] {
 }
 
 #houses li {
-    background-color: white;
+    background-color: var(--bg-color-2);
     border: 2px solid var(--main-color);
     border-radius: 1em; 
     box-shadow: var(--simple-shadow); 
@@ -516,6 +602,7 @@ input[type=number] {
 
 #houses figure {
     margin:0;
+    max-height: 12em;
     overflow: hidden;
     position: relative;
     border-radius: 0.85em 0.85em 0 0;
@@ -581,7 +668,7 @@ input[type=number] {
 
     padding: 1em;
     font-size: 1.25em;
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
     transition: background-color 200ms ease-in-out;
     
     border-radius: 10px;
@@ -591,7 +678,7 @@ input[type=number] {
 }
 
 #searchButton:hover {
-    background-color: var(--accent-color-hl);
+    background-color: var(--secondary-color-hl);
 }
 
 
@@ -612,7 +699,6 @@ input[type=number] {
     margin: 10% auto;
     border-radius: 3px;
     padding: 2em;
-    background-color: #fefefe;
     box-shadow: var(--strong-shadow);
 }
 
@@ -705,8 +791,8 @@ input[type=number] {
     border-radius: 50%;  
     text-align: center;
 
-    border: 2px solid var(--main-color);
-    color:  var(--main-color);
+    border: 2px solid var(--main-color-hl);
+    color:  var(--main-color-hl);
     font-size: 0.6em;    
     padding: 1em;
     margin: 0 1em;    
@@ -723,7 +809,7 @@ input[type=number] {
 	margin: 0.2em 0.5em;
 	font-weight: bold;
 	font-size: 3em; 
-	color: #333;
+	color: var(--main-color-hl);
 }
 
 #house .host {
@@ -732,7 +818,7 @@ input[type=number] {
 }
 
 #house .description {
-	background-color: white;
+	background-color: var(--bg-color-2);
 	padding: 2em;
 	border-radius: 1em;
 }

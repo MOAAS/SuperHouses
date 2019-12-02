@@ -1,7 +1,7 @@
 <?php function draw_search($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies) { ?>
   <i id="searchButton" class="fas fa-search"></i>
   <div id="searchBackground">
-    <section id="searchDialog">
+    <section id="searchDialog" class="genericForm">
       <h3>Rent with us for the ultimate experience.</h3>
       <form method="get" action="../pages/search_houses.php">
         <div id="locationField">

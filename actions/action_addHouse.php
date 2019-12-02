@@ -15,14 +15,14 @@
   $min = $_POST['min'];
   $max = $_POST['max'];
 
+  $username = $_SESSION['username'];
+  $ownerId = getUserId($username);
   // verificar se price > 0
   // verificar se price min max sao numeros
   // verificar se min <= max
   // verificar se addhouse retorna false
   addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);
 
-  $username = $_SESSION['username'];
-  $ownerId = getUserId($username);
 
   //print_r($ownerId);
   //echo $ownerId;
@@ -44,10 +44,10 @@
         move_uploaded_file($tmp, $target);
         */
         $original_filename = $_FILES['fileUpload']['name'][$key]; 
-        // Get the fileextension
-        $ext = pathinfo($original_filename, PATHINFO_EXTENSION);  
+       /* // Get the fileextension
+        $ext = pathinfo($original_filename, PATHINFO_EXTENSION); */ 
         // Generate new filename
-        $new_filename = $key . '.' . $ext; 
+        $new_filename = $key; 
         // Upload the file with new name
         move_uploaded_file($_FILES['fileUpload']['tmp_name'][$key], $target_dir . $new_filename);
       }
