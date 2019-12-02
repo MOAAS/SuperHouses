@@ -35,26 +35,26 @@
         <div id="countAdults" class="guestCounter">
             <label>Adults</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
+                <i class="decreaseNum fas fa-minus"></i>
                 <p class="count"><?=toHTML($numAdults)?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div>            
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>
         <div id="countChildren" class="guestCounter">
             <label>Children</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
+                <i class="decreaseNum fas fa-minus"></i>
                 <p class="count"><?=toHTML($numChildren)?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div>            
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>
 
         <div id="countBabies" class="guestCounter">
             <label>Babies</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
+            <i class="decreaseNum fas fa-minus"></i>
                 <p class="count"><?=toHTML($numBabies)?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div> 
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>      
 
