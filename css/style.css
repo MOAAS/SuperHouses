@@ -350,31 +350,31 @@ input[type="submit"]:hover {
 #profile {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 2em auto;
+    grid-template-rows: 5em 2em 1fr;
+    grid-template-areas: 
+    " none   item"
+    " header item"
+    " nav    item";
     margin: 1em auto;
-    width: 80em;
-
+    max-width: 80em;
 }
 
 #profile header {
-    grid-area: 1 / 1;
+    grid-area: header;
     justify-self: center;
-    align-self: start;
+}
+
+#profile .profileTab {
+    grid-area: item;
+    max-width: 50em;
+    margin: 1em;
 }
 
 #profile nav {
-    grid-area: 2 / 1;
+    grid-area: nav;
     justify-self: center;
 }
 
-#profile section:not([id="profile"]) {
-    grid-area: 1 / 2 / span 2 / span 1;
-}
-
-#profile nav ul {
-    border-radius: 5px;
-    background-color: var(--input-bg-color);
-}
 
 #profile nav li {
     font-size: 1.25em;
@@ -382,46 +382,55 @@ input[type="submit"]:hover {
     cursor: pointer;
     color: black;
     transition: all 0.2s ease-in-out;
+    font-weight: bold;
+    background-color: var(--input-bg-color);
 }
 
-#profile nav li:hover {
+#profile nav li:first-child {
+    border-radius: 5px 5px 0 0;
+}
+
+#profile nav li:last-child {
+    border-radius: 0 0 5px 5px ;
+}
+
+#profile nav li:hover,
+#profile nav li.selectedTab {
     color: white;
     background-color: var(--main-color);    
 }
 
-#profile nav li.selectedTab {
-    background-color: var(--main-color);
-    color: white;
-}
-
-#profile .profileTab {
-    margin: 1em;
-}
 
 /* Edit profile */
 
 #editProfile {
     display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;    
 }
 
 #editProfile h3 {
-    margin: 0.75em 0;
+    margin: 0 0 1em 0;
 }
-
 #editProfile header {
     grid-area: 1 / 1 / span 1 / span 2;
 }
 
 #editProfile #editInfo {
     grid-area: 2 / 1;
+    padding: 0 2em;
+    border-right: 1px solid black;
+    margin: 1em 0;
 }
 
 #editProfile #editCredentials {
     grid-area: 2 / 2;
+    padding: 0 2em;
+    margin: 1em 0;
 }
 
 #editProfile input, #editProfile select {
-    width: 50%;
+    width: 100%;
     margin-bottom: 0.75em; 
     margin-top: 0.3em;
 }
@@ -435,7 +444,6 @@ input[type="submit"]:hover {
 }
 
 /*Add House*/
-
 
 #addHouse input[type="text"],
 #addHouse input[type="number"],
@@ -454,7 +462,7 @@ input[type="submit"]:hover {
 }
 
 #addHouse #description {
-    height:5em;
+    height: 10em;
     box-sizing: border-box;
     resize: none;
 }

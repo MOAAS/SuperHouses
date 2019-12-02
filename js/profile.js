@@ -1,32 +1,42 @@
 function hideAllTabs() {
-    document.querySelectorAll('#profile .profileTab').forEach(element => {
-        element.style.display = "none";
+    document.querySelectorAll('#profile .profileTab').forEach(tab => {
+        tab.style.display = "none";
     });
 }
 
+function selectTabItem(tabItemName) {
+    if (tabItemName == "")
+        tabItemName = "Profile";
+    document.querySelectorAll('#profile nav li').forEach(tabItem => {
+        if (tabItem.textContent == tabItemName)
+            tabItem.classList.add('selectedTab')
+        else tabItem.classList.remove('selectedTab')
+    });
+    window.location.hash = tabItemName;
+    updateTabs();
+}
+
 function updateTabs() {
-    let selected = document.querySelector('.selectedTab').textContent;
+    let selected = decodeURIComponent(window.location.hash);
     hideAllTabs();
     switch (selected) {
-        case 'Profile': document.getElementById('editProfile').style.display = ""; break;
-        case 'Your places': document.getElementById('editProfile').style.display = ""; break;
-        case 'Add Place': document.getElementById('addHouse').style.display = ""; break;
-        case 'Reservations': document.getElementById('editProfile').style.display = ""; break;
-        case 'Your reservations': document.getElementById('editProfile').style.display = ""; break;
-        case 'Messages': document.getElementById('editProfile').style.display = ""; break;
+        case '#Profile': document.getElementById('editProfile').style.display = ""; break;
+        case '#Your places': document.getElementById('editProfile').style.display = ""; break;
+        case '#Add Place': document.getElementById('addHouse').style.display = ""; break;
+        case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
+        case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
+        case '#Messages': document.getElementById('editProfile').style.display = ""; break;
         default: console.log("Lmao"); break;
     }
 }
 
 let tabItems = document.querySelectorAll('#profile nav li');
 tabItems.forEach(tabItem => {
-    tabItem.addEventListener('click', event => {
-        tabItems.forEach(tabItem => tabItem.classList.remove('selectedTab'));
-        tabItem.classList.add('selectedTab');
-        updateTabs();
-    });
+    tabItem.addEventListener('click', event => selectTabItem(tabItem.textContent));        
 });
-updateTabs();
+selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
+
+// coisas do doni
 
 let filesInput = document.getElementById("files");
 

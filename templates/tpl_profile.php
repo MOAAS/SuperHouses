@@ -3,7 +3,7 @@
     <header><h2><?=toHTML($user->username)?></h2></header>
     <nav>
       <ul>
-        <li class="selectedTab">Profile</li>
+        <li>Profile</li>
         <li>Your places</li>
         <li>Add Place</li>
         <li>Reservations</li>
@@ -12,7 +12,7 @@
       </ul>
     </nav>
     <?php draw_profileedit($user, $countryOptions) ?>
-    <?php draw_addHouse($user, $countryOptions) ?>
+    <?php draw_addHouse($countryOptions) ?>
       
   </section>
 
@@ -85,7 +85,7 @@
       <input id="title" type="text" name="title" placeholder="Name your place" required>
 
       <label for="description">Description</label>
-      <textarea rows="4" id="description" name="description" placeholder="Describe your place" required></textarea>
+      <textarea rows="6" id="description" name="description" placeholder="Describe your place" required></textarea>
       <div id="localization">
         <div>
           <label for="houseCountry">Country</label>
