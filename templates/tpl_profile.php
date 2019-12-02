@@ -1,6 +1,10 @@
-<?php function draw_profile($user, $countryOptions) { ?>
+<?php function draw_profile($username) { 
+  $user = getUserInfo($username);
+  $countryOptions = getAllCountries();
+  $messages = getLatestMessages($username);
+?>
   <section id="profile">
-    <header><h2><?=toHTML($user->username)?></h2></header>
+    <h2><?=toHTML($user->username)?></h2>
     <nav>
       <ul>
         <li>Profile</li>
@@ -13,6 +17,7 @@
     </nav>
     <?php draw_profileedit($user, $countryOptions) ?>
     <?php draw_addHouse($countryOptions) ?>
+    <?php draw_messages($messages) ?>
       
   </section>
 
@@ -20,7 +25,7 @@
 
 <?php function draw_profileedit($user, $countryOptions) { ?>
   <section id="editProfile" class="genericForm profileTab">
-    <header><h2>Edit Profile</h2></header>
+    <h2>Edit Profile</h2>
     <section id="editInfo">
       <h3>Personal Information</h3>
       <form method="post" action="../actions/action_editProfile.php">
@@ -77,9 +82,7 @@
 
 <?php function draw_addHouse($countryOptions){?>
   <section id="addHouse" class="genericForm profileTab">
-
-    <header><h2>Add your place!</h2></header>
-    
+    <h2>Add your place</h2>    
     <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
       <label for="title">Title</label>      
       <input id="title" type="text" name="title" placeholder="Name your place" required>
@@ -124,6 +127,56 @@
 
       <input type="submit" value="Save">
     </form>
+  </section>
+
+<?php } ?>
+
+<?php function draw_messages($messages){?>
+  <section id="messages" class="profileTab">
+    <h2>Your Messages</h2>
+    <div id="conversations">
+      <ul>
+        <li class="conversation">
+          <h3>John</h3>
+          <p>Message from John</p>
+          <span>May 28th</span>
+        </li>
+        <li class="conversation">
+          <h3>Not John</h3>
+          <p>Message from John 2</p>
+          <span>May 27th</span>
+        </li>
+        <li class="conversation">
+          <h3>John but another John</h3>
+          <p>Message from John 3</p>
+          <span>May 26th</span>
+        </li>
+      </ul>
+    </div>
+    <div id="conversationUser">
+      <h3>John</h3>
+    </div>
+    <div id="messageHistory">
+      <ul>
+        <li class="receivedMessage">
+          <p>Message from John</p>
+          <span>May 27th</span>
+        </li>
+        <li class="receivedMessage">
+          <p>Another message from John</p>
+          <span>May 28th</span>
+        </li>
+        <li class="sentMessage">
+          <p>Message that you sent to John</p>
+          <span>May 28th</span>
+        </li>
+      </ul>
+    </div>
+    <div id="sendMessageInput">
+    </div>
+    
+    
+    
   </section>
 
 <?php } ?>

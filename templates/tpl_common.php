@@ -1,5 +1,4 @@
 <?php function draw_header($username, $script) { 
-  include_once('../database/db_notifications.php');
   $notifications = getUnseenNotifications($username);
 ?>
   <!DOCTYPE html>
@@ -52,7 +51,7 @@
         </section>
       </header>
       <?php if (isset($_SESSION['messages'])) {?>
-        <section id="messages">
+        <section id="sessionMessages">
           <?php foreach($_SESSION['messages'] as $message) { ?>
             <div class="<?=$message['type']?>"><?=$message['content']?></div>
           <?php } ?>

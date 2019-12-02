@@ -25,7 +25,7 @@ function updateTabs() {
         case '#Add Place': document.getElementById('addHouse').style.display = ""; break;
         case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
         case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
-        case '#Messages': document.getElementById('editProfile').style.display = ""; break;
+        case '#Messages': document.getElementById('messages').style.display = ""; break;
         default: console.log("Lmao"); break;
     }
 }

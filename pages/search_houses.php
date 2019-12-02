@@ -5,6 +5,7 @@
   include_once('../templates/tpl_houses.php');
   include_once('../templates/tpl_search.php');
   include_once('../database/db_houses.php');
+  include_once('../database/db_notifications.php');
 
   if (!isset($_SESSION['username']))
     die(header('Location: login.php'));
