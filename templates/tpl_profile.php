@@ -3,7 +3,7 @@
     <header><h2><?=toHTML($user->username)?></h2></header>
     <nav>
       <ul>
-        <li class="selected">Profile</li>
+        <li class="selectedTab">Profile</li>
         <li>Your places</li>
         <li>Add Place</li>
         <li>Reservations</li>
@@ -12,13 +12,14 @@
       </ul>
     </nav>
     <?php draw_profileedit($user, $countryOptions) ?>
+    <?php draw_addHouse($user, $countryOptions) ?>
       
   </section>
 
 <?php } ?>
 
 <?php function draw_profileedit($user, $countryOptions) { ?>
-  <section id="editProfile" class="genericForm">
+  <section id="editProfile" class="genericForm profileTab">
     <header><h2>Edit Profile</h2></header>
     <section id="editInfo">
       <h3>Personal Information</h3>
@@ -26,17 +27,11 @@
         <label for="displayname">Display Name</label>
         <input id="displayname" type="text" name="displayname" value="<?=toHTML($user->displayname)?>">  
 
-        <label for="country">Country</label>
-        <select id="country" name="country">
-          <option value="">None</option>
-          <?php foreach ($countryOptions as $country) { ?>
-            <option value="<?=$country?>" <?=$country==$user->country?'selected':''?>><?=$country?></option>
-          <?php } ?>
-          
-        </select>
+        <label for="userCountry">Country</label>
+        <?php draw_countrySelect("userCountry", $countryOptions); ?>
 
-        <label for="city">City</label>
-        <input id="city" type="text" name="city" value="<?=toHTML($user->city)?>">  
+        <label for="userCity">City</label>
+        <input id="userCity" type="text" name="city" value="<?=toHTML($user->city)?>">  
 
         <input type="submit" value="Save">
       </form>
@@ -71,8 +66,17 @@
   </section>
 <?php } ?>
 
+<?php function draw_countrySelect($id, $countryOptions) { ?>
+  <select id="<?=$id?>" name="country">
+    <option value="">None</option>
+    <?php foreach ($countryOptions as $country) { ?>
+      <option value="<?=$country?>"><?=$country?></option>
+    <?php } ?>
+  </select>
+<?php } ?>
+
 <?php function draw_addHouse($countryOptions){?>
-  <section id="addhouse" class="genericForm">
+  <section id="addHouse" class="genericForm profileTab">
 
     <header><h2>Add your place!</h2></header>
     
@@ -84,17 +88,12 @@
       <textarea rows="4" id="description" name="description" placeholder="Describe your place" required></textarea>
       <div id="localization">
         <div>
-          <label for="country">Country</label>
-          <select id="country" name="country">
-            <option value="">None</option>
-            <?php foreach ($countryOptions as $country) { ?>
-              <option value="<?=$country?>"><?=$country?></option>
-            <?php } ?>
-          </select>
+          <label for="houseCountry">Country</label>
+          <?php draw_countrySelect("houseCountry", $countryOptions); ?>
         </div>
         <div>
-          <label for="city">City</label>
-          <input id="city" type="text" name="city" placeholder="City" required>
+          <label for="houseCity">City</label>
+          <input id="houseCity" type="text" name="city" placeholder="City" required>
         </div>
         <div>
           <label for="address">Address</label>

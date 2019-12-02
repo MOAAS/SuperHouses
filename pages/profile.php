@@ -12,7 +12,7 @@
   $user = getUserInfo($_SESSION['username']);
   $countryOptions = getAllCountries();
 
-  draw_header($user->username, null);
+  draw_header($user->username, "../js/profile.js");
   draw_profile($user, $countryOptions);
   draw_footer();
 ?>
