@@ -160,15 +160,15 @@
       <ul>
         <li class="message receivedMessage">
           <p>Message from John</p>
-          <span>May 27th</span>
+          <small class="messageDate">May 27th</small>
         </li>
         <li class="message receivedMessage">
           <p>Another message from John</p>
-          <span>May 28th</span>
+          <small class="messageDate">May 28th</small>
         </li>
         <li class="message sentMessage">
           <p>Message that you sent to John</p>
-          <span>May 28th</span>
+          <small class="messageDate">May 28th</small>
         </li>
       </ul>
     </div>
