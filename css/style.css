@@ -448,7 +448,7 @@ input[type="submit"]:hover {
     max-width: 80em;
 }
 
-#profile header {
+#profile h2 {
     grid-area: header;
     justify-self: center;
 }
@@ -646,7 +646,7 @@ input[type=number] {
 #messages {
     display: grid;
     grid-template-columns: 1fr 3fr;
-    grid-template-rows: 2em 1fr 6fr 1fr;
+    grid-template-rows: 2em 4em 6fr 1fr;
     grid-template-areas: 
         "title title"
         "conv user"
@@ -665,12 +665,14 @@ input[type=number] {
     border-top: 1px solid black;
     border-left: 1px solid black;
     border-bottom: 1px solid black;
+    padding: 1em;
 }
 
 #messages #conversationUser {
     grid-area: user;
     background-color: white;
     border: 1px solid black;
+    padding: 1em;
 }
 
 #messages #messageHistory {
@@ -678,13 +680,59 @@ input[type=number] {
     background-color: white;
     border-left: 1px solid black;
     border-right: 1px solid black;
+    padding: 1em;
 }
 
 #messages #sendMessageInput {
     grid-area: msgInput;
     background-color: white;
     border: 1px solid black;
+    padding: 1em;
 }
+
+#messageHistory .message p {
+    display: inline-block;
+    padding: 0.5em;
+    color: var(--text-color-2);
+    border-radius: 5px;
+    margin: 0.75em 0 0.25em 0;
+
+}
+
+#messageHistory .sentMessage {
+    text-align: right;
+}
+
+#messageHistory .receivedMessage { 
+    text-align: left;
+}
+
+#messageHistory .sentMessage p {
+    background-color: var(--main-color);
+    color: var(--text-color-2)
+}
+
+#messageHistory .receivedMessage p {
+    background-color: var(--bg-color-2);
+    color:  var(--text-color)
+}
+
+
+#messageHistory .message span {
+    display: block;
+    font-size: 0.5em;
+    color: grey;
+
+}
+
+
+
+#sendMessageInput button {
+    display: inline;
+    border: 0;
+    background: none;  
+}
+
 
 
 /* Houses */

@@ -158,25 +158,26 @@
     </div>
     <div id="messageHistory">
       <ul>
-        <li class="receivedMessage">
+        <li class="message receivedMessage">
           <p>Message from John</p>
           <span>May 27th</span>
         </li>
-        <li class="receivedMessage">
+        <li class="message receivedMessage">
           <p>Another message from John</p>
           <span>May 28th</span>
         </li>
-        <li class="sentMessage">
+        <li class="message sentMessage">
           <p>Message that you sent to John</p>
           <span>May 28th</span>
         </li>
       </ul>
     </div>
     <div id="sendMessageInput">
+      <form method="post" action="../actions/action_sendMessage.php">
+        <input id="sentMessage" type="text" name="content" placeholder="Type your message...">
+        <button type="submit"><i class="fas fa-paper-plane"></i></button>      
+      </form>
     </div>
-    
-    
-    
   </section>
 
 <?php } ?>
