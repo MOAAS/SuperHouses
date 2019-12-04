@@ -294,6 +294,7 @@ a {
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 input, label, select, textarea {
@@ -439,18 +440,20 @@ input[type="submit"]:hover {
 #profile {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 5em 2em 1fr;
+    grid-template-rows: 2em 2.5em 1fr;
     grid-template-areas: 
         " none   item"
         " header item"
         " nav    item";
+    align-items: start;
     margin: 1em auto;
     max-width: 80em;
 }
 
-#profile h2 {
+#profile #userProfileName {
     grid-area: header;
     justify-self: center;
+    font-size: 1.25em;
 }
 
 #profile .profileTab {
@@ -643,9 +646,37 @@ input[type=number] {
  
 /* Messages */
 
+#conversations {
+    background-color: var(--bg-color-2);
+    box-shadow: var(--simple-shadow);
+    overflow: auto;
+    height: 40em;
+}
+
+#conversations h2 {
+    padding: 1em;
+    border-bottom: 1px solid rgb(150, 150, 150, 150);
+}
+
+#conversations .conversation {
+    padding: 1em;
+    border-bottom: 1px solid rgb(150, 150, 150, 150);
+    cursor: pointer;
+    background-color: var(--input-bg-color);
+    transition: background-color 0.3s ease-in-out;
+}
+
+#conversations .conversation:hover {
+    background-color: var(--input-hint-color);
+}
+
+
+#conversations .conversation p {
+    margin: 0.5em 0 0.25em 0
+}
+
 #messages {
     background-color: white;
-
     box-shadow: var(--simple-shadow);
 
     display: grid;
@@ -653,33 +684,32 @@ input[type=number] {
 }
 
 #messages header {
-    padding-left: 1em;
     display: flex;
     align-items: center;
-    align-self: stretch;
-    box-shadow: var(--simple-shadow);
+    border-bottom: 1px solid rgb(150, 150, 150, 150);
+    background-color: var(--bg-color-2);
 }
 
-
-#messages > div {
-    padding: 1em;
+#messages #messageBack {
+    background-color: var(--input-bg-color);
+    padding: 2em;   
+    margin-right: 1em; 
+    border-right: 1px solid rgb(150, 150, 150, 150);
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
 }
 
-#messages #conversations {
-    border-width: 1px 0 1px 1px;
+#messages #messageBack:hover {
+    background-color: var(--input-hint-color);
 }
 
 #messages #messageHistory {
-    border-color: black;
-    border-style: solid;
-    border-width: 1px 0 0 0;
+    padding: 1em;
 }
 
-#conversations .conversation {
-    background-color: var(--bg-color-2);
-    color:  var(--text-color);
-    margin-bottom: 1em;
+#messages #sendMessageInput {
     padding: 1em;
+    border-top: 1px solid rgb(150, 150, 150, 150);
 }
 
 #messageHistory .message {
@@ -691,6 +721,12 @@ input[type=number] {
     margin: 0;
     padding: 0.5em;
     color: var(--text-color-2);
+}
+
+#messageHistory .message .messageDate {
+    display: block;
+    color: grey;
+    margin: 0.25em;
 }
 
 #messageHistory .sentMessage {
@@ -713,11 +749,6 @@ input[type=number] {
     color:  var(--text-color)
 }
 
-#messageHistory .message .messageDate {
-    display: block;
-    color: grey;
-    margin: 0.25em;
-}
 
 #sendMessageInput form {
     display: flex;

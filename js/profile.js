@@ -25,7 +25,7 @@ function updateTabs() {
         case '#Add Place': document.getElementById('addHouse').style.display = ""; break;
         case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
         case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
-        case '#Messages': document.getElementById('messages').style.display = ""; break;
+        case '#Messages': document.getElementById('conversations').style.display = ""; break;
         default: console.log("Lmao"); break;
     }
 }
@@ -35,6 +35,22 @@ tabItems.forEach(tabItem => {
     tabItem.addEventListener('click', event => selectTabItem(tabItem.textContent));        
 });
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
+
+function toMessage() {
+    document.getElementById('conversations').style.display = "none";
+    document.getElementById('messages').style.display = "";
+}
+
+function backToConversations() {
+    document.getElementById('conversations').style.display = "";
+    document.getElementById('messages').style.display = "none";
+}
+
+document.querySelectorAll('#profile #conversations .conversation').forEach(conversation => {
+    conversation.addEventListener('click', toMessage);
+});
+
+document.querySelector('#profile #messages #messageBack').addEventListener('click', backToConversations);
 
 // coisas do doni
 

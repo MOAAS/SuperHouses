@@ -4,7 +4,7 @@
   $messages = getLatestMessages($username);
 ?>
   <section id="profile">
-    <h2><?=toHTML($user->username)?></h2>
+    <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
     <nav>
       <ul>
         <li>Profile</li>
@@ -157,7 +157,10 @@
 
 <?php function draw_messages($messages){?>
   <section id="messages" class="profileTab">
-    <header><h2>Messages with John</h2></header>
+    <header>
+      <i id="messageBack" class="fas fa-chevron-left"></i>
+      <h2>John</h2>
+    </header>
     <div id="messageHistory">
       <ul>
         <li class="message receivedMessage">
