@@ -1,5 +1,6 @@
 <?php 
   include_once('../includes/session.php');
+  include_once('../includes/htmlcleaner2000.php');
   include_once('../templates/tpl_common.php');
   include_once('../templates/tpl_houses.php');
   include_once('../templates/tpl_search.php');
@@ -23,6 +24,11 @@
   $numAdults = $_GET['numAdults'];
   $numChildren = $_GET['numChildren'];
   $numBabies = $_GET['numBabies'];
+
+  if (!is_numeric($maxPrice)) $maxPrice = 500;
+  if (!is_numeric($numAdults)) $numAdults = 0;
+  if (!is_numeric($numChildren)) $numChildren = 0;
+  if (!is_numeric($numBabies)) $numBabies = 0;
 
   $places = searchHouses($location, $startDate, $endDate, $maxPrice, $numAdults + $numChildren, $numBabies);
 

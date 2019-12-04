@@ -1,27 +1,27 @@
 <?php function draw_search($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies) { ?>
   <i id="searchButton" class="fas fa-search"></i>
   <div id="searchBackground">
-    <div id="searchDialog">
+    <section id="searchDialog" class="genericForm">
       <h3>Rent with us for the ultimate experience.</h3>
       <form method="get" action="../pages/search_houses.php">
         <div id="locationField">
             <label for="location">Where?</label>
-            <input id="location" type="text" name="location" value="<?=$location?>">  
+            <input id="location" type="text" name="location" value="<?=toHTML($location)?>">  
         </div>
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="date" name="startDate" value="<?=$startDate?>">  
+            <input id="startDate" type="date" name="startDate" value="<?=toHTML($startDate)?>">  
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="date" name="endDate" value="<?=$endDate?>">  
+            <input id="endDate" type="date" name="endDate" value="<?=toHTML($endDate)?>">  
         </div>
 
         <div id="maxPriceSlider">
             <label for="maxPrice">Maximum Price:</label>
-            <input id="maxPrice" type="range" min="1" max="1000" name="maxPrice" value="<?=$maxPrice?>">
+            <input id="maxPrice" type="range" min="1" max="1000" name="maxPrice" value="<?=toHTML($maxPrice)?>">
             <div class="priceTag">
                 <p class="priceValue">0</p>
                 <p class="priceCurrency"> € / day</p>
@@ -35,32 +35,31 @@
         <div id="countAdults" class="guestCounter">
             <label>Adults</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=$numAdults?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div>            
+                <i class="decreaseNum fas fa-minus"></i>
+                <p class="count"><?=toHTML($numAdults)?></p>
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>
-
         <div id="countChildren" class="guestCounter">
             <label>Children</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=$numChildren?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div>            
+                <i class="decreaseNum fas fa-minus"></i>
+                <p class="count"><?=toHTML($numChildren)?></p>
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>
 
         <div id="countBabies" class="guestCounter">
             <label>Babies</label>
             <div class="counterManager">
-                <div class="decreaseNum"><i class="fas fa-minus"></i></div>
-                <p class="count"><?=$numBabies?></p>
-                <div class="increaseNum"><i class="fas fa-plus"></i></div> 
+            <i class="decreaseNum fas fa-minus"></i>
+                <p class="count"><?=toHTML($numBabies)?></p>
+                <i class="increaseNum fas fa-plus"></i>
             </div>         
         </div>      
 
         <input type="submit" value="Search">
       </form>
-    </div>
+    </section>
   </div>
 <?php } ?>

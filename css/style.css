@@ -1,40 +1,90 @@
 /* Page header and body */
-body {
+:root {
     margin: 0;
 
     --bg-color: rgb(244, 247, 252);
-    --main-color: rgb(37, 71, 46);
-    --main-color-hl: rgb(64, 116, 75);
+    --bg-color-2: rgb(235, 235, 235);
+    --main-color: #455A64;
+    --topbar-color: #455A64;
+    --main-color-hl: #78909c;
 
-    --main-color-light: rgb(90, 160, 105);
-    --main-color-light-hl: rgb(64, 116, 75);
+    --main-color-light: #546e7a;
+    --main-color-light-hl: #37474f;
 
-    --input-bg-color: rgb(220, 220, 220);
+    --input-bg-color: rgb(200, 200, 200);
     --input-hint-color: rgb(80, 80, 80);
-    --accent-color-hl: rgb(165, 244, 255);
-    --accent-color: rgb(102, 219, 235);
+    --secondary-color-hl: #ffbe99;
+    --secondary-color: #d48253;
+
+    --text-color:rgb(0,0,0);
+    --text-color-2:rgb(240,240,240);
 
     --success-color: rgb(97, 187, 61);
-    --error-color: rgb(255, 0, 0);
+    --error-color: rgb(225, 0, 0);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
-  
-  
+
+}
+
+[data-theme="dark"] {
+    --bg-color: rgb(12, 12, 12);
+    --bg-color-2: rgb(30, 30, 30);
+
+    --topbar-color: rgb(40, 40, 40);
+    --main-color: #9dcbe2;
+    --main-color-hl: #acc7d4;
+
+    --main-color-light: #7e9dac;
+    --main-color-light-hl: #37474f;
+
+    --input-bg-color: rgb(50, 50, 50);
+    --input-hint-color: rgb(80, 80, 80);
+    --secondary-color-hl: #ffc7a7;
+    --secondary-color: #ffae80;
+
+    --text-color:rgb(240,240,240);
+    --text-color-2:rgb(0,0,0);
+
+    --success-color: rgb(97, 187, 61);
+    --error-color: rgb(225, 0, 0);
+
+    --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
+    --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
+    --strong-shadow: 0px 0px 10px  rgba(68, 47, 47, 0.5);
+}
+
+body{
+    margin:0;
+    color: var(--text-color);
     background-color: var(--bg-color);
-    /*background-image: url("icon.png");*/
+    /*
+    background-image: url("hoss.jpg");
+    background-size: 100%;
+    background-position: center;
+    background-repeat: no-repeat;
+    */
 
     font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
-  
+
+
+#pagebanner {
+    background-color: var(--topbar-color);
+}
 
 #pagetop {
-    background-color: var(--main-color);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: auto;
+    max-width: 80em;    
 }
 
 #pagetop h1 {
     padding: 0.5em;
-    color: white;
+    color: rgb(225, 225,225);
 }
 
 #pagetop h1 small {
@@ -43,26 +93,106 @@ body {
 }
 
 #pagetop a {
-    color: white;
     font-weight: bold;
 }
 
-#pagetop span {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin: auto;
-    max-width: 80em;    
-}
-
-#pagetop nav li {
+#pagetop nav > ul > li {
     display: inline;
-    color: white;
+    color: rgb(225, 225,225);
     margin: 0.25em;
 }
 
+#pagetop #notifications {
+    color: white;
+    position: relative;
+    margin: 0 1em; 
+}
+
+#pagetop #notificationBell {
+    font-size: 1.75em;   
+    cursor: pointer;
+}
+
+#pagetop #notificationNum {
+    position: absolute;
+    top: -20px; right: -10px;  
+    border-radius: 50%;
+    padding: 0.2em;
+    width: 1.5em; height: 1.5em; line-height: 1.5em;
+    text-align: center;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(255, 0, 0, 1);
+}
+
+#pagetop #notificationList {
+    display: none;
+    position: absolute;
+    top: 20px; right: 10px;
+    z-index: 3;
+    width: 25em;
+    max-height: 40em;
+    overflow: auto;
+    padding: 0;   
+    
+    color: var(--text-color);
+    box-shadow: var(--simple-shadow);
+    background-color: var(--bg-color);
+}
+
+#notificationList li {
+    display: grid;
+    align-items: center;
+    border-bottom: 1px solid black;
+    grid-template-columns: 4fr 1fr;    
+    color: var(--text-color);
+}
+
+#notificationList .notifClickable {    
+    justify-self: stretch;
+    border-right: 1px solid grey;
+}
+
+#notificationList .notifClickable:hover {
+    color: var(--main-color-light);
+}
+
+#notificationList .notifContent {
+    margin: 1em;
+}
+
+#notificationList .notifDate {
+    display: block;
+    text-align: right;
+    margin: 0.75em;
+    font-size: 0.75em;
+}
+
+#notificationList .notifMarkAsSeen {
+    justify-self: center;
+    cursor: pointer;
+    color: black;
+}
+
+#notificationList .notifMarkAsSeen:hover {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen {
+    color: red;
+}
+
+#notificationList .notifUnseen .notifMarkAsSeen:hover {
+    color: black;
+}
+
+#notificationList .notifUnseen {
+    background-color: rgb(225, 225,225)
+}
+
+
 #pagetop #loggeduser {
-    color: var(--accent-color);
+    color: var(--secondary-color);
     font-weight: bold;
 }
 
@@ -93,6 +223,61 @@ body {
     background-color: var(--error-color);
 }
 
+/*Dark theme switch*/
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    
+  }
+  .theme-switch {
+    display: inline-block;
+    height: 34px;
+    position: relative;
+    width: 60px;
+  }
+  
+  .theme-switch input {
+    display:none;
+  }
+  
+  .slider {
+    background-color: var(--bg-color);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+  }
+  
+  .slider:before {
+    background-color: var(--main-color);
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+  }
+  
+  input:checked + .slider {
+    background-color: var(--bg-color);
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(26px);
+  }
+  
+  .slider.round {
+    border-radius: 34px;
+  }
+  
+  .slider.round:before {
+    border-radius: 50%;
+  }
+
 
 /* Generic */
 html {
@@ -105,29 +290,44 @@ h1, h2, h3 {
 }
 
 a {
+    color: inherit;
     text-decoration: none;
 }
 
 ul {
     list-style-type: none;
+    padding: 0;
 }
 
-input, label {
+input, label, select, textarea {
     display: block;
+    color:var(--text-color);
 }
 
 
-input[type="text"], input[type="password"], input[type="date"], select{
+input[type="text"], 
+input[type="password"], 
+input[type="date"],
+input[type="number"],
+button, 
+textarea, 
+select {
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
     background-color:  var(--input-bg-color);
     border-radius: 10px;
     border: none;
+    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
 }
 
-input::placeholder {
-    color: var(--input-hint-color);
+input::placeholder,
+textarea::-webkit-input-placeholder,
+textarea:-moz-placeholder,
+textarea::-moz-placeholder,
+textarea:-ms-input-placeholder {
+    font-size: 1em;
+    color: var(--text-color);
 }
 
 input:focus {
@@ -165,17 +365,19 @@ input[type="range"]::-moz-range-thumb {
     cursor: pointer;
 }
 
-input[type="submit"] {
+input[type="submit"],
+button {
     cursor: pointer;
     color: white;
-    background-color: var(--main-color);
+    background-color: var(--main-color-light);
     border: none;
 
     transition: background-color 200ms ease-in-out;
 }
 
-input[type="submit"]:hover {
-    background-color: var(--main-color-hl);
+input[type="submit"]:hover,
+button:hover {
+    background-color: var(--main-color-light-hl);
 }
 
 .hidden {
@@ -196,7 +398,7 @@ input[type="submit"]:hover {
 
 .genericForm {
     box-shadow: var(--simple-shadow);
-    background-color: white;
+    background-color: var(--bg-color-2);
     padding: 1em 2em;
 }
 
@@ -238,32 +440,92 @@ input[type="submit"]:hover {
     font-weight: bold;
 }
 
+/* Profile  */
+
+#profile {
+    display: grid;
+    grid-template-columns: 1fr 4fr;
+    grid-template-rows: 5em 2em 1fr;
+    grid-template-areas: 
+    " none   item"
+    " header item"
+    " nav    item";
+    margin: 1em auto;
+    max-width: 80em;
+}
+
+#profile header {
+    grid-area: header;
+    justify-self: center;
+}
+
+#profile .profileTab {
+    grid-area: item;
+    max-width: 50em;
+    margin: 1em;
+}
+
+#profile nav {
+    grid-area: nav;
+    justify-self: center;
+}
+
+
+#profile nav li {
+    font-size: 1.25em;
+    padding: 1em;
+    cursor: pointer;
+    color: var(--text-color);
+    transition: all 0.2s ease-in-out;
+    font-weight: bold;
+    background-color: var(--input-bg-color);
+}
+
+#profile nav li:first-child {
+    border-radius: 5px 5px 0 0;
+}
+
+#profile nav li:last-child {
+    border-radius: 0 0 5px 5px ;
+}
+
+#profile nav li:hover,
+#profile nav li.selectedTab {
+    color: var(--text-color-2);
+    background-color: var(--main-color);    
+}
+
+
 /* Edit profile */
 
 #editProfile {
     display: grid;
-    margin: 1em auto;
-    max-width: 60em;
+    grid-template-columns: 1fr 1fr;
+    justify-items: stretch;    
 }
 
 #editProfile h3 {
-    margin: 0.75em 0;
+    margin: 0 0 1em 0;
 }
-
 #editProfile header {
     grid-area: 1 / 1 / span 1 / span 2;
 }
 
 #editProfile #editInfo {
     grid-area: 2 / 1;
+    padding: 0 2em;
+    border-right: 1px solid black;
+    margin: 1em 0;
 }
 
 #editProfile #editCredentials {
     grid-area: 2 / 2;
+    padding: 0 2em;
+    margin: 1em 0;
 }
 
 #editProfile input, #editProfile select {
-    width: 50%;
+    width: 100%;
     margin-bottom: 0.75em; 
     margin-top: 0.3em;
 }
@@ -276,6 +538,133 @@ input[type="submit"]:hover {
     font-size: 1.25em;
 }
 
+/* Your Places*/
+
+#yourPlaces #houses > ul {
+    grid-template-columns: repeat(auto-fit, 16em);
+    gap: 0.8em;
+}
+
+#yourPlaces #noPlaces{
+  padding: 170px 0;
+  text-align: center;
+  }
+
+/*Add House*/
+
+#addHouse input[type="text"],
+#addHouse input[type="number"],
+#addHouse select,
+#addHouse textarea {
+  width: 100%;
+  padding: 12px 20px;
+  margin: 8px 0;
+}
+
+#addHouse #localization,
+#addHouse #details {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
+#addHouse #description {
+    height: 10em;
+    box-sizing: border-box;
+    resize: none;
+}
+
+#addHouse input[type="submit"] {
+    font-size: 1.25em;
+    width: 25%;
+    margin-bottom: 0.75em;
+    margin-top: 0.3em;
+
+
+}
+
+/*Remove arrows from input type number*/
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; 
+}
+
+/*file upload*/
+[type="file"] {
+    margin:1em;
+    height: 0;
+    overflow: hidden;
+    width: 0;
+  }
+
+[type="file"] + label {
+    border: none;
+    border-radius: 5px;
+    color: #000000;
+    cursor: pointer;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    font-size: inherit;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    outline: none;
+    padding: 0.5em 2em;
+    position: relative;
+    transition: all 0.3s;
+    vertical-align: middle;
+}
+
+[type="file"] + label {
+    background-color: var(--secondary-color);
+    border-radius: 50px;
+    overflow: hidden;
+}
+[type="file"] + label::before {
+    color: #000000;
+    content: "\f382";
+    font-family: "Font Awesome 5 Free";
+    font-size: 100%;
+    height: 100%;
+    right: 130%;
+    line-height: 3.3;
+    position: absolute;
+    top: -9px;
+    transition: all 0.3s;
+}
+[type="file"] + label:hover {
+    background-color: var(--secondary-color-hl);
+}
+[type="file"] + label:hover::before {
+    right: 85%;
+}
+
+  
+  
+
+#result {
+    background-color: var(--bg-color);
+    min-height: 9em;
+    border-radius: 1em; 
+    display: grid;
+    grid-template-columns: repeat(auto-fit, 9em);
+    grid-gap: 10px;
+    align-items: center;
+    padding:1em;
+    margin-top:0em;
+    margin-bottom: 2em;
+}
+#result img{
+    width:9em;
+    height:9em;
+    vertical-align: top;
+}
+ 
 
 /* Houses */
 
@@ -293,15 +682,24 @@ input[type="submit"]:hover {
 }
 
 #houses li {
-
-    box-shadow: var(--simple-shadow); /** pode ser q fique bem **/
-    background-color: white;
-    border: 2px solid var(--main-color);
-    border-radius: 1em;    
+    background-color: var(--bg-color-2);
+    border: 2px solid var(--topbar-color);
+    border-radius: 1em; 
+    box-shadow: var(--simple-shadow); 
+    transition: all 0.2s ease-in-out;
 }
+
+#houses li:hover {
+    box-shadow: var(--simple-shadow-hl);    
+    color: var(--main-color);
+    transform: scale(1.05);
+}
+
+
 
 #houses figure {
     margin:0;
+    max-height: 12em;
     overflow: hidden;
     position: relative;
     border-radius: 0.85em 0.85em 0 0;
@@ -332,11 +730,8 @@ input[type="submit"]:hover {
     white-space: normal; 
 }
 
-#houses .houseInfo > * {
+#houses .houseInfo {
     padding: 0 0.75em;
-}
-
-.houseInfo {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr;
@@ -345,8 +740,6 @@ input[type="submit"]:hover {
 .houseInfo .priceTag {
     grid-area: 1 / 1;
     justify-self: start;
-
-    margin: 0.5em 0 0 0;
 }
 
 .houseInfo .houseLocation {
@@ -366,14 +759,14 @@ input[type="submit"]:hover {
 /* Search functionality */
 
 #searchButton {
+    color:var(--text-color-2);
     position: fixed;
     z-index: 2;
-    bottom: 2em;    
-    right: 3em;
+    bottom: 2em; right: 3em;
 
     padding: 1em;
     font-size: 1.25em;
-    background-color: var(--accent-color);
+    background-color: var(--secondary-color);
     transition: background-color 200ms ease-in-out;
     
     border-radius: 10px;
@@ -383,7 +776,7 @@ input[type="submit"]:hover {
 }
 
 #searchButton:hover {
-    background-color: var(--accent-color-hl);
+    background-color: var(--secondary-color-hl);
 }
 
 
@@ -391,8 +784,7 @@ input[type="submit"]:hover {
     display: none;
     position: fixed;
     z-index: 99999;
-    left: 0;
-    top: 0;
+    left: 0; top: 0;
     width: 100%; 
     height: 100%; 
     overflow: auto;
@@ -405,8 +797,6 @@ input[type="submit"]:hover {
     margin: 10% auto;
     border-radius: 3px;
     padding: 2em;
-    background-color: #fefefe;
-    box-shadow: var(--strong-shadow);
 }
 
 #searchDialog h3 {
@@ -463,14 +853,12 @@ input[type="submit"]:hover {
 }
 
 #startDate {
-    border-bottom-right-radius: 0;
-    border-top-right-radius: 0;
+    border-radius: 3px 0 0 3px;
     border-right: 1px solid gray;
 }
 
 #endDate {
-    border-bottom-left-radius: 0;
-    border-top-left-radius: 0;
+    border-radius: 0 3px 3px 0;
 }
 
 #maxPriceSlider .priceTag {
@@ -485,7 +873,6 @@ input[type="submit"]:hover {
 }
 
 .guestCounter .counterManager {
-    grid-area: 1 / 2;
     display: flex;
     align-items: center;
 }
@@ -496,8 +883,6 @@ input[type="submit"]:hover {
 }
 
 .guestCounter .increaseNum, .guestCounter .decreaseNum {
-    width: 1em;
-    height: 1em;
     border-radius: 50%;  
     text-align: center;
 
@@ -519,7 +904,7 @@ input[type="submit"]:hover {
 	margin: 0.2em 0.5em;
 	font-weight: bold;
 	font-size: 3em; 
-	color: #333;
+	color: var(--main-color);
 }
 
 #house .host {
@@ -528,7 +913,7 @@ input[type="submit"]:hover {
 }
 
 #house .description {
-	background-color: white;
+	background-color: var(--bg-color-2);
 	padding: 2em;
 	border-radius: 1em;
 }

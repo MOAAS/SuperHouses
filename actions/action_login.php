@@ -1,5 +1,6 @@
 <?php
-  include_once('../includes/session.php');
+  include_once('../includes/session.php');   
+  include_once('../includes/messages.php');
   include_once('../database/db_users.php');
   
   $username = $_POST['username'];
@@ -7,11 +8,11 @@
 
   if (validCredentials($username, $password)) {
     $_SESSION['username'] = $username;
-    $_SESSION['messages'][] = array('type' => 'success', 'content' => 'Successfully logged in!');
+    addSuccessMessage('Successfully logged in!');
     header('Location: ../pages/search_houses.php');
   } 
   else {
-    $_SESSION['messages'][] = array('type' => 'error', 'content' => 'Login failed! Username and password do not match.');
+    addErrorMessage('Login failed! Username and password do not match.');
     header('Location: ../pages/login.php');
   }
 ?>

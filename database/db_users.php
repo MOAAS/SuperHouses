@@ -3,12 +3,20 @@
     include_once('../includes/userinfo.php');
     include_once('../database/db_countries.php');
 
+    function getUserID($username) {
+        $db = Database::instance()->db();
+
+        $statement = $db->prepare('SELECT id FROM User WHERE username = ?');
+        $statement->execute(array($username));
+
+        return $statement->fetch()['id'];
+    }
+    
     function updateUserInfo($userInfo) {
         $db = Database::instance()->db();
 
         $countryID = getCountryID($userInfo->country);
 
-        print_r($countryID);
         if ($countryID == false)
             $countryID = NULL;
 
@@ -68,5 +76,4 @@
         $statement = $db->prepare('UPDATE User SET passwordHash = ? WHERE username = ?');
         $statement->execute(array(password_hash($newPassword, PASSWORD_DEFAULT), $username));
     }
-
 ?>
