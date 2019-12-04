@@ -17,6 +17,7 @@
     </nav>
     <?php draw_profileedit($user, $countryOptions) ?>
     <?php draw_addHouse($countryOptions) ?>
+    <?php draw_conversations($messages) ?>
     <?php draw_messages($messages) ?>
       
   </section>
@@ -131,31 +132,32 @@
 
 <?php } ?>
 
+<?php function draw_conversations($conversations) { ?>
+  <section id="conversations" class="profileTab">
+    <h2>Conversations</h2>
+    <ul>
+      <li class="conversation">
+        <h3>John</h3>
+        <p>Message from John</p>
+        <small class="messageDate">May 28th</small>
+      </li>
+      <li class="conversation">
+        <h3>Not John</h3>
+        <p>Message from John 2</p>
+        <small class="messageDate">May 27th</small>
+      </li>
+      <li class="conversation">
+        <h3>John but another John</h3>
+        <p>Message from John 3</p>
+        <small class="messageDate">May 26th</small>
+      </li>
+    </ul>
+  </section>
+<?php } ?>
+
 <?php function draw_messages($messages){?>
   <section id="messages" class="profileTab">
-    <h2>Your Messages</h2>
-    <div id="conversations">
-      <ul>
-        <li class="conversation">
-          <h3>John</h3>
-          <p>Message from John</p>
-          <span>May 28th</span>
-        </li>
-        <li class="conversation">
-          <h3>Not John</h3>
-          <p>Message from John 2</p>
-          <span>May 27th</span>
-        </li>
-        <li class="conversation">
-          <h3>John but another John</h3>
-          <p>Message from John 3</p>
-          <span>May 26th</span>
-        </li>
-      </ul>
-    </div>
-    <div id="conversationUser">
-      <h3>John</h3>
-    </div>
+    <header><h2>Messages with John</h2></header>
     <div id="messageHistory">
       <ul>
         <li class="message receivedMessage">
