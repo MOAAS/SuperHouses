@@ -1,7 +1,7 @@
 <?php function draw_profile($username) { 
   $user = getUserInfo($username);
   $countryOptions = getAllCountries();
-  $messages = getLatestMessages($username);
+  $messages = getConversations($username);
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -136,21 +136,14 @@
   <section id="conversations" class="profileTab">
     <h2>Conversations</h2>
     <ul>
-      <li class="conversation">
-        <h3>John</h3>
-        <p>Message from John</p>
-        <small class="messageDate">May 28th</small>
-      </li>
-      <li class="conversation">
-        <h3>Not John</h3>
-        <p>Message from John 2</p>
-        <small class="messageDate">May 27th</small>
-      </li>
-      <li class="conversation">
-        <h3>John but another John</h3>
-        <p>Message from John 3</p>
-        <small class="messageDate">May 26th</small>
-      </li>
+      <?php foreach ($conversations as $conversation) { ?>
+        <li class="conversation">
+          <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
+          <h3><?=$conversation['person']?></h3>
+          <p><?=$conversation['content']?></p>
+          <small class="messageDate"> <?=$conversation['sendTime']?></small>
+        </li>
+      <?php } ?>
     </ul>
   </section>
 <?php } ?>
@@ -163,18 +156,12 @@
     </header>
     <div id="messageHistory">
       <ul>
-        <li class="message receivedMessage">
-          <p>Message from John</p>
-          <small class="messageDate">May 27th</small>
+      <?php foreach ($messages as $message) { ?>
+        <li class="message <?=$message['wasSent']?'sentMessage':'receivedMessage'?>">
+          <p><?=$message['content']?></p>
+          <small class="messageDate"><?=$message['sendTime']?></small>
         </li>
-        <li class="message receivedMessage">
-          <p>Another message from John</p>
-          <small class="messageDate">May 28th</small>
-        </li>
-        <li class="message sentMessage">
-          <p>Message that you sent to John</p>
-          <small class="messageDate">May 28th</small>
-        </li>
+      <?php } ?>
       </ul>
     </div>
     <div id="sendMessageInput">

@@ -15,6 +15,8 @@
     --secondary-color-hl: rgb(179, 149, 137);
     --secondary-color: #966c57;
 
+    --border-color: rgba(150, 150, 150, 150);
+
     --text-color:rgb(0,0,0);
     --text-color-2:rgb(240,240,240);
 
@@ -644,7 +646,7 @@ input[type=number] {
     vertical-align: top;
 }
  
-/* Messages */
+/* Conversations */
 
 #conversations {
     background-color: var(--bg-color-2);
@@ -652,27 +654,62 @@ input[type=number] {
     overflow: auto;
     height: 40em;
 }
-
-#conversations h2 {
+#conversations > h2 {
     padding: 1em;
-    border-bottom: 1px solid rgb(150, 150, 150, 150);
+    border-bottom: 1px solid var(--border-color);
 }
 
 #conversations .conversation {
     padding: 1em;
-    border-bottom: 1px solid rgb(150, 150, 150, 150);
+
+    display: grid;
+    grid-template-columns: 6em 1fr;
+    grid-template-areas: 
+        "img username username"
+        "img lastMsg date";
+
     cursor: pointer;
-    background-color: var(--input-bg-color);
+    background-color: var(--bg-color);
     transition: background-color 0.3s ease-in-out;
 }
 
 #conversations .conversation:hover {
-    background-color: var(--input-hint-color);
+    background-color: var(--text-color-2);
+}
+
+.conversation h3 {
+    grid-area: username;
+    align-items: center;
+    display: flex;
+}
+
+.conversation img {
+    grid-area: img;
+    width: 4em;
+    max-height: 4em;
+    border-radius: 500%;
 }
 
 
-#conversations .conversation p {
-    margin: 0.5em 0 0.25em 0
+.conversation .messageDate {
+    grid-area: date;
+    color: gray;
+    font-size: 0.8em;
+    vertical-align: middle;
+    margin-left: 0.25em;
+}
+
+.conversation .messageDate::before {
+    content: " \00B7 ";
+}
+
+.conversation p {
+    grid-area: lastMsg;
+    margin: 0;
+    font-size: 1.25em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 #messages {

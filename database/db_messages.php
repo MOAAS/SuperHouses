@@ -25,7 +25,7 @@
         $statement->execute(array($senderID, $receiverID));
     }
 
-    function getLatestMessages($username) {
+    function getConversations($username) {
         $db = Database::instance()->db();
 
         $userID = getUserId($username);
@@ -50,18 +50,27 @@
         return $statement->fetchAll();
     }
     
-    function getMessagesFrom($senderUsername, $username) {
+    function getMessagesBetween($otherUsername, $username) {
         $db = Database::instance()->db();
 
-        $senderID = getUserId($senderUsername);
-        $receiverID = getUserId($username);
+        $userID = getUserId($senderUsername);
+        $otherID = getUserId($otherUsername);
+
         $statement = $db->prepare(
-            'SELECT id, content, sendTime, seen,
+            'SELECT sendTime, id, content, seen, 0 AS wasSent
             FROM UserMessage
-            WHERE sender = ? AND receiver = ?'
+            WHERE receiver = ? AND sender = ?
+
+            UNION
+
+            SELECT sendTime, id, content, seen, 1 AS wasSent
+            FROM UserMessage
+            WHERE receiver = ? AND sender = ?
+            '
         );
 
-        $statement->execute(array($senderID, $receiverID));
+
+        $statement->execute(array($userID, $otherID, $otherID, $userID));
 
         return $statement->fetchAll();
     }
