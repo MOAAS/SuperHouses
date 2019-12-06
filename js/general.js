@@ -1,7 +1,7 @@
 "use strict"
 
 let priceTags = document.querySelectorAll('.priceTag .priceValue');
-priceTags.forEach(priceTag => priceTag.textContent = parseFloat(priceTag.textContent).toFixed(2));
+priceTags.forEach(priceTag => {priceTag.textContent = parseFloat(priceTag.textContent).toFixed(2)});
 
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
@@ -15,12 +15,12 @@ if (currentTheme) {
 
 function switchTheme(e) {
     if (e.target.checked) {
-        document.documentElement.setAttribute('data-theme', 'dark');
-        localStorage.setItem('theme', 'dark');
-    }
-    else {        document.documentElement.setAttribute('data-theme', 'light');
-          localStorage.setItem('theme', 'light');
-    }    
-}
+            document.documentElement.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+                    }
+                        else {        document.documentElement.setAttribute('data-theme', 'light');
+                            localStorage.setItem('theme', 'light');
+                                }    
+                                    }
 
-toggleSwitch.addEventListener('change', switchTheme, false);
+                                        toggleSwitch.addEventListener('change', switchTheme, false);

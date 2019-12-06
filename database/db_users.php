@@ -27,7 +27,7 @@
     function getUserInfo($username) {
         $db = Database::instance()->db();
 
-        $statement = $db->prepare('SELECT username, displayname, country, city FROM User WHERE username = ?');
+        $statement = $db->prepare('SELECT id, username, displayname, country, city FROM User WHERE username = ?');
         $statement->execute(array($username));
 
         $user = $statement->fetch();
@@ -36,7 +36,11 @@
             $country = "";
         else $country = getCountryByID($user['country']);
 
-        return new UserInfo($user['username'], $user['displayname'], $country, $user['city']);
+        $pfpPath = "../database/profileImages/" . $user['id'];
+        if(! file_exists($pfpPath))
+            $pfpPath = "../database/profileImages/DefaultPic/default.png";
+
+        return new UserInfo($user['username'], $user['displayname'], $country, $user['city'], $pfpPath);
     }
 
     function userExists($username) {

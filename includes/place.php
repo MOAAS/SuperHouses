@@ -8,11 +8,11 @@
 		public $ownerDisplayname;
         public $title;
         public $description;
-        public $price;
+        public $pricePerDay;
         public $minPeople;
         public $maxPeople;
         
-        public function __construct($place_id, $country, $city, $address, $ownerUsername, $ownerDisplayname, $title, $description, $price, $minPeople, $maxPeople) {
+        public function __construct($place_id, $country, $city, $address, $ownerUsername, $ownerDisplayname, $title, $description, $pricePerDay, $minPeople, $maxPeople) {
             $this->place_id = $place_id;
             $this->country = $country;
             $this->city = $city;
@@ -21,9 +21,13 @@
 			$this->ownerDisplayname = $ownerDisplayname;
             $this->title = $title;
             $this->description = $description;
-            $this->price = $price;
+            $this->pricePerDay = $pricePerDay;
             $this->minPeople = $minPeople;
             $this->maxPeople = $maxPeople;
+        }
+
+        public function getLocationString() {
+            return $this->city . ", " . $this->country;
         }
     }
 ?>

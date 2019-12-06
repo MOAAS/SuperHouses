@@ -3,19 +3,22 @@
     include_once('../includes/place.php');
     include_once('../database/db_countries.php');
 
-    function getAllHouses() {
-        $db = Database::instance()->db();
-
-        $statement = $db->prepare(
-            "SELECT Place.id,countryName,PlaceLocation.city,username,displayname,title,description,price,minPeople,maxPeople
-            FROM Place, PlaceLocation, Country, User 
-            WHERE Place.location=PlaceLocation.id AND PlaceLocation.country = Country.id"
-        );
-        $statement->execute();
-
+    function makePlaceArray($rows) {
         $places = array();
-        foreach($statement->fetchAll() as $place) {
-            array_push($places, new Place($place['id'], $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']));
+        foreach($rows as $place) {
+            array_push($places, new Place(                
+                $place['id'], 
+                $place['countryName'], 
+                $place['city'], 
+                $place['address'], 
+                $place['ownerUsername'], 
+                $place['ownerName'], 
+                $place['title'], 
+                $place['description'], 
+                $place['pricePerDay'], 
+                $place['minPeople'], 
+                $place['maxPeople'])
+            );
         }
 
         return $places;
@@ -25,27 +28,22 @@
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
-            "SELECT Place.id,countryName,PlaceLocation.city,address,username,displayname,title,description,price,minPeople,maxPeople
-            FROM Place, PlaceLocation, Country, User 
-            WHERE Place.location = PlaceLocation.id AND PlaceLocation.country = Country.id AND Place.owner = User.id AND User.username = ?"
+            "SELECT *
+            FROM PlaceComplete
+            WHERE ownerUsername = ?"
         );
         $statement->execute(array($username));
 
-        $places = array();
-        foreach($statement->fetchAll() as $place) {
-            array_push($places, new Place($place['id'], $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']));
-        }
-
-        return $places;
+        return makePlaceArray($statement->fetchAll());
     }
 
     function getHouseById($house_id) {
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
-            "SELECT countryName,PlaceLocation.city,address,username,displayname,title,description,price,minPeople,maxPeople
-            FROM Place, PlaceLocation, Country, User 
-            WHERE Place.location = PlaceLocation.id AND PlaceLocation.country = Country.id AND Place.owner = User.id AND Place.id = ?"
+            "SELECT *
+            FROM PlaceComplete
+            WHERE id = ?"
         );
         $statement->execute(array($house_id));
 
@@ -54,7 +52,7 @@
         if ($place == false)
             return null;
 
-        return new Place($house_id, $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']);
+        return makePlaceArray(array($place))[0];
     }
 
     function getHousePhotoPathsByID($house_id) {
@@ -70,30 +68,25 @@
     function searchHouses($location, $startDate, $endDate, $maxPrice, $numGuests, $numBabies) {
         $db = Database::instance()->db();
         $statement = $db->prepare(
-            "SELECT Place.id, title, price, minPeople, maxPeople, countryName, PlaceLocation.city, address, description, username, displayname
-            FROM Place JOIN PlaceLocation ON Place.location=PlaceLocation.id JOIN Country ON PlaceLocation.country = Country.id JOIN User ON Place.owner = User.id
-            WHERE price < ? AND ? <= maxPeople AND (countryName LIKE ? OR PlaceLocation.city LIKE ?) AND Place.id NOT IN (
+            "SELECT *
+            FROM PlaceComplete
+            WHERE pricePerDay <= ? AND ? <= maxPeople AND (countryName LIKE ? OR city LIKE ?) AND id NOT IN (
                 SELECT id 
                 FROM Reservation
-                WHERE place = Place.id AND dateStart < ? AND dateEnd > ?
+                WHERE place = id AND dateStart < ? AND dateEnd > ?
             )
-            ORDER BY price
+            ORDER BY pricePerDay
             "           
         );
 
         $location = str_replace("\\", "\\\\", $location);;
         $location = str_replace("%", "\%", $location);;
         $location = str_replace("_", "\_", $location);;
+        $location = "%" . $location . "%";
         
-        $statement->execute(array($maxPrice, $numGuests + $numBabies / 2, "%" . $location . "%", "%" . $location . "%", $endDate, $startDate));
+        $statement->execute(array($maxPrice, $numGuests + $numBabies / 2, $location, $location, $endDate, $startDate));
         
-        $results = $statement->fetchAll();
-        $places = array();
-        foreach($results as $place) {
-            array_push($places, new Place($place['id'], $place['countryName'], $place['city'], $place['address'], $place['username'], $place['displayname'], $place['title'], $place['description'], $place['price'], $place['minPeople'], $place['maxPeople']));
-        }
-
-        return $places;
+        return makePlaceArray($statement->fetchAll());
     }
 
     function getNewHouseId() {
@@ -126,14 +119,11 @@
         $countryID = getCountryID($country);
         if ($countryID == false)
             return false;
-       // echo $countryID;
 
-        $statement2 = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
-        $statement2->execute(array($newplaceid,$countryID,$city,$address));
-        //$statement2->execute(array(5,1,'teste','23sadas'));
+        $statement = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
+        $statement->execute(array($newplaceid,$countryID,$city,$address));
 
-        $statement3 = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?)');
-        $statement3->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max));
-        //$statement3->execute(array(12, 1, 1, 'casa','sssss', 32, 1, 2));
+        $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max));
     }
 ?>

@@ -1,6 +1,6 @@
 <?php
   include_once('../includes/session.php');   
-  include_once('../includes/messages.php');
+  include_once('../includes/sessionMessages.php');
   include_once('../database/db_users.php');
   
   $username = $_SESSION['username'];
