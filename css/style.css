@@ -227,9 +227,10 @@ body{
 .theme-switch-wrapper {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     
-  }
-  .theme-switch {
+}
+.theme-switch {
     display: inline-block;
     height: 34px;
     position: relative;
@@ -241,7 +242,7 @@ body{
   }
   
   .slider {
-    background-color: var(--bg-color);
+    background-color: var(--input-bg-color);
     bottom: 0;
     cursor: pointer;
     left: 0;
@@ -263,7 +264,7 @@ body{
   }
   
   input:checked + .slider {
-    background-color: var(--bg-color);
+    background-color:  var(--input-bg-color);
   }
   
   input:checked + .slider:before {
@@ -511,6 +512,33 @@ button:hover {
     grid-area: 1 / 1 / span 1 / span 2;
 }
 
+/*Edit profile pic*/
+#ppic{
+    position:relative;
+    width: 50%;
+    margin:auto;
+}
+
+#preview img{
+    border-radius: 50%;
+    width:8em;
+    height:8em;
+}
+
+#ppic [type="file"] + label {
+    position:absolute;
+    background-color: var(--secondary-color);
+    border-radius: 50%;
+    margin:0;
+    padding: 0.8em;
+    cursor:pointer;
+}
+
+#ppic [type="file"] + label:hover {
+    background-color: var(--secondary-color-hl);
+}
+/**/
+
 #editProfile #editInfo {
     grid-area: 2 / 1;
     padding: 0 2em;
@@ -603,7 +631,7 @@ input[type=number] {
     width: 0;
   }
 
-[type="file"] + label {
+#addHouseImages [type="file"] + label {
     border: none;
     border-radius: 5px;
     color: #000000;
@@ -620,12 +648,12 @@ input[type=number] {
     vertical-align: middle;
 }
 
-[type="file"] + label {
+#addHouseImages [type="file"] + label {
     background-color: var(--secondary-color);
     border-radius: 50px;
     overflow: hidden;
 }
-[type="file"] + label::before {
+#addHouseImages [type="file"] + label::before {
     color: #000000;
     content: "\f382";
     font-family: "Font Awesome 5 Free";
@@ -637,15 +665,13 @@ input[type=number] {
     top: -9px;
     transition: all 0.3s;
 }
-[type="file"] + label:hover {
+#addHouseImages [type="file"] + label:hover {
     background-color: var(--secondary-color-hl);
 }
-[type="file"] + label:hover::before {
+#addHouseImages [type="file"] + label:hover::before {
     right: 85%;
 }
 
-  
-  
 
 #result {
     background-color: var(--bg-color);

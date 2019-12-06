@@ -14,8 +14,11 @@
   $user = getUserInfo($_SESSION['username']);
   $houseList = getHousesFromOwner($user->username);
   $countryOptions = getAllCountries();
+  
+  
+  $ppic = getUserPPic($user->username);
 
   draw_header($user->username, "../js/profile.js");
-  draw_profile($user, $countryOptions,$houseList);
+  draw_profile($user, $ppic, $countryOptions,$houseList);
   draw_footer();
 ?>
