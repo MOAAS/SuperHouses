@@ -1,6 +1,6 @@
 <?php
   include_once('../includes/session.php');   
-  include_once('../includes/messages.php');
+  include_once('../includes/sessionMessages.php');
   
   session_destroy();
   session_start();

@@ -2,7 +2,6 @@
   $user = getUserInfo($username);
   $countryOptions = getAllCountries();
   $messages = getConversations($username);
-  print_r($messages);
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -19,7 +18,7 @@
     <?php draw_profileedit($user, $countryOptions) ?>
     <?php draw_addHouse($countryOptions) ?>
     <?php draw_conversations($messages) ?>
-    <?php draw_messages($messages) ?>
+    <?php draw_messages() ?>
       
   </section>
 
@@ -138,10 +137,14 @@
     <h2>Conversations</h2>
     <ul>
       <?php foreach ($conversations as $conversation) { ?>
-        <li class="conversation <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> <?=$conversation->seen?'seenMessage':''?>">
+        <li class="
+          conversation 
+          <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> 
+          <?=$conversation->seen?'seenMessage':''?>"
+        >
           <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
           <h3><?=$conversation->otherUser?></h3>
-          <p><?=$conversation->content?></p>
+          <p><?=toHTML($conversation->content)?></p>
           <small class="messageDate"> <?=$conversation->sendTime?></small>
         </li>
       <?php } ?>
@@ -149,21 +152,15 @@
   </section>
 <?php } ?>
 
-<?php function draw_messages($messages){?>
+<?php function draw_messages(){?>
   <section id="messages" class="profileTab">
     <header>
       <i id="messageBack" class="fas fa-chevron-left"></i>
       <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
-      <h2>John</h2>
+      <h2></h2>
     </header>
     <div id="messageHistory">
       <ul>
-      <?php foreach ($messages as $message) { ?>
-        <li class="message <?=$message->wasSent?'sentMessage':'receivedMessage'?>">
-          <p><?=$message->content?></p>
-          <small class="messageDate"><?=$message->endTime?></small>
-        </li>
-      <?php } ?>
       </ul>
     </div>
     <div id="sendMessageInput">

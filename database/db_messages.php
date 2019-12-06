@@ -12,11 +12,14 @@
         $senderID = getUserID($senderUsername);
         $receiverID = getUserID($receiverUsername);
 
+        if ($senderID == false || $receiverID == false)
+            return;
+
         $statement->execute(array($content, date('Y-m-d H:i:s'), $senderID, $receiverID));
         sendNotification($receiverUsername, "You received a message from " . $senderUsername . "!");
     }
     
-    function setSeenMessagesBetween($otherUser, $username) {
+    function setSeenMessagesFrom($otherUser, $username) {
         $db = Database::instance()->db();
 
         $otherID = getUserId($otherUser);
@@ -24,11 +27,10 @@
         $statement = $db->prepare(
             'UPDATE UserMessage
             SET seen = 1
-            WHERE (UserMessage.sender = ? AND UserMessage.receiver = ?)
-               OR (UserMessage.sender = ? AND UserMessage.receiver = ?)'
+            WHERE (UserMessage.sender = ? AND UserMessage.receiver = ?)'
         );
 
-        $statement->execute(array($userID, $otherID, $otherID, $userID));
+        $statement->execute(array($otherID, $userID));
     }
 
     function getConversations($username) {
@@ -51,7 +53,8 @@
                 WHERE sender = ?
                 GROUP BY username
             )
-            GROUP BY username'            
+            GROUP BY username
+            ORDER BY sendTime DESC'            
         );
 
         $statement->execute(array($userID, $userID));
@@ -70,16 +73,18 @@
         $otherID = getUserId($otherUsername); // marco
 
         $statement = $db->prepare(
-            'SELECT id, sendTime, content, seen, 0 AS wasSent
-            FROM UserMessage
-            WHERE receiver = ? AND sender = ?
+            'SELECT * FROM (
+                SELECT id, sendTime, content, seen, 0 AS wasSent
+                FROM UserMessage
+                WHERE receiver = ? AND sender = ?
 
-            UNION
+                UNION
 
-            SELECT id, sendTime, content, seen, 1 AS wasSent
-            FROM UserMessage
-            WHERE receiver = ? AND sender = ?
-            '
+                SELECT id, sendTime, content, seen, 1 AS wasSent
+                FROM UserMessage
+                WHERE receiver = ? AND sender = ?
+            )
+            ORDER BY sendTime'
         );
 
 

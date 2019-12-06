@@ -1,3 +1,12 @@
+let messageHistory = document.querySelector('#messageHistory ul');
+let conversations = document.querySelector('#conversations ul');
+let currentConversation = null;
+
+let sendMsgForm = document.querySelector('#messages #sendMessageInput form');
+let sendMsgInput = sendMsgForm.querySelector('#sentMessage');
+
+// Profile
+
 function hideAllTabs() {
     document.querySelectorAll('#profile .profileTab').forEach(tab => {
         tab.style.display = "none";
@@ -26,7 +35,11 @@ function updateTabs() {
         case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
         case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
         case '#Messages': document.getElementById('conversations').style.display = ""; break;
-        default: console.log("Lmao"); break;
+        default: 
+            if (selected.startsWith("#Conversation_"))
+                toConversation(findConversation(selected.split('_')[1])); 
+            else console.log("lmao");
+            break;
     }
 }
 
@@ -36,48 +49,104 @@ tabItems.forEach(tabItem => {
 });
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
 
+// Conversations
+
+function scrollConversationToBottom() {
+    let scrollable = document.querySelector('#messageHistory');
+    scrollable.scrollTop = scrollable.scrollHeight;
+}
+
+function appendMessage(content, wasSent, sendTime) {
+    let message = document.createElement('li');
+    message.classList.add('message');
+    if (wasSent == true)
+        message.classList.add('sentMessage');
+    else message.classList.add('receivedMessage');
+
+    message.innerHTML += "<p>" + htmlEntities(content) + "</p>"
+    message.innerHTML += '<small class="messageDate">' + htmlEntities(sendTime)  + '</small>'        
+    messageHistory.appendChild(message);
+}
+
+function updateConversation(conversation, content) {
+    let date = new Date().getHours() + ":" + new Date().getMinutes();
+    conversation.querySelector('p').innerHTML = htmlEntities(content);
+    conversation.querySelector('.messageDate').innerHTML = htmlEntities(date);
+    conversation.remove();
+    conversations.insertBefore(conversation, conversations.firstChild);
+    return date;
+}
+
 function onConversationLoad() {
-    console.log(this.responseText);
     let messages = JSON.parse(this.responseText);
 
-    let history = document.querySelector('#messageHistory ul')
     for (let i = 0; i < messages.length; i++) {
-        let message = document.createElement('li');
-        message.classList.add('message');
-        if (messages[i].wasSent == true)
-            message.classList.add('sentMessage');
-        else message.classList.add('receivedMessage');
+        appendMessage(messages[i].content, messages[i].wasSent, messages[i].sendTime);
+    }
+    scrollConversationToBottom();
+}
 
-        console.log(message.innerHTML)
-        message.innerHTML += "<p>" + messages[i].content + "</p>"
-        message.innerHTML += '<small class="messageDate">' + messages[i].sendTime  + '</small>'        
-        history.appendChild(message);
+function findConversation(username) {
+    let conversations = document.querySelectorAll("#conversations .conversation");
+    for (let i = 0; i < conversations.length; i++) {
+        if (conversations[i].querySelector('h3').textContent == username)
+            return conversations[i];
     }
 }
 
-function toConversation(conversation) {
-    console.log(conversation);
+function toConversation(conversation) {    
+    if (conversation == null) {
+        console.log("Null conversation");
+        backToConversations();
+        return;
+    }
+    messageHistory.innerHTML = "";
     sendGetRequest('../actions/get_conversation.php',
     {
         otherUser: conversation.querySelector('h3').textContent
     }, onConversationLoad);
-    
+
+    let username = conversation.querySelector('h3').textContent;
+    window.location.hash = "Conversation_" + username;
+
+    currentConversation = conversation;
+    conversation.classList.add('seenMessage');
     document.getElementById('conversations').style.display = "none";
-    document.querySelector('#messages header h2').innerHTML = conversation.querySelector('h3').textContent;
-    document.querySelector('#messageHistory ul').innerHTML = "";
+    document.querySelector('#messages header h2').textContent = username;
     document.getElementById('messages').style.display = "";
 }
 
 function backToConversations() {
     document.getElementById('conversations').style.display = "";
     document.getElementById('messages').style.display = "none";
+    window.location.hash = "Messages"
 }
 
-document.querySelectorAll('#profile #conversations .conversation').forEach(conversation => {
+// Messages
+
+sendMsgForm.addEventListener('submit', (event) => sendMessage(event));
+
+function sendMessage(event) {
+    event.preventDefault();
+    let content = sendMsgInput.value
+    if (content == "")
+        return;
+    sendPostRequest('../actions/action_sendMessage.php',
+    {
+        receiverUsername: document.querySelector('#messages header h2').textContent,
+        content: content
+    });
+    let timeStamp = updateConversation(currentConversation, content);
+    appendMessage(content, true, timeStamp);
+    sendMsgInput.value = "";
+    scrollConversationToBottom();
+}
+
+document.querySelectorAll('#conversations .conversation').forEach(conversation => {
     conversation.addEventListener('click', (event) => toConversation(conversation));
 });
 
-document.querySelector('#profile #messages #messageBack').addEventListener('click', backToConversations);
+document.querySelector('#messages #messageBack').addEventListener('click', backToConversations);
 
 // coisas do doni
 

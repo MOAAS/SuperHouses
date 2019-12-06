@@ -7,5 +7,5 @@
 
     echo json_encode(getMessagesBetween($_GET['otherUser'], $_SESSION['username']));
 
-    setSeenMessagesBetween($_GET['otherUser'], $_SESSION['username']);
+    setSeenMessagesFrom($_GET['otherUser'], $_SESSION['username']);
 ?>

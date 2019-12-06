@@ -649,12 +649,15 @@ input[type=number] {
 /* Conversations */
 
 #conversations {
-    background-color: var(--bg-color-2);
+    background-color: white;
     box-shadow: var(--simple-shadow);
     overflow: auto;
     height: 40em;
 }
+
 #conversations > h2 {
+    background-color: var(--main-color);
+    color: var(--text-color-2);
     padding: 1em;
     border-bottom: 1px solid var(--border-color);
 }
@@ -673,7 +676,7 @@ input[type=number] {
 }
 
 #conversations .conversation:hover {
-    background-color: var(--text-color-2);
+    background-color: var(--bg-color);
 }
 
 .conversation h3 {
@@ -692,33 +695,21 @@ input[type=number] {
 
 .conversation .messageDate {
     grid-area: date;
-    color: gray;
     font-size: 0.8em;
     vertical-align: middle;
     margin-left: 0.25em;
 }
-
-.conversation .messageDate::before {
-    content: " \00B7 ";
-}
-
 
 .conversation.sentMessage p::before {
     content: "You: ";
 }
 
 .conversation.sentMessage p {
-    color: gray;
+    color: var(--input-hint-color);
 }
 
-
-.conversation.seenMessage {
-    background-color: var(--bg-color);
-}
-
-.conversation:not(.seenMessage) {
-    background-color: red;
-
+.conversation.receivedMessage:not(.seenMessage) {
+    background-color: var(--main-color-hl);
 }
 
 
@@ -745,7 +736,8 @@ input[type=number] {
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgb(150, 150, 150, 150);
-    background-color: var(--bg-color-2);
+    background-color: var(--main-color);
+    color: var(--text-color-2);
 }
 
 #messages img {
@@ -756,22 +748,22 @@ input[type=number] {
 }
 
 #messages #messageBack {
-    background-color: var(--input-bg-color);
     padding: 2em;   
-    border-right: 1px solid rgb(150, 150, 150, 150);
+    border-right: 1px solid var(--border-color);
     cursor: pointer;
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 #messages #messageBack:hover {
-    background-color: var(--input-hint-color);
+    color: var(--text-color);
+    background-color: var(--bg-color);
 }
 
 #messages #messageHistory {
     align-self: stretch;
     padding: 1em;
-    max-height: 30em;
-    overflow: auto;   
+    height: 30em;
+    overflow: auto;  
 }
 
 #messages #sendMessageInput {
@@ -779,7 +771,17 @@ input[type=number] {
     border-top: 1px solid rgb(150, 150, 150, 150);
 }
 
-#messageHistory .message {
+#messages #sendMessageInput button {
+    cursor: pointer;
+    color: var(--main-color);
+    transition: color 0.3s ease-in-out;
+}
+
+#messages #sendMessageInput button:hover {
+    color: var(--main-color-hl);
+}
+
+#messageHistory .message:not(:last-child) {
     margin-bottom: 1em;
 }
 
@@ -792,7 +794,6 @@ input[type=number] {
 
 #messageHistory .message .messageDate {
     display: block;
-    color: grey;
     margin: 0.25em;
 }
 
@@ -805,6 +806,7 @@ input[type=number] {
 }
 
 #messageHistory .sentMessage p {
+    word-break: break-all;
     border-radius: 20px 20px 1px 20px;
     background-color: var(--main-color);
     color: var(--text-color-2)
