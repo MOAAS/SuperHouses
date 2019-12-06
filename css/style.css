@@ -338,6 +338,20 @@ input:focus {
     outline: none;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance:textfield; 
+}
+
+input[type="file"] {
+    display: none;
+}
+
 input[type="range"] {
     -webkit-appearance: none;
     background:  var(--input-bg-color);
@@ -383,6 +397,7 @@ input[type="submit"]:hover,
 button:hover {
     background-color: var(--main-color-light-hl);
 }
+
 
 .hidden {
     display: none;
@@ -530,6 +545,7 @@ button:hover {
 }
 
 /*Edit profile pic*/
+
 #ppic{
     position:relative;
     width: 50%;
@@ -633,24 +649,6 @@ button:hover {
 }
 
 /*Remove arrows from input type number*/
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance:textfield; 
-}
-
-/*file upload*/
-[type="file"] {
-    margin:1em;
-    height: 0;
-    overflow: hidden;
-    width: 0;
-  }
 
 #addHouseImages [type="file"] + label {
     border: none;

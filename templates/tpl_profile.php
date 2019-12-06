@@ -1,10 +1,10 @@
 <?php function draw_profile($username) { 
+  $user = getUserInfo($username);
   $countryOptions = getAllCountries();
   $messages = getConversations($username);
   $houseList = getHousesFromOwner($username);
   $comingReservations = getComingReservations($username);
   $goingReservations = getGoingReservations($username);
-  $ppic = getUserPPic($username);
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -18,7 +18,7 @@
         <li>Messages</li>
       </ul>
     </nav>
-    <?php draw_profileedit($user, $ppic, $countryOptions) ?>
+    <?php draw_profileedit($user, $countryOptions) ?>
     <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
     <?php draw_comingReservations($comingReservations) ?>
@@ -30,7 +30,7 @@
 
 <?php } ?>
 
-<?php function draw_profileedit($user, $ppic, $countryOptions) {?>
+<?php function draw_profileedit($user, $countryOptions) {?>
   <section id="editProfile" class="genericForm profileTab">
     <h2>Edit Profile</h2>
     <section id="editInfo">
@@ -42,7 +42,7 @@
           <input id="profilePic" type="file" name="imageUpload" accept=".png, .jpg, .jpeg" />
           <label for="profilePic"></label>
           <ul id="preview">
-            <li><img src= "<?=$ppic?>" alt="Profile Pic"></li>
+            <li><img src= "<?=$user->profilePic?>" alt="Profile Pic"></li>
           </ul>
         </div>
 
