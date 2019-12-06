@@ -46,6 +46,6 @@
     <p class="host">Hóspede: <?=toHTML($house->ownerDisplayname)?></p>
     <p class="description"><?=toHTML($house->description)?></p>
     <p><?=toHTML($house->address)?>, <?=toHTML($house->city)?>, <?=toHTML($house->country)?></p>
-    <p class="price"><?=$house->price?></p>
+    <p class="price"><?=$house->pricePerDay?></p>
   </section>
 <?php } ?>
