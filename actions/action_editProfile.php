@@ -12,8 +12,8 @@
     move_uploaded_file($_FILES['imageUpload']['tmp_name'], $uploaddir . $id);
     }
 
-    
+
     addSuccessMessage('Successfully updated profile!');
-    header('Location: ../pages/profile.php'); //?
+    header('Location: ../pages/profile.php#Profile'); //?
 
 ?>
