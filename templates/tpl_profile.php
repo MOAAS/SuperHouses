@@ -1,12 +1,10 @@
 <?php function draw_profile($username) { 
-  $user = getUserInfo($username);
   $countryOptions = getAllCountries();
   $messages = getConversations($username);
   $houseList = getHousesFromOwner($username);
-
   $comingReservations = getComingReservations($username);
   $goingReservations = getGoingReservations($username);
-
+  $ppic = getUserPPic($username);
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -20,7 +18,7 @@
         <li>Messages</li>
       </ul>
     </nav>
-    <?php draw_profileedit($user, $countryOptions) ?>
+    <?php draw_profileedit($user, $ppic, $countryOptions) ?>
     <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
     <?php draw_comingReservations($comingReservations) ?>
@@ -32,12 +30,22 @@
 
 <?php } ?>
 
-<?php function draw_profileedit($user, $countryOptions) { ?>
+<?php function draw_profileedit($user, $ppic, $countryOptions) {?>
   <section id="editProfile" class="genericForm profileTab">
     <h2>Edit Profile</h2>
     <section id="editInfo">
       <h3>Personal Information</h3>
-      <form method="post" action="../actions/action_editProfile.php">
+
+      <form method="post" action="../actions/action_editProfile.php" enctype="multipart/form-data">
+        
+        <div id="ppic">
+          <input id="profilePic" type="file" name="imageUpload" accept=".png, .jpg, .jpeg" />
+          <label for="profilePic"></label>
+          <ul id="preview">
+            <li><img src= "<?=$ppic?>" alt="Profile Pic"></li>
+          </ul>
+        </div>
+
         <label for="displayname">Display Name</label>
         <input id="displayname" type="text" name="displayname" value="<?=toHTML($user->displayname)?>">  
 
@@ -49,6 +57,15 @@
 
         <input type="submit" value="Save">
       </form>
+
+      <h3>Preferences</h3>
+      <div class="theme-switch-wrapper">
+        <p>Theme</p>
+          <label class="theme-switch" for="checkbox">
+          <input type="checkbox" id="checkbox" />
+          <div class="slider round"></div>
+          </label>
+      </div>
     </section>
 
     <section id="editCredentials">
@@ -209,7 +226,7 @@
         </div>
       </div>
       
-      <div>
+      <div id=addHouseImages>
         <input id="files" type="file" name="fileUpload[]" multiple required>        
         <label for="files">Choose images</label>
         <ul id="result"></ul>
@@ -259,4 +276,5 @@
       </form>
     </div>
   </section>
+
 <?php } ?>

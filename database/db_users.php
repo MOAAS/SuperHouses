@@ -76,4 +76,12 @@
         $statement = $db->prepare('UPDATE User SET passwordHash = ? WHERE username = ?');
         $statement->execute(array(password_hash($newPassword, PASSWORD_DEFAULT), $username));
     }
+
+    function getUserPPic($username) {
+        $id = getUserID($username);
+        $path = "../database/profileImages/" . $id;
+        if(! file_exists($path))
+            return "../database/profileImages/DefaultPic/default.png";
+        return $path;
+    }
 ?>

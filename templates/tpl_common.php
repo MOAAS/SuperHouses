@@ -23,13 +23,6 @@
       <header id="pagebanner">        
         <section id="pagetop">
           
-        <div class="theme-switch-wrapper">
-          <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
-          </label>
-        </div>
-
           <h1>
             <a href="../index.php">Super Houses</a>
             <small>We rent.</small>
