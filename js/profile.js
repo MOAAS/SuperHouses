@@ -36,8 +36,35 @@ tabItems.forEach(tabItem => {
 });
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
 
-function toMessage() {
+function onConversationLoad() {
+    console.log(this.responseText);
+    let messages = JSON.parse(this.responseText);
+
+    let history = document.querySelector('#messageHistory ul')
+    for (let i = 0; i < messages.length; i++) {
+        let message = document.createElement('li');
+        message.classList.add('message');
+        if (messages[i].wasSent == true)
+            message.classList.add('sentMessage');
+        else message.classList.add('receivedMessage');
+
+        console.log(message.innerHTML)
+        message.innerHTML += "<p>" + messages[i].content + "</p>"
+        message.innerHTML += '<small class="messageDate">' + messages[i].sendTime  + '</small>'        
+        history.appendChild(message);
+    }
+}
+
+function toConversation(conversation) {
+    console.log(conversation);
+    sendGetRequest('../actions/get_conversation.php',
+    {
+        otherUser: conversation.querySelector('h3').textContent
+    }, onConversationLoad);
+    
     document.getElementById('conversations').style.display = "none";
+    document.querySelector('#messages header h2').innerHTML = conversation.querySelector('h3').textContent;
+    document.querySelector('#messageHistory ul').innerHTML = "";
     document.getElementById('messages').style.display = "";
 }
 
@@ -47,7 +74,7 @@ function backToConversations() {
 }
 
 document.querySelectorAll('#profile #conversations .conversation').forEach(conversation => {
-    conversation.addEventListener('click', toMessage);
+    conversation.addEventListener('click', (event) => toConversation(conversation));
 });
 
 document.querySelector('#profile #messages #messageBack').addEventListener('click', backToConversations);

@@ -423,7 +423,7 @@ input[type="submit"]:hover {
 
 #login input, #signup input {
     width: 100%;   
-    margin-bottom: 3em; 
+    margin-bottom: 2em; 
     margin-top: 0.5em;
 }
 
@@ -525,7 +525,7 @@ input[type="submit"]:hover {
 
 #editProfile #editInfo {
     grid-area: edit-info;
-    border-right: 1px solid black;
+    border-right: 1px solid var(--border-color);
     padding: 0 2em; 
     margin: 1em 0;
 }
@@ -669,7 +669,6 @@ input[type=number] {
         "img lastMsg date";
 
     cursor: pointer;
-    background-color: var(--bg-color);
     transition: background-color 0.3s ease-in-out;
 }
 
@@ -703,6 +702,26 @@ input[type=number] {
     content: " \00B7 ";
 }
 
+
+.conversation.sentMessage p::before {
+    content: "You: ";
+}
+
+.conversation.sentMessage p {
+    color: gray;
+}
+
+
+.conversation.seenMessage {
+    background-color: var(--bg-color);
+}
+
+.conversation:not(.seenMessage) {
+    background-color: red;
+
+}
+
+
 .conversation p {
     grid-area: lastMsg;
     margin: 0;
@@ -717,7 +736,9 @@ input[type=number] {
     box-shadow: var(--simple-shadow);
 
     display: grid;
-    grid-template-rows: 1fr 6fr 1fr;
+    align-items: center;
+    grid-template-rows: minmax(1fr, 1.25fr) auto minmax(1fr, 1.25fr);
+
 }
 
 #messages header {
@@ -727,10 +748,16 @@ input[type=number] {
     background-color: var(--bg-color-2);
 }
 
+#messages img {
+    width: 3em;
+    max-height: 3em;
+    border-radius: 500%;
+    margin: 0 1em; 
+}
+
 #messages #messageBack {
     background-color: var(--input-bg-color);
     padding: 2em;   
-    margin-right: 1em; 
     border-right: 1px solid rgb(150, 150, 150, 150);
     cursor: pointer;
     transition: background-color 0.3s ease-in-out;
@@ -741,7 +768,10 @@ input[type=number] {
 }
 
 #messages #messageHistory {
+    align-self: stretch;
     padding: 1em;
+    max-height: 30em;
+    overflow: auto;   
 }
 
 #messages #sendMessageInput {

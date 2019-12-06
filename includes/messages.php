@@ -1,15 +1,19 @@
-<?php 
-
-function addErrorMessage($content) {
-    if (isset($_SESSION['messages']))
-        array_push($_SESSION['messages'],  array('type' => 'error', 'content' => $content));
-    else $_SESSION['messages'][] = array('type' => 'error', 'content' => $content);
-}
-
-function addSuccessMessage($content) {
-    if (isset($_SESSION['messages']))
-        array_push($_SESSION['messages'],  array('type' => 'success', 'content' => $content));
-    else $_SESSION['messages'][] = array('type' => 'success', 'content' => $content);
-}
-
+<?php
+    class UserMessage {
+        public $content;
+        public $seen;
+        public $sendTime;
+        public $wasSent;
+        public $username;
+        public $otherUser;
+        
+        public function __construct($content, $seen, $sendTime, $wasSent, $username, $otherUser) {
+            $this->content = $content;
+            $this->seen = $seen;
+            $this->sendTime = $sendTime;
+            $this->wasSent = $wasSent;
+            $this->username = $username;
+            $this->otherUser = $otherUser;
+        }
+    }
 ?>

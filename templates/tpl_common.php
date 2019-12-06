@@ -1,6 +1,5 @@
 <?php function draw_header($username, $script) { 
   $notifications = getUnseenNotifications($username);
-
 ?>
   <!DOCTYPE html>
   <html lang="en">

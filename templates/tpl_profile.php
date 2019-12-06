@@ -2,6 +2,7 @@
   $user = getUserInfo($username);
   $countryOptions = getAllCountries();
   $messages = getConversations($username);
+  print_r($messages);
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -137,11 +138,11 @@
     <h2>Conversations</h2>
     <ul>
       <?php foreach ($conversations as $conversation) { ?>
-        <li class="conversation">
+        <li class="conversation <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> <?=$conversation->seen?'seenMessage':''?>">
           <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
-          <h3><?=$conversation['person']?></h3>
-          <p><?=$conversation['content']?></p>
-          <small class="messageDate"> <?=$conversation['sendTime']?></small>
+          <h3><?=$conversation->otherUser?></h3>
+          <p><?=$conversation->content?></p>
+          <small class="messageDate"> <?=$conversation->sendTime?></small>
         </li>
       <?php } ?>
     </ul>
@@ -152,14 +153,15 @@
   <section id="messages" class="profileTab">
     <header>
       <i id="messageBack" class="fas fa-chevron-left"></i>
+      <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
       <h2>John</h2>
     </header>
     <div id="messageHistory">
       <ul>
       <?php foreach ($messages as $message) { ?>
-        <li class="message <?=$message['wasSent']?'sentMessage':'receivedMessage'?>">
-          <p><?=$message['content']?></p>
-          <small class="messageDate"><?=$message['sendTime']?></small>
+        <li class="message <?=$message->wasSent?'sentMessage':'receivedMessage'?>">
+          <p><?=$message->content?></p>
+          <small class="messageDate"><?=$message->endTime?></small>
         </li>
       <?php } ?>
       </ul>

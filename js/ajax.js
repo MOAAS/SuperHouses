@@ -13,3 +13,10 @@ function sendPostRequest(action, data, onload) {
     request.setRequestHeader('Content-Type', 'application/x-www-form-urlencoded');
     request.send(encodeForAjax(data));      
 }
+
+function sendGetRequest(action, data, onload) {
+    let request = new XMLHttpRequest();
+    request.open("GET", action + '?' + encodeForAjax(data), true);
+    request.onload = onload;
+    request.send()
+}
