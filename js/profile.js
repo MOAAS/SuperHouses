@@ -14,14 +14,16 @@ function hideAllTabs() {
 }
 
 function selectTabItem(tabItemName) {
+    window.location.hash = tabItemName;
     if (tabItemName == "")
         tabItemName = "Profile";
+    if (tabItemName.startsWith('#Conversation'))
+        tabItemName = "Messages";
     document.querySelectorAll('#profile nav li').forEach(tabItem => {
         if (tabItem.textContent == tabItemName)
             tabItem.classList.add('selectedTab')
         else tabItem.classList.remove('selectedTab')
     });
-    window.location.hash = tabItemName;
     updateTabs();
 }
 
@@ -37,7 +39,7 @@ function updateTabs() {
         case '#Messages': document.getElementById('conversations').style.display = ""; break;
         default: 
             if (selected.startsWith("#Conversation_"))
-                toConversation(findConversation(selected.split('_')[1])); 
+                toConversation(selected.split('_')[1]); 
             else console.log("lmao");
             break;
     }
@@ -79,6 +81,11 @@ function updateConversation(conversation, content) {
 
 function onConversationLoad() {
     let messages = JSON.parse(this.responseText);
+    if (messages == null) {
+        currentConversation.remove();
+        backToConversations();
+        return;
+    }
 
     for (let i = 0; i < messages.length; i++) {
         appendMessage(messages[i].content, messages[i].wasSent, messages[i].sendTime);
@@ -87,36 +94,40 @@ function onConversationLoad() {
 }
 
 function findConversation(username) {
-    let conversations = document.querySelectorAll("#conversations .conversation");
-    for (let i = 0; i < conversations.length; i++) {
-        if (conversations[i].querySelector('h3').textContent == username)
-            return conversations[i];
+    let conversationList = document.querySelectorAll("#conversations .conversation");
+    for (let i = 0; i < conversationList.length; i++) {
+        if (conversationList[i].querySelector('h3').textContent == username)
+            return conversationList[i];
     }
+    let newConversation = document.createElement('li');
+    newConversation.classList.add('conversation');
+    newConversation.innerHTML = 
+        '<img src="../database/avatars/defaultAv.jpg" alt="Photo"></img>' +
+        '<h3>' + username + '</h3>' +
+        '<p></p>' + 
+        '<small class="messageDate"></small>'
+    conversations.insertBefore(newConversation, conversations.firstChild);
+    return newConversation
 }
 
-function toConversation(conversation) {    
-    if (conversation == null) {
-        console.log("Null conversation");
-        backToConversations();
-        return;
-    }
+function toConversation(username) {
     messageHistory.innerHTML = "";
     sendGetRequest('../actions/get_conversation.php',
     {
-        otherUser: conversation.querySelector('h3').textContent
+        otherUser: username
     }, onConversationLoad);
 
-    let username = conversation.querySelector('h3').textContent;
     window.location.hash = "Conversation_" + username;
 
-    currentConversation = conversation;
-    conversation.classList.add('seenMessage');
+    currentConversation = findConversation(username);
+    currentConversation.classList.add('seenMessage');
     document.getElementById('conversations').style.display = "none";
     document.querySelector('#messages header h2').textContent = username;
     document.getElementById('messages').style.display = "";
 }
 
 function backToConversations() {
+    currentConversation = null;
     document.getElementById('conversations').style.display = "";
     document.getElementById('messages').style.display = "none";
     window.location.hash = "Messages"
@@ -137,13 +148,15 @@ function sendMessage(event) {
         content: content
     });
     let timeStamp = updateConversation(currentConversation, content);
+    currentConversation.classList.add('sentMessage');
+    currentConversation.classList.remove('receivedMessage');
     appendMessage(content, true, timeStamp);
     sendMsgInput.value = "";
     scrollConversationToBottom();
 }
 
 document.querySelectorAll('#conversations .conversation').forEach(conversation => {
-    conversation.addEventListener('click', (event) => toConversation(conversation));
+    conversation.addEventListener('click', (_) => toConversation(conversation.querySelector('h3').textContent));
 });
 
 document.querySelector('#messages #messageBack').addEventListener('click', backToConversations);
@@ -182,9 +195,7 @@ filesInput.addEventListener("change", function (event) {
 });
 
 const addHouseButton = document.getElementById('addHouseButton');
-function selectAddPlace(){
-    selectTabItem('Add Place')
-}
-addHouseButton.addEventListener('click',selectAddPlace, false);
+if (addHouseButton != null)
+    addHouseButton.addEventListener('click', () => selectTabItem('Add Place'));
 
 
