@@ -1,5 +1,4 @@
 <?php function draw_header($username, $script) { 
-  include_once('../database/db_notifications.php');
   $notifications = getUnseenNotifications($username);
 ?>
   <!DOCTYPE html>
@@ -11,12 +10,12 @@
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
-      <?php if ($script != null) { ?>
-        <script src="<?=$script?>" defer></script>
-      <?php } ?>
       <script src="../js/ajax.js" defer></script>
       <script src="../js/general.js" defer></script>
       <script src="../js/notifications.js" defer></script>
+      <?php if ($script != null) { ?>
+        <script src="<?=$script?>" defer></script>
+      <?php } ?>
     </head>
 
     <body>
@@ -51,7 +50,7 @@
         </section>
       </header>
       <?php if (isset($_SESSION['messages'])) {?>
-        <section id="messages">
+        <section id="sessionMessages">
           <?php foreach($_SESSION['messages'] as $message) { ?>
             <div class="<?=$message['type']?>"><?=$message['content']?></div>
           <?php } ?>

@@ -16,6 +16,8 @@
     --secondary-color-hl: #ffbe99;
     --secondary-color: #d48253;
 
+    --border-color: rgba(150, 150, 150, 150);
+
     --text-color:rgb(0,0,0);
     --text-color-2:rgb(240,240,240);
 
@@ -206,19 +208,19 @@ body{
     background-color: var(--main-color-light-hl);
 }
 
-#messages {
+#sessionMessages {
     color: white;
     text-align: center;
     font-weight: bold;
     font-size: 1.25em;    
 }
 
-#messages .success {
+#sessionMessages .success {
     padding: 0.5em;
     background-color: var(--success-color);
 }
 
-#messages .error {
+#sessionMessages .error {
     padding: 0.5em;
     background-color: var(--error-color);
 }
@@ -297,6 +299,7 @@ a {
 ul {
     list-style-type: none;
     padding: 0;
+    margin: 0;
 }
 
 input, label, select, textarea {
@@ -426,7 +429,7 @@ button:hover {
 
 #login input, #signup input {
     width: 100%;   
-    margin-bottom: 3em; 
+    margin-bottom: 2em; 
     margin-top: 0.5em;
 }
 
@@ -445,18 +448,20 @@ button:hover {
 #profile {
     display: grid;
     grid-template-columns: 1fr 4fr;
-    grid-template-rows: 5em 2em 1fr;
+    grid-template-rows: 2em 2.5em 1fr;
     grid-template-areas: 
-    " none   item"
-    " header item"
-    " nav    item";
+        " none   item"
+        " header item"
+        " nav    item";
+    align-items: start;
     margin: 1em auto;
     max-width: 80em;
 }
 
-#profile header {
+#profile #userProfileName {
     grid-area: header;
     justify-self: center;
+    font-size: 1.25em;
 }
 
 #profile .profileTab {
@@ -468,17 +473,23 @@ button:hover {
 #profile nav {
     grid-area: nav;
     justify-self: center;
+
 }
 
+#profile nav ul {
+    border-radius: 5px;
+    box-shadow: var(--simple-shadow);
+}
 
 #profile nav li {
-    font-size: 1.25em;
     padding: 1em;
-    cursor: pointer;
-    color: var(--text-color);
-    transition: all 0.2s ease-in-out;
+    font-size: 1.25em;
     font-weight: bold;
+    color: var(--text-color);
     background-color: var(--input-bg-color);
+    cursor: pointer;
+    transition: all 0.2s ease-in-out;
+    box-shadow: -5px 0px 1px var(--main-color);
 }
 
 #profile nav li:first-child {
@@ -492,6 +503,7 @@ button:hover {
 #profile nav li:hover,
 #profile nav li.selectedTab {
     color: var(--text-color-2);
+    transform: translateX(5px);
     background-color: var(--main-color);    
 }
 
@@ -501,25 +513,30 @@ button:hover {
 #editProfile {
     display: grid;
     grid-template-columns: 1fr 1fr;
+    grid-template-areas:
+        "header header"
+        "edit-info edit-cred";
     justify-items: stretch;    
 }
 
 #editProfile h3 {
     margin: 0 0 1em 0;
 }
-#editProfile header {
-    grid-area: 1 / 1 / span 1 / span 2;
+
+#editProfile h2 {
+    text-align: center;
+    grid-area: header;
 }
 
 #editProfile #editInfo {
-    grid-area: 2 / 1;
-    padding: 0 2em;
-    border-right: 1px solid black;
+    grid-area: edit-info;
+    border-right: 1px solid var(--border-color);
+    padding: 0 2em; 
     margin: 1em 0;
 }
 
 #editProfile #editCredentials {
-    grid-area: 2 / 2;
+    grid-area: edit-cred;
     padding: 0 2em;
     margin: 1em 0;
 }
@@ -551,6 +568,10 @@ button:hover {
   }
 
 /*Add House*/
+
+#addHouse h2 {
+    text-align: center;
+}
 
 #addHouse input[type="text"],
 #addHouse input[type="number"],
@@ -665,6 +686,196 @@ input[type=number] {
     vertical-align: top;
 }
  
+/* Conversations */
+
+#conversations {
+    background-color: white;
+    box-shadow: var(--simple-shadow);
+    overflow: auto;
+    height: 40em;
+}
+
+#conversations > h2 {
+    background-color: var(--main-color);
+    color: var(--text-color-2);
+    padding: 1em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+#conversations .conversation {
+    padding: 1em;
+
+    display: grid;
+    grid-template-columns: 6em 1fr;
+    grid-template-areas: 
+        "img username username"
+        "img lastMsg date";
+
+    cursor: pointer;
+    transition: background-color 0.3s ease-in-out;
+}
+
+#conversations .conversation:hover {
+    background-color: var(--bg-color);
+}
+
+.conversation h3 {
+    grid-area: username;
+    align-items: center;
+    display: flex;
+}
+
+.conversation img {
+    grid-area: img;
+    width: 4em;
+    max-height: 4em;
+    border-radius: 500%;
+}
+
+
+.conversation .messageDate {
+    grid-area: date;
+    font-size: 0.8em;
+    vertical-align: middle;
+    margin-left: 0.25em;
+}
+
+.conversation.sentMessage p::before {
+    content: "You: ";
+}
+
+.conversation.sentMessage p {
+    color: var(--input-hint-color);
+}
+
+.conversation.receivedMessage:not(.seenMessage) {
+    background-color: var(--main-color-hl);
+}
+
+
+.conversation p {
+    grid-area: lastMsg;
+    margin: 0;
+    font-size: 1.25em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+#messages {
+    background-color: white;
+    box-shadow: var(--simple-shadow);
+
+    display: grid;
+    align-items: center;
+    grid-template-rows: minmax(1fr, 1.25fr) auto minmax(1fr, 1.25fr);
+
+}
+
+#messages header {
+    display: flex;
+    align-items: center;
+    border-bottom: 1px solid rgb(150, 150, 150, 150);
+    background-color: var(--main-color);
+    color: var(--text-color-2);
+}
+
+#messages img {
+    width: 3em;
+    max-height: 3em;
+    border-radius: 500%;
+    margin: 0 1em; 
+}
+
+#messages #messageBack {
+    padding: 2em;   
+    border-right: 1px solid var(--border-color);
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+
+#messages #messageBack:hover {
+    color: var(--text-color);
+    background-color: var(--bg-color);
+}
+
+#messages #messageHistory {
+    align-self: stretch;
+    padding: 1em;
+    height: 30em;
+    overflow: auto;  
+}
+
+#messages #sendMessageInput {
+    padding: 1em;
+    border-top: 1px solid rgb(150, 150, 150, 150);
+}
+
+#messages #sendMessageInput button {
+    cursor: pointer;
+    color: var(--main-color);
+    transition: color 0.3s ease-in-out;
+}
+
+#messages #sendMessageInput button:hover {
+    color: var(--main-color-hl);
+}
+
+#messageHistory .message:not(:last-child) {
+    margin-bottom: 1em;
+}
+
+#messageHistory .message p {
+    display: inline-block;
+    margin: 0;
+    padding: 0.5em;
+    color: var(--text-color-2);
+}
+
+#messageHistory .message .messageDate {
+    display: block;
+    margin: 0.25em;
+}
+
+#messageHistory .sentMessage {
+    text-align: right;
+}
+
+#messageHistory .receivedMessage { 
+    text-align: left;
+}
+
+#messageHistory .sentMessage p {
+    word-break: break-all;
+    border-radius: 20px 20px 1px 20px;
+    background-color: var(--main-color);
+    color: var(--text-color-2)
+}
+
+#messageHistory .receivedMessage p {
+    border-radius: 20px 20px 20px 1px;
+    background-color: var(--bg-color-2);
+    color:  var(--text-color)
+}
+
+
+#sendMessageInput form {
+    display: flex;
+}
+
+#sendMessageInput button {
+    border: none;
+    padding: 0;
+    margin-left: 0.5em;
+    background: none;  
+    font-size: 1.5em;
+}
+
+#sendMessageInput input {
+    display: inline;
+    width: 100%;
+}
+
 
 /* Houses */
 

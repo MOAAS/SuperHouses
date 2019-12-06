@@ -38,7 +38,7 @@
       <label for="confirmPassword">Confirm Password</label>
       <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm your password" required>
 
-      <input type="submit" value="Signup">
+      <input type="submit" value="Sign Up">
     </form>
 
     <footer>
