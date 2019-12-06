@@ -1135,6 +1135,54 @@ button:hover {
 	max-width: 80em;
 }
 
+#house #place-body {
+    display: flex;
+    max-width: 300em;
+    margin: 0 auto;
+}
+
+#house #place-info {
+    flex: 50%;
+}
+
+#house #booking {
+    flex: 50%;
+}
+
+#house .rating input {
+    width: 0;
+    height: 0;
+}
+
+#house .rating .stars {
+    display: flex;
+    flex-direction: row-reverse;
+    float: left;
+}
+
+#house .rating label {
+    color: #c8c8c8;
+    cursor: pointer;
+}
+
+#house .rating label:before {
+    content: "☆";
+    font-size: 1.5em;
+    color: #ccc;
+}
+
+#house .rating input:checked ~ label:before {
+    color: #ffc107;
+}
+
+#house .rating label:hover ~ label:before {
+    color: #ffdb70;
+}
+
+#house .rating label:hover:before {
+    color: #ffc107;
+}
+
 #house .title {
 	margin: 0.2em 0.5em;
 	font-weight: bold;

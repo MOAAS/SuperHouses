@@ -6,6 +6,7 @@ DROP TABLE IF EXISTS Country;
 DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Reservation;
 DROP TABLE IF EXISTS UserNotification;
+DROP TABLE IF EXISTS Rating;
 DROP TABLE IF EXISTS UserMessage;
 
 DROP VIEW IF EXISTS PlaceComplete;
@@ -65,6 +66,15 @@ CREATE TABLE UserNotification (
     CONSTRAINT CHK_seen CHECK (seen = 0 OR seen = 1)
 );
 
+CREATE TABLE Rating (
+    user REFERENCES User NOT NULL,
+    place REFERENCES Place NOT NULL,
+    rating INTEGER NOT NULL,
+    CONSTRAINT CHK_inbounds CHECK (rating >= 1 AND rating <= 5),
+    PRIMARY KEY (user, place)
+);
+
+PRAGMA foreign_keys = ON;
 CREATE TABLE UserMessage (
     id INTEGER PRIMARY KEY,
     content VARCHAR,

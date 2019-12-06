@@ -7,7 +7,6 @@ function updateNotificationNum() {
     else notificationNum.style.display = "block";
 }
 
-
 function toggleNotificationList() {
     let notificationList = document.getElementById('notificationList');
     if (notificationList.style.display == "block") {
