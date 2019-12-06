@@ -1,4 +1,4 @@
-PRAGMA foreign_keys = OFF;
+PRAGMA foreign_keys=OFF;
 
 DROP TABLE IF EXISTS User;
 DROP TABLE IF EXISTS PlaceLocation;
@@ -6,13 +6,14 @@ DROP TABLE IF EXISTS Country;
 DROP TABLE IF EXISTS Place;
 DROP TABLE IF EXISTS Reservation;
 DROP TABLE IF EXISTS UserNotification;
+DROP TABLE IF EXISTS UserMessage;
 
 CREATE TABLE User (
     id INTEGER PRIMARY KEY,
     username VARCHAR UNIQUE NOT NULL,
     passwordHash VARCHAR NOT NULL,
     displayname VARCHAR NOT NULL,
-    country INTEGER REFERENCES Country,
+    country REFERENCES Country,
     city VARCHAR
 );
 
@@ -23,7 +24,7 @@ CREATE TABLE Country (
 
 CREATE TABLE PlaceLocation (
     id INTEGER PRIMARY KEY,
-    country REFERENCES Country,
+    country INTEGER REFERENCES Country,
     city VARCHAR,
     address VARCHAR
 );
@@ -59,7 +60,18 @@ CREATE TABLE UserNotification (
     CONSTRAINT CHK_seen CHECK (seen = 0 OR seen = 1)
 );
 
-PRAGMA foreign_keys = ON;
+CREATE TABLE UserMessage (
+    id INTEGER PRIMARY KEY,
+    content VARCHAR,
+    sendTime DATE NOT NULL,
+    seen INTEGER,
+    sender REFERENCES User,
+    receiver REFERENCES User,
+    CONSTRAINT CHK_seen CHECK (seen = 0 OR seen = 1),
+    CONSTRAINT CHK_fromNotTo CHECK (sender != receiver)
+);
+
+PRAGMA foreign_keys=ON;
 
 INSERT INTO Country VALUES (NULL, 'Portugal');
 INSERT INTO Country VALUES (NULL, 'France');
@@ -89,6 +101,7 @@ INSERT INTO Country VALUES (NULL, 'Greece');
 INSERT INTO Country VALUES (NULL, 'Turkey');
 
 INSERT INTO User VALUES(1,"Marco","7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Marco321",1,"Lisbon");
+INSERT INTO User VALUES(2,"Polo","7110eda4d09e062aa5e4a390b0a572ac0d2c0220","Polo123",1,"Lisbon");
 
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Porto", "Rua Joao Carlos, 123");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua Lelelelele, 898");

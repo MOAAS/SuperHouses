@@ -1,6 +1,12 @@
-<?php function draw_profile($user, $ppic, $countryOptions,$houseList) { ?>
+<?php function draw_profile($username) { 
+  $user = getUserInfo($username);
+  $countryOptions = getAllCountries();
+  $messages = getConversations($username);
+  $houseList = getHousesFromOwner($username);
+  $ppic = getUserPPic($user->username);
+?>
   <section id="profile">
-    <header><h2><?=toHTML($user->username)?></h2></header>
+    <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
     <nav>
       <ul>
         <li>Profile</li>
@@ -14,6 +20,8 @@
     <?php draw_profileedit($user, $ppic, $countryOptions) ?>
     <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
+    <?php draw_conversations($messages) ?>
+    <?php draw_messages() ?>
       
   </section>
 
@@ -21,7 +29,7 @@
 
 <?php function draw_profileedit($user, $ppic, $countryOptions) {?>
   <section id="editProfile" class="genericForm profileTab">
-    <header><h2>Edit Profile</h2></header>
+    <h2>Edit Profile</h2>
     <section id="editInfo">
       <h3>Personal Information</h3>
 
@@ -101,20 +109,18 @@
     <?php
       if(count($houseList)>0)
         draw_houselist($houseList);
-      else{ ?>
-      <div id="noPlaces">
-       <p>Looks like you dont have any place yet!</p>
-       <button id="addHouseButton" type="button">Add a Place</button>
-      </div> 
+      else { ?>
+        <div id="noPlaces">
+          <p>Looks like you dont have any place yet!</p>
+          <button id="addHouseButton" type="button">Add a Place</button>
+        </div> 
       <?php } ?>
   </section>
 <?php } ?>
 
 <?php function draw_addHouse($countryOptions){?>
   <section id="addHouse" class="genericForm profileTab">
-
-    <header><h2>Add your place!</h2></header>
-    
+    <h2>Add your place</h2>    
     <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
       <label for="title">Title</label>      
       <input id="title" type="text" name="title" placeholder="Name your place" required>
@@ -164,3 +170,43 @@
 
 <?php } ?>
 
+<?php function draw_conversations($conversations) { ?>
+  <section id="conversations" class="profileTab">
+    <h2>Conversations</h2>
+    <ul>
+      <?php foreach ($conversations as $conversation) { ?>
+        <li class="
+          conversation 
+          <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> 
+          <?=$conversation->seen?'seenMessage':''?>"
+        >
+          <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
+          <h3><?=$conversation->otherUser?></h3>
+          <p><?=toHTML($conversation->content)?></p>
+          <small class="messageDate"> <?=$conversation->sendTime?></small>
+        </li>
+      <?php } ?>
+    </ul>
+  </section>
+<?php } ?>
+
+<?php function draw_messages(){?>
+  <section id="messages" class="profileTab">
+    <header>
+      <i id="messageBack" class="fas fa-chevron-left"></i>
+      <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
+      <h2></h2>
+    </header>
+    <div id="messageHistory">
+      <ul>
+      </ul>
+    </div>
+    <div id="sendMessageInput">
+      <form method="post" action="../actions/action_sendMessage.php">
+        <input id="sentMessage" type="text" name="content" placeholder="Type your message...">
+        <button type="submit"><i class="fas fa-paper-plane"></i></button>      
+      </form>
+    </div>
+  </section>
+
+<?php } ?>
