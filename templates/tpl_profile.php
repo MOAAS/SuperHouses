@@ -3,6 +3,10 @@
   $countryOptions = getAllCountries();
   $messages = getConversations($username);
   $houseList = getHousesFromOwner($username);
+
+  $comingReservations = getComingReservations($username);
+  $goingReservations = getGoingReservations($username);
+
 ?>
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
@@ -10,8 +14,8 @@
       <ul>
         <li>Profile</li>
         <li>Your places</li>
-        <li>Add Place</li>
-        <li>Reservations</li>
+        <li>Add place</li>
+        <li>Future guests</li>
         <li>Your reservations</li>
         <li>Messages</li>
       </ul>
@@ -19,6 +23,8 @@
     <?php draw_profileedit($user, $countryOptions) ?>
     <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
+    <?php draw_comingReservations($comingReservations) ?>
+    <?php draw_goingReservations($goingReservations) ?>
     <?php draw_conversations($messages) ?>
     <?php draw_messages() ?>
       
@@ -83,9 +89,9 @@
   </select>
 <?php } ?>
 
-
 <?php function draw_yourListing($houseList){?>
   <section id="yourPlaces" class="genericForm profileTab">
+    <h2>Your Places</h2>
     <?php
       if(count($houseList)>0)
         draw_houselist($houseList);
@@ -97,6 +103,71 @@
       <?php } ?>
   </section>
 <?php } ?>
+
+<?php function draw_comingReservations($comingReservations) { ?>
+  <section id="comingReservations" class="profileTab">
+    <h2>Future Guests</h2>
+    <table>
+      <tr>
+        <th colspan="2">Place</th>
+        <th>Date</th>
+        <th>Guest</th>
+        <th>Price</th>
+        <th>Lmao</th>
+      </tr>
+      <?php foreach ($comingReservations as $reservation) { 
+        $place = $reservation->getPlace();
+      ?>
+        <tr>
+          <td><img src="../database/houseImages/<?=$place->place_id?>/0"></td>
+          <td>
+            <p><?=toHTML($place->title)?><p>
+            <p><?=toHTML($place->getLocationString())?><p>
+          </td>
+          <td>
+            <p>From: <?=$reservation->getStartString()?><p>
+            <p>To: <?=$reservation->getEndString()?><p>
+          </td>
+          <td><?=$reservation->getGuest()?></td>
+          <td><?=$reservation->getTotalPrice()?> € (<?=$place->pricePerDay?> € x <?=$reservation->getNights()?> nights)</td>
+          <td><span>Cancel Reservation</span></td>
+        </tr>    
+      <?php } ?> 
+    </table>
+  </section>
+<?php } ?>
+
+<?php function draw_goingReservations($goingReservations) { ?>
+  <section id="goingReservations" class="profileTab">
+    <h2>Your Reservations</h2>
+    <table>
+      <tr>
+        <th colspan="2">Place</th>
+        <th>Date</th>
+        <th>Price</th>
+        <th>Lmao</th>
+      </tr>
+      <?php foreach ($goingReservations as $reservation) { 
+        $place = $reservation->getPlace();
+      ?>
+        <tr>
+          <td><img src="../database/houseImages/<?=$place->place_id?>/0"></td>
+          <td>
+            <p><?=toHTML($place->title)?><p>
+            <p><?=toHTML($place->getLocationString())?><p>
+          </td>
+          <td>
+            <p>From: <?=$reservation->getStartString()?><p>
+            <p>To: <?=$reservation->getEndString()?><p>
+          </td>
+          <td><?=$reservation->getTotalPrice()?> € (<?=$place->pricePerDay?> € x <?=$reservation->getNights()?> nights)</td>
+          <td><span>Cancel Reservation</span></td>
+        </tr>   
+      <?php } ?> 
+    </table>
+  </section>
+<?php } ?>
+
 
 <?php function draw_addHouse($countryOptions){?>
   <section id="addHouse" class="genericForm profileTab">
@@ -188,5 +259,4 @@
       </form>
     </div>
   </section>
-
 <?php } ?>

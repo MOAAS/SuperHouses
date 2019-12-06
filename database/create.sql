@@ -8,6 +8,8 @@ DROP TABLE IF EXISTS Reservation;
 DROP TABLE IF EXISTS UserNotification;
 DROP TABLE IF EXISTS UserMessage;
 
+DROP VIEW IF EXISTS PlaceComplete;
+
 CREATE TABLE User (
     id INTEGER PRIMARY KEY,
     username VARCHAR UNIQUE NOT NULL,
@@ -35,13 +37,16 @@ CREATE TABLE Place (
     owner REFERENCES User NOT NULL,
     title VARCHAR,
     description VARCHAR,
-    price REAL,
+    pricePerDay REAL,
     minPeople INTEGER,
     maxPeople INTEGER,
     CONSTRAINT CHK_people CHECK (minPeople <= maxPeople),
-    CONSTRAINT CHK_price CHECK (price >= 0)
+    CONSTRAINT CHK_price CHECK (pricePerDay >= 0)
 );
 
+CREATE VIEW PlaceComplete AS 
+    SELECT Place.id AS id, countryName, PlaceLocation.city AS city, address, username AS ownerUsername, displayname AS ownerName, title, description, pricePerDay, minPeople, maxPeople
+    FROM Place JOIN PlaceLocation ON Place.location = PlaceLocation.id JOIN Country ON PlaceLocation.country = Country.id JOIN User ON Place.owner = User.id;
 
 CREATE TABLE Reservation (
     id INTEGER PRIMARY KEY,
@@ -65,8 +70,8 @@ CREATE TABLE UserMessage (
     content VARCHAR,
     sendTime DATE NOT NULL,
     seen INTEGER,
-    sender REFERENCES User,
-    receiver REFERENCES User,
+    sender REFERENCES User NOT NULL,
+    receiver REFERENCES User NOT NULL,
     CONSTRAINT CHK_seen CHECK (seen = 0 OR seen = 1),
     CONSTRAINT CHK_fromNotTo CHECK (sender != receiver)
 );

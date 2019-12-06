@@ -4,6 +4,7 @@ let currentConversation = null;
 
 let sendMsgForm = document.querySelector('#messages #sendMessageInput form');
 let sendMsgInput = sendMsgForm.querySelector('#sentMessage');
+sendMsgForm.addEventListener('submit', (event) => sendMessage(event));
 
 // Profile
 
@@ -14,9 +15,9 @@ function hideAllTabs() {
 }
 
 function selectTabItem(tabItemName) {
-    window.location.hash = tabItemName;
     if (tabItemName == "")
         tabItemName = "Profile";
+    window.location.hash = tabItemName;
     if (tabItemName.startsWith('#Conversation'))
         tabItemName = "Messages";
     document.querySelectorAll('#profile nav li').forEach(tabItem => {
@@ -33,9 +34,9 @@ function updateTabs() {
     switch (selected) {
         case '#Profile': document.getElementById('editProfile').style.display = ""; break;
         case '#Your places': document.getElementById('yourPlaces').style.display = ""; break;
-        case '#Add Place': document.getElementById('addHouse').style.display = ""; break;
-        case '#Reservations': document.getElementById('editProfile').style.display = ""; break;
-        case '#Your reservations': document.getElementById('editProfile').style.display = ""; break;
+        case '#Add place': document.getElementById('addHouse').style.display = ""; break;
+        case '#Future guests': document.getElementById('comingReservations').style.display = ""; break;
+        case '#Your reservations': document.getElementById('goingReservations').style.display = ""; break;
         case '#Messages': document.getElementById('conversations').style.display = ""; break;
         default: 
             if (selected.startsWith("#Conversation_"))
@@ -134,8 +135,6 @@ function backToConversations() {
 }
 
 // Messages
-
-sendMsgForm.addEventListener('submit', (event) => sendMessage(event));
 
 function sendMessage(event) {
     event.preventDefault();

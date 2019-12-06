@@ -12,7 +12,7 @@
           </figure>
           <div class="houseInfo">
             <div class="priceTag">
-              <p class="priceValue"><?=$house->price?></p> 
+              <p class="priceValue"><?=$house->pricePerDay?></p> 
               <p class="priceCurrency"> € / day</p>
             </div>
             <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=toHTML($house->city)?>, <?=toHTML($house->country)?></p>

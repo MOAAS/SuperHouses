@@ -9,6 +9,7 @@
   include_once('../database/db_houses.php');
   include_once('../database/db_messages.php');
   include_once('../database/db_notifications.php');
+  include_once('../database/db_reservations.php');
 
   if (!isset($_SESSION['username']))
     die(header('Location: login.php'));
