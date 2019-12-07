@@ -1137,21 +1137,35 @@ button:hover {
 
 #house #place-body {
     display: flex;
-    max-width: 300em;
+    max-width: 60em;
     margin: 0 auto;
 }
 
 #house #place-info {
-    flex: 50%;
+    margin: 1em;
+    padding: 1em;
+    flex: 67%;
 }
 
 #house #booking {
-    flex: 50%;
+    background-color: var(--bg-color-2);
+	border-radius: 1em;
+    margin: 1em;
+    padding: 1em;
+    flex: 33%;
+}
+
+#house #booking input[type="submit"] {
+    margin: 5%;
+    width: 90%;
+    padding: 0.2em;
+    font-size: 200%;
 }
 
 #house .rating input {
     width: 0;
     height: 0;
+    margin: 0;
 }
 
 #house .rating .stars {
@@ -1167,7 +1181,7 @@ button:hover {
 
 #house .rating label:before {
     content: "☆";
-    font-size: 1.5em;
+    font-size: 200%;
     color: #ccc;
 }
 
@@ -1190,15 +1204,35 @@ button:hover {
 	color: var(--main-color);
 }
 
+#house .address {
+    margin: 0 0.5em;
+    display: inline;
+}
+
 #house .host {
 	font-weight: bold;
 	margin: 0.2em 0.5em;
 }
 
 #house .description {
-	background-color: var(--bg-color-2);
+    border-top: 1px solid var(--bg-color-2);
 	padding: 2em;
-	border-radius: 1em;
+}
+
+#house .price {
+    display: inline;
+    font-size: 24px;
+    margin: 0;
+}
+
+#house #checkInDateField {
+    display: inline-block;
+    padding: 0.2em;
+}
+
+#house #checkOutDateField {
+    display: inline-block;
+    padding: 0.2em;
 }
 
 #house #photoCarousel img{
@@ -1208,16 +1242,16 @@ button:hover {
 }
 
 #house #photos {
+    padding: 1em;
 	position: relative;
-	display: inline-block;
-	margin: 0 1em 1em 1em;
+	margin: 0 auto;
 }
 
 #house #photoCarousel {
     height: 20em;
     width: 40em;
-	padding: 0;
-	margin: 0;
+    padding: 0;
+	margin: 0 auto;
 }
 
 @keyframes fade {
