@@ -10,13 +10,42 @@
             array_push($reservations, new Reservation($row['id'], getHouseById($row['place']), $row['dateStart'], $row['dateEnd'], $row['username']));
         return $reservations;
     }
+    
+    function reservationOverlaps($placeID, $checkIn, $checkOut) {
+        $db = Database::instance()->db();
 
-    function addReservation($from, $to, $username, $placeID) {
+        $statement = $db->prepare(
+            'SELECT id
+            FROM Reservation
+            WHERE place = ? AND ? > dateStart AND ? < dateEnd
+            LIMIT 1'
+        );
+
+        $statement->execute(array($placeID, $checkOut, $checkIn));
+
+        return ($statement->fetch() != false);
+    }
+
+    function getFutureReservations($placeID) {
+        $db = Database::instance()->db();
+        
+        $statement = $db->prepare(
+            'SELECT dateStart, dateEnd
+            FROM Reservation
+            WHERE place = ?'
+        );
+
+        $statement->execute(array($placeID));
+
+        return $statement->fetchAll();
+    }
+
+    function addReservation($from, $to, $userID, $placeID) {
         $db = Database::instance()->db();
 
         $statement = $db->prepare('INSERT INTO Reservation VALUES (NULL, ?, ?, ?, ?)');
 
-        $statement->execute(array($from, $to, getUserID($username), $placeID));
+        $statement->execute(array($from, $to, $userID, $placeID));
     }
 
     function getReservationByID($id) {

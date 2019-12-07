@@ -442,7 +442,8 @@ button:hover {
     font-weight: bold;
 }
 
-.genericForm  input[type="submit"] {
+.genericForm  input[type="submit"],
+.genericForm  button[type="submit"] {
     border-radius: 999px;
     margin-bottom: 1em;
     padding: 0.25em;
@@ -1258,30 +1259,88 @@ button:hover {
 
 #house #place-body {
     display: flex;
+    align-items: flex-start;
     max-width: 60em;
-    margin: 0 auto;
+    margin: 1em auto;
 }
 
 #house #place-info {
-    margin: 1em;
     padding: 1em;
-    flex: 67%;
+    flex: 2;
 }
 
-#house #booking {
-    background-color: var(--bg-color-2);
-	border-radius: 1em;
-    margin: 1em;
-    padding: 1em;
-    flex: 33%;
+#place-info #houseOwner {
+    display: flex;
+    align-items: center;
+    font-weight: bold;
+    font-size: 1.1em;
 }
 
-#house #booking input[type="submit"] {
-    margin: 5%;
-    width: 90%;
-    padding: 0.2em;
-    font-size: 200%;
+#houseOwner img {
+    width: 4em; height: 4em;
+    border-radius: 50%;
+    margin-right: 0.75em;
 }
+
+#houseOwner a {
+    margin-left: 0.25em;
+    color: var(--main-color);
+}
+
+#place-info #houseLocation {
+    font-weight: bold;
+}
+
+#place-info #houseCommodities {
+    display: flex;
+    justify-content: space-around;
+    border-top: 1px solid var(--border-color);
+    padding: 1em 0 0 0;
+}
+#place-info #houseDescription {
+    white-space: pre-wrap;
+}
+
+
+#booking {
+	border-radius: 1px;
+    padding: 1.5em;
+    flex: 1;
+}
+
+#booking button[type="submit"] {
+    margin: 0;
+    width: 100%;
+    font-size: 1.5em;
+}
+
+#booking input[type="date"] {
+    margin: 0.5em 0 1em 0;
+    width: 75%;
+}
+
+#booking #unavailableDate {
+    color: red;
+    text-decoration: underline;
+}
+
+#booking #loadingIndicator {
+    text-align: center;
+    font-size: 2em;
+    transition: all 0.3s ease-in-out;
+    animation: rotation 2s infinite linear;
+}
+
+@keyframes rotation {
+    from {
+      transform: rotate(0deg);
+    }
+    to {
+      transform: rotate(359deg);
+    }
+}
+
+/* para usar quando reimplementnar os ratigns
 
 #house .rating input {
     width: 0;
@@ -1318,43 +1377,7 @@ button:hover {
     color: #ffc107;
 }
 
-#house .title {
-	margin: 0.2em 0.5em;
-	font-weight: bold;
-	font-size: 3em; 
-	color: var(--main-color);
-}
-
-#house .address {
-    margin: 0 0.5em;
-    display: inline;
-}
-
-#house .host {
-	font-weight: bold;
-	margin: 0.2em 0.5em;
-}
-
-#house .description {
-    border-top: 1px solid var(--bg-color-2);
-	padding: 2em;
-}
-
-#house .price {
-    display: inline;
-    font-size: 24px;
-    margin: 0;
-}
-
-#house #checkInDateField {
-    display: inline-block;
-    padding: 0.2em;
-}
-
-#house #checkOutDateField {
-    display: inline-block;
-    padding: 0.2em;
-}
+*/
 
 #house #photoCarousel img{
     height: 20em;
@@ -1370,6 +1393,7 @@ button:hover {
 	position: relative;
     box-shadow: var(--simple-shadow);
     overflow: hidden;
+    margin-bottom: 1em;
 }
 
 #house #photoCarousel {

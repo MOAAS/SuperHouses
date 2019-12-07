@@ -7,7 +7,7 @@
         private $guest;
 
         private $totalNights;
-        
+
         public function __construct($id, $place, $start, $end, $guest) {
             $this->id = $id;
             $this->place = $place;

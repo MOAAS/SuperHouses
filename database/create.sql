@@ -54,7 +54,8 @@ CREATE TABLE Reservation (
     dateStart DATE NOT NULL,
     dateEnd DATE NOT NULL,
     user REFERENCES User NOT NULL,
-    place REFERENCES Place NOT NULL
+    place REFERENCES Place NOT NULL,
+    CONSTRAINT CHK_range CHECK (dateStart < dateEnd)
 );
 
 CREATE TABLE UserNotification (
@@ -67,14 +68,12 @@ CREATE TABLE UserNotification (
 );
 
 CREATE TABLE Rating (
-    user REFERENCES User NOT NULL,
-    place REFERENCES Place NOT NULL,
+    reservation PRIMARY KEY REFERENCES Reservation,
     rating INTEGER NOT NULL,
-    CONSTRAINT CHK_inbounds CHECK (rating >= 1 AND rating <= 5),
-    PRIMARY KEY (user, place)
+    comment VARCHAR,
+    CONSTRAINT CHK_inbounds CHECK (rating >= 1 AND rating <= 5)
 );
 
-PRAGMA foreign_keys = ON;
 CREATE TABLE UserMessage (
     id INTEGER PRIMARY KEY,
     content VARCHAR,

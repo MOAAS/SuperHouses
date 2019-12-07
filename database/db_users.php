@@ -24,6 +24,14 @@
         $statement->execute(array($userInfo->displayname, $countryID, $userInfo->city, $userInfo->username));
     }
 
+    function getProfilePicture($username) {
+
+        $pfpPath = "../database/profileImages/" . getUserID($username);
+        if(! file_exists($pfpPath))
+            return "../database/profileImages/DefaultPic/default.png";
+        return $pfpPath;
+    }
+
     function getUserInfo($username) {
         $db = Database::instance()->db();
 
