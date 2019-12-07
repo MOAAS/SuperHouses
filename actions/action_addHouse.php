@@ -38,7 +38,6 @@
   }
   
   addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);
-  // verificar se addhouse retorna false// como?/pq?
     
   //save files
   mkdir( '../database/houseImages/' . $id);

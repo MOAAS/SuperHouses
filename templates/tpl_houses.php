@@ -26,10 +26,12 @@
 <?php } ?>
 
 <?php function draw_house($house, $pictures) {
+  $userId = getUserID($_SESSION['username']);
   $avg_rating = getHouseRating($house->place_id);
   $num_ratings = getNumRatings($house->place_id);
-  $user_rating = getUserRating(getUserID($_SESSION['username']), $house->place_id);
+  $user_rating = getUserRating($userId, $house->place_id);
   $owner = getUserInfo($house->ownerUsername);
+  $ownerId = getUserID($owner->username);
   ?>
   <section id="house">
     <div id="photos">
@@ -43,6 +45,11 @@
       <button id="photoLeftButton">&#10094;</button>
       <button id="photoRightButton">&#10095;</button>
     </div>
+    <?php 
+    if($userId == $ownerId){ ?>
+      <a href="edit_house.php?id=<?=$house->place_id?>"><button type="button">Edit Place</button> </a>
+    <?php } ?>
+    
     <div id="place-body">
       <section id="place-info">
         <p class="title"><?=toHTML($house->title)?></p>
@@ -82,3 +89,63 @@
     </div>
   </section>
 <?php } ?>
+
+<?php function draw_editHouse($house, $pictures) { 
+  $countryOptions = getAllCountries();?>
+  <section id="addHouse" class="genericForm profileTab">
+    <h2>Edit your place</h2>    
+    <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
+      <label for="title">Title</label>      
+      <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
+
+      <label for="description">Description</label>
+      <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
+      <div id="localization">
+        <div>
+        
+          <label for="houseCountry">Country</label>
+          <select id="<?=$id?>" name="country">
+            <option value="">None</option>
+            <?php foreach ($countryOptions as $country) {
+              if($country == $house->country){ ?>
+              <option selected value="<?=$country?>"><?=$country?></option>
+              <?php }else{ ?>
+              <option value="<?=$country?>"><?=$country?></option>
+            <?php }}?>
+          </select>
+
+        </div>
+        <div>
+          <label for="houseCity">City</label>
+          <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
+        </div>
+        <div>
+          <label for="address">Address</label>
+          <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
+        </div>
+      </div>
+      
+      <p>Recommended Capacity</p>
+      <div id="details">
+        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" max="20" value="<?=toHTML($house->minPeople)?>" required>
+        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" max="20" value="<?=toHTML($house->maxPeople)?>" required>
+        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000" value="<?=toHTML($house->pricePerDay)?>" required>
+      </div>
+      
+      <div id=addHouseImages>
+        <input id="files" type="file" name="fileUpload[]" multiple>        
+        <label for="files">Choose images</label>
+        <ul id="result">
+          <?php foreach($pictures as $picture){?>
+          <li>
+            <img src=<?=$picture?> alt="<?=toHTML($house->title)?>">
+          </li>
+          <?php } ?>
+        </ul>
+      </div>
+
+      <input type="submit" value="Save">
+    </form>
+  </section>
+<?php } ?>
+
