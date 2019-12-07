@@ -1357,27 +1357,26 @@ button:hover {
 }
 
 #house #photoCarousel img{
-    animation: fade 0.4s linear;
     height: 20em;
     width: 40em;
+}
+
+#house #photoCarousel li {
+    transition: all 1s ease-in-out;
 }
 
 #house #photos {
-    padding: 1em;
+    background-color: black;
 	position: relative;
-	margin: 0 auto;
+    box-shadow: var(--simple-shadow);
+    overflow: hidden;
 }
 
 #house #photoCarousel {
+    display: flex;
     height: 20em;
     width: 40em;
-    padding: 0;
-	margin: 0 auto;
-}
-
-@keyframes fade {
-  0% { opacity: 0.8 }
-  100% { opacity: 1 }
+    margin: auto;
 }
 
 #house #photoLeftButton, #house #photoRightButton{
@@ -1389,11 +1388,11 @@ button:hover {
 	border: none;
 	cursor: pointer;
 	transition: background-color 0.2s ease-in-out;
-	background-color: rgba(0,0,0,0.2);
+    background-color: rgba(69, 90, 100, 0.2);
 }
 
 #house #photoLeftButton:hover, #house #photoRightButton:hover {
-	background-color: rgba(0,0,0,0.8);
+    background-color: rgba(69, 90, 100, 0.8);
 }
 
 #house #photoLeftButton{

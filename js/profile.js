@@ -1,5 +1,6 @@
 let messageHistory = document.querySelector('#messageHistory ul');
-let conversations = document.querySelector('#conversations ul');
+let conversations = document.querySelector('#conversations');
+let conversationList = document.querySelector('#conversations ul');
 let currentConversation = null;
 
 // Profile
@@ -118,7 +119,7 @@ function updateConversation(conversation, content) {
     conversation.querySelector('p').innerHTML = htmlEntities(content);
     conversation.querySelector('.messageDate').innerHTML = htmlEntities(date);
     conversation.remove();
-    conversations.insertBefore(conversation, conversations.firstChild);
+    conversationList.insertBefore(conversation, conversationList.firstChild);
     return date;
 }
 
@@ -137,10 +138,10 @@ function onConversationLoad() {
 }
 
 function findConversation(username) {
-    let conversationList = document.querySelectorAll("#conversations .conversation");
-    for (let i = 0; i < conversationList.length; i++) {
-        if (conversationList[i].querySelector('h3').textContent == username)
-            return conversationList[i];
+    let allConversations = document.querySelectorAll("#conversations .conversation");
+    for (let i = 0; i < allConversations.length; i++) {
+        if (allConversations[i].querySelector('h3').textContent == username)
+            return allConversations[i];
     }
     let newConversation = document.createElement('li');
     newConversation.addEventListener('click', (_) => toConversation(username));
@@ -150,7 +151,13 @@ function findConversation(username) {
         '<h3>' + username + '</h3>' +
         '<p></p>' + 
         '<small class="messageDate"></small>'
-    conversations.insertBefore(newConversation, conversations.firstChild);
+    if (conversationList == null) {
+        conversationList = document.createElement('ul');
+        conversations.querySelector('p').remove();
+        conversations.classList.remove('noContent');
+        conversations.appendChild(conversationList);
+    }
+    conversationList.insertBefore(newConversation, conversationList.firstChild);
     return newConversation
 }
 
