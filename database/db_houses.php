@@ -126,4 +126,34 @@
         $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max));
     }
+
+    function editHouse($id, $country, $city, $address, $title, $description, $price, $min,  $max) {
+        $db = Database::instance()->db();
+        
+        $countryID = getCountryID($country);
+        if ($countryID == false)
+            return false;
+
+        $statement = $db->prepare(
+            "SELECT location
+            FROM Place
+            WHERE id = ? 
+           "
+        );
+        $statement->execute(array($id));
+        $placeId = $statement->fetch()['location'];
+        print_r($placeId);
+
+        $statement = $db->prepare('UPDATE PlaceLocation 
+                                SET country = ?, city = ?, address = ?
+                                WHERE id = ?');
+
+        $statement->execute(array($countryID, $city, $address, $placeId));
+
+        $statement = $db->prepare('UPDATE Place 
+                                 SET title = ?, description = ?, pricePerDay = ?, minPeople = ?, maxPeople = ? 
+                                 WHERE id = ?');
+    
+        $statement->execute(array($title, $description, $price, $min, $max, $id));
+    } 
 ?>
