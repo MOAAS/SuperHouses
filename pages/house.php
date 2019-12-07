@@ -4,6 +4,7 @@
   include_once('../templates/tpl_common.php');
   include_once('../templates/tpl_houses.php');
   include_once('../database/db_houses.php');
+  include_once('../database/db_ratings.php');
   include_once('../database/db_notifications.php');
 
   if (!isset($_SESSION['username']))
@@ -11,8 +12,10 @@
 
   $id = $_GET['id'];
   $house = getHouseByID($id);
-  if($house ==null)
+  if($house ==null) {
+    addErrorMessage('The house you searched for is no longer available.');
     die(header('Location: search_houses.php'));
+  }
     
   $pictures = getHousePhotoPathsByID($id);
 
