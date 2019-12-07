@@ -20,21 +20,21 @@
   // verificar se price > 0
   if ($price <= 0 || !is_numeric($price)) {
     addErrorMessage('Adding place failed! Price invalid!');
-    header('Location: ../pages/profile.php#Add Place');
+    die(header('Location: ../pages/profile.php#Add Place'));
   }
   if ($min <= 0 || !is_numeric($min)) {
     addErrorMessage('Adding place failed! Minimum capacity invalid!');
-    header('Location: ../pages/profile.php#Add Place');
+    die(header('Location: ../pages/profile.php#Add Place'));
   }
 
   if ($max <= 0 || !is_numeric($max)) {
     addErrorMessage('Adding place failed! Maximum capacity invalid!');
-    header('Location: ../pages/profile.php#Add Place');
+    die(header('Location: ../pages/profile.php#Add Place'));
   }
 
-  if ($min >= $max) {
+  if ($min > $max) {
     addErrorMessage('Adding place failed! Minimum capacity is bigger than Maximum!');
-    header('Location: ../pages/profile.php#Add Place');
+    die(header('Location: ../pages/profile.php#Add Place'));
   }
   
   addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max);

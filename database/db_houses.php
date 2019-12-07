@@ -142,7 +142,7 @@
         );
         $statement->execute(array($id));
         $placeId = $statement->fetch()['location'];
-        print_r($placeId);
+        //print_r($placeId);
 
         $statement = $db->prepare('UPDATE PlaceLocation 
                                 SET country = ?, city = ?, address = ?
