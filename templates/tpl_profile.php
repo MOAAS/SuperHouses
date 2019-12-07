@@ -107,25 +107,24 @@
 <?php } ?>
 
 <?php function draw_yourListing($houseList){?>
-  <section id="yourPlaces" class="genericForm profileTab">
+  <section id="yourPlaces" class="profileTab <?=count($houseList)==0?'noContent':''?>">
     <h2>Your Places</h2>
     <?php
       if(count($houseList)>0)
         draw_houselist($houseList);
       else { ?>
-        <div id="noPlaces">
-          <p>Looks like you dont have any place yet!</p>
-          <button id="addHouseButton" type="button">Add a Place</button>
-        </div> 
+        <p>Looks like you dont have any place yet!</p>
+        <button id="addHouseButton" type="button">Add a Place</button>
       <?php } ?>
   </section>
 <?php } ?>
 
 <?php function draw_comingReservations($comingReservations) { ?>
-  <section id="comingReservations" class="profileTab reservationList">
+  <section id="comingReservations" class="profileTab reservationList <?=count($comingReservations)==0?'noContent':''?>">
     <h2>Future Guests</h2>
     <?php if (count($comingReservations) == 0) { ?>
-      <p id="noReservations">You haven't received any reservations yet!</p>
+      <p>You haven't received any reservations yet!</p>
+      <button id="checkPlacesButton" type="button">Check your places</a></button>      
     <?php } else { ?>
     <table>
         <thead>
@@ -168,11 +167,11 @@
 <?php } ?>
 
 <?php function draw_goingReservations($goingReservations) { ?>
-  <section id="goingReservations" class="profileTab reservationList">
+  <section id="goingReservations" class="profileTab reservationList <?=count($goingReservations)==0?'noContent':''?>">
     <h2>Your Reservations</h2>
     <?php if (count($goingReservations) == 0) { ?>
-      <p id="noReservations">You haven't booked any reservations yet!</p>
-      <a href="../pages/search_houses.php">Search for houses</a>
+      <p>You haven't booked any reservations yet!</p>
+      <button type="button"><a href="../pages/search_houses.php">Search for houses</a></button>      
     <?php } else { ?>
     <table>
       <thead>
@@ -237,24 +236,15 @@
         </div>
       </div>
       
-      <p>Recomended Capacity</p>
+      <p>Recommended Capacity</p>
       <div id="details">
-        <div>
-          <label for="min">Minimum</label>
-          <input id="min" type="number" name="min" placeholder="Minimum" min="1" max="20" required>
-        </div>
-        <div>
-          <label for="max">Maximum</label>
-          <input id="max" type="number" name="max" placeholder="Maximum" min="1" max="20" required>
-        </div>
-        <div>
-          <label for="price">Price</label>
-          <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000"  required>
-        </div>
+        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" max="20" required>
+        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" max="20" required>
+        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000"  required>
       </div>
       
       <div id=addHouseImages>
-        <input id="files" type="file" name="fileUpload[]" multiple required>        
+        <input id="files" type="file" name="fileUpload[]" multiple>        
         <label for="files">Choose images</label>
         <ul id="result"></ul>
       </div>
@@ -266,23 +256,27 @@
 <?php } ?>
 
 <?php function draw_conversations($conversations) { ?>
-  <section id="conversations" class="profileTab">
+  <section id="conversations" class="profileTab <?=count($conversations)==0?'noContent':''?>">
     <h2>Conversations</h2>
-    <ul>
-      <?php foreach ($conversations as $conversation) { ?>
-        <li class="
-          conversation 
-          <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> 
-          <?=$conversation->seen?'seenMessage':''?>"
-        >
-          <img src="<?=getUserInfo($conversation->otherUser)->profilePic?>" alt="Photo"/>
-          <h3><?=$conversation->otherUser?></h3>
-          <p><?=toHTML($conversation->content)?></p>
-          <small class="messageDate"> <?=$conversation->sendTime?></small>
-        </li>
-      <?php } ?>
-    </ul>
-  </section>
+    <?php if (count($conversations) == 0) { ?>
+      <p>You have no active conversations!</p>
+    <?php } else { ?>
+      <ul>
+        <?php foreach ($conversations as $conversation) { ?>
+          <li class="
+            conversation 
+            <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> 
+            <?=$conversation->seen?'seenMessage':''?>"
+          >
+            <img src="<?=getUserInfo($conversation->otherUser)->profilePic?>" alt="Photo"/>
+            <h3><?=$conversation->otherUser?></h3>
+            <p><?=toHTML($conversation->content)?></p>
+            <small class="messageDate"> <?=$conversation->sendTime?></small>
+          </li>
+        <?php } ?>
+      </ul>
+    <?php } ?>
+ </section>
 <?php } ?>
 
 <?php function draw_messages(){?>

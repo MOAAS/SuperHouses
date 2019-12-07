@@ -274,6 +274,10 @@ filesInput.addEventListener("change", function (event) {
 
 const addHouseButton = document.getElementById('addHouseButton');
 if (addHouseButton != null)
-    addHouseButton.addEventListener('click', () => selectTabItem('Add Place'));
+    addHouseButton.addEventListener('click', () => selectTabItem('Add place'));
+
+const checkPlacesButton = document.getElementById('checkPlacesButton');
+if (checkPlacesButton != null)
+    checkPlacesButton.addEventListener('click', () => selectTabItem('Your places'));
 
 

@@ -494,8 +494,23 @@ button:hover {
 
 #profile .profileTab {
     grid-area: item;
-    max-width: 50em;
+    max-width: 75em;
     margin: 1em;
+}
+
+#profile .profileTab.genericForm {
+    margin: 1em 4em;
+}
+
+#profile .profileTab.noContent {
+    margin: auto;
+    height: 8em;
+    font-size: 1.25em;
+    text-align: center;
+}
+
+#profile .profileTab.noContent p {
+    margin: 1.5em;
 }
 
 #profile nav {
@@ -538,7 +553,7 @@ button:hover {
 
 /* Edit profile */
 
-#editProfile {
+#profile #editProfile {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-areas:
@@ -552,6 +567,7 @@ button:hover {
 }
 
 #editProfile h2 {
+    margin: 0.5em 0;
     text-align: center;
     grid-area: header;
 }
@@ -562,6 +578,10 @@ button:hover {
     position:relative;
     width: 50%;
     margin:auto;
+}
+
+#ppic #preview {
+    text-align: center;
 }
 
 #preview img{
@@ -614,18 +634,14 @@ button:hover {
 /* Your Places*/
 
 #yourPlaces h2 {
+    margin: 1em;
     text-align: center;
 }
 
 #yourPlaces #houses > ul {
-    grid-template-columns: repeat(auto-fit, 16em);
+    grid-template-columns: repeat(auto-fit, 18em);
     gap: 0.8em;
 }
-
-#yourPlaces #noPlaces{
-  padding: 170px 0;
-  text-align: center;
-  }
 
 /*Add House*/
 
@@ -640,6 +656,13 @@ button:hover {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
+}
+
+#addHouse p,
+#addHouse label {
+    font-weight: bold;
+    margin-top: 1em;    
+    margin-bottom: 0;    
 }
 
 #addHouse #localization,
@@ -660,9 +683,8 @@ button:hover {
     width: 25%;
     margin-bottom: 0.75em;
     margin-top: 0.3em;
-
-
 }
+
 
 /*Remove arrows from input type number*/
 
@@ -730,11 +752,7 @@ button:hover {
 /* Your reservations (incoming) */
 /* Your reservations (outgoing) */
 
-#profile .reservationList {
-    max-width: 75em;
-}
-
-.reservationList h2 {
+.reservationList:not(.noContent) h2 {
     margin: 1em;
     text-align: center;
 }
@@ -742,12 +760,6 @@ button:hover {
 .reservationList p,
 .reservationList h3 {
     margin: 0.5em 0;
-}
-
-.reservationList #noReservations {
-    padding: 1em;
-    text-align: center;
-    font-size: 2em;
 }
 
 .reservationList table {
@@ -821,14 +833,14 @@ button:hover {
 
 /* Conversations */
 
-#conversations {
+#conversations:not(.noContent) {
     background-color: white;
     box-shadow: var(--simple-shadow);
     overflow: auto;
     height: 40em;
 }
 
-#conversations > h2 {
+#conversations:not(.noContent) > h2 {
     background-color: var(--main-color);
     color: var(--text-color-2);
     padding: 1em;
