@@ -308,6 +308,10 @@ input, label, select, textarea {
     color:var(--text-color);
 }
 
+img {
+    object-fit: cover;
+}
+
 
 input[type="text"], 
 input[type="password"], 
@@ -384,13 +388,21 @@ input[type="range"]::-moz-range-thumb {
 }
 
 input[type="submit"],
-button {
+button:not(:disabled) {
     cursor: pointer;
     color: white;
     background-color: var(--main-color-light);
     border: none;
 
-    transition: background-color 200ms ease-in-out;
+    transition: background-color 0.3s ease-in-out;
+}
+
+button:disabled {
+    transition: all 0.3s ease-in-out;
+}
+
+button:disabled:hover {
+    color: white;
 }
 
 input[type="submit"]:hover,
@@ -601,6 +613,10 @@ button:hover {
 
 /* Your Places*/
 
+#yourPlaces h2 {
+    text-align: center;
+}
+
 #yourPlaces #houses > ul {
     grid-template-columns: repeat(auto-fit, 16em);
     gap: 0.8em;
@@ -704,12 +720,105 @@ button:hover {
     margin-top:0em;
     margin-bottom: 2em;
 }
+
 #result img{
     width:9em;
     height:9em;
     vertical-align: top;
 }
- 
+
+/* Your reservations (incoming) */
+/* Your reservations (outgoing) */
+
+#profile .reservationList {
+    max-width: 75em;
+}
+
+.reservationList h2 {
+    margin: 1em;
+    text-align: center;
+}
+
+.reservationList p,
+.reservationList h3 {
+    margin: 0.5em 0;
+}
+
+.reservationList #noReservations {
+    padding: 1em;
+    text-align: center;
+    font-size: 2em;
+}
+
+.reservationList table {
+    border-collapse: collapse;
+    width: 100%; 
+    table-layout: fixed;
+    word-wrap: break-word;     
+}
+
+.reservationList th {
+    position: sticky;
+    top: 0;
+    padding: 0.5em 1em;
+    font-size: 1.5em;
+    background-color: var(--main-color);
+    color: var(--text-color-2);
+}
+
+.reservationList .reservation:not(:first-child) {
+    border-top: 2px solid var(--main-color);
+}
+
+.reservationList .reservation {
+    transition: all 0.3s ease-in-out;
+}
+
+
+.reservationList .reservation:hover {
+    background-color: var(--bg-color-2);
+}
+
+.reservationList .reservation td:not(.reservationInfo)  {
+    text-align: center;
+}
+
+.reservationList img {
+    width: 10em;
+    height: 5.6em;
+    vertical-align: middle;
+}
+
+.reservationList .reservationInfo {
+    padding: 0 0 0 0.5em;
+}
+
+.reservationList .reservationDate, 
+.reservationList .totalPrice {
+    font-size: 1.25em;
+}
+
+.reservationList .reservationApproaching {
+    color: var(--error-color);
+}
+
+.reservationList .priceValue {
+    font-weight: bold;
+}
+
+.reservationList .reservationGuest h3 {
+    cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
 /* Conversations */
 
 #conversations {
@@ -752,7 +861,7 @@ button:hover {
 .conversation img {
     grid-area: img;
     width: 4em;
-    max-height: 4em;
+    height: 4em;
     border-radius: 500%;
 }
 
@@ -806,7 +915,7 @@ button:hover {
 
 #messages img {
     width: 3em;
-    max-height: 3em;
+    height: 3em;
     border-radius: 500%;
     margin: 0 1em; 
 }

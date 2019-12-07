@@ -15,7 +15,7 @@
               <p class="priceValue"><?=$house->pricePerDay?></p> 
               <p class="priceCurrency"> € / day</p>
             </div>
-            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=toHTML($house->city)?>, <?=toHTML($house->country)?></p>
+            <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=toHTML($house->getLocationString())?></p>
             <p class="guestLimit"><i class="fas fa-users"></i> <?=toHTML($house->minPeople)?> - <?=toHTML($house->maxPeople)?> people</p>
           </div>
         </a>

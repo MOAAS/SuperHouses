@@ -2,10 +2,6 @@ let messageHistory = document.querySelector('#messageHistory ul');
 let conversations = document.querySelector('#conversations ul');
 let currentConversation = null;
 
-let sendMsgForm = document.querySelector('#messages #sendMessageInput form');
-let sendMsgInput = sendMsgForm.querySelector('#sentMessage');
-sendMsgForm.addEventListener('submit', (event) => sendMessage(event));
-
 // Profile
 
 function hideAllTabs() {
@@ -18,7 +14,7 @@ function selectTabItem(tabItemName) {
     if (tabItemName == "")
         tabItemName = "Profile";
     window.location.hash = tabItemName;
-    if (tabItemName.startsWith('#Conversation'))
+    if (tabItemName.startsWith('Conversation'))
         tabItemName = "Messages";
     document.querySelectorAll('#profile nav li').forEach(tabItem => {
         if (tabItem.textContent == tabItemName)
@@ -39,8 +35,8 @@ function updateTabs() {
         case '#Your reservations': document.getElementById('goingReservations').style.display = ""; break;
         case '#Messages': document.getElementById('conversations').style.display = ""; break;
         default: 
-            if (selected.startsWith("#Conversation_"))
-                toConversation(selected.split('_')[1]); 
+            if (selected.startsWith("#Conversation "))
+                toConversation(selected.split(' ')[1]); 
             else console.log("lmao");
             break;
     }
@@ -52,6 +48,52 @@ tabItems.forEach(tabItem => {
 });
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
 
+// Reservations
+
+function updateReservations() {
+    if (reservationGoing.querySelectorAll('.reservation').length == 0)
+        reservationGoing.innerHTML = '<h2>Your Reservations</h2> <p id="noReservations">You haven\'t booked any reservations yet!</p>'
+    if (reservationComing.querySelectorAll('.reservation').length == 0)
+        reservationComing.innerHTML = '<h2>Future Guests</h2> <p id="noReservations">You haven\'t received any reservations yet!</p>'
+}
+
+function removeReservation(reservation, button) {
+    if (button.textContent == "Cancel Reservation") {
+        button.style.backgroundColor = "red";
+        setTimeout(() => { 
+            button.style.transition = "background-color 2.7s linear";
+            button.style.backgroundColor = ""; 
+        }, 250);
+        button.innerHTML = '<i class="fas fa-trash"></i> Confirm deletion';
+        setTimeout(() => { 
+            button.textContent = "Cancel Reservation"; 
+            button.style.transition = "";
+        }, 3000);
+    }
+    else {
+        reservation.style.transform = "scale(0)";
+        setTimeout(() => {
+            sendPostRequest('../actions/action_cancelReservation.php', {reservationID: reservation.querySelector('.reservationID').textContent });
+            reservation.remove(); 
+            updateReservations(); 
+        }, 300);
+    }
+}
+
+let reservations = document.querySelectorAll('.reservationList .reservation');
+let reservationGoing = document.querySelector('#goingReservations');
+let reservationComing = document.querySelector('#comingReservations');
+
+reservations.forEach(reservation => {
+    if (reservation.id == 'comingReservations')
+        reservation.querySelector('.reservationGuest h3').addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
+    reservation.querySelector('.cancelReservation').addEventListener('click', (event) => removeReservation(reservation, event.target, false));
+});
+
+let reservationGuests = document.querySelectorAll('#comingReservations .reservationGuest h3');
+reservationGuests.forEach(guest => {
+    guest.addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
+});
 // Conversations
 
 function scrollConversationToBottom() {
@@ -101,9 +143,10 @@ function findConversation(username) {
             return conversationList[i];
     }
     let newConversation = document.createElement('li');
+    newConversation.addEventListener('click', (_) => toConversation(username));
     newConversation.classList.add('conversation');
     newConversation.innerHTML = 
-        '<img src="../database/avatars/defaultAv.jpg" alt="Photo"></img>' +
+        '<img src="../database/profileImages/defaultPic/default.png" alt="UserPhoto"></img>' +
         '<h3>' + username + '</h3>' +
         '<p></p>' + 
         '<small class="messageDate"></small>'
@@ -118,10 +161,13 @@ function toConversation(username) {
         otherUser: username
     }, onConversationLoad);
 
-    window.location.hash = "Conversation_" + username;
+    window.location.hash = "Conversation " + username;
 
     currentConversation = findConversation(username);
     currentConversation.classList.add('seenMessage');
+
+    hideAllTabs();
+    document.querySelector('#messages header img').src = currentConversation.querySelector('img').src;
     document.getElementById('conversations').style.display = "none";
     document.querySelector('#messages header h2').textContent = username;
     document.getElementById('messages').style.display = "";
@@ -135,6 +181,10 @@ function backToConversations() {
 }
 
 // Messages
+
+let sendMsgForm = document.querySelector('#messages #sendMessageInput form');
+let sendMsgInput = sendMsgForm.querySelector('#sentMessage');
+sendMsgForm.addEventListener('submit', (event) => sendMessage(event));
 
 function sendMessage(event) {
     event.preventDefault();

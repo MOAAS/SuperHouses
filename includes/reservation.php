@@ -1,5 +1,6 @@
 <?php
     class Reservation {
+        private $id;
         private $place;
         private $start;
         private $end;
@@ -7,7 +8,8 @@
 
         private $totalNights;
         
-        public function __construct($place, $start, $end, $guest) {
+        public function __construct($id, $place, $start, $end, $guest) {
+            $this->id = $id;
             $this->place = $place;
             $this->start = $start;
             $this->end = $end;
@@ -16,6 +18,7 @@
             $startTime = DateTime::createFromFormat('Y-m-d', $this->start);
             $endTime = DateTime::createFromFormat('Y-m-d', $this->end);
 
+
             $this->totalNights = $endTime->diff($startTime)->days;
         }
 
@@ -23,7 +26,7 @@
             $startTime = DateTime::createFromFormat('Y-m-d', $this->start);
             
             $day = $startTime->format('j');
-            $monthName = $startTime->format('F');
+            $monthName = substr($startTime->format('F'), 0, 3);
             $year = $startTime->format('Y');
             
             return $monthName . " " . $day . ", " . $year;
@@ -33,10 +36,18 @@
             $endTime = DateTime::createFromFormat('Y-m-d', $this->end);
             
             $day = $endTime->format('j');
-            $monthName = $endTime->format('F');
+            $monthName = substr($endTime->format('F'), 0, 3);
+
             $year = $endTime->format('Y');
             
             return $monthName . " " . $day . ", " . $year;
+        }
+
+        public function isApproaching() {
+            $startTime = DateTime::createFromFormat('Y-m-d', $this->start);
+            $endTime = DateTime::createFromFormat('Y-m-d', $this->end);
+            $now = (new DateTime());
+            return $now->diff($startTime)->days < 3 || $now->diff($endTime)->days < 3;
         }
 
         public function getNights() {
@@ -53,6 +64,10 @@
 
         public function getGuest() {
             return $this->guest;
+        }
+
+        public function getID() {
+            return $this->id;
         }
     }
 

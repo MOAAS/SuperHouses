@@ -122,66 +122,93 @@
 <?php } ?>
 
 <?php function draw_comingReservations($comingReservations) { ?>
-  <section id="comingReservations" class="profileTab">
+  <section id="comingReservations" class="profileTab reservationList">
     <h2>Future Guests</h2>
+    <?php if (count($comingReservations) == 0) { ?>
+      <p id="noReservations">You haven't received any reservations yet!</p>
+    <?php } else { ?>
     <table>
-      <tr>
-        <th colspan="2">Place</th>
-        <th>Date</th>
-        <th>Guest</th>
-        <th>Price</th>
-        <th>Lmao</th>
-      </tr>
-      <?php foreach ($comingReservations as $reservation) { 
-        $place = $reservation->getPlace();
-      ?>
-        <tr>
-          <td><img src="../database/houseImages/<?=$place->place_id?>/0"></td>
-          <td>
-            <p><?=toHTML($place->title)?><p>
-            <p><?=toHTML($place->getLocationString())?><p>
-          </td>
-          <td>
-            <p>From: <?=$reservation->getStartString()?><p>
-            <p>To: <?=$reservation->getEndString()?><p>
-          </td>
-          <td><?=$reservation->getGuest()?></td>
-          <td><?=$reservation->getTotalPrice()?> € (<?=$place->pricePerDay?> € x <?=$reservation->getNights()?> nights)</td>
-          <td><span>Cancel Reservation</span></td>
-        </tr>    
-      <?php } ?> 
+        <thead>
+          <tr>
+            <th colspan="2">Place</th>
+            <th>Date</th>
+            <th>Guest</th>
+            <th>Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <?php foreach ($comingReservations as $reservation) { 
+            $place = $reservation->getPlace();
+          ?>
+          <tr class="reservation">
+            <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0"></a></td>
+            <td class="reservationInfo">
+              <span class="hidden reservationID"><?=$reservation->getID()?></span>
+              <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
+              <p><i class="fas fa-map-marker-alt"></i> <?=toHTML($place->getLocationString())?></p>
+            </td>            
+            <td class="reservationDate <?=$reservation->isApproaching()?'reservationApproaching':''?>">
+              <p><?=$reservation->getStartString()?></p>
+              <p><i class="fas fa-long-arrow-alt-down"></i></p>
+              <p><?=$reservation->getEndString()?><p>
+            </td>
+            <td class="reservationGuest"><h3><?=$reservation->getGuest()?></h3></td>
+            <td>
+              <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
+              <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
+            </td>
+            <td><button class="cancelReservation" <?=$reservation->isApproaching()?'disabled':''?> type="button"><?=$reservation->isApproaching()?"Too late to cancel":'Cancel Reservation'?></button></td>
+          </tr>    
+        <?php } ?> 
+      </tbody>
     </table>
+    <?php } ?> 
   </section>
 <?php } ?>
 
 <?php function draw_goingReservations($goingReservations) { ?>
-  <section id="goingReservations" class="profileTab">
+  <section id="goingReservations" class="profileTab reservationList">
     <h2>Your Reservations</h2>
+    <?php if (count($goingReservations) == 0) { ?>
+      <p id="noReservations">You haven't booked any reservations yet!</p>
+      <a href="../pages/search_houses.php">Search for houses</a>
+    <?php } else { ?>
     <table>
-      <tr>
+      <thead>
+        <tr>
         <th colspan="2">Place</th>
         <th>Date</th>
         <th>Price</th>
-        <th>Lmao</th>
-      </tr>
-      <?php foreach ($goingReservations as $reservation) { 
-        $place = $reservation->getPlace();
-      ?>
-        <tr>
-          <td><img src="../database/houseImages/<?=$place->place_id?>/0"></td>
-          <td>
-            <p><?=toHTML($place->title)?><p>
-            <p><?=toHTML($place->getLocationString())?><p>
+        <th>Action</th>
+        </tr>
+      </thead>
+      <tbody>
+        <?php foreach ($goingReservations as $reservation) { 
+          $place = $reservation->getPlace();
+        ?>
+        <tr class="reservation">
+          <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0"></a></td>
+          <td class="reservationInfo">
+            <span class="hidden reservationID"><?=$reservation->getID()?></span>
+            <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
+            <p><i class="fas fa-map-marker-alt"></i> <?=toHTML($place->getLocationString())?></p>
+          </td>            
+          <td class="reservationDate">
+            <p><?=$reservation->getStartString()?></p>
+            <p><i class="fas fa-long-arrow-alt-down"></i></p>
+            <p><?=$reservation->getEndString()?><p>
           </td>
           <td>
-            <p>From: <?=$reservation->getStartString()?><p>
-            <p>To: <?=$reservation->getEndString()?><p>
+            <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
+            <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
           </td>
-          <td><?=$reservation->getTotalPrice()?> € (<?=$place->pricePerDay?> € x <?=$reservation->getNights()?> nights)</td>
-          <td><span>Cancel Reservation</span></td>
+          <td><button class="cancelReservation" <?=$reservation->isApproaching()?'disabled':''?> type="button"><?=$reservation->isApproaching()?"Too late to cancel":'Cancel Reservation'?></button></td>
         </tr>   
       <?php } ?> 
-    </table>
+      </tbody>
+    <?php } ?> 
+   </table>
   </section>
 <?php } ?>
 
@@ -248,7 +275,7 @@
           <?=$conversation->wasSent?'sentMessage':'receivedMessage'?> 
           <?=$conversation->seen?'seenMessage':''?>"
         >
-          <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
+          <img src="<?=getUserInfo($conversation->otherUser)->profilePic?>" alt="Photo"/>
           <h3><?=$conversation->otherUser?></h3>
           <p><?=toHTML($conversation->content)?></p>
           <small class="messageDate"> <?=$conversation->sendTime?></small>
@@ -262,7 +289,7 @@
   <section id="messages" class="profileTab">
     <header>
       <i id="messageBack" class="fas fa-chevron-left"></i>
-      <img src="../database/avatars/defaultAv.jpg" alt="Photo"/>
+      <img src="../database/profileImages/defaultPic/default.png" alt="Photo"/>
       <h2></h2>
     </header>
     <div id="messageHistory">
