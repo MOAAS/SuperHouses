@@ -17,26 +17,35 @@
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
-  // verificar se price > 0
+  $house = getHouseById($id);
+  
+  if($username != $house->ownerUsername){
+    addErrorMessage('Editing place failed. You are not the owner!');
+    die(header('Location: ../pages/house.php?id='.$id));
+  }
+  
   if ($price <= 0 || !is_numeric($price)) {
-    addErrorMessage('Adding place failed! Price invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    addErrorMessage('Editing place failed. Price invalid!');
+    die(header('Location: ../pages/house.php?id='.$id));
   }
   if ($min <= 0 || !is_numeric($min)) {
-    addErrorMessage('Adding place failed! Minimum capacity invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    addErrorMessage('Editing place failed. Minimum capacity invalid!');
+    die(header('Location: ../pages/house.php?id='.$id));
   }
 
   if ($max <= 0 || !is_numeric($max)) {
-    addErrorMessage('Adding place failed! Maximum capacity invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    addErrorMessage('Editing place failed. Maximum capacity invalid!');
+    die(header('Location: ../pages/house.php?id='.$id));
   }
 
   if ($min > $max) {
-    addErrorMessage('Adding place failed! Minimum capacity is bigger than Maximum!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    addErrorMessage('Editing place failed. Minimum capacity is bigger than Maximum!');
+    die(header('Location: ../pages/house.php?id='.$id));
   }
-  editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max);
+  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max)){
+    addErrorMessage('Editing place failed. Country is not valid!');
+    die(header('Location: ../pages/house.php?id='.$id));
+  }
     
   //save files
   if(isset($_FILES['fileUpload']))
@@ -50,7 +59,6 @@
             if(is_file($file))
             unlink($file); 
         }
-
         for($key = 0; $key < $total_files; $key++) {
             if(isset($_FILES['fileUpload']['name'][$key]) && $_FILES['fileUpload']['size'][$key] > 0) {
                 $original_filename = $_FILES['fileUpload']['name'][$key]; 
