@@ -1,7 +1,7 @@
 "use strict"
 
 let searchButton = document.getElementById('searchButton');
-let searchBackground = document.getElementById('searchBackground');
+let searchBackground = document.querySelector("#searchPage #searchBackground");
 
 searchButton.addEventListener('click', () => {
     searchBackground.style.display = "block";

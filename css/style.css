@@ -1152,6 +1152,7 @@ button:hover {
     background-color: rgba(0,0,0,0.4);
 }
 
+
 #searchDialog {
     max-width: 30em;
     margin: 10% auto;
@@ -1251,6 +1252,21 @@ button:hover {
     font-size: 0.6em;    
     padding: 1em;
     margin: 0 1em;    
+}
+
+#mainPage #searchBackground {
+    background-image: url("bg.jpg");
+    background-size:     cover;                      /* <------ */
+    background-repeat:   no-repeat;
+    background-position: center center;
+    display: block;
+    left: initial; top: initial;
+    background-color: rgba(0,0,0,0);
+}
+
+
+#mainPage #searchButton {
+    display: none;
 }
 
 /* House Page */
