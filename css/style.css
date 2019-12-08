@@ -673,6 +673,12 @@ button:hover {
     grid-gap: 20px;
 }
 
+#addHouse #accomodations {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-gap: 20px;
+}
+
 #addHouse #description {
     height: 10em;
     box-sizing: border-box;

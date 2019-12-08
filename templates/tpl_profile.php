@@ -240,7 +240,14 @@
       <div id="details">
         <input id="min" type="number" name="min" placeholder="Minimum people" min="1" max="20" required>
         <input id="max" type="number" name="max" placeholder="Maximum people" min="1" max="20" required>
-        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000"  required>
+        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000" required>
+      </div>
+
+      <p>Accomodations</p>
+      <div id="accomodations">
+        <input id="numRooms" type="number" name="numRooms" placeholder="Number of rooms" min="1" max="20" required>
+        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds" min="1" max="20" required>
+        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Bathrooms" min="1" max="10" required>
       </div>
       
       <div id=addHouseImages>

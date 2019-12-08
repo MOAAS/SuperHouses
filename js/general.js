@@ -1,7 +1,7 @@
 "use strict"
 
 let priceTags = document.querySelectorAll('.priceValue');
-priceTags.forEach(priceTag => {priceTag.textContent = parseFloat(priceTag.textContent).toFixed(2)});
+priceTags.forEach(priceTag => { priceTag.textContent = parseFloat(priceTag.textContent).toFixed(2) });
 
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
@@ -16,12 +16,12 @@ if (currentTheme) {
 function addButtonAnimation(button, newColor, newText, finalText) {
     button.style.backgroundColor = newColor;
     button.innerHTML = newText;
-    setTimeout(() => { 
+    setTimeout(() => {
         button.style.transition = "background-color 2.7s linear";
-        button.style.backgroundColor = ""; 
+        button.style.backgroundColor = "";
     }, 250);
-    setTimeout(() => { 
-        button.textContent = finalText; 
+    setTimeout(() => {
+        button.textContent = finalText;
         button.style.transition = "";
     }, 3000);
 }
@@ -33,17 +33,14 @@ function dateToString(date) {
 
 function switchTheme(e) {
     if (e.target.checked) {
-            document.documentElement.setAttribute('data-theme', 'dark');
-                localStorage.setItem('theme', 'dark');
-                    }
-                        else {        document.documentElement.setAttribute('data-theme', 'light');
-                            localStorage.setItem('theme', 'light');
-                                }    
-                                    }
-
-                                        toggleSwitch.addEventListener('change', switchTheme, false);
-                                        
-
+        document.documentElement.setAttribute('data-theme', 'dark');
+        localStorage.setItem('theme', 'dark');
+    }
+    else {
+        document.documentElement.setAttribute('data-theme', 'light');
+        localStorage.setItem('theme', 'light');
+    }
+}
 
 function previewImages(event,outputId){
     let files = event.target.files; //FileList object

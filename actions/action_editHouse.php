@@ -14,6 +14,9 @@
   $price = $_POST['price'];
   $min = $_POST['min'];
   $max = $_POST['max'];
+  $numRooms = $_POST['numRooms'];
+  $numBeds = $_POST['numBeds'];
+  $numBathrooms = $_POST['numBathrooms'];
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
@@ -25,24 +28,40 @@
   }
   
   if ($price <= 0 || !is_numeric($price)) {
-    addErrorMessage('Editing place failed. Price invalid!');
-    die(header('Location: ../pages/house.php?id='.$id));
+    addErrorMessage('Editing place failed! Price invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
   }
   if ($min <= 0 || !is_numeric($min)) {
-    addErrorMessage('Editing place failed. Minimum capacity invalid!');
-    die(header('Location: ../pages/house.php?id='.$id));
+    addErrorMessage('Editing place failed! Minimum capacity invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
   }
 
   if ($max <= 0 || !is_numeric($max)) {
-    addErrorMessage('Editing place failed. Maximum capacity invalid!');
-    die(header('Location: ../pages/house.php?id='.$id));
+    addErrorMessage('Editing place failed! Maximum capacity invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
   }
 
   if ($min > $max) {
-    addErrorMessage('Editing place failed. Minimum capacity is bigger than Maximum!');
-    die(header('Location: ../pages/house.php?id='.$id));
+    addErrorMessage('Editing place failed! Minimum capacity is bigger than Maximum!');
+    die(header('Location: ../pages/house.php?id=${id}'));
   }
-  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max)){
+
+  if ($numRooms <= 0 || !is_numeric($numRooms)) {
+    addErrorMessage('Editing place failed! Number of rooms invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  if ($numBeds <= 0 || !is_numeric($numBeds)) {
+    addErrorMessage('Editing place failed! Number of beds invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  if ($numBathrooms <= 0 || !is_numeric($numBathrooms)) {
+    addErrorMessage('Editing place failed! Number of bathrooms invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Editing place failed. Country is not valid!');
     die(header('Location: ../pages/house.php?id='.$id));
   }

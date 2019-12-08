@@ -17,7 +17,10 @@
                 $place['description'], 
                 $place['pricePerDay'], 
                 $place['minPeople'], 
-                $place['maxPeople'])
+                $place['maxPeople'],
+                $place['numRooms'],
+                $place['numBeds'],
+                $place['numBathrooms'])
             );
         }
 
@@ -111,7 +114,7 @@
         return $maxplaceid['max(ID)']+1;
     }
 
-    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max) {
+    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max, $numRooms, $numBeds, $numBathrooms) {
         $db = Database::instance()->db();
 
         $newplaceid = getNewPlaceLocId();
@@ -123,12 +126,12 @@
         $statement = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
         $statement->execute(array($newplaceid,$countryID,$city,$address));
 
-        $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?)');
-        $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max));
-        return true; //parece necessario
+        $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms));
+        return true;
     }
 
-    function editHouse($id, $country, $city, $address, $title, $description, $price, $min,  $max) {
+    function editHouse($id, $country, $city, $address, $title, $description, $price, $min,  $max, $numRooms, $numBeds, $numBathrooms) {
         $db = Database::instance()->db();
         
         $countryID = getCountryID($country);
@@ -152,10 +155,10 @@
         $statement->execute(array($countryID, $city, $address, $placeId));
 
         $statement = $db->prepare('UPDATE Place 
-                                 SET title = ?, description = ?, pricePerDay = ?, minPeople = ?, maxPeople = ? 
+                                 SET title = ?, description = ?, pricePerDay = ?, minPeople = ?, maxPeople = ?, numRooms = ?, numBeds = ?, numBathrooms = ?
                                  WHERE id = ?');
     
-        $statement->execute(array($title, $description, $price, $min, $max, $id));
+        $statement->execute(array($title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms, $id));
         return true;
     } 
 ?>
