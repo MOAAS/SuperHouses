@@ -128,12 +128,14 @@
 
         $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
         $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms));
+        return true;
     }
 
     function editHouse($id, $country, $city, $address, $title, $description, $price, $min,  $max, $numRooms, $numBeds, $numBathrooms) {
         $db = Database::instance()->db();
         
         $countryID = getCountryID($country);
+        echo $countryID;
         if ($countryID == false)
             return false;
 
@@ -145,7 +147,6 @@
         );
         $statement->execute(array($id));
         $placeId = $statement->fetch()['location'];
-        //print_r($placeId);
 
         $statement = $db->prepare('UPDATE PlaceLocation 
                                 SET country = ?, city = ?, address = ?
@@ -158,5 +159,6 @@
                                  WHERE id = ?');
     
         $statement->execute(array($title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms, $id));
+        return true;
     } 
 ?>

@@ -55,7 +55,10 @@
     die(header('Location: ../pages/profile.php#Add Place'));
   }
   
-  addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms);
+  if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms)){
+    addErrorMessage('Adding place failed! Country is not valid!');
+    die(header('Location: ../pages/profile.php#Add Place'));
+  }
     
   //save files
   mkdir( '../database/houseImages/' . $id);

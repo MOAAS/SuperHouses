@@ -41,7 +41,7 @@
     </div>
     <?php 
     if($_SESSION['username'] == $house->ownerUsername){ ?>
-      <a href="edit_house.php?id=<?=$house->place_id?>"><button type="button">Edit Place</button> </a>
+      <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
     <?php } ?>
     
     <div id="place-body">
@@ -98,38 +98,39 @@
 
 <?php function draw_editHouse($house, $pictures) { 
   $countryOptions = getAllCountries();?>
-  <section id="addHouse" class="genericForm profileTab">
-    <h2>Edit your place</h2>    
-    <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
-      <label for="title">Title</label>      
-      <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
-
-      <label for="description">Description</label>
-      <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
-      <div id="localization">
-        <div>
-        
-          <label for="houseCountry">Country</label>
-          <select id="<?=$id?>" name="country">
-            <option value="">None</option>
-            <?php foreach ($countryOptions as $country) {
-              if($country == $house->country){ ?>
-              <option selected value="<?=$country?>"><?=$country?></option>
-              <?php }else{ ?>
-              <option value="<?=$country?>"><?=$country?></option>
-            <?php }}?>
-          </select>
-
+  <section id="editHouse">
+    <section id="addHouse" class="genericForm">
+      <h2>Edit your place</h2>    
+      <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
+        <label for="title">Title</label>      
+        <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
+  
+        <label for="description">Description</label>
+        <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
+        <div id="localization">
+          <div>
+  
+            <label for="houseCountry">Country</label>
+            <select id="<?=$id?>" name="country">
+              <option value="">None</option>
+              <?php foreach ($countryOptions as $country) {
+                if($country == $house->country){ ?>
+                <option selected value="<?=$country?>"><?=$country?></option>
+                <?php }else{ ?>
+                <option value="<?=$country?>"><?=$country?></option>
+              <?php }}?>
+            </select>
+  
+          </div>
+          <div>
+            <label for="houseCity">City</label>
+            <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
+          </div>
+          <div>
+            <label for="address">Address</label>
+            <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
+          </div>
         </div>
-        <div>
-          <label for="houseCity">City</label>
-          <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
-        </div>
-        <div>
-          <label for="address">Address</label>
-          <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
-        </div>
-      </div>
       
       <p>Recommended Capacity</p>
       <div id="details">

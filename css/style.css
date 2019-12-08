@@ -49,8 +49,8 @@
     --text-color:rgb(240,240,240);
     --text-color-2:rgb(0,0,0);
 
-    --success-color: rgb(97, 187, 61);
-    --error-color: rgb(225, 0, 0);
+    --success-color: rgb(130, 224, 93);
+    --error-color: rgb(233, 72, 72);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
@@ -124,7 +124,7 @@ body{
     text-align: center;
     cursor: pointer;
     color: white;
-    background-color: rgba(255, 0, 0, 1);
+    background-color: var(--error-color);
 }
 
 #pagetop #notificationList {
@@ -139,7 +139,7 @@ body{
     
     color: var(--text-color);
     box-shadow: var(--simple-shadow);
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-2);
 }
 
 #notificationList li {
@@ -152,7 +152,7 @@ body{
 
 #notificationList .notifClickable {    
     justify-self: stretch;
-    border-right: 1px solid grey;
+    border-right: 2px solid var(--main-color-light);
 }
 
 #notificationList .notifClickable:hover {
@@ -173,23 +173,23 @@ body{
 #notificationList .notifMarkAsSeen {
     justify-self: center;
     cursor: pointer;
-    color: black;
+    color: var(--text-color);
 }
 
 #notificationList .notifMarkAsSeen:hover {
-    color: red;
+    color: var(--main-color-light);
 }
 
 #notificationList .notifUnseen .notifMarkAsSeen {
-    color: red;
+    color: var(--main-color-light);
 }
 
 #notificationList .notifUnseen .notifMarkAsSeen:hover {
-    color: black;
+    color: var(--main-color-light-hl);
 }
 
 #notificationList .notifUnseen {
-    background-color: rgb(225, 225,225)
+    color: var(--main-color-hl);
 }
 
 
@@ -841,15 +841,15 @@ button:hover {
 /* Conversations */
 
 #conversations:not(.noContent) {
-    background-color: white;
+    background-color: var(--bg-color);
     box-shadow: var(--simple-shadow);
     overflow: auto;
     height: 40em;
 }
 
 #conversations:not(.noContent) > h2 {
-    background-color: var(--main-color);
-    color: var(--text-color-2);
+    background-color: var(--topbar-color);
+    color: white;
     padding: 1em;
     border-bottom: 1px solid var(--border-color);
 }
@@ -868,7 +868,7 @@ button:hover {
 }
 
 #conversations .conversation:hover {
-    background-color: var(--bg-color);
+    background-color: var(--bg-color-2);
 }
 
 .conversation h3 {
@@ -903,7 +903,9 @@ button:hover {
 .conversation.receivedMessage:not(.seenMessage) {
     background-color: var(--main-color-hl);
 }
-
+.conversation.receivedMessage:not(.seenMessage):hover {
+    background-color: var(--main-color-hl);
+}
 
 .conversation p {
     grid-area: lastMsg;
@@ -915,7 +917,7 @@ button:hover {
 }
 
 #messages {
-    background-color: white;
+    background-color: var(--bg-color);
     box-shadow: var(--simple-shadow);
 
     display: grid;
@@ -928,8 +930,8 @@ button:hover {
     display: flex;
     align-items: center;
     border-bottom: 1px solid rgb(150, 150, 150, 150);
-    background-color: var(--main-color);
-    color: var(--text-color-2);
+    background-color: var(--topbar-color);
+    color: white;
 }
 
 #messages img {
@@ -940,6 +942,7 @@ button:hover {
 }
 
 #messages #messageBack {
+    background-color: var(--main-color);
     padding: 2em;   
     border-right: 1px solid var(--border-color);
     cursor: pointer;
@@ -948,7 +951,7 @@ button:hover {
 
 #messages #messageBack:hover {
     color: var(--text-color);
-    background-color: var(--bg-color);
+    background-color: var(--main-color-hl);
 }
 
 #messages #messageHistory {
@@ -1263,11 +1266,20 @@ button:hover {
 	max-width: 80em;
 }
 
+
 #house #place-body {
     display: flex;
     align-items: flex-start;
     max-width: 60em;
     margin: 1em auto;
+}
+#house #editButton{
+    flex: 1;
+    background-color: var(--secondary-color);
+    padding:0.5em;
+}
+#house #editButton:hover{
+    background-color: var(--secondary-color-hl);
 }
 
 #house #place-info {
@@ -1433,4 +1445,9 @@ button:hover {
 #house #photoRightButton{
 	right:0%;
 	border-radius: 3px 0 0 3px;
+}
+
+#editHouse{
+    max-width: 60em;
+    margin: 2em auto;
 }
