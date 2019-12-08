@@ -28,7 +28,7 @@
 
         $pfpPath = "../database/profileImages/" . getUserID($username);
         if(! file_exists($pfpPath))
-            return "../database/profileImages/DefaultPic/default.png";
+            return "../database/profileImages/defaultPic/default.png";
         return $pfpPath;
     }
 
@@ -46,7 +46,7 @@
 
         $pfpPath = "../database/profileImages/" . $user['id'];
         if(! file_exists($pfpPath))
-            $pfpPath = "../database/profileImages/DefaultPic/default.png";
+            $pfpPath = "../database/profileImages/defaultPic/default.png";
 
         return new UserInfo($user['username'], $user['displayname'], $country, $user['city'], $pfpPath);
     }

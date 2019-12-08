@@ -14,29 +14,48 @@
   $price = $_POST['price'];
   $min = $_POST['min'];
   $max = $_POST['max'];
+  $numRooms = $_POST['numRooms'];
+  $numBeds = $_POST['numBeds'];
+  $numBathrooms = $_POST['numBathrooms'];
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
   // verificar se price > 0
   if ($price <= 0 || !is_numeric($price)) {
-    addErrorMessage('Adding place failed! Price invalid!');
+    addErrorMessage('Editing place failed! Price invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
   if ($min <= 0 || !is_numeric($min)) {
-    addErrorMessage('Adding place failed! Minimum capacity invalid!');
+    addErrorMessage('Editing place failed! Minimum capacity invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
 
   if ($max <= 0 || !is_numeric($max)) {
-    addErrorMessage('Adding place failed! Maximum capacity invalid!');
+    addErrorMessage('Editing place failed! Maximum capacity invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
 
   if ($min > $max) {
-    addErrorMessage('Adding place failed! Minimum capacity is bigger than Maximum!');
+    addErrorMessage('Editing place failed! Minimum capacity is bigger than Maximum!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
-  editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max);
+
+  if ($numRooms <= 0 || !is_numeric($numRooms)) {
+    addErrorMessage('Editing place failed! Number of rooms invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  if ($numBeds <= 0 || !is_numeric($numBeds)) {
+    addErrorMessage('Editing place failed! Number of beds invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  if ($numBathrooms <= 0 || !is_numeric($numBathrooms)) {
+    addErrorMessage('Editing place failed! Number of bathrooms invalid!');
+    die(header('Location: ../pages/house.php?id=${id}'));
+  }
+
+  editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms);
     
   //save files
   if(isset($_FILES['fileUpload']))

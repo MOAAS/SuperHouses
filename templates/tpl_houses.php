@@ -56,8 +56,8 @@
         <p id="houseAddress">Address: <?=toHTML($house->address)?></p>
         <p id="houseCommodities">
           <i class="fas fa-users"> <?=$house->maxPeople?> people</i>
-          <i class="fas fa-bed"> <?=toHTML('2')?> rooms / <?=toHTML('4')?> beds</i> 
-          <i class="fas fa-shower"> <?=toHTML('3')?> bathrooms</i> 
+          <i class="fas fa-bed"> <?=toHTML($house->numRooms)?> rooms / <?=toHTML($house->numBeds)?> beds</i> 
+          <i class="fas fa-shower"> <?=toHTML($house->numBathrooms)?> bathrooms</i> 
         </p>
         <p id="houseDescription"><?=toHTML($house->description)?></p>
       </section>
@@ -136,6 +136,13 @@
         <input id="min" type="number" name="min" placeholder="Minimum people" min="1" max="20" value="<?=toHTML($house->minPeople)?>" required>
         <input id="max" type="number" name="max" placeholder="Maximum people" min="1" max="20" value="<?=toHTML($house->maxPeople)?>" required>
         <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000" value="<?=toHTML($house->pricePerDay)?>" required>
+      </div>
+
+      <p>Accomodations</p>
+      <div id="accomodations">
+        <input id="numRooms" type="number" name="numRooms" placeholder="Number of rooms" min="1" max="20" value="<?=toHTML($house->numRooms)?>" required>
+        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds" min="1" max="20" value="<?=toHTML($house->numBeds)?>" required>
+        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Bathrooms" min="1" max="10" value="<?=toHTML($house->numBathrooms)?>" required>
       </div>
       
       <div id=addHouseImages>
