@@ -34,7 +34,7 @@
   $places = searchHouses($location, $startDate, $endDate, $maxPrice, $numAdults + $numChildren, $numBabies);
 
   draw_header($_SESSION['username'], "../js/search.js");
-  draw_search($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies);
+  draw_searchPage($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies);
   draw_houselist($places);
   draw_footer();
 ?>

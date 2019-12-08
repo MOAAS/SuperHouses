@@ -43,8 +43,8 @@
       <button id="photoRightButton">&#10095;</button>
     </div>
 
-    <?php if($username == $house->ownerUsername){ ?>
-      <a href="edit_house.php?id=<?=$house->place_id?>"><button type="button">Edit Place</button></a>
+    <?php if($username == $house->ownerUsername) { ?>
+      <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
     <?php } ?>
     
     <div id="place-body">
@@ -68,9 +68,9 @@
         <p id="houseLocation"><i class="fa fa-map-marker-alt"></i> &nbsp;<?=toHTML($house->getLocationString())?></p>
         <p id="houseAddress">Address: <?=toHTML($house->address)?></p>
         <p id="houseAcommodations">
-          <i class="fas fa-users"> <?=$house->maxPeople?> guests</i>
-          <i class="fas fa-bed"> <?=toHTML('2')?> rooms / <?=toHTML('4')?> beds</i> 
-          <i class="fas fa-shower"> <?=toHTML('3')?> bathrooms</i> 
+          <i class="fas fa-users"> <?=$house->maxPeople?> people</i>
+          <i class="fas fa-bed"> <?=toHTML($house->numRooms)?> rooms / <?=toHTML($house->numBeds)?> beds</i> 
+          <i class="fas fa-shower"> <?=toHTML($house->numBathrooms)?> bathrooms</i> 
         </p>
         <p id="houseDescription" class="allowNewlines"><?=toHTML($house->description)?></p>
       </section>
@@ -130,44 +130,52 @@
 
 <?php function draw_editHouse($house, $pictures) { 
   $countryOptions = getAllCountries();?>
-  <section id="addHouse" class="genericForm profileTab">
-    <h2>Edit your place</h2>    
-    <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
-      <label for="title">Title</label>      
-      <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
-
-      <label for="description">Description</label>
-      <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
-      <div id="localization">
-        <div>
-        
-          <label for="houseCountry">Country</label>
-          <select id="<?=$id?>" name="country">
-            <option value="">None</option>
-            <?php foreach ($countryOptions as $country) {
-              if($country == $house->country){ ?>
-              <option selected value="<?=$country?>"><?=$country?></option>
-              <?php }else{ ?>
-              <option value="<?=$country?>"><?=$country?></option>
-            <?php }}?>
-          </select>
-
+  <section id="editHouse">
+    <section id="addHouse" class="genericForm">
+      <h2>Edit your place</h2>    
+      <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
+        <label for="title">Title</label>      
+        <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
+  
+        <label for="description">Description</label>
+        <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
+        <div id="localization">
+          <div>
+  
+            <label for="houseCountry">Country</label>
+            <select id="<?=$id?>" name="country">
+              <option value="">None</option>
+              <?php foreach ($countryOptions as $country) {
+                if($country == $house->country){ ?>
+                <option selected value="<?=$country?>"><?=$country?></option>
+                <?php }else{ ?>
+                <option value="<?=$country?>"><?=$country?></option>
+              <?php }}?>
+            </select>
+  
+          </div>
+          <div>
+            <label for="houseCity">City</label>
+            <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
+          </div>
+          <div>
+            <label for="address">Address</label>
+            <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
+          </div>
         </div>
-        <div>
-          <label for="houseCity">City</label>
-          <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
-        </div>
-        <div>
-          <label for="address">Address</label>
-          <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
-        </div>
-      </div>
       
       <p>Recommended Capacity</p>
       <div id="details">
-        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" max="20" value="<?=toHTML($house->minPeople)?>" required>
-        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" max="20" value="<?=toHTML($house->maxPeople)?>" required>
-        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" max="10000" value="<?=toHTML($house->pricePerDay)?>" required>
+        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" value="<?=toHTML($house->minPeople)?>" required>
+        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" value="<?=toHTML($house->maxPeople)?>" required>
+        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" value="<?=toHTML($house->pricePerDay)?>" required>
+      </div>
+
+      <p>Accomodations</p>
+      <div id="accomodations">
+        <input id="numRooms" type="number" name="numRooms" placeholder="Number of rooms" min="1" value="<?=toHTML($house->numRooms)?>" required>
+        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds" min="1" value="<?=toHTML($house->numBeds)?>" required>
+        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Bathrooms" min="1" value="<?=toHTML($house->numBathrooms)?>" required>
       </div>
       
       <div id=addHouseImages>
@@ -184,6 +192,7 @@
 
       <input type="submit" value="Save">
     </form>
+    </section>
   </section>
 <?php } ?>
 

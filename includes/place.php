@@ -11,8 +11,11 @@
         public $pricePerDay;
         public $minPeople;
         public $maxPeople;
+        public $numRooms;
+        public $numBeds;
+        public $numBathrooms;
         
-        public function __construct($place_id, $country, $city, $address, $ownerUsername, $ownerDisplayname, $title, $description, $pricePerDay, $minPeople, $maxPeople) {
+        public function __construct($place_id, $country, $city, $address, $ownerUsername, $ownerDisplayname, $title, $description, $pricePerDay, $minPeople, $maxPeople, $numRooms, $numBeds, $numBathrooms) {
             $this->place_id = $place_id;
             $this->country = $country;
             $this->city = $city;
@@ -24,6 +27,9 @@
             $this->pricePerDay = $pricePerDay;
             $this->minPeople = $minPeople;
             $this->maxPeople = $maxPeople;
+            $this->numRooms = $numRooms;
+            $this->numBeds = $numBeds;
+            $this->numBathrooms = $numBathrooms;
         }
 
         public function getLocationString() {
