@@ -157,7 +157,13 @@
               <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
               <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
             </td>
-            <td><button class="cancelReservation" <?=$reservation->isApproaching()?'disabled':''?> type="button"><?=$reservation->isApproaching()?"Too late to cancel":'Cancel Reservation'?></button></td>
+            <td>
+              <?php if ($reservation->isApproaching()) { ?>
+                <button class="cancelReservation" type="button" disabled>Too late to cancel</button>              
+              <?php } else { ?>
+                <button class="cancelReservation" type="button">Cancel Reservation</button>
+              <?php } ?>
+            </td>
           </tr>    
         <?php } ?> 
       </tbody>
@@ -193,7 +199,7 @@
             <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
             <p><i class="fas fa-map-marker-alt"></i> <?=toHTML($place->getLocationString())?></p>
           </td>            
-          <td class="reservationDate">
+          <td class="reservationDate <?=$reservation->isApproaching()?'reservationApproaching':''?>">
             <p><?=$reservation->getStartString()?></p>
             <p><i class="fas fa-long-arrow-alt-down"></i></p>
             <p><?=$reservation->getEndString()?><p>
@@ -202,7 +208,37 @@
             <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
             <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
           </td>
-          <td><button class="cancelReservation" <?=$reservation->isApproaching()?'disabled':''?> type="button"><?=$reservation->isApproaching()?"Too late to cancel":'Cancel Reservation'?></button></td>
+          <td>
+            <?php if (isReviewed($reservation->getID())) { ?>
+              <button type="button" disabled>Reservation reviewed</button>              
+            <?php } else if ($reservation->recentlyEnded()) { ?>
+              <button class="reviewReservation" type="button">Review reservation</button>
+            <?php } else if ($reservation->isApproaching()) { ?>
+              <button type="button" disabled>Too late to cancel</button>              
+            <?php } else { ?>
+              <button class="cancelReservation" type="button">Cancel Reservation</button>
+            <?php } ?>
+          </td>
+          <td colspan="5" class="hidden reviewForm">
+            <form method="post" action="" class="genericForm">
+              <h3>Review this reservation!</h3>
+              <div class="rating">
+                <input type="radio" id="1star<?=$reservation->getID()?>" name="stars" class="hidden">
+                <label for="1star<?=$reservation->getID()?>" class="clickable"><i class="fas fa-star"></i></label>
+                <input type="radio" id="2stars<?=$reservation->getID()?>" name="stars" class="hidden">
+                <label for="2stars<?=$reservation->getID()?>" class="clickable"><i class="fas fa-star"></i></label>
+                <input type="radio" id="3stars<?=$reservation->getID()?>" name="stars" class="hidden">
+                <label for="3stars<?=$reservation->getID()?>" class="clickable"><i class="fas fa-star"></i></label>
+                <input type="radio" id="4stars<?=$reservation->getID()?>" name="stars" class="hidden">
+                <label for="4stars<?=$reservation->getID()?>" class="clickable"><i class="fas fa-star"></i></label>
+                <input type="radio" id="5stars<?=$reservation->getID()?>" name="stars" class="hidden">
+                <label for="5stars<?=$reservation->getID()?>" class="clickable"><i class="fas fa-star"></i></label>
+              </div>
+              <span class="closeForm clickable"><i class="fas fa-times"></i></span>
+              <textarea name="content" placeholder="Type your comment..."></textarea>
+              <button type="submit">Review</button>
+            </form>
+          </td>
         </tr>   
       <?php } ?> 
       </tbody>

@@ -27,20 +27,20 @@ CREATE TABLE Country (
 
 CREATE TABLE PlaceLocation (
     id INTEGER PRIMARY KEY,
-    country INTEGER REFERENCES Country,
-    city VARCHAR,
-    address VARCHAR
+    country INTEGER REFERENCES Country NOT NULL,
+    city VARCHAR NOT NULL,
+    address VARCHAR NOT NULL
 );
 
 CREATE TABLE Place (
     id INTEGER PRIMARY KEY,
     location REFERENCES PlaceLocation UNIQUE NOT NULL,
     owner REFERENCES User NOT NULL,
-    title VARCHAR,
-    description VARCHAR,
-    pricePerDay REAL,
-    minPeople INTEGER,
-    maxPeople INTEGER,
+    title VARCHAR NOT NULL,
+    description VARCHAR NOT NULL,
+    pricePerDay REAL NOT NULL,
+    minPeople INTEGER NOT NULL,
+    maxPeople INTEGER NOT NULL,
     CONSTRAINT CHK_people CHECK (minPeople <= maxPeople),
     CONSTRAINT CHK_price CHECK (pricePerDay >= 0)
 );
@@ -70,13 +70,15 @@ CREATE TABLE UserNotification (
 CREATE TABLE Rating (
     reservation PRIMARY KEY REFERENCES Reservation,
     rating INTEGER NOT NULL,
-    comment VARCHAR,
-    CONSTRAINT CHK_inbounds CHECK (rating >= 1 AND rating <= 5)
+    comment VARCHAR NOT NULL,
+    reply VARCHAR,
+    CONSTRAINT CHK_inbounds CHECK (rating >= 1 AND rating <= 5),
+    CONSTRAINT CHK_comments CHECK (comment != "" AND reply != "")
 );
 
 CREATE TABLE UserMessage (
     id INTEGER PRIMARY KEY,
-    content VARCHAR,
+    content VARCHAR NOT NULL,
     sendTime DATE NOT NULL,
     seen INTEGER,
     sender REFERENCES User NOT NULL,

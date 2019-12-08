@@ -12,12 +12,12 @@
     if ($content == "")
         return;
 
-    if (getUserID($sender == false)) {
+    if (getUserID($sender) == false) {
         echo "Couldn't find sender user: $sender";
         return;
     }
     
-    if (getUserID($receiver == false)) {
+    if (getUserID($receiver) == false) {
         echo "Couldn't find receiver user: $receiver";
         return;
     }

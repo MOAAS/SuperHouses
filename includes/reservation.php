@@ -7,7 +7,6 @@
         private $guest;
 
         private $totalNights;
-
         public function __construct($id, $place, $start, $end, $guest) {
             $this->id = $id;
             $this->place = $place;
@@ -48,6 +47,14 @@
             $endTime = DateTime::createFromFormat('Y-m-d', $this->end);
             $now = (new DateTime());
             return $now->diff($startTime)->days < 3 || $now->diff($endTime)->days < 3;
+        }
+
+        public function recentlyEnded() {
+            $endTime = DateTime::createFromFormat('Y-m-d', $this->end);
+            $now = (new DateTime());
+
+            $numDaysSinceEnd = $endTime->diff($now)->format('%R%a');
+            return $numDaysSinceEnd >= 0 && $numDaysSinceEnd < 7;
         }
 
         public function getNights() {

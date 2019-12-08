@@ -25,8 +25,11 @@
 </section>
 <?php } ?>
 
-<?php function draw_house($house, $pictures) {
-  $ratings = getHouseRatings($house->place_id);
+<?php function draw_house($username, $house, $pictures) {
+  $avgRating = getHouseAvgRating($house->place_id);
+  $comments = getHouseComments($house->place_id);
+  $ownerProfilepic = getProfilePicture($house->ownerUsername);
+  $numComments = count($comments);
 ?>
   <section id="house">
     <span id="houseID" class="hidden"><?=$house->place_id?></span>
@@ -39,46 +42,39 @@
       <button id="photoLeftButton">&#10094;</button>
       <button id="photoRightButton">&#10095;</button>
     </div>
-    <?php 
-    if($_SESSION['username'] == $house->ownerUsername){ ?>
-      <a href="edit_house.php?id=<?=$house->place_id?>"><button type="button">Edit Place</button> </a>
+
+    <?php if($username == $house->ownerUsername){ ?>
+      <a href="edit_house.php?id=<?=$house->place_id?>"><button type="button">Edit Place</button></a>
     <?php } ?>
     
     <div id="place-body">
       <section id="place-info">
         <h2><?=toHTML($house->title)?></h2>        
         <p id="houseOwner">
-          <img src="<?=getProfilePicture($house->ownerUsername)?>" alt="<?=toHTML($house->ownerUsername)?>"> 
+          <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerUsername)?>"> 
           <?=toHTML($house->ownerDisplayname)?> 
-          <a href="../pages/profile.php#Conversation <?=toHTML($house->ownerUsername)?>">(Message him)</a>
+          <?php if ($house->ownerUsername != $username) {?>
+            <a href="../pages/profile.php#Conversation <?=toHTML($house->ownerUsername)?>">(Message)</a>
+          <?php } ?>
         </p>
+        <div id="placeRating">
+          <?php if ($numComments == 0) { ?>            
+            <span>No reviews</span>
+          <?php } else { ?>
+            <span id="avgRating"><?=$avgRating?> <i class="fas fa-star"></i></span>
+            <span>(<?=$numComments==1?'1 review':$numComments . ' reviews'?>)</span>
+          <?php } ?>
+        </div>
         <p id="houseLocation"><i class="fa fa-map-marker-alt"></i> &nbsp;<?=toHTML($house->getLocationString())?></p>
         <p id="houseAddress">Address: <?=toHTML($house->address)?></p>
-        <p id="houseCommodities">
-          <i class="fas fa-users"> <?=$house->maxPeople?> people</i>
+        <p id="houseAcommodations">
+          <i class="fas fa-users"> <?=$house->maxPeople?> guests</i>
           <i class="fas fa-bed"> <?=toHTML('2')?> rooms / <?=toHTML('4')?> beds</i> 
           <i class="fas fa-shower"> <?=toHTML('3')?> bathrooms</i> 
         </p>
-        <p id="houseDescription"><?=toHTML($house->description)?></p>
+        <p id="houseDescription" class="allowNewlines"><?=toHTML($house->description)?></p>
       </section>
       <form action="../actions/action_addReservation" method="post" id="booking" class="genericForm">
-        <!--
-          <div class="rating">
-            <form class="stars">
-                <input type="radio" id="1star" name="stars" <?//=($user_rating == 1)?'checked="checked"':''; ?>>
-                <label for="1star"></label>
-                <input type="radio" id="2stars" name="stars" <?//=($user_rating == 2)?'checked="checked"':''; ?>>
-                <label for="2stars"></label>
-                <input type="radio" id="3stars" name="stars" <?//=($user_rating == 3)?'checked="checked"':''; ?>>
-                <label for="3stars"></label>
-                <input type="radio" id="4stars" name="stars" <?//=($user_rating == 4)?'checked="checked"':''; ?>>
-                <label for="4stars"></label>
-                <input type="radio" id="5stars" name="stars" <?//=($user_rating == 5)?'checked="checked"':''; ?>/>
-                <label for="5stars"></label>
-            </form>
-            <p class="stars"><?//=toHTML($num_ratings)?> reviews</p>
-        </div>
-      -->
         <label for="checkInDate">Check-in:</label>
         <input id="checkInDate" type="date" name="checkInDate" min="<?=date("Y-m-d")?>">       
 
@@ -92,7 +88,43 @@
         <button type="submit">Book</button>
         <span id="loadingIndicator" class="hidden"><i class="fas fa-spinner"></i></span>
       </form>
-    </div>
+
+      <section id="placeComments">
+        <h2 class="<?=$numComments==0?'hidden':''?>">Comments</h2>
+        <?php foreach($comments as $comment)  { ?>
+          <article class="comment">
+            <span class="hidden reservationID"><?=$comment['reservation']?></span>
+            <img src="<?=getProfilePicture($comment['username'])?>" alt="<?=toHTML($comment['username'])?>"> 
+            <h3 class="commentPoster"><?=toHTML($comment['username'])?></h3> 
+            <p class="commentReservation"><?=toHTML($comment['date'])?></p>
+            <div class="rating">
+
+              <?php for ($i = 0; $i < $comment['rating']; $i++) { ?>
+                <i class="fas fa-star"></i>
+              <?php } ?>
+              <?php for ($i = $comment['rating']; $i < 5; $i++) { ?>
+                <i class="far fa-star"></i>
+              <?php } ?>
+              <?=$comment['rating']?>/5
+            </div>
+            <p class="commentContent allowNewLines"><?=toHTML($comment['comment'])?></p>
+            <?php if ($comment['reply'] != null) { ?>
+              <section class="comment reply">
+                <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerUsername)?>"> 
+                <h3 class="commentPoster"><?=toHTML($house->ownerUsername)?></h3>
+                <p class="commentContent allowNewLines"><?=$comment['reply']?></p>
+              </section>
+            <?php } else if ($username == $house->ownerUsername) { ?>
+              <form method="post" action="" class="genericForm hidden">
+                <h3>Reply to guest</h3>
+                <span class="closeForm clickable"><i class="fas fa-times"></i></span>
+                <textarea name="content" placeholder="Type your reply..."></textarea>
+                <button type="submit">Reply</button>
+              </form>
+            <?php } ?>
+          </article>
+        <?php } ?>    
+
   </section>
 <?php } ?>
 

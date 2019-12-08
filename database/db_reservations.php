@@ -59,7 +59,11 @@
 
         $statement->execute(array($id));
 
-        return makeReservationArray(array($statement->fetch()))[0];
+        $reservation = $statement->fetch();
+        if ($reservation == false)
+            return null;
+
+        return makeReservationArray(array($reservation))[0];
     }
 
     function removeReservation($id) {
@@ -102,4 +106,20 @@
 
         return makeReservationArray($statement->fetchAll());
     }
+
+    function getReservationHost($reservationID) {
+        $db = Database::instance()->db();
+       
+        $statement = $db->prepare(
+            'SELECT username
+            FROM Reservation JOIN Place ON Reservation.place = Place.id JOIN User ON Place.owner = User.id
+            WHERE Reservation.id = ?'
+        );
+
+        $statement->execute(array($reservationID));
+
+        return $statement->fetch();
+    }
+
+
 ?>

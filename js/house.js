@@ -17,7 +17,7 @@ function advancePhotos(n) {
 
 function showPhotos() {
   for (let i = 0; i < photos.length; i++) {
-    photos[i].style.transform = "translate(" + slideIndex * -40 + "em)";      
+    photos[i].style.transform = "translate(" + slideIndex * -45 + "em)";      
   }
 }
 
@@ -48,11 +48,10 @@ function validateDates() {
   let checkIn = Date.parse(checkInDate.value);
   let checkOut = Date.parse(checkOutDate.value); 
 
-  if (Number.isNaN(checkIn) || Number.isNaN(checkOut))
+  if (Number.isNaN(checkIn) || Number.isNaN(checkOut)) {
+    unavailableDate.innerHTML = "";
     return;
-
-  console.log(checkIn);
-  console.log(checkOut);
+  }
 
   for (let i = 0; i < futureReservations.length; i++) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
@@ -67,8 +66,6 @@ function validateDates() {
         dateToString(reservationEnd);
       return;
     }
-
-
   }
   unavailableDate.innerHTML = "";
 }
@@ -117,14 +114,9 @@ function onReservationMade() {
   }
 
   else {
-    bookButton.textContent = response;
-    bookButton.style.backgroundColor = "red";
     bookButton.style.display = "block";
     loadingIndicator.style.display = "none";
-    setTimeout(() => { 
-      bookButton.textContent = "Book"; 
-      bookButton.style.backgroundColor = "";
-    }, 3000);
+    setTimeout(() => addButtonAnimation(bookButton, "red", response, 'Book'), 20)
   }
 }
 
@@ -143,3 +135,51 @@ function updateBookingPrice() {
   totalPrice.textContent = (parseFloat(pricePerNight.textContent) * numNights).toFixed(2);
 }
 
+// COMMENTING
+
+let clickableComments = document.querySelectorAll('#placeComments .comment.clickable');
+clickableComments.forEach(comment => {
+  let form = comment.querySelector('form');
+  comment.addEventListener('click', () => {    
+    if (!comment.classList.contains('clickable')) 
+      return;
+    comment.classList.toggle('clickable');
+    form.classList.toggle('hidden');
+  }, false);
+  comment.querySelector('.closeForm').addEventListener('click', (event) => {
+    event.stopPropagation(); // p nao fazer outros event listeners
+    comment.classList.toggle('clickable');
+    form.classList.toggle('hidden');
+  });
+
+  form.addEventListener('submit', (event) => {
+    event.preventDefault();
+    
+    let messageContent =  form.querySelector('textarea').value;
+    let replyButton = form.querySelector('button');
+    let reservationID = comment.querySelector('.reservationID').textContent;    
+
+    if (messageContent == "") {
+      addButtonAnimation(replyButton, "red", "Reply can't be empty", "Reply")
+      return;
+    }
+
+    sendPostRequest('../actions/action_replyComment.php', {
+      reservationID: reservationID,
+      content: messageContent
+    }, null);
+
+    let reply = document.createElement('section');
+    reply.classList.add('reply')
+    reply.classList.add('comment')
+    reply.innerHTML = 
+    '<img src="../database/profileImages/3" alt="Marco"> ' +
+    '<h3 class="commentPoster">Marco321</h3>' +
+    '<p class="commentContent allowNewlines">' + htmlEntities(messageContent) + '</p>'
+
+    comment.append(reply);
+    form.classList.toggle('hidden')
+  })
+
+
+});

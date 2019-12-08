@@ -28,6 +28,8 @@
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
 
+    --regular-font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    --heading-font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 [data-theme="dark"] {
@@ -68,7 +70,7 @@ body{
     background-repeat: no-repeat;
     */
 
-    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-family: var(--regular-font-family);
 }
 
 
@@ -326,7 +328,7 @@ select {
     background-color:  var(--input-bg-color);
     border-radius: 10px;
     border: none;
-    font-family: Futura, "Trebuchet MS", Arial, sans-serif;
+    font-family: var(--regular-font-family)
 }
 
 input::placeholder,
@@ -410,6 +412,14 @@ button:hover {
     background-color: var(--main-color-light-hl);
 }
 
+.clickable {
+    cursor: pointer;
+}
+
+.allowNewlines {
+    white-space: pre-wrap;
+    word-wrap: break-word;
+}
 
 .hidden {
     display: none;
@@ -428,9 +438,15 @@ button:hover {
 /* Forms */
 
 .genericForm {
+    position: relative;
     box-shadow: var(--simple-shadow);
     background-color: var(--bg-color-2);
     padding: 1em 2em;
+}
+
+.genericForm .closeForm {
+    position: absolute;
+    right: 1em; top: 1em;
 }
 
 .genericForm header {
@@ -823,12 +839,62 @@ button:hover {
     cursor: pointer;
 }
 
+.reservationList .reviewForm form {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    box-shadow: none;
+}
 
+.reviewForm button[type="submit"] {
+    width: 30%;
+    font-size: 1.25em;
+    margin: 0;
+}
 
+.reviewForm textarea {
+    margin: 1em 0;
+    width: 100%;
+    height: 10em;
+    resize: none;
+}
 
+.reviewForm .rating {
+    display: flex;
+}
 
+.reviewForm .rating label,
+.reviewForm .rating label:hover ~ label {
+    color: var(--main-color);
+}
 
+.reviewForm .rating input:checked + label,
+.reviewForm .rating label:hover {
+    color: #ffc107;
+}
 
+.rating:hover label {
+    color: #ffdb70;
+}
+
+/*
+.reviewForm .rating input:checked + label {
+    color: #ffc107;
+}
+
+.reviewForm .rating input:checked ~ label {
+    color: #ffc107;
+}
+
+.reviewForm .rating label:hover ~ label {
+    color: #ffdb70;
+}
+
+.reviewForm .rating label:hover {
+    color: #ffc107;
+}
+
+*/
 
 
 
@@ -999,6 +1065,7 @@ button:hover {
 }
 
 #messageHistory .receivedMessage p {
+    word-break: break-all;
     border-radius: 20px 20px 20px 1px;
     background-color: var(--bg-color-2);
     color:  var(--text-color)
@@ -1254,19 +1321,83 @@ button:hover {
 
 #house {
 	margin: auto;
-	max-width: 80em;
+}
+
+#house #photoCarousel img{
+    height: 22.5em;
+    width: 45em;
+}
+
+#house #photoCarousel li {
+    margin: 0 0.25em;
+    transition: all 1s ease-in-out;
+}
+
+#house #photos {
+    background-color: var(--bg-color);
+	position: relative;
+    overflow: hidden;
+    margin-bottom: 1em;
+}
+
+#house #photoCarousel {
+    display: flex;
+    width: 45em;
+    height: 22.5em;
+    margin: auto;
+}
+
+#house #photoLeftButton, #house #photoRightButton{
+	position: absolute;
+    bottom: 45%;
+	color: white;
+	font-size: 16px;
+	padding: 12px 24px;
+	border: none;
+	cursor: pointer;
+	transition: background-color 0.2s ease-in-out;
+    background-color: rgba(69, 90, 100, 0.2);
+}
+
+#house #photoLeftButton:hover, #house #photoRightButton:hover {
+    background-color: rgba(69, 90, 100, 0.8);
+}
+
+#house #photoLeftButton{
+	left:0%;
+	border-radius: 0 3px 3px 0;
+}
+
+#house #photoRightButton{
+	right:0%;
+	border-radius: 3px 0 0 3px;
 }
 
 #house #place-body {
-    display: flex;
-    align-items: flex-start;
-    max-width: 60em;
+    display: grid;
+    align-items: start;
+    grid-template-columns: 2fr 1fr;
+    grid-template-areas: 
+        "house book"
+        "comments comments";
     margin: 1em auto;
+    max-width: 60em;
 }
 
 #house #place-info {
+    min-width: 0;
     padding: 1em;
-    flex: 2;
+    grid-area: house;
+}
+
+#house #booking {
+	border-radius: 1px;
+    padding: 1.5em;
+    grid-area: book;
+}
+#house #placeComments {
+    padding: 1em;
+    grid-area: comments;
 }
 
 #place-info #houseOwner {
@@ -1291,22 +1422,121 @@ button:hover {
     font-weight: bold;
 }
 
-#place-info #houseCommodities {
+#place-info #houseAcommodations {
     display: flex;
     justify-content: space-around;
     border-top: 1px solid var(--border-color);
     padding: 1em 0 0 0;
 }
-#place-info #houseDescription {
-    white-space: pre-wrap;
+
+#place-info #avgRating {
+    background-color: var(--main-color);
+    color: var(--text-color-2);
+    border-radius: 4px;
+    padding: 0.5em;
+
 }
 
+/* House comments */
 
-#booking {
-	border-radius: 1px;
-    padding: 1.5em;
-    flex: 1;
+#placeComments .comment {
+    display: grid;
+    align-items: center;
+    grid-template-columns: 4em max-content 1fr;
+    grid-template-areas: 
+        "pic username reservation"
+        "pic rating rating"
+        "comment comment comment"
+        "replyForm replyForm replyForm";
+    padding: 1em 0 0 0.5em;
+    transition: background-color 0.3s ease-in-out;
 }
+
+#placeComments .reply {
+    grid-area: replyForm;
+    margin-left: 3em;
+    grid-template-columns: 4em 1fr;
+    grid-template-areas: 
+        "pic username"
+        "comment comment";
+}
+
+#placeComments > .comment:not(:last-child) {
+    border-bottom: 1px solid var(--border-color);
+}
+
+.comment img {
+    grid-area: pic;
+    justify-self: center;
+    width: 3em; height: 3em;
+    border-radius: 50%;
+}
+
+.comment .commentPoster {
+    grid-area: username;
+    font-size: 1em;
+    padding-left: 0.1em;
+    font-family: var(--regular-font-family);
+}
+
+.comment:not(.reply) > .commentPoster::after {
+    content: "\00B7\00a0";
+}
+
+.comment .rating {
+    grid-area: rating;
+    color: var(--main-color);
+}
+
+.comment .commentReservation {
+    grid-area: reservation;
+    margin: 0;
+}
+
+.comment .commentContent {
+    grid-area: comment;
+    margin: 1em 0;
+    line-height: 1.5em;
+}
+
+.comment .commentContent::before {
+    content: open-quote;
+    font-size: 1.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+}
+
+.comment .commentContent::after {
+    content: close-quote;
+    font-size: 1.5em;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    line-height: 0;
+}
+
+.comment.clickable:hover {
+    background-color: var(--bg-color-2);
+}
+
+.comment form {
+    grid-area: replyForm;
+    width: 50%;
+}
+
+.comment button[type="submit"] {
+    margin: 0;
+    grid-area: replyForm;
+    padding: 0.25em 1.5em;
+    
+    font-size: 1.25em;
+}
+
+.comment textarea {
+    margin: 1em 0;
+    width: 100%;
+    height: 10em;
+    resize: none;
+}
+
+/* Booking */
 
 #booking button[type="submit"] {
     margin: 0;
@@ -1338,93 +1568,4 @@ button:hover {
     to {
       transform: rotate(359deg);
     }
-}
-
-/* para usar quando reimplementnar os ratigns
-
-#house .rating input {
-    width: 0;
-    height: 0;
-    margin: 0;
-}
-
-#house .rating .stars {
-    display: flex;
-    flex-direction: row-reverse;
-    float: left;
-}
-
-#house .rating label {
-    color: #c8c8c8;
-    cursor: pointer;
-}
-
-#house .rating label:before {
-    content: "☆";
-    font-size: 200%;
-    color: #ccc;
-}
-
-#house .rating input:checked ~ label:before {
-    color: #ffc107;
-}
-
-#house .rating label:hover ~ label:before {
-    color: #ffdb70;
-}
-
-#house .rating label:hover:before {
-    color: #ffc107;
-}
-
-*/
-
-#house #photoCarousel img{
-    height: 20em;
-    width: 40em;
-}
-
-#house #photoCarousel li {
-    transition: all 1s ease-in-out;
-}
-
-#house #photos {
-    background-color: black;
-	position: relative;
-    box-shadow: var(--simple-shadow);
-    overflow: hidden;
-    margin-bottom: 1em;
-}
-
-#house #photoCarousel {
-    display: flex;
-    height: 20em;
-    width: 40em;
-    margin: auto;
-}
-
-#house #photoLeftButton, #house #photoRightButton{
-	position: absolute;
-    bottom: 45%;
-	color: white;
-	font-size: 16px;
-	padding: 12px 24px;
-	border: none;
-	cursor: pointer;
-	transition: background-color 0.2s ease-in-out;
-    background-color: rgba(69, 90, 100, 0.2);
-}
-
-#house #photoLeftButton:hover, #house #photoRightButton:hover {
-    background-color: rgba(69, 90, 100, 0.8);
-}
-
-#house #photoLeftButton{
-	left:0%;
-	border-radius: 0 3px 3px 0;
-}
-
-#house #photoRightButton{
-	right:0%;
-	border-radius: 3px 0 0 3px;
 }

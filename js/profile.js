@@ -59,18 +59,8 @@ function updateReservations() {
 }
 
 function removeReservation(reservation, button) {
-    if (button.textContent == "Cancel Reservation") {
-        button.style.backgroundColor = "red";
-        setTimeout(() => { 
-            button.style.transition = "background-color 2.7s linear";
-            button.style.backgroundColor = ""; 
-        }, 250);
-        button.innerHTML = '<i class="fas fa-trash"></i> Confirm deletion';
-        setTimeout(() => { 
-            button.textContent = "Cancel Reservation"; 
-            button.style.transition = "";
-        }, 3000);
-    }
+    if (button.textContent == "Cancel Reservation")
+        addButtonAnimation(button, "red", '<i class="fas fa-trash"></i> Confirm cancellation', "Cancel Reservation");
     else {
         reservation.style.transform = "scale(0)";
         setTimeout(() => {
@@ -88,13 +78,54 @@ let reservationComing = document.querySelector('#comingReservations');
 reservations.forEach(reservation => {
     if (reservation.id == 'comingReservations')
         reservation.querySelector('.reservationGuest h3').addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
-    reservation.querySelector('.cancelReservation').addEventListener('click', (event) => removeReservation(reservation, event.target, false));
+
+    let reviewReservationBtn = reservation.querySelector('.reviewReservation');
+    let cancelReservationBtn = reservation.querySelector('.cancelReservation');
+    if (cancelReservationBtn != null) {
+        cancelReservationBtn.addEventListener('click', (event) => removeReservation(reservation, event.target));
+    }
+    if (reviewReservationBtn != null) {
+        let otherCells = reservation.querySelectorAll('td:not(:last-child)')
+        let reviewForm = reservation.querySelector('.reviewForm');
+        let closeFormBtn = reviewForm.querySelector('.closeForm');
+        let sendReviewBtn = reviewForm.querySelector('button');
+
+        let toggleForm = () => {
+            reviewForm.classList.toggle('hidden');
+            otherCells.forEach(cell => cell.classList.toggle('hidden'));
+        }
+
+        closeFormBtn.addEventListener('click', toggleForm)
+        reviewReservationBtn.addEventListener('click' , toggleForm)
+        reviewForm.addEventListener('submit', event => {
+            event.preventDefault();
+            let reviewContent = reviewForm.querySelector('textarea');
+            let reviewRating = reviewForm.querySelector('.rating input:checked');
+            if (sendReviewBtn.textContent == "Confirm review") {
+                sendPostRequest("../actions/action_addRating.php", {
+                    reservationID: reservation.querySelector('.reservationID').textContent,
+                    content: reviewContent.value,
+                    numStars: parseInt(reviewRating.id.substr(0, 1))
+                })
+                reviewReservationBtn.outerHTML = '<button type="button" disabled>Reservation reviewed</button>'
+                toggleForm();                
+                return;
+            }
+            else if (reviewContent.value == "")
+                addButtonAnimation(sendReviewBtn, "red", "Can't be empty", "Review")
+            else if (reviewRating == null)
+                addButtonAnimation(sendReviewBtn, "red", "Must pick a rating", "Review")
+            else addButtonAnimation(sendReviewBtn, "green", "Confirm review", "Review")
+
+        })
+    }
 });
 
 let reservationGuests = document.querySelectorAll('#comingReservations .reservationGuest h3');
 reservationGuests.forEach(guest => {
     guest.addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
 });
+
 // Conversations
 
 function scrollConversationToBottom() {
