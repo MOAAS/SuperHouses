@@ -14,10 +14,11 @@
     $checkOut = $_POST['checkOut'];
 
    // sleep(1);
+    $place = getHouseById($placeID);
 
     if ($userID == false)
         echo json_encode('User does not exist');
-    else if (getHouseById($placeID) == false)
+    else if ($place == false)
         echo json_encode('Place does not exist');
     else if (!validDate($checkIn))
         echo json_encode('Invalid Check In Date');
@@ -28,7 +29,7 @@
     else if (reservationOverlaps($placeID, $checkIn, $checkOut))
         echo json_encode('Overlapping reservation');
     else { 
-        addReservation($checkIn, $checkOut, $userID, $placeID);
+        addReservation($place->pricePerDay, $checkIn, $checkOut, $userID, $placeID);
         echo json_encode(null);
     }
 ?>

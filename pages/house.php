@@ -14,7 +14,7 @@
 
   $id = $_GET['id'];
   $house = getHouseByID($id);
-  if($house ==null) {
+  if($house == null) {
     addErrorMessage('The house you searched for is no longer available.');
     die(header('Location: search_houses.php'));
   }

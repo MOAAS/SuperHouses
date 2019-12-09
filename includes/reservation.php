@@ -5,11 +5,13 @@
         private $start;
         private $end;
         private $guest;
+        private $pricePerDay;
 
         private $totalNights;
 
-        public function __construct($id, $place, $start, $end, $guest) {
+        public function __construct($id, $pricePerDay, $place, $start, $end, $guest) {
             $this->id = $id;
+            $this->pricePerDay = $pricePerDay;
             $this->place = $place;
             $this->start = DateTime::createFromFormat('Y-m-d', $start);
             $this->end = DateTime::createFromFormat('Y-m-d', $end);
@@ -36,7 +38,6 @@
         }
 
         public function isCancellable() {
-            return false;
             $now = new DateTime();
             $daysToStart = $now->diff($this->start)->format('%R%a');
 
@@ -44,7 +45,6 @@
         }
 
         public function hasEnded() {
-            return true;
             $now = new DateTime();
             $daysSinceEnd = $this->end->diff($now)->format('%R%a');
             return $daysSinceEnd >= 0;
@@ -61,7 +61,7 @@
         }
 
         public function getTotalPrice() {
-            return $this->place->pricePerDay * $this->getNights();
+            return $this->pricePerDay * $this->getNights();
         }
 
         public function getPlace() {
@@ -74,6 +74,10 @@
 
         public function getID() {
             return $this->id;
+        }      
+        
+        public function getPricePerDay() {
+            return $this->pricePerDay;
         }
     }
 

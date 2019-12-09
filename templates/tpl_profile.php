@@ -177,7 +177,7 @@
     <h2>Your Reservations</h2>
     <?php if (count($goingReservations) == 0) { ?>
       <p>You haven't booked any reservations yet!</p>
-      <button type="button"><a href="../pages/search_houses.php">Search for houses</a></button>      
+      <button type="button"><a href="../pages/main.php">Search for houses</a></button>      
     <?php } else { ?>
     <table>
       <thead>
@@ -255,46 +255,55 @@
   <section id="addHouse" class="profileTab genericForm reducedWidth">
     <h2>Add your place</h2>    
     <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
-      <label for="title">Title</label>      
-      <input id="title" type="text" name="title" placeholder="Name your place" required>
 
-      <label for="description">Description</label>
-      <textarea rows="6" id="description" name="description" placeholder="Describe your place" required></textarea>
-      <div id="localization">
-        <div>
-          <label for="houseCountry">Country</label>
-          <?php draw_countrySelect("houseCountry", $countryOptions); ?>
-        </div>
-        <div>
-          <label for="houseCity">City</label>
-          <input id="houseCity" type="text" name="city" placeholder="City" required>
-        </div>
-        <div>
-          <label for="address">Address</label>
-          <input id="address" type="text" name="address" placeholder="Address" required>
-        </div>
-      </div>
-      
-      <p>Recommended Capacity</p>
-      <div id="details">
-        <input id="capacity" type="number" name="capacity" placeholder="Capacity" min="1" required>
-        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" required>
+      <div id="mainInfo">
+        <label for="title">Title</label>      
+        <input id="title" type="text" name="title" placeholder="Name your place">
+
+        <label for="description">Description</label>
+        <textarea id="description" rows="6"  name="description" placeholder="Describe your place"></textarea>
       </div>
 
-      <p>Accomodations</p>
-      <div id="accomodations">
-        <input id="numRooms" type="number" name="numRooms" placeholder="Number of rooms" min="1" required>
-        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds" min="1" required>
-        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Bathrooms" min="1" required>
-      </div>
-      
-      <div id=addHouseImages>
-        <input id="files" type="file" name="fileUpload[]" multiple>        
-        <label for="files">Choose images</label>
+      <section id="location">
+        <h3>Location</h3>
+        <label for="houseCountry">Country</label>
+        <?php draw_countrySelect("houseCountry", $countryOptions); ?>
+
+        <label for="houseCity">City</label>
+        <input id="houseCity" type="text" name="city" placeholder="City">
+
+        <label for="address">Address</label>
+        <input id="address" type="text" name="address" placeholder="Address">
+      </section>
+
+      <section id="accomodations">
+        <h3>Accomodations</h3>
+        <label for="numRooms">Bedrooms</label>
+        <input id="numRooms" type="number" name="numRooms" placeholder="Number of bedrooms">
+        
+        <label for="numBeds">Beds</label>
+        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds">
+
+        <label for="numBathrooms">Bathrooms</label>
+        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Number of bathrooms">
+      </section>
+
+      <section id="details">
+        <h3>Details</h3>
+        <label for="capacity">Capacity</label>
+        <input id="capacity" type="number" name="capacity" placeholder="Guest capacity">
+
+        <label for="price">Price (Max. 1000€)</label>
+        <input id="price" type="number" step="0.01" name="price" placeholder="€ / night">
+      </section>
+
+      <div id="addHouseImages">
+        <input id="files" type="file" name="fileUpload[]" multiple class="requiresFiles">        
+        <label for="files" class="clickable">Choose images</label>
         <ul id="result"></ul>
       </div>
 
-      <input type="submit" value="Save">
+      <button type="submit">Add house</button>
     </form>
   </section>
 

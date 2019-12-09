@@ -42,12 +42,11 @@
       <button id="photoLeftButton">&#10094;</button>
       <button id="photoRightButton">&#10095;</button>
     </div>
-
-    <?php if($username == $house->ownerUsername) { ?>
-      <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
-    <?php } ?>
-    
+   
     <div id="place-body">
+      <?php if($username == $house->ownerUsername) { ?>
+        <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
+      <?php } ?>
       <section id="place-info">
         <h2><?=toHTML($house->title)?></h2>        
         <p id="houseOwner">
@@ -74,7 +73,7 @@
         </p>
         <p id="houseDescription" class="allowNewlines"><?=toHTML($house->description)?></p>
       </section>
-      <form action="../actions/action_addReservation" method="post" id="booking" class="genericForm">
+      <form method="post" id="booking" class="genericForm">
         <label for="checkInDate">Check-in:</label>
         <input id="checkInDate" type="date" name="checkInDate" min="<?=date("Y-m-d")?>">       
 
@@ -134,66 +133,71 @@
   $countryOptions = getAllCountries();?>
   <section id="editHouse">
     <section id="addHouse" class="genericForm">
-      <h2>Edit your place</h2>    
-      <form method="post" action="../actions/action_editHouse.php?id=<?=$house->place_id?>" enctype="multipart/form-data">
-        <label for="title">Title</label>      
-        <input id="title" type="text" name="title" placeholder="Name your place"  value="<?=toHTML($house->title)?>" required>
-  
-        <label for="description">Description</label>
-        <textarea rows="6" id="description" name="description" placeholder="Describe your place"  required><?=toHTML($house->description)?></textarea>
-        <div id="localization">
-          <div>
-  
-            <label for="houseCountry">Country</label>
-            <select id="<?=$id?>" name="country">
-              <option value="">None</option>
-              <?php foreach ($countryOptions as $country) {
-                if($country == $house->country){ ?>
-                <option selected value="<?=$country?>"><?=$country?></option>
-                <?php }else{ ?>
-                <option value="<?=$country?>"><?=$country?></option>
-              <?php }}?>
-            </select>
-  
-          </div>
-          <div>
-            <label for="houseCity">City</label>
-            <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>"required>
-          </div>
-          <div>
-            <label for="address">Address</label>
-            <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>" required>
-          </div>
+      <h2>Add your place</h2>    
+      <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
+
+        <div id="mainInfo">
+          <label for="title">Title</label>      
+          <input id="title" type="text" name="title" placeholder="Name your place" value="<?=toHTML($house->title)?>">
+
+          <label for="description">Description</label>
+          <textarea id="description" rows="6"  name="description" placeholder="Describe your place"><?=toHTML($house->description)?></textarea>
         </div>
-      
-      <p>Recommended Capacity</p>
-      <div id="details">
-        <input id="capacity" type="number" name="capacity" placeholder="Capacity" min="1" value="<?=toHTML($house->capacity)?>" required>
-        <input id="price" type="number" name="price" placeholder="Price $/day" min="1" value="<?=toHTML($house->pricePerDay)?>" required>
-      </div>
 
-      <p>Accomodations</p>
-      <div id="accomodations">
-        <input id="numRooms" type="number" name="numRooms" placeholder="Number of rooms" min="1" value="<?=toHTML($house->numRooms)?>" required>
-        <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds" min="1" value="<?=toHTML($house->numBeds)?>" required>
-        <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Bathrooms" min="1" value="<?=toHTML($house->numBathrooms)?>" required>
-      </div>
-      
-      <div id=addHouseImages>
-        <input id="files" type="file" name="fileUpload[]" multiple>        
-        <label for="files">Choose images</label>
-        <ul id="result">
-          <?php foreach($pictures as $picture){?>
-          <li>
-            <img src=<?=$picture?> alt="<?=toHTML($house->title)?>">
-          </li>
-          <?php } ?>
-        </ul>
-      </div>
 
-      <input type="submit" value="Save">
-    </form>
-    </section>
+        <section id="location">
+          <h3>Location</h3>
+          <label for="houseCountry">Country</label>
+          <select id="<?=$id?>" name="country">
+            <?php foreach ($countryOptions as $country) {
+              if($country == $house->country){ ?>
+              <option selected value="<?=$country?>"><?=$country?></option>
+              <?php }else{ ?>
+              <option value="<?=$country?>"><?=$country?></option>
+            <?php }}?>
+          </select>
+
+          <label for="houseCity">City</label>
+          <input id="houseCity" type="text" name="city" placeholder="City" value="<?=toHTML($house->city)?>">
+
+          <label for="address">Address</label>
+          <input id="address" type="text" name="address" placeholder="Address" value="<?=toHTML($house->address)?>">
+        </section>
+
+        <section id="accomodations">
+          <h3>Accomodations</h3>
+          <label for="numRooms">Bedrooms</label>
+          <input id="numRooms" type="number" name="numRooms" placeholder="Number of bedrooms" value="<?=toHTML($house->numRooms)?>">
+          
+          <label for="numBeds">Beds</label>
+          <input id="numBeds" type="number" name="numBeds" placeholder="Number of beds"  value="<?=toHTML($house->numBeds)?>">
+
+          <label for="numBathrooms">Bathrooms</label>
+          <input id="numBathrooms" type="number" name="numBathrooms" placeholder="Number of bathrooms" value="<?=toHTML($house->numBathrooms)?>">
+        </section>
+
+        <section id="details">
+          <h3>Details</h3>
+          
+          <label for="capacity">Capacity</label>
+          <input id="capacity" type="number" name="capacity" placeholder="Guest capacity" value="<?=toHTML($house->capacity)?>">
+
+          <label for="price">Price (Max. 1000€)</label>
+          <input id="price" type="number" step="0.01" name="price" placeholder="€ / night" value="<?=toHTML($house->pricePerDay)?>">
+        </section>
+
+        <div id=addHouseImages>
+          <input id="files" type="file" name="fileUpload[]" multiple >        
+          <label for="files">Choose images</label>
+          <ul id="result">
+            <?php foreach($pictures as $picture){?>
+              <li><img src=<?=$picture?> alt="<?=toHTML($house->title)?>"></li>
+            <?php } ?>
+          </ul>
+        </div>
+        <button type="submit">Add house</button>
+      </form>
+    </section>  
   </section>
 <?php } ?>
 

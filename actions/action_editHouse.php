@@ -26,7 +26,7 @@
     die(header('Location: ../pages/house.php?id='.$id));
   }
   
-  if ($price <= 0 || !is_numeric($price)) {
+  if ($price <= 0 || $price > 1000 || !is_numeric($price)) {
     addErrorMessage('Editing place failed! Price invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
@@ -51,7 +51,7 @@
     die(header('Location: ../pages/house.php?id=${id}'));
   }
 
-  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$capacity,$numRooms,$numBeds,$numBathrooms)){
+  if(!editHouse($id,$country,$city,$address,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Editing place failed. Country is not valid!');
     die(header('Location: ../pages/house.php?id='.$id));
   }

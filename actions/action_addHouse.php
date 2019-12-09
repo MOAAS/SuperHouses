@@ -19,8 +19,8 @@
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
-  // verificar se price > 0
-  if ($price <= 0 || !is_numeric($price)) {
+  
+  if ($price <= 0 || $price > 1000 || !is_numeric($price)) {
     addErrorMessage('Adding place failed! Price invalid!');
     die(header('Location: ../pages/profile.php#Add Place'));
   }
@@ -45,7 +45,7 @@
     die(header('Location: ../pages/profile.php#Add Place'));
   }
   
-  if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$capacity,$numRooms,$numBeds,$numBathrooms)){
+  if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Adding place failed! Country is not valid!');
     die(header('Location: ../pages/profile.php#Add Place'));
   }

@@ -56,6 +56,7 @@ CREATE VIEW PlaceComplete AS
 
 CREATE TABLE Reservation (
     id INTEGER PRIMARY KEY,
+    pricePerDay REAL NOT NULL,
     dateStart DATE NOT NULL,
     dateEnd DATE NOT NULL,
     user REFERENCES User NOT NULL,

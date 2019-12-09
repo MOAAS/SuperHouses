@@ -234,60 +234,60 @@ body{
 }
 
 /*Dark theme switch*/
-.theme-switch-wrapper {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-}
-.theme-switch {
-    display: inline-block;
-    height: 34px;
-    position: relative;
-    width: 60px;
-  }
-  
-  .theme-switch input {
-    display:none;
-  }
-  
-  .slider {
-    background-color: var(--input-bg-color);
-    bottom: 0;
-    cursor: pointer;
-    left: 0;
-    position: absolute;
-    right: 0;
-    top: 0;
-    transition: .4s;
-  }
-  
-  .slider:before {
-    background-color: var(--main-color);
-    bottom: 4px;
-    content: "";
-    height: 26px;
-    left: 4px;
-    position: absolute;
-    transition: .4s;
-    width: 26px;
-  }
-  
-  input:checked + .slider {
-    background-color:  var(--input-bg-color);
-  }
-  
-  input:checked + .slider:before {
-    transform: translateX(26px);
-  }
-  
-  .slider.round {
-    border-radius: 34px;
-  }
-  
-  .slider.round:before {
-    border-radius: 50%;
-  }
+                                                                                                                                    .theme-switch-wrapper {
+                                                                                                                                        display: flex;
+                                                                                                                                        align-items: center;
+                                                                                                                                        justify-content: space-between;
+                                                                                                                                        
+                                                                                                                                                                                                    }
+            /* isto  */                                                                                                                                                                                        .theme-switch {
+                                                                                                                                                                                                        display: inline-block;
+                        /* é  */                                                                                                                                                                       height: 34px;
+                                                                                                                                                                                                        position: relative;
+                                                                                                                                                                                                        width: 60px;
+                  /* mesmo  */                                                                                                                                                                          }
+                                                                                                                                                                                                    
+                                                                                                                                                                                                    .theme-switch input {
+                           /* fiiixe  */                                                                                                    display:none;
+                                                                                                                                    }
+                                                                                                                          
+                                                                                                                                    .slider {
+                                                                                                                                        background-color: var(--input-bg-color);
+                                                                                                                                        bottom: 0;
+                                                                                                                                        cursor: pointer;
+                                                                                                                                                                                            left: 0;
+                                                                                                                                                                                            position: absolute;
+                                                                                                                                                                                            right: 0;
+                                                                                                                                        top: 0;
+                                                                                                                                        transition: .4s;
+                                                                                                                                    }
+                                                                                                
+                                                                                                .slider:before {
+                                                                                                    background-color: var(--main-color);
+                                                                                                    bottom: 4px;
+                                                                                                    content: "";
+                                                                                                    height: 26px;
+                                                                                                    left: 4px;
+                                                                                                                                                                        position: absolute;
+                                                                                                                                                                        transition: .4s;
+                                                                                                                                                                        width: 26px;
+                                                                                                                                                                    }
+                                                                                                                                                                    
+                                                                                                                                                                    input:checked + .slider {
+                                                                                                                                                                        background-color:  var(--input-bg-color);
+                                                                                                                                                                    }
+                                                                                                                                                                    
+                                                                                                                                                                    input:checked + .slider:before {
+                                                                                                                                                                        transform: translateX(26px);
+                                                                                                                                                                    }
+                                                                                                
+                                                                                                .slider.round {
+                                                                                                    border-radius: 34px;
+                                                                                                }
+                                                                                                                                    
+                                                                                                                                    .slider.round:before {
+                                                                                                                                        border-radius: 50%;
+                                                                                                                                    }
 
 
 /* Generic */
@@ -314,12 +314,17 @@ ul {
 input, label, select, textarea {
     display: block;
     color:var(--text-color);
+
 }
 
 img {
     object-fit: cover;
 }
 
+textarea {
+    height: 10em;
+    resize: none;
+}
 
 input[type="text"], 
 input[type="password"], 
@@ -429,6 +434,10 @@ button:hover {
 
 .hidden {
     display: none;
+}
+
+.invalidInput::placeholder {
+    color: var(--error-color);
 }
 
 .priceTag .priceValue {
@@ -681,79 +690,56 @@ button:hover {
   margin: 8px 0;
 }
 
-#addHouse p,
-#addHouse label {
-    font-weight: bold;
-    margin-top: 1em;    
-    margin-bottom: 0;    
+#addHouse form > section {
+    display: grid;
+    align-items: center;
+    grid-auto-flow: column;
+    grid-template-rows: 0.8fr 0.4fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr;
+    column-gap: 10px;
+    margin: 1em 0;
 }
 
-#addHouse #localization,
-#addHouse #details {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
-}
-
-#addHouse #accomodations {
-    display: grid;
-    grid-template-columns: 1fr 1fr 1fr;
-    grid-gap: 20px;
+#addHouse form > section h3 {
+    grid-column: 1 / span 3;
 }
 
 #addHouse #description {
     height: 10em;
     box-sizing: border-box;
-    resize: none;
 }
 
-#addHouse input[type="submit"] {
+#addHouse button[type="submit"] {
     font-size: 1.25em;
     width: 25%;
-    margin-bottom: 0.75em;
-    margin-top: 0.3em;
+    margin: 1em 0 0.25em 0;
 }
 
 
-/*Remove arrows from input type number*/
-
 #addHouseImages [type="file"] + label {
-    border: none;
     border-radius: 5px;
-    color: #000000;
-    cursor: pointer;
     display: inline-block;
-    font-family: 'Poppins', sans-serif;
-    font-size: inherit;
-    font-weight: 600;
-    margin-bottom: 1rem;
-    outline: none;
+    margin-bottom: 1em;
     padding: 0.5em 2em;
     position: relative;
     transition: all 0.3s;
-    vertical-align: middle;
-}
-
-#addHouseImages [type="file"] + label {
     background-color: var(--secondary-color);
     border-radius: 50px;
     overflow: hidden;
 }
+
 #addHouseImages [type="file"] + label::before {
-    color: #000000;
     content: "\f382";
-    font-family: "Font Awesome 5 Free";
-    font-size: 100%;
-    height: 100%;
-    right: 130%;
-    line-height: 3.3;
+    font-family: "Font Awesome 5 Free";    
     position: absolute;
-    top: -9px;
+    top: 10px; right: 130%;
     transition: all 0.3s;
 }
+
 #addHouseImages [type="file"] + label:hover {
     background-color: var(--secondary-color-hl);
 }
+
 #addHouseImages [type="file"] + label:hover::before {
     right: 85%;
 }
@@ -768,14 +754,11 @@ button:hover {
     grid-gap: 10px;
     align-items: center;
     padding:1em;
-    margin-top:0em;
-    margin-bottom: 2em;
 }
 
 #result img{
     width:9em;
     height:9em;
-    vertical-align: top;
 }
 
 /* Your reservations (incoming) */
@@ -867,8 +850,6 @@ button:hover {
 .reviewForm textarea {
     margin: 1em 0;
     width: 100%;
-    height: 10em;
-    resize: none;
 }
 
 .reviewForm .rating {
@@ -1582,8 +1563,6 @@ button:hover {
 .comment textarea {
     margin: 1em 0;
     width: 100%;
-    height: 10em;
-    resize: none;
 }
 
 /* Booking */

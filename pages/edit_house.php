@@ -1,5 +1,6 @@
 <?php 
   include_once('../includes/session.php');
+  include_once('../includes/sessionMessages.php');
   include_once('../includes/htmlcleaner2000.php');
   include_once('../templates/tpl_common.php');
   include_once('../templates/tpl_houses.php');
@@ -14,8 +15,18 @@
   
   $id = $_GET['id'];
   $house = getHouseByID($id);
-
+  if($house == null) {
+    addErrorMessage('The house you searched for is no longer available.');
+    die(header('Location: search_houses.php'));
+  }
+  
+  if ($house->ownerUsername != $_SESSION['username']) {
+    addErrorMessage("You don't have permission to edit this house.");
+    die(header('Location: search_houses.php'));
+  }
   $pictures = getHousePhotoPathsByID($id);
+
+
 
   draw_header($_SESSION['username'], "../js/edithouse.js");
   draw_editHouse($house, $pictures);

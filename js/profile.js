@@ -60,7 +60,7 @@ function updateReservations() {
 
 function removeReservation(reservation, button) {
     if (button.textContent == "Cancel Reservation")
-        addButtonAnimation(button, "red", '<i class="fas fa-trash"></i> Confirm cancellation', "Cancel Reservation");
+        addButtonAnimation(button, "red", '<i class="fas fa-trash"></i> Confirm action', "Cancel Reservation");
     else {
         reservation.style.transform = "scale(0)";
         setTimeout(() => {

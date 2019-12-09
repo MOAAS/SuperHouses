@@ -22,6 +22,75 @@ function dateToString(date) {
     return date.getDate() + " " + months[date.getMonth()].substr(0, 3) + " " + date.getFullYear();
 }
 
+function setInvalidInput(input, placeholder) {
+    input.classList.add('invalidInput');
+    input.style.border = "2px solid red";
+    input.placeholder = placeholder;
+}
+
+function clearInvalidInput(input) {
+    input.classList.remove('invalidInput');
+    input.style.border = "";
+    input.placeholder = "";
+}
+
+let addHouseForm = document.querySelector('#addHouse form');
+if (addHouseForm != null) {
+    addHouseForm.addEventListener('submit', event => {
+        event.preventDefault();
+        let validForm = true;
+        let addHouseFormButton = addHouseForm.querySelector('button[type="submit"]');
+    
+        let checkStringInput = (input) => {
+            if (input.value == "") {
+                validForm = false;
+                setInvalidInput(input, "Must not be empty!");
+            }
+            else clearInvalidInput(input)
+        }
+        
+        let checkIntegerInput = (input) => {
+            if (!Number.isInteger(parseInt(input.value)) || input.value <= 0) {
+                setInvalidInput(input, "Must be a positive integer!");
+                validForm = false;
+            }
+            else clearInvalidInput(input)
+        }
+        
+        let checkPriceInput = (input) => {
+            if (isNaN(input.value) || input.value <= 0 || input.value > 1000) {
+                setInvalidInput(input, "Must be a positive number (Max. 1000 €)!");
+                validForm = false;
+            }
+            else clearInvalidInput(input)
+        }
+
+        let checkFileInput = (input) => {
+            if (input.files.length == 0 && input.classList.contains('requiresFiles')) {
+                validForm = false;
+                setInvalidInput(input, "Must not be empty!");
+            }
+            else clearInvalidInput(input)
+        }
+        
+        checkStringInput(addHouseForm.querySelector('input[name="title"]'));
+        checkStringInput(addHouseForm.querySelector('textarea[name="description"]'));
+        checkStringInput(addHouseForm.querySelector('input[name="city"]'));
+        checkStringInput(addHouseForm.querySelector('input[name="address"]'));
+        checkStringInput(addHouseForm.querySelector('select[name="country"]'));
+        checkIntegerInput(addHouseForm.querySelector('input[name="numRooms"]'));
+        checkIntegerInput(addHouseForm.querySelector('input[name="numBeds"]'));
+        checkIntegerInput(addHouseForm.querySelector('input[name="numBathrooms"]'));
+        checkIntegerInput(addHouseForm.querySelector('input[name="capacity"]'));
+        checkPriceInput(addHouseForm.querySelector('input[name="price"]'));
+        checkFileInput(addHouseForm.querySelector('input[name="fileUpload[]"]'));
+        
+        if (validForm)
+            addHouseForm.submit();
+        else addButtonAnimation(addHouseFormButton, "red", "Invalid input", "Add house");
+    });
+}
+
 function previewImages(event,outputId){
     let files = event.target.files; //FileList object
     let output = document.getElementById(outputId);

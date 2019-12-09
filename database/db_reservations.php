@@ -7,7 +7,7 @@
     function makeReservationArray($rows) {
         $reservations = array();
         foreach($rows as $row)
-            array_push($reservations, new Reservation($row['id'], getHouseById($row['place']), $row['dateStart'], $row['dateEnd'], $row['username']));
+            array_push($reservations, new Reservation($row['id'], $row['pricePerDay'], getHouseById($row['place']), $row['dateStart'], $row['dateEnd'], $row['username']));
         return $reservations;
     }
     
@@ -40,12 +40,12 @@
         return $statement->fetchAll();
     }
 
-    function addReservation($from, $to, $userID, $placeID) {
+    function addReservation($pricePerDay, $from, $to, $userID, $placeID) {
         $db = Database::instance()->db();
 
-        $statement = $db->prepare('INSERT INTO Reservation VALUES (NULL, ?, ?, ?, ?)');
+        $statement = $db->prepare('INSERT INTO Reservation VALUES (NULL, ?, ?, ?, ?, ?)');
 
-        $statement->execute(array($from, $to, $userID, $placeID));
+        $statement->execute(array($pricePerDay, $from, $to, $userID, $placeID));
     }
 
     function getReservationByID($id) {
@@ -83,7 +83,7 @@
         
         $statement = $db->prepare(
             'SELECT * FROM (
-                SELECT Reservation.id, dateStart, dateEnd, place, username
+                SELECT Reservation.id, Reservation.pricePerDay, dateStart, dateEnd, place, username
                 FROM Reservation JOIN User ON Reservation.user = User.id
                 WHERE User.username = ? AND dateEnd <= ?
                 ORDER BY dateStart DESC
@@ -92,7 +92,7 @@
             UNION ALL
             
             SELECT * FROM (
-                SELECT Reservation.id, dateStart, dateEnd, place, username
+                SELECT Reservation.id, Reservation.pricePerDay, dateStart, dateEnd, place, username
                 FROM Reservation JOIN User ON Reservation.user = User.id
                 WHERE User.username = ? AND dateEnd > ?
                 ORDER BY dateStart ASC
@@ -111,7 +111,7 @@
         
         $statement = $db->prepare(
             'SELECT * FROM (
-                SELECT Reservation.id, dateStart, dateEnd, place, username
+                SELECT Reservation.id, Reservation.pricePerDay, dateStart, dateEnd, place, username
                 FROM Reservation JOIN User ON Reservation.user = User.id JOIN Place ON Reservation.place = Place.id 
                 WHERE Place.owner = ? AND dateEnd <= ?
                 ORDER BY dateStart DESC
@@ -120,7 +120,7 @@
             UNION ALL
 
             SELECT * FROM (
-                SELECT Reservation.id, dateStart, dateEnd, place, username
+                SELECT Reservation.id, Reservation.pricePerDay, dateStart, dateEnd, place, username
                 FROM Reservation JOIN User ON Reservation.user = User.id JOIN Place ON Reservation.place = Place.id 
                 WHERE Place.owner = ? AND dateEnd > ?
                 ORDER BY dateStart ASC
