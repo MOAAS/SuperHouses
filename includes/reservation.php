@@ -1,4 +1,6 @@
 <?php
+    include_once('../includes/htmlcleaner2000.php');
+
     class Reservation {
         private $id;
         private $place;
@@ -60,6 +62,10 @@
             return $this->totalNights;
         }
 
+        public function getPricePerDay() {
+            return $this->pricePerDay;
+        }
+
         public function getTotalPrice() {
             return $this->pricePerDay * $this->getNights();
         }
@@ -75,10 +81,6 @@
         public function getID() {
             return $this->id;
         }      
-        
-        public function getPricePerDay() {
-            return $this->pricePerDay;
-        }
     }
 
 ?>

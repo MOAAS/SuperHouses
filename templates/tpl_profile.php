@@ -155,7 +155,7 @@
             <td class="reservationGuest"><h3><?=$reservation->getGuest()?></h3></td>
             <td>
               <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
-              <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
+              <p class="numNights"><span class="priceValue"><?=$reservation->getPricePerDay()?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
             </td>
             <td>
               <?php if ($reservation->isApproaching()) { ?>
@@ -207,7 +207,7 @@
           </td>
           <td>
             <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
-            <p class="numNights"><span class="priceValue"><?=$place->pricePerDay?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
+            <p class="numNights"><span class="priceValue"><?=$reservation->getPricePerDay()?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
           </td>
           <td>
             <?php if (isReviewed($reservation->getID())) { ?>

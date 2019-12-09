@@ -64,7 +64,7 @@
     <?php foreach ($notifications as $notif) { ?>
       <li class="notifUnseen">
         <span class="notifId hidden"><?=$notif->getID()?></span>
-        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif->getID()?>">
+        <a class="notifClickable" href="../actions/action_viewNotification.php?id=<?=$notif->getID()?>">
           <p class="notifContent"><?=toHTML($notif->getContent())?></p>
           <span class="notifDate"><?=toHTML($notif->getDateString())?></span>
         </a>

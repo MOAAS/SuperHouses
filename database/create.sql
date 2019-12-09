@@ -66,6 +66,7 @@ CREATE TABLE Reservation (
 
 CREATE TABLE UserNotification (
     id INTEGER PRIMARY KEY,
+    link VARCHAR,
     content VARCHAR,
     dateTime DATE NOT NULL,
     user REFERENCES User NOT NULL,
@@ -158,4 +159,11 @@ INSERT INTO Place VALUES (5, 5, "coolApril", "The perfect house under the beach"
 
 INSERT INTO Reservation VALUES (1, "2019-11-07", "2019-11-11", "dommyWoods", 1);
 INSERT INTO Reservation VALUES (2, "2019-11-07", "2019-11-12", "zaccOld", 4);
+
+- delete / edit house
+- login signup c/ JS
+- notif click of ratings brings you to comment
+- responsive
+- rest API
+- no reservations display bug on JS side
 */

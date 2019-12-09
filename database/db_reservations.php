@@ -52,7 +52,7 @@
         $db = Database::instance()->db();
        
         $statement = $db->prepare(
-            'SELECT Reservation.id, dateStart, dateEnd, place, username
+            'SELECT Reservation.id, Reservation.pricePerDay, dateStart, dateEnd, place, username
             FROM Reservation JOIN User ON Reservation.user = User.id
             WHERE Reservation.id = ?'
         );

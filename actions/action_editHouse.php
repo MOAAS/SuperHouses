@@ -4,8 +4,7 @@
   include_once('../database/db_houses.php');
   include_once('../database/db_users.php');
   
-  $id = $_GET['id'];
-
+  $id = $_POST['placeID'];
   $title = $_POST['title'];
   $description = $_POST['description'];
   $country = $_POST['country'];
@@ -21,8 +20,9 @@
   $ownerId = getUserId($username);
   $house = getHouseById($id);
   
+  print_r("HELLO");
   if($username != $house->ownerUsername){
-    addErrorMessage('Editing place failed. You are not the owner!');
+    addErrorMessage('Editing place failed. You are not the owner! id: ' . $id . ' usernam' . $username . ' owner:' . $house->ownerUsername);
     die(header('Location: ../pages/house.php?id='.$id));
   }
   

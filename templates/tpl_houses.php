@@ -134,7 +134,8 @@
   <section id="editHouse">
     <section id="addHouse" class="genericForm">
       <h2>Add your place</h2>    
-      <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
+      <form method="post" action="../actions/action_editHouse.php" enctype="multipart/form-data">
+        <input class="hidden" type="text" name="placeID" value="<?=toHTML($house->place_id)?>"/>
 
         <div id="mainInfo">
           <label for="title">Title</label>      
@@ -187,7 +188,7 @@
         </section>
 
         <div id=addHouseImages>
-          <input id="files" type="file" name="fileUpload[]" multiple >        
+          <input id="files" type="file" name="fileUpload[]" multiple>        
           <label for="files">Choose images</label>
           <ul id="result">
             <?php foreach($pictures as $picture){?>

@@ -1,6 +1,8 @@
 <?php
     include_once('../includes/session.php');
+    include_once('../includes/htmlcleaner2000.php');
     include_once('../database/db_reservations.php');
+    include_once('../database/db_notifications.php');
 
     function validDate($date) {
         $d = DateTime::createFromFormat('Y-m-d', $date);
@@ -29,6 +31,10 @@
     else if (reservationOverlaps($placeID, $checkIn, $checkOut))
         echo json_encode('Overlapping reservation');
     else { 
+        sendNotification(
+            $place->ownerUsername, 
+            $_SESSION['username'] . " just made a reservation for " . dateString(DateTime::createFromFormat('Y-m-d', $checkIn)) . " (" . $place->title . ")", 
+            "../pages/profile.php#Future%20guests");
         addReservation($place->pricePerDay, $checkIn, $checkOut, $userID, $placeID);
         echo json_encode(null);
     }

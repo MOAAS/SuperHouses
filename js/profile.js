@@ -172,7 +172,7 @@ function findConversation(username) {
             return allConversations[i];
     }
     let newConversation = document.createElement('li');
-    newConversation.addEventListener('click', (_) => toConversation(username));
+  //  newConversation.addEventListener('click', (_) => toConversation(username));
     newConversation.classList.add('conversation');
     newConversation.innerHTML = 
         '<img src="../database/profileImages/defaultPic/default.png" alt="UserPhoto"></img>' +
@@ -190,6 +190,7 @@ function findConversation(username) {
 }
 
 function toConversation(username) {
+    console.log("hello");
     messageHistory.innerHTML = "";
     sendGetRequest('../actions/get_conversation.php',
     {

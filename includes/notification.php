@@ -1,4 +1,6 @@
 <?php
+    include_once('../includes/htmlcleaner2000.php');
+    
     class Notification {
         private $id;
         private $content;
@@ -7,7 +9,7 @@
         public function __construct($id, $content, $dateTime) {
             $this->id = $id;
             $this->content = $content;
-            $this->dateTime =  DateTime::createFromFormat('Y-m-d H:i:s', $dateTime);
+            $this->dateTime =  DateTime::createFromFormat('Y-m-d', $dateTime);
         }
 
         public function getContent() {
@@ -15,7 +17,7 @@
         }
 
         public function getDateString() {
-            return dateString($dateTime);
+            return dateString($this->dateTime);
         }
 
         public function getID() {

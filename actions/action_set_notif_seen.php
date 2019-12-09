@@ -3,12 +3,12 @@
     include_once('../database/db_notifications.php');
 
 
-    if ($_SESSION['username'] != getNotificationUsername($_POST['notif_id'])) {
-        echo "You filthy animal trying to hack this very secure website";
+    $notification = getNotificationByID($_POST['notif_id']);
+    if ($notification == false || $_SESSION['username'] != $notification['username']) {
+        echo "This one is not for you";
         return;
     }
 
     setNotificationSeen($_POST['notif_id']);
-
     
 ?>

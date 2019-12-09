@@ -2,7 +2,6 @@
     include_once('../includes/database.php');
     include_once('../includes/messages.php');
     include_once('../database/db_users.php');
-    include_once('../database/db_notifications.php');
 
     function sendMessage($senderUsername, $receiverUsername, $content) {
         $db = Database::instance()->db();
@@ -12,11 +11,7 @@
         $senderID = getUserID($senderUsername);
         $receiverID = getUserID($receiverUsername);
 
-        if ($senderID == false || $receiverID == false)
-            return;
-
         $statement->execute(array($content, date('Y-m-d H:i:s'), $senderID, $receiverID));
-        sendNotification($receiverUsername, "You received a message from " . $senderUsername . "!");
     }
     
     function setSeenMessagesFrom($otherUser, $username) {

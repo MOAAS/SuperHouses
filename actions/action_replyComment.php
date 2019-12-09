@@ -3,6 +3,7 @@
     
     include_once('../database/db_reservations.php');
     include_once('../database/db_ratings.php');
+    include_once('../database/db_notifications.php');
 
 
     $username = $_SESSION['username'];
@@ -32,4 +33,8 @@
     }
 
     setReservationReply($reservationID, $content);    
+    sendNotification(
+        $reservation->getGuest(), 
+        $_SESSION['username'] . " replied to your comment on " . $reservation->getPlace()->title . "!",
+        "../pages/house.php?id=" . $reservation->getPlace()->place_id);
 ?>

@@ -3,12 +3,12 @@
     include_once('../includes/notification.php');
     include_once('../database/db_users.php');
 
-    function sendNotification($username, $content) {
+    function sendNotification($username, $content, $link) {
         $db = Database::instance()->db();
 
-        $statement = $db->prepare('INSERT INTO UserNotification VALUES (NULL, ?, ?, ?, 0)');
+        $statement = $db->prepare('INSERT INTO UserNotification VALUES (NULL, ?, ?, ?, ?, 0)');
 
-        $statement->execute(array($content, date('Y-m-d H:i:s'), getUserID($username)));
+        $statement->execute(array($link, $content, date('Y-m-d'), getUserID($username)));
     }
     
     function setNotificationSeen($id) {
@@ -23,18 +23,18 @@
         $statement->execute(array($id));
     }
 
-    function getNotificationUsername($id) {
+    function getNotificationByID($id) {
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
-            'SELECT User.username
+            'SELECT User.username, UserNotification.link
             FROM UserNotification JOIN User ON user = User.id
             WHERE UserNotification.id = ?'
         );
 
         $statement->execute(array($id));
 
-        return $statement->fetch()['username'];
+        return $statement->fetch();
     }
 
     function getUnseenNotifications($username) {
@@ -43,7 +43,8 @@
         $statement = $db->prepare(
             'SELECT UserNotification.id, content, dateTime 
             FROM UserNotification JOIN User ON user = User.id
-            WHERE username = ? AND seen = 0'
+            WHERE username = ? AND seen = 0
+            ORDER BY dateTime DESC'
         );
 
         $statement->execute(array($username));

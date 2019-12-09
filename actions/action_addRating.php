@@ -3,7 +3,7 @@
     
     include_once('../database/db_reservations.php');
     include_once('../database/db_ratings.php');
-
+    include_once('../database/db_notifications.php');
 
     $username = $_SESSION['username'];
     $reservationID = $_POST['reservationID'];
@@ -44,4 +44,9 @@
     }
 
     addReservationRating($reservationID, $numStars, $content);    
+    sendNotification(
+        $reservation->getPlace()->ownerUsername, 
+        $_SESSION['username'] . " rated a place you listed!",
+        "../pages/house.php?id=" . $reservation->getPlace()->place_id);
+
 ?>
