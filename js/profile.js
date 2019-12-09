@@ -101,22 +101,19 @@ reservations.forEach(reservation => {
             event.preventDefault();
             let reviewContent = reviewForm.querySelector('textarea');
             let reviewRating = reviewForm.querySelector('.rating input:checked');
-            if (sendReviewBtn.textContent == "Confirm review") {
-                sendPostRequest("../actions/action_addRating.php", {
-                    reservationID: reservation.querySelector('.reservationID').textContent,
-                    content: reviewContent.value,
-                    numStars: parseInt(reviewRating.id.substr(0, 1))
-                })
-                reviewReservationBtn.outerHTML = '<button type="button" disabled>Reservation reviewed</button>'
-                toggleForm();                
-                return;
-            }
+            if (reviewRating == null)
+                return addButtonAnimation(sendReviewBtn, "red", "Must pick a rating", "Review")
             else if (reviewContent.value == "")
-                addButtonAnimation(sendReviewBtn, "red", "Can't be empty", "Review")
-            else if (reviewRating == null)
-                addButtonAnimation(sendReviewBtn, "red", "Must pick a rating", "Review")
-            else addButtonAnimation(sendReviewBtn, "green", "Confirm review", "Review")
-
+                return addButtonAnimation(sendReviewBtn, "red", "Can't be empty", "Review")
+            else if (sendReviewBtn.textContent == "Review")
+                return addButtonAnimation(sendReviewBtn, "green", "Confirm review", "Review")
+            sendPostRequest("../actions/action_addRating.php", {
+                reservationID: reservation.querySelector('.reservationID').textContent,
+                content: reviewContent.value,
+                numStars: parseInt(reviewRating.id.substr(0, 1))
+            })
+            reviewReservationBtn.outerHTML = '<button type="button" disabled>Reservation reviewed</button>'
+            toggleForm();     
         })
     }
 });

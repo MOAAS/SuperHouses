@@ -45,7 +45,7 @@
 
     function setReservationReply($reservationID, $content) {
         $db = Database::instance()->db();
-        $statement = $db->prepare("UPDATE Rating SET comment = ? WHERE reservation = ?");
+        $statement = $db->prepare("UPDATE Rating SET reply = ? WHERE reservation = ?");
         $statement->execute(array($content, $reservationID));
     }
 

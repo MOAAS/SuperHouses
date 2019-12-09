@@ -277,8 +277,7 @@
       
       <p>Recommended Capacity</p>
       <div id="details">
-        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" required>
-        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" required>
+        <input id="capacity" type="number" name="capacity" placeholder="Capacity" min="1" required>
         <input id="price" type="number" name="price" placeholder="Price $/day" min="1" required>
       </div>
 

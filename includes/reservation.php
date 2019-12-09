@@ -18,21 +18,12 @@
             $this->totalNights = $this->end->diff($this->start)->days;
         }
 
-        public function getStartString() {            
-            $day = $this->start->format('j');
-            $monthName = substr($this->start->format('F'), 0, 3);
-            $year = $this->start->format('Y');
-            
-            return $monthName . " " . $day . ", " . $year;
+        public function getStartString() {      
+            return dateString($this->start);      
         }
 
         public function getEndString() {
-            $day = $this->end->format('j');
-            $monthName = substr($this->end->format('F'), 0, 3);
-
-            $year = $this->end->format('Y');
-            
-            return $monthName . " " . $day . ", " . $year;
+            return dateString($this->end);                  
         }
 
         public function isApproaching() {
@@ -45,6 +36,7 @@
         }
 
         public function isCancellable() {
+            return false;
             $now = new DateTime();
             $daysToStart = $now->diff($this->start)->format('%R%a');
 
@@ -52,6 +44,7 @@
         }
 
         public function hasEnded() {
+            return true;
             $now = new DateTime();
             $daysSinceEnd = $this->end->diff($now)->format('%R%a');
             return $daysSinceEnd >= 0;

@@ -31,7 +31,7 @@
         return;
     }
     
-    if (getReservationHost($reservationID)['username'] == $username) {
+    if (getReservationHost($reservationID) == $username) {
         echo "The host cannot review his own house";
         return;
     }

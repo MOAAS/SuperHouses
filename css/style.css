@@ -1475,12 +1475,15 @@ button:hover {
     padding: 1em 0 0 0;
 }
 
+#place-info #placeRating {
+    margin: 1.5em 0;
+}
+
 #place-info #avgRating {
     background-color: var(--main-color);
     color: var(--text-color-2);
     border-radius: 4px;
     padding: 0.5em;
-
 }
 
 /* House comments */
@@ -1494,6 +1497,7 @@ button:hover {
         "pic rating rating"
         "comment comment comment"
         "replyForm replyForm replyForm";
+    margin-top: 1em;
     padding: 1em 0 0 0.5em;
     transition: background-color 0.3s ease-in-out;
 }
@@ -1616,7 +1620,7 @@ button:hover {
     }
 }
 
-#editHouse{
+#editHouse {
     max-width: 60em;
     margin: 2em auto;
 }

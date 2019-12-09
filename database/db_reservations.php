@@ -98,10 +98,9 @@
                 ORDER BY dateStart ASC
             )'
         );
-
-        $userID = getUserID($username);
+        
         $now = date('Y-m-d');
-        $statement->execute(array($userID, $now, $userID, $now));
+        $statement->execute(array($username, $now, $username, $now));
 
         return makeReservationArray($statement->fetchAll());
     }
@@ -146,7 +145,7 @@
 
         $statement->execute(array($reservationID));
 
-        return $statement->fetch();
+        return $statement->fetch()['username'];
     }
 
 

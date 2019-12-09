@@ -3,6 +3,8 @@
 
 
 let houseID = document.getElementById("houseID");
+let ownerPic = document.querySelector('#houseOwner img').src;
+let ownerName = document.querySelector('#houseOwnerName').textContent;
 
 let photos = document.getElementById("photoCarousel").children;
 let slideIndex = (photos.length > 1)?1:0;
@@ -159,10 +161,10 @@ clickableComments.forEach(comment => {
     let replyButton = form.querySelector('button');
     let reservationID = comment.querySelector('.reservationID').textContent;    
 
-    if (messageContent == "") {
-      addButtonAnimation(replyButton, "red", "Reply can't be empty", "Reply")
-      return;
-    }
+    if (messageContent == "")
+      return addButtonAnimation(replyButton, "red", "Reply can't be empty", "Reply")
+    else if (replyButton.textContent == "Reply")
+      return addButtonAnimation(replyButton, "green", "Confirm reply", "Reply");
 
     sendPostRequest('../actions/action_replyComment.php', {
       reservationID: reservationID,
@@ -173,8 +175,8 @@ clickableComments.forEach(comment => {
     reply.classList.add('reply')
     reply.classList.add('comment')
     reply.innerHTML = 
-    '<img src="../database/profileImages/3" alt="Marco"> ' +
-    '<h3 class="commentPoster">Marco321</h3>' +
+    '<img src="' +ownerPic + '" alt="' + ownerName + '"> ' +
+    '<h3 class="commentPoster">' + ownerName + '</h3>' +
     '<p class="commentContent allowNewlines">' + htmlEntities(messageContent) + '</p>'
 
     comment.append(reply);

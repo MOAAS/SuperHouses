@@ -16,8 +16,7 @@
                 $place['title'], 
                 $place['description'], 
                 $place['pricePerDay'], 
-                $place['minPeople'], 
-                $place['maxPeople'],
+                $place['capacity'],
                 $place['numRooms'],
                 $place['numBeds'],
                 $place['numBathrooms'])
@@ -73,7 +72,7 @@
         $statement = $db->prepare(
             "SELECT *
             FROM PlaceComplete
-            WHERE pricePerDay <= ? AND ? <= maxPeople AND (countryName LIKE ? OR city LIKE ?) AND id NOT IN (
+            WHERE pricePerDay <= ? AND ? <= capacity AND (countryName LIKE ? OR city LIKE ?) AND id NOT IN (
                 SELECT id 
                 FROM Reservation
                 WHERE place = id AND dateStart < ? AND dateEnd > ?
@@ -114,7 +113,7 @@
         return $maxplaceid['max(ID)']+1;
     }
 
-    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $min,  $max, $numRooms, $numBeds, $numBathrooms) {
+    function addHouse($id, $country, $city, $address, $owner, $title, $description, $price, $capacity, $numRooms, $numBeds, $numBathrooms) {
         $db = Database::instance()->db();
 
         $newplaceid = getNewPlaceLocId();
@@ -126,12 +125,12 @@
         $statement = $db->prepare('INSERT INTO PlaceLocation Values (?, ?, ?, ?)');
         $statement->execute(array($newplaceid,$countryID,$city,$address));
 
-        $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
-        $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms));
+        $statement = $db->prepare('INSERT INTO Place Values (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)');
+        $statement->execute(array($id, $newplaceid, $owner, $title, $description, $price, $capacity, $numRooms, $numBeds, $numBathrooms));
         return true;
     }
 
-    function editHouse($id, $country, $city, $address, $title, $description, $price, $min,  $max, $numRooms, $numBeds, $numBathrooms) {
+    function editHouse($id, $country, $city, $address, $title, $description, $price, $capacity, $numRooms, $numBeds, $numBathrooms) {
         $db = Database::instance()->db();
         
         $countryID = getCountryID($country);
@@ -155,10 +154,10 @@
         $statement->execute(array($countryID, $city, $address, $placeId));
 
         $statement = $db->prepare('UPDATE Place 
-                                 SET title = ?, description = ?, pricePerDay = ?, minPeople = ?, maxPeople = ?, numRooms = ?, numBeds = ?, numBathrooms = ?
+                                 SET title = ?, description = ?, pricePerDay = ?, capacity = ?, numRooms = ?, numBeds = ?, numBathrooms = ?
                                  WHERE id = ?');
     
-        $statement->execute(array($title, $description, $price, $min, $max, $numRooms, $numBeds, $numBathrooms, $id));
+        $statement->execute(array($title, $description, $price, $capacity, $numRooms, $numBeds, $numBathrooms, $id));
         return true;
     } 
 ?>

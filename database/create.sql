@@ -39,17 +39,19 @@ CREATE TABLE Place (
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL,
     pricePerDay REAL NOT NULL,
-    minPeople INTEGER NOT NULL,
-    maxPeople INTEGER NOT NULL,
+    capacity INTEGER NOT NULL,
     numRooms INTEGER NOT NULL,
     numBeds INTEGER NOT NULL,
     numBathrooms INTEGER NOT NULL,
-    CONSTRAINT CHK_people CHECK (minPeople <= maxPeople),
-    CONSTRAINT CHK_price CHECK (pricePerDay >= 0)
+    CONSTRAINT CHK_people CHECK (capacity > 0),
+    CONSTRAINT CHK_rooms CHECK (numRooms > 0),
+    CONSTRAINT CHK_beds CHECK (numBeds > 0),
+    CONSTRAINT CHK_bathrooms CHECK (numBathrooms > 0),
+    CONSTRAINT CHK_price CHECK (pricePerDay > 0)
 );
 
 CREATE VIEW PlaceComplete AS 
-    SELECT Place.id AS id, countryName, PlaceLocation.city AS city, address, username AS ownerUsername, displayname AS ownerName, title, description, pricePerDay, minPeople, maxPeople, numRooms, numBeds, numBathrooms
+    SELECT Place.id AS id, countryName, PlaceLocation.city AS city, address, username AS ownerUsername, displayname AS ownerName, title, description, pricePerDay, capacity, numRooms, numBeds, numBathrooms
     FROM Place JOIN PlaceLocation ON Place.location = PlaceLocation.id JOIN Country ON PlaceLocation.country = Country.id JOIN User ON Place.owner = User.id;
 
 CREATE TABLE Reservation (
@@ -128,11 +130,11 @@ INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua Falso 332");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua do lixo, 2");
 INSERT INTO PlaceLocation VALUES (NULL, 1, "Faro", "Rua debaixo da praia, 1");
 
-INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "When I was just a little boy, my parents would take me to a cozy house in Porto in the cold Winter. I have many fond memories of sitting around the fireplace with my parents, drinking whiskey and getting extra close to my uncle for warmth. And now you can too!", 96.25, 3, 5, 2, 3, 2);
-INSERT INTO Place VALUES (NULL, 2, 1, "Cute house near the beach", "But this one's cuter", 50.00, 3, 5, 1, 3, 2);
-INSERT INTO Place VALUES (NULL, 3, 1, "Cute house near the beach", "But this one's nearer", 1000.00, 8, 10, 3, 6, 3);
-INSERT INTO Place VALUES (NULL, 4, 1, "Awful house on the beach", "A great place", 75.00, 3, 5, 1, 1, 0);
-INSERT INTO Place VALUES (NULL, 5, 1, "The perfect house under the beach", "You won't enjoy this", 4.00, 1, 2, 1, 1, 1);
+INSERT INTO Place VALUES (NULL, 1, 1, "The good place", "When I was just a little boy, my parents would take me to a cozy house in Porto in the cold Winter. I have many fond memories of sitting around the fireplace with my parents, drinking whiskey and getting extra close to my uncle for warmth. And now you can too!", 96.25, 5, 2, 3, 2);
+INSERT INTO Place VALUES (NULL, 2, 1, "Cute house near the beach", "But this one's cuter", 50.00, 5, 1, 3, 2);
+INSERT INTO Place VALUES (NULL, 3, 1, "Cute house near the beach", "But this one's nearer", 1000.00, 10, 3, 6, 3);
+INSERT INTO Place VALUES (NULL, 4, 1, "Awful house on the beach", "A great place", 75.00, 5, 1, 1, 1);
+INSERT INTO Place VALUES (NULL, 5, 1, "The perfect house under the beach", "You won't enjoy this", 4.00, 2, 1, 1, 1);
 
 -- All passwords are 1234 in SHA-1 format
 /*

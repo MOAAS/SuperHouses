@@ -15,10 +15,7 @@
         }
 
         public function getDateString() {
-            $day = $this->dateTime->format('j');
-            $monthName = substr($this->dateTime->format('F'), 0, 3);
-            $year = $this->dateTime->format('Y');            
-            return $monthName . " " . $day . ", " . $year;
+            return dateString($dateTime);
         }
 
         public function getID() {

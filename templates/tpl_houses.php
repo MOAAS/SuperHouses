@@ -16,7 +16,7 @@
               <p class="priceCurrency"> € / day</p>
             </div>
             <p class="houseLocation"><i class="fas fa-map-marker-alt"></i> <?=toHTML($house->getLocationString())?></p>
-            <p class="guestLimit"><i class="fas fa-users"></i> <?=toHTML($house->minPeople)?> - <?=toHTML($house->maxPeople)?> people</p>
+            <p class="guestLimit"><i class="fas fa-users"></i> <?=toHTML($house->capacityString())?></p>
           </div>
         </a>
       </li>
@@ -52,7 +52,7 @@
         <h2><?=toHTML($house->title)?></h2>        
         <p id="houseOwner">
           <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerUsername)?>"> 
-          <?=toHTML($house->ownerDisplayname)?> 
+          <span id="houseOwnerName"><?=toHTML($house->ownerDisplayname)?></span>
           <?php if ($house->ownerUsername != $username) {?>
             <a href="../pages/profile.php#Conversation <?=toHTML($house->ownerUsername)?>">(Message)</a>
           <?php } ?>
@@ -68,9 +68,9 @@
         <p id="houseLocation"><i class="fa fa-map-marker-alt"></i> &nbsp;<?=toHTML($house->getLocationString())?></p>
         <p id="houseAddress">Address: <?=toHTML($house->address)?></p>
         <p id="houseAcommodations">
-          <i class="fas fa-users"> <?=$house->maxPeople?> people</i>
-          <i class="fas fa-bed"> <?=toHTML($house->numRooms)?> rooms / <?=toHTML($house->numBeds)?> beds</i> 
-          <i class="fas fa-shower"> <?=toHTML($house->numBathrooms)?> bathrooms</i> 
+          <i class="fas fa-users"> <?=toHTML($house->capacityString())?></i>
+          <i class="fas fa-bed"> <?=toHTML($house->numBedroomsString())?> / <?=toHTML($house->numBedsString())?></i> 
+          <i class="fas fa-shower"> <?=toHTML($house->numBathroomsString())?></i> 
         </p>
         <p id="houseDescription" class="allowNewlines"><?=toHTML($house->description)?></p>
       </section>
@@ -91,12 +91,14 @@
 
       <section id="placeComments">
         <h2 class="<?=$numComments==0?'hidden':''?>">Comments</h2>
-        <?php foreach($comments as $comment)  { ?>
-          <article class="comment">
+        <?php foreach($comments as $comment)  {
+          $canReply = ($username == $house->ownerUsername) && ($comment['reply'] == null); 
+        ?>
+          <article class="comment <?=$canReply?'clickable':''?>">
             <span class="hidden reservationID"><?=$comment['reservation']?></span>
             <img src="<?=getProfilePicture($comment['username'])?>" alt="<?=toHTML($comment['username'])?>"> 
             <h3 class="commentPoster"><?=toHTML($comment['username'])?></h3> 
-            <p class="commentReservation"><?=toHTML($comment['date'])?></p>
+            <p class="commentReservation"><?=monthYearString(DateTime::createFromFormat('Y-m-d', $comment['date']))?></p>
             <div class="rating">
 
               <?php for ($i = 0; $i < $comment['rating']; $i++) { ?>
@@ -110,11 +112,11 @@
             <p class="commentContent allowNewLines"><?=toHTML($comment['comment'])?></p>
             <?php if ($comment['reply'] != null) { ?>
               <section class="comment reply">
-                <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerUsername)?>"> 
-                <h3 class="commentPoster"><?=toHTML($house->ownerUsername)?></h3>
+                <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerDisplayname)?>"> 
+                <h3 class="commentPoster"><?=toHTML($house->ownerDisplayname)?></h3>
                 <p class="commentContent allowNewLines"><?=$comment['reply']?></p>
               </section>
-            <?php } else if ($username == $house->ownerUsername) { ?>
+            <?php } else if ($canReply) { ?>
               <form method="post" action="" class="genericForm hidden">
                 <h3>Reply to guest</h3>
                 <span class="closeForm clickable"><i class="fas fa-times"></i></span>
@@ -166,8 +168,7 @@
       
       <p>Recommended Capacity</p>
       <div id="details">
-        <input id="min" type="number" name="min" placeholder="Minimum people" min="1" value="<?=toHTML($house->minPeople)?>" required>
-        <input id="max" type="number" name="max" placeholder="Maximum people" min="1" value="<?=toHTML($house->maxPeople)?>" required>
+        <input id="capacity" type="number" name="capacity" placeholder="Capacity" min="1" value="<?=toHTML($house->capacity)?>" required>
         <input id="price" type="number" name="price" placeholder="Price $/day" min="1" value="<?=toHTML($house->pricePerDay)?>" required>
       </div>
 

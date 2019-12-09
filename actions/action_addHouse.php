@@ -12,8 +12,7 @@
   $city = $_POST['city'];
   $address = $_POST['address'];
   $price = $_POST['price'];
-  $min = $_POST['min'];
-  $max = $_POST['max'];
+  $capacity = $_POST['capacity'];
   $numRooms = $_POST['numRooms'];
   $numBeds = $_POST['numBeds'];
   $numBathrooms =$_POST['numBathrooms'];
@@ -25,18 +24,9 @@
     addErrorMessage('Adding place failed! Price invalid!');
     die(header('Location: ../pages/profile.php#Add Place'));
   }
-  if ($min <= 0 || !is_numeric($min)) {
-    addErrorMessage('Adding place failed! Minimum capacity invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
-  }
 
-  if ($max <= 0 || !is_numeric($max)) {
-    addErrorMessage('Adding place failed! Maximum capacity invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
-  }
-
-  if ($min > $max) {
-    addErrorMessage('Adding place failed! Minimum capacity is bigger than Maximum!');
+  if ($capacity <= 0 || !is_numeric($capacity)) {
+    addErrorMessage('Adding place failed! Capacity invalid!');
     die(header('Location: ../pages/profile.php#Add Place'));
   }
 
@@ -55,7 +45,7 @@
     die(header('Location: ../pages/profile.php#Add Place'));
   }
   
-  if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms)){
+  if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,$price,$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Adding place failed! Country is not valid!');
     die(header('Location: ../pages/profile.php#Add Place'));
   }

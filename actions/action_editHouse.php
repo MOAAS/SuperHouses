@@ -12,8 +12,7 @@
   $city = $_POST['city'];
   $address = $_POST['address'];
   $price = $_POST['price'];
-  $min = $_POST['min'];
-  $max = $_POST['max'];
+  $capacity = $_POST['capacity'];
   $numRooms = $_POST['numRooms'];
   $numBeds = $_POST['numBeds'];
   $numBathrooms = $_POST['numBathrooms'];
@@ -31,18 +30,9 @@
     addErrorMessage('Editing place failed! Price invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
-  if ($min <= 0 || !is_numeric($min)) {
-    addErrorMessage('Editing place failed! Minimum capacity invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
-  }
 
-  if ($max <= 0 || !is_numeric($max)) {
-    addErrorMessage('Editing place failed! Maximum capacity invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
-  }
-
-  if ($min > $max) {
-    addErrorMessage('Editing place failed! Minimum capacity is bigger than Maximum!');
+  if ($capacity <= 0 || !is_numeric($capacity)) {
+    addErrorMessage('Editing place failed! Capacity invalid!');
     die(header('Location: ../pages/house.php?id=${id}'));
   }
 
@@ -61,7 +51,7 @@
     die(header('Location: ../pages/house.php?id=${id}'));
   }
 
-  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$min,$max,$numRooms,$numBeds,$numBathrooms)){
+  if(!editHouse($id,$country,$city,$address,$title,$description,$price,$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Editing place failed. Country is not valid!');
     die(header('Location: ../pages/house.php?id='.$id));
   }

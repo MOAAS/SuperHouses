@@ -26,7 +26,7 @@
         return;
     }
 
-    if (username == null || getReservationHost($reservationID) != $username) {
+    if ($username == null || getReservationHost($reservationID) != $username) {
         echo "You're not this reservation's host";
         return;
     }
