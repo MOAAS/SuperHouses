@@ -32,7 +32,7 @@
   $numComments = count($comments);
 ?>
   <section id="house">
-    <span id="houseID" class="hidden"><?=$house->place_id?></span>
+    <h2 id="houseID" class="hidden"><?=$house->place_id?></h2>
     <div id="photos">
       <ul id="photoCarousel">
       <?php foreach($pictures as $picture){?>
@@ -54,7 +54,7 @@
           <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerUsername)?>"> 
           <span id="houseOwnerName"><?=toHTML($house->ownerDisplayname)?></span>
           <?php if ($house->ownerUsername != $username) {?>
-            <a href="../pages/profile.php#Conversation <?=toHTML($house->ownerUsername)?>">(Message)</a>
+            <a href="../pages/profile.php#Conversation%20<?=toHTML($house->ownerUsername)?>">(Message)</a>
           <?php } ?>
         </p>
         <div id="placeRating">
@@ -88,7 +88,6 @@
         <button type="submit">Book</button>
         <span id="loadingIndicator" class="hidden"><i class="fas fa-spinner"></i></span>
       </form>
-
       <section id="placeComments">
         <h2 class="<?=$numComments==0?'hidden':''?>">Comments</h2>
         <?php foreach($comments as $comment)  {
@@ -125,8 +124,9 @@
               </form>
             <?php } ?>
           </article>
-        <?php } ?>    
-
+        <?php } ?>  
+      </section>
+    </div>
   </section>
 <?php } ?>
 

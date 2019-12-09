@@ -62,8 +62,8 @@
       <div class="theme-switch-wrapper">
         <p>Theme</p>
           <label class="theme-switch" for="checkbox">
-          <input type="checkbox" id="checkbox" />
-          <div class="slider round"></div>
+            <input type="checkbox" id="checkbox" />
+            <div class="slider round"></div>
           </label>
       </div>
     </section>
@@ -124,7 +124,7 @@
     <h2>Future Guests</h2>
     <?php if (count($comingReservations) == 0) { ?>
       <p>You haven't received any reservations yet!</p>
-      <button id="checkPlacesButton" type="button">Check your places</a></button>      
+      <button id="checkPlacesButton" type="button">Check your places</button>      
     <?php } else { ?>
     <table>
         <thead>
@@ -141,7 +141,7 @@
             $place = $reservation->getPlace();
           ?>
           <tr class="reservation">
-            <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0"></a></td>
+            <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
             <td class="reservationInfo">
               <span class="hidden reservationID"><?=$reservation->getID()?></span>
               <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
@@ -194,7 +194,7 @@
           $reservation->isApproaching();
         ?>
         <tr class="reservation">
-          <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0"></a></td>
+          <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
           <td class="reservationInfo">
             <span class="hidden reservationID"><?=$reservation->getID()?></span>
             <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
@@ -223,7 +223,7 @@
             <?php } ?>
           </td>
           <td colspan="5" class="hidden reviewForm">
-            <form method="post" action="" class="genericForm">
+            <form method="post" class="genericForm">
               <h3>Review this reservation!</h3>
               <div class="rating">
                 <input type="radio" id="1star<?=$reservation->getID()?>" name="stars" class="hidden">
@@ -329,7 +329,7 @@
     <header>
       <i id="messageBack" class="fas fa-chevron-left"></i>
       <img src="../database/profileImages/defaultPic/default.png" alt="Photo"/>
-      <h2></h2>
+      <h2>Placeholder</h2>
     </header>
     <div id="messageHistory">
       <ul>

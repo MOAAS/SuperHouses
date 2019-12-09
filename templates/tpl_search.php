@@ -65,13 +65,13 @@
 <?php } ?>
 
 <?php function draw_searchPage($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies){?>
-    <section id="searchPage">
+    <div id="searchPage">
         <?php draw_search($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies); ?>
-    </section>
+    </div>
 <?php } ?>
 
 <?php function draw_main() { ?>
-    <section id="mainPage">
+    <div id="mainPage">
         <?php draw_search("","","",500,0,0,0); ?>
-    </section>
+    </div>
 <?php } ?>
