@@ -9,7 +9,7 @@
   if (validCredentials($username, $password)) {
     $_SESSION['username'] = $username;
     addSuccessMessage('Successfully logged in!');
-    header('Location: ../pages/search_houses.php');
+    header('Location: ../pages/main.php');
   } 
   else {
     addErrorMessage('Login failed! Username and password do not match.');

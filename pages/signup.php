@@ -7,7 +7,7 @@
 
   // Verify if user is logged in
   if (isset($_SESSION['username']))
-    die(header('Location: search_houses.php'));
+    die(header('Location: main.php'));
 
   draw_header(null, null);
   draw_signup();

@@ -269,3 +269,8 @@ if (checkPlacesButton != null)
     checkPlacesButton.addEventListener('click', () => selectTabItem('Your places'));
 
 
+const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+
+toggleSwitch.addEventListener('change', switchTheme, false);
+
+
