@@ -22,7 +22,7 @@
     <?php draw_yourListing($houseList) ?>
     <?php draw_addHouse($countryOptions) ?>
     <?php draw_comingReservations($comingReservations) ?>
-    <?php draw_goingReservations($goingReservations) ?>
+    <?php draw_goingReservations($username, $goingReservations) ?>
     <?php draw_conversations($messages) ?>
     <?php draw_messages() ?>
       
@@ -31,7 +31,7 @@
 <?php } ?>
 
 <?php function draw_profileedit($user, $countryOptions) {?>
-  <section id="editProfile" class="genericForm profileTab">
+  <section id="editProfile" class="genericForm profileTab reducedWidth">
     <h2>Edit Profile</h2>
     <section id="editInfo">
       <h3>Personal Information</h3>
@@ -172,7 +172,7 @@
   </section>
 <?php } ?>
 
-<?php function draw_goingReservations($goingReservations) { ?>
+<?php function draw_goingReservations($username, $goingReservations) { ?>
   <section id="goingReservations" class="profileTab reservationList <?=count($goingReservations)==0?'noContent':''?>">
     <h2>Your Reservations</h2>
     <?php if (count($goingReservations) == 0) { ?>
@@ -191,6 +191,7 @@
       <tbody>
         <?php foreach ($goingReservations as $reservation) { 
           $place = $reservation->getPlace();
+          $reservation->isApproaching();
         ?>
         <tr class="reservation">
           <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0"></a></td>
@@ -210,13 +211,15 @@
           </td>
           <td>
             <?php if (isReviewed($reservation->getID())) { ?>
-              <button type="button" disabled>Reservation reviewed</button>              
-            <?php } else if ($reservation->recentlyEnded()) { ?>
-              <button class="reviewReservation" type="button">Review reservation</button>
-            <?php } else if ($reservation->isApproaching()) { ?>
-              <button type="button" disabled>Too late to cancel</button>              
-            <?php } else { ?>
+              <button type="button" disabled>Reservation reviewed</button>    
+            <?php } else if ($reservation->isCancellable()) { ?>
               <button class="cancelReservation" type="button">Cancel Reservation</button>
+            <?php } else if ($reservation->hasEnded() && $place->ownerUsername == $reservation->getGuest()) { ?>
+              <button type="button" disabled>Can't review your house!</button>       
+            <?php } else if ($reservation->hasEnded()) { ?>
+              <button class="reviewReservation" type="button">Review reservation</button>
+            <?php } else { ?>
+              <button type="button" disabled>Too late to cancel</button>
             <?php } ?>
           </td>
           <td colspan="5" class="hidden reviewForm">
@@ -249,7 +252,7 @@
 
 
 <?php function draw_addHouse($countryOptions){?>
-  <section id="addHouse" class="genericForm profileTab">
+  <section id="addHouse" class="profileTab genericForm reducedWidth">
     <h2>Add your place</h2>    
     <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
       <label for="title">Title</label>      
@@ -299,7 +302,7 @@
 <?php } ?>
 
 <?php function draw_conversations($conversations) { ?>
-  <section id="conversations" class="profileTab <?=count($conversations)==0?'noContent':''?>">
+  <section id="conversations" class="profileTab <?=count($conversations)==0?'noContent':'reducedWidth'?>">
     <h2>Conversations</h2>
     <?php if (count($conversations) == 0) { ?>
       <p>You have no active conversations!</p>
@@ -323,7 +326,7 @@
 <?php } ?>
 
 <?php function draw_messages(){?>
-  <section id="messages" class="profileTab">
+  <section id="messages" class="profileTab reducedWidth">
     <header>
       <i id="messageBack" class="fas fa-chevron-left"></i>
       <img src="../database/profileImages/defaultPic/default.png" alt="Photo"/>

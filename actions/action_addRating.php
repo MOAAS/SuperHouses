@@ -21,8 +21,8 @@
     }
 
     $reservation = getReservationByID($reservationID);
-    if (!$reservation->recentlyEnded()) {
-        echo "Reservation must have been recently ended to be reviewed";
+    if (!$reservation->hasEnded()) {
+        echo "Reservation must have ended to be reviewed";
         return;
     }
 
@@ -31,7 +31,7 @@
         return;
     }
     
-    if (getReservationHost($reservationID) == $username) {
+    if (getReservationHost($reservationID)['username'] == $username) {
         echo "The host cannot review his own house";
         return;
     }

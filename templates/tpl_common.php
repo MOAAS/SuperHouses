@@ -62,13 +62,13 @@
 <?php function drawNotificationList($notifications) { ?>
   <ul id="notificationList">
     <?php foreach ($notifications as $notif) { ?>
-      <li class="<?=$notif['seen']?'notifSeen':'notifUnseen'?>">
-        <span class="notifId hidden"><?=$notif['id']?></span>
-        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif['id']?>">
-          <p class="notifContent"><?=toHTML($notif['content'])?></p>
-          <span class="notifDate"><?=toHTML($notif['dateTime'])?></span>
+      <li class="notifUnseen">
+        <span class="notifId hidden"><?=$notif->getID()?></span>
+        <a class="notifClickable" href="../actions/view_notification.php?id=<?=$notif->getID()?>">
+          <p class="notifContent"><?=toHTML($notif->getContent())?></p>
+          <span class="notifDate"><?=toHTML($notif->getDateString())?></span>
         </a>
-        <span class="notifMarkAsSeen"><i class="fas fa-eye"></i></span>
+        <span class="notifMarkAsSeen clickable"><i class="fas fa-eye"></i></span>
       </li>
     <?php } ?>
   </ul>

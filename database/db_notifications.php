@@ -1,5 +1,6 @@
 <?php
     include_once('../includes/database.php');
+    include_once('../includes/notification.php');
     include_once('../database/db_users.php');
 
     function sendNotification($username, $content) {
@@ -40,13 +41,18 @@
         $db = Database::instance()->db();
 
         $statement = $db->prepare(
-            'SELECT UserNotification.id, content, dateTime, seen 
+            'SELECT UserNotification.id, content, dateTime 
             FROM UserNotification JOIN User ON user = User.id
             WHERE username = ? AND seen = 0'
         );
 
         $statement->execute(array($username));
 
-        return $statement->fetchAll();
+        $rows = $statement->fetchAll();
+        $notifs = array();
+        foreach($rows as $row)
+            array_push($notifs, new Notification($row['id'], $row['content'], $row['dateTime']));
+
+        return $notifs;
     }
 ?>

@@ -147,9 +147,12 @@ body{
 #notificationList li {
     display: grid;
     align-items: center;
-    border-bottom: 1px solid black;
     grid-template-columns: 4fr 1fr;    
     color: var(--text-color);
+}
+
+#notificationList li:not(:last-child) {
+    border-bottom: 1px solid black;
 }
 
 #notificationList .notifClickable {    
@@ -173,8 +176,11 @@ body{
 }
 
 #notificationList .notifMarkAsSeen {
-    justify-self: center;
-    cursor: pointer;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
     color: var(--text-color);
 }
 
@@ -515,8 +521,8 @@ button:hover {
     margin: 1em;
 }
 
-#profile .profileTab.genericForm {
-    margin: 1em 4em;
+#profile .profileTab.reducedWidth {
+    margin: 1em 5em;
 }
 
 #profile .profileTab.noContent {
@@ -989,7 +995,6 @@ button:hover {
     display: grid;
     align-items: center;
     grid-template-rows: minmax(1fr, 1.25fr) auto minmax(1fr, 1.25fr);
-
 }
 
 #messages header {

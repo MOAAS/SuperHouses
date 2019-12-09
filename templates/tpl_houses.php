@@ -26,7 +26,7 @@
 <?php } ?>
 
 <?php function draw_house($username, $house, $pictures) {
-  $avgRating = getHouseAvgRating($house->place_id);
+  $avgRating = round(getHouseAvgRating($house->place_id), 1);
   $comments = getHouseComments($house->place_id);
   $ownerProfilepic = getProfilePicture($house->ownerUsername);
   $numComments = count($comments);

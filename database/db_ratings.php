@@ -22,7 +22,8 @@
         $statement = $db->prepare(
             "SELECT Rating.reservation AS reservation, rating, comment, reply, username, Reservation.dateEnd AS date
             FROM Rating JOIN Reservation ON Rating.reservation = Reservation.id JOIN User ON Reservation.user = User.id
-            WHERE Reservation.place = ?"
+            WHERE Reservation.place = ?
+            ORDER BY date DESC"
         );
         $statement->execute(array($houseID));
 

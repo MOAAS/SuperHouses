@@ -82,12 +82,26 @@
         $db = Database::instance()->db();
         
         $statement = $db->prepare(
-            'SELECT Reservation.id, dateStart, dateEnd, place, username
-            FROM Reservation JOIN User ON Reservation.user = User.id
-            WHERE User.username = ?'
+            'SELECT * FROM (
+                SELECT Reservation.id, dateStart, dateEnd, place, username
+                FROM Reservation JOIN User ON Reservation.user = User.id
+                WHERE User.username = ? AND dateEnd <= ?
+                ORDER BY dateStart DESC
+            )
+
+            UNION ALL
+            
+            SELECT * FROM (
+                SELECT Reservation.id, dateStart, dateEnd, place, username
+                FROM Reservation JOIN User ON Reservation.user = User.id
+                WHERE User.username = ? AND dateEnd > ?
+                ORDER BY dateStart ASC
+            )'
         );
 
-        $statement->execute(array($username));
+        $userID = getUserID($username);
+        $now = date('Y-m-d');
+        $statement->execute(array($userID, $now, $userID, $now));
 
         return makeReservationArray($statement->fetchAll());
     }
@@ -97,12 +111,26 @@
         $db = Database::instance()->db();
         
         $statement = $db->prepare(
-            'SELECT Reservation.id, dateStart, dateEnd, place, username
-            FROM Reservation JOIN User ON Reservation.user = User.id JOIN Place ON Reservation.place = Place.id 
-            WHERE Place.owner = ?'
+            'SELECT * FROM (
+                SELECT Reservation.id, dateStart, dateEnd, place, username
+                FROM Reservation JOIN User ON Reservation.user = User.id JOIN Place ON Reservation.place = Place.id 
+                WHERE Place.owner = ? AND dateEnd <= ?
+                ORDER BY dateStart DESC
+            )
+                        
+            UNION ALL
+
+            SELECT * FROM (
+                SELECT Reservation.id, dateStart, dateEnd, place, username
+                FROM Reservation JOIN User ON Reservation.user = User.id JOIN Place ON Reservation.place = Place.id 
+                WHERE Place.owner = ? AND dateEnd > ?
+                ORDER BY dateStart ASC
+            )'
         );
 
-        $statement->execute(array(getUserID($username)));
+        $userID = getUserID($username);
+        $now = date('Y-m-d');
+        $statement->execute(array($userID, $now, $userID, $now));
 
         return makeReservationArray($statement->fetchAll());
     }

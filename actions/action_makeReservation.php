@@ -13,7 +13,7 @@
     $checkIn = $_POST['checkIn'];
     $checkOut = $_POST['checkOut'];
 
-    sleep(1);
+   // sleep(1);
 
     if ($userID == false)
         echo json_encode('User does not exist');
