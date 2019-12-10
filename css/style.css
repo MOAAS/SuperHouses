@@ -129,6 +129,17 @@ body{
     margin-right:0.2em;
 }
 
+/*
+#pagetop h1 svg path{
+transition:all 0.1s ease-in-out;
+}
+#pagetop h1 svg:hover path {
+    filter: drop-shadow( 30px 30px 1px var(--secondary-color));
+    transform: translateX(-30px) translateY(-30px);
+}
+*/
+
+
 #pagetop h1 {
     padding: 0.5em;
     color: rgb(230, 230,230);
@@ -1187,16 +1198,13 @@ button:hover {
     position:relative;
     background-color: var(--bg-color-2);
     border-radius: 0.2em; 
-    box-shadow: var(--simple-shadow); 
-    transition: all 0.2s ease-in-out;
+    box-shadow: var(--simple-shadow);
+    transition:all 0.1s ease-in-out;
 }
-
 #houses li:hover {
-    box-shadow: var(--simple-shadow-hl);    
-    color: var(--main-color);
-    transform: scale(1.05);
+    box-shadow: -1px 1px var(--main-color), -2px 2px var(--main-color), -3px 3px var(--main-color), -4px 4px var(--main-color), -5px 5px var(--main-color), -6px 6px var(--main-color);
+    transform: translateX(6px) translateY(-6px);
 }
-
 
 
 #houses figure {
@@ -1292,8 +1300,7 @@ button:hover {
     background-color: var(--secondary-color);
     transition: background-color 200ms ease-in-out;
     
-    border-radius: 10px;
-    border: 2px solid black;
+    border-radius: 5px;
     box-shadow: var(--strong-shadow);
     cursor: pointer;
 }
