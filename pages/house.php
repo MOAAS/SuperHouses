@@ -21,7 +21,7 @@
     
   $pictures = getHousePhotoPathsByID($id);
 
-  draw_header("house",$_SESSION['username'], "../js/house.js");
+  draw_header("housePage",$_SESSION['username'], "../js/house.js");
   draw_house($_SESSION['username'], $house, $pictures);
   draw_footer();
 ?>

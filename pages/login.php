@@ -9,7 +9,7 @@
   if (isset($_SESSION['username']))
     die(header('Location: main.php'));
 
-  draw_header("loginpage",null, null);
+  draw_header("loginPage",null, null);
   draw_login();
   draw_footer();
 ?>
