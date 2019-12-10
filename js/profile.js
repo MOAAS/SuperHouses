@@ -50,7 +50,17 @@ tabItems.forEach(tabItem => {
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
 
 // my places
-let deleteButton = document.querySelectorAll('.deleteButton')
+let deleteButton = document.querySelectorAll('.deleteButton').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        if (button.textContent == '<i class="fas fa-trash"></i>') {
+            addButtonAnimation(button, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
+            event.preventDefault();
+        }
+        
+    });
+    addButtonAnimation()
+
+});
 
 // Reservations
 
