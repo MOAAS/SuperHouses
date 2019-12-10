@@ -554,10 +554,12 @@ button:hover {
 }
 
 #login {
+    border-radius: 5px;
     margin: 5em 7em;
     max-width: 20em;
 }
 #signup {
+    border-radius: 5px;
     margin: 6em 7em 0 7em;
     max-width: 30em;
 }
