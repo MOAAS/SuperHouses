@@ -47,6 +47,6 @@
     sendNotification(
         $reservation->getPlace()->ownerUsername, 
         $_SESSION['username'] . " rated a place you listed!",
-        "../pages/house.php?id=" . $reservation->getPlace()->place_id);
+        "../pages/house.php?id=" . $reservation->getPlace()->place_id . '#' . $reservationID);
 
 ?>

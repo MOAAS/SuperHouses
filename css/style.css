@@ -16,7 +16,7 @@
     --secondary-color-hl: #ffbe99;
     --secondary-color: #d48253;
 
-    --border-color: rgba(150, 150, 150, 150);
+    --border-color: rgba(175, 175, 175, 100);
 
     --text-color:rgb(0,0,0);
     --text-color-2:rgb(240,240,240);
@@ -677,20 +677,20 @@ button:hover {
 
 /*Add House*/
 
-#addHouse h2 {
+#manageHouse h2 {
     text-align: center;
 }
 
-#addHouse input[type="text"],
-#addHouse input[type="number"],
-#addHouse select,
-#addHouse textarea {
+#manageHouse input[type="text"],
+#manageHouse input[type="number"],
+#manageHouse select,
+#manageHouse textarea {
   width: 100%;
   padding: 12px 20px;
   margin: 8px 0;
 }
 
-#addHouse form > section {
+#manageHouse form > section {
     display: grid;
     align-items: center;
     grid-auto-flow: column;
@@ -700,23 +700,23 @@ button:hover {
     margin: 1em 0;
 }
 
-#addHouse form > section h3 {
+#manageHouse form > section h3 {
     grid-column: 1 / span 3;
 }
 
-#addHouse #description {
+#manageHouse #description {
     height: 10em;
     box-sizing: border-box;
 }
 
-#addHouse button[type="submit"] {
+#manageHouse button[type="submit"] {
     font-size: 1.25em;
     width: 25%;
     margin: 1em 0 0.25em 0;
 }
 
 
-#addHouseImages [type="file"] + label {
+#manageHouseImages [type="file"] + label {
     border-radius: 5px;
     display: inline-block;
     margin-bottom: 1em;
@@ -728,7 +728,7 @@ button:hover {
     overflow: hidden;
 }
 
-#addHouseImages [type="file"] + label::before {
+#manageHouseImages [type="file"] + label::before {
     content: "\f382";
     font-family: "Font Awesome 5 Free";    
     position: absolute;
@@ -736,11 +736,11 @@ button:hover {
     transition: all 0.3s;
 }
 
-#addHouseImages [type="file"] + label:hover {
+#manageHouseImages [type="file"] + label:hover {
     background-color: var(--secondary-color-hl);
 }
 
-#addHouseImages [type="file"] + label:hover::before {
+#manageHouseImages [type="file"] + label:hover::before {
     right: 85%;
 }
 
@@ -1487,14 +1487,15 @@ button:hover {
         "pic rating rating"
         "comment comment comment"
         "replyForm replyForm replyForm";
-    margin-top: 1em;
+    margin: 1em 0;
     padding: 1em 0 0 0.5em;
     transition: background-color 0.3s ease-in-out;
 }
 
 #placeComments .reply {
     grid-area: replyForm;
-    margin-left: 3em;
+    margin: 0 0 0 4em;
+    padding: 0;
     grid-template-columns: 4em 1fr;
     grid-template-areas: 
         "pic username"
@@ -1535,21 +1536,8 @@ button:hover {
 
 .comment .commentContent {
     grid-area: comment;
-    margin: 1em 0;
+    margin: 1em;
     line-height: 1.5em;
-}
-
-.comment .commentContent::before {
-    content: open-quote;
-    font-size: 1.5em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-}
-
-.comment .commentContent::after {
-    content: close-quote;
-    font-size: 1.5em;
-    font-family: Georgia, 'Times New Roman', Times, serif;
-    line-height: 0;
 }
 
 .comment.clickable:hover {
@@ -1608,7 +1596,7 @@ button:hover {
     }
 }
 
-#editHouse {
+#editHouse #manageHouse {
     max-width: 60em;
     margin: 2em auto;
 }

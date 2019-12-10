@@ -126,9 +126,10 @@ function updateBookingPrice() {
   let checkIn = Date.parse(checkInDate.value);
   let checkOut = Date.parse(checkOutDate.value);
 
-  if (Number.isNaN(checkIn) || Number.isNaN(checkOut))
-    return;
-  let numNights = (checkOut - checkIn) / (1000 * 3600 * 24);
+  let numNights = 0;
+  if (!Number.isNaN(checkIn) && !Number.isNaN(checkOut)) {
+    numNights = (checkOut - checkIn) / (1000 * 3600 * 24)
+  }
 
   if (numNights == 1)
     nightCount.textContent = numNights + ' night';
@@ -159,7 +160,7 @@ clickableComments.forEach(comment => {
     
     let messageContent =  form.querySelector('textarea').value;
     let replyButton = form.querySelector('button');
-    let reservationID = comment.querySelector('.reservationID').textContent;    
+    let reservationID = comment.id;    
 
     if (messageContent == "")
       return addButtonAnimation(replyButton, "red", "Reply can't be empty", "Reply")

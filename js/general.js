@@ -40,6 +40,7 @@ if (addHouseForm != null) {
         event.preventDefault();
         let validForm = true;
         let addHouseFormButton = addHouseForm.querySelector('button[type="submit"]');
+        let buttonText = addHouseFormButton.textContent;
     
         let checkStringInput = (input) => {
             if (input.value == "") {
@@ -87,7 +88,7 @@ if (addHouseForm != null) {
         
         if (validForm)
             addHouseForm.submit();
-        else addButtonAnimation(addHouseFormButton, "red", "Invalid input", "Add house");
+        else addButtonAnimation(addHouseFormButton, "red", "Invalid input", buttonText);
     });
 }
 

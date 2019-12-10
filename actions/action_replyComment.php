@@ -36,5 +36,5 @@
     sendNotification(
         $reservation->getGuest(), 
         $_SESSION['username'] . " replied to your comment on " . $reservation->getPlace()->title . "!",
-        "../pages/house.php?id=" . $reservation->getPlace()->place_id);
+        "../pages/house.php?id=" . $reservation->getPlace()->place_id . '#' . $reservationID);
 ?>

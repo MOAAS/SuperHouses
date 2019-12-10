@@ -2,6 +2,8 @@ let messageHistory = document.querySelector('#messageHistory ul');
 let conversations = document.querySelector('#conversations');
 let conversationList = document.querySelector('#conversations ul');
 let currentConversation = null;
+let username = document.getElementById('userProfileName').textContent;
+let urlHash = decodeURIComponent(window.location.hash.substr(1));
 
 // Profile
 
@@ -31,7 +33,7 @@ function updateTabs() {
     switch (selected) {
         case '#Profile': document.getElementById('editProfile').style.display = ""; break;
         case '#Your places': document.getElementById('yourPlaces').style.display = ""; break;
-        case '#Add place': document.getElementById('addHouse').style.display = ""; break;
+        case '#Add place': document.getElementById('manageHouse').style.display = ""; break;
         case '#Future guests': document.getElementById('comingReservations').style.display = ""; break;
         case '#Your reservations': document.getElementById('goingReservations').style.display = ""; break;
         case '#Messages': document.getElementById('conversations').style.display = ""; break;
@@ -47,15 +49,28 @@ let tabItems = document.querySelectorAll('#profile nav li');
 tabItems.forEach(tabItem => {
     tabItem.addEventListener('click', event => selectTabItem(tabItem.textContent));        
 });
-selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
+if (urlHash == "Conversation " + username)
+    selectTabItem('Messages');
+else selectTabItem(urlHash);
 
 // Reservations
 
 function updateReservations() {
-    if (reservationGoing.querySelectorAll('.reservation').length == 0)
-        reservationGoing.innerHTML = '<h2>Your Reservations</h2> <p id="noReservations">You haven\'t booked any reservations yet!</p>'
-    if (reservationComing.querySelectorAll('.reservation').length == 0)
-        reservationComing.innerHTML = '<h2>Future Guests</h2> <p id="noReservations">You haven\'t received any reservations yet!</p>'
+    if (reservationGoing.querySelectorAll('.reservation').length == 0) {
+        reservationGoing.classList.add('noContent');
+        reservationGoing.innerHTML = 
+            '<h2>Future Guests</h2>' + 
+            '<p>You haven\'t booked any reservations yet!</p>' +
+            '<button type="button"><a href="../pages/main.php">Search for houses</a></button>'   
+    }
+    if (reservationComing.querySelectorAll('.reservation').length == 0) {
+        reservationComing.classList.add('noContent');
+        reservationComing.innerHTML = 
+            '<h2>Future Guests</h2>' + 
+            '<p>You haven\'t received any reservations yet!</p>' + 
+            '<button id="checkPlacesButton" type="button">Check your places</button>';    
+        document.getElementById('checkPlacesButton').addEventListener('click', () => selectTabItem('Your places'));           
+    }
 }
 
 function removeReservation(reservation, button) {
@@ -172,7 +187,6 @@ function findConversation(username) {
             return allConversations[i];
     }
     let newConversation = document.createElement('li');
-  //  newConversation.addEventListener('click', (_) => toConversation(username));
     newConversation.classList.add('conversation');
     newConversation.innerHTML = 
         '<img src="../database/profileImages/defaultPic/default.png" alt="UserPhoto"></img>' +
@@ -183,6 +197,7 @@ function findConversation(username) {
         conversationList = document.createElement('ul');
         conversations.querySelector('p').remove();
         conversations.classList.remove('noContent');
+        conversations.classList.add('reducedWidth');
         conversations.appendChild(conversationList);
     }
     conversationList.insertBefore(newConversation, conversationList.firstChild);
@@ -190,7 +205,6 @@ function findConversation(username) {
 }
 
 function toConversation(username) {
-    console.log("hello");
     messageHistory.innerHTML = "";
     sendGetRequest('../actions/get_conversation.php',
     {
@@ -203,6 +217,7 @@ function toConversation(username) {
     currentConversation.classList.add('seenMessage');
 
     hideAllTabs();
+    document.querySelector('#sendMessageInput input').value = "";
     document.querySelector('#messages header img').src = currentConversation.querySelector('img').src;
     document.getElementById('conversations').style.display = "none";
     document.querySelector('#messages header h2').textContent = username;

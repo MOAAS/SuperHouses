@@ -215,7 +215,7 @@
             <?php } else if ($reservation->isCancellable()) { ?>
               <button class="cancelReservation" type="button">Cancel Reservation</button>
             <?php } else if ($reservation->hasEnded() && $place->ownerUsername == $reservation->getGuest()) { ?>
-              <button type="button" disabled>Can't review your house!</button>       
+              <button type="button" disabled>This is your house!</button>       
             <?php } else if ($reservation->hasEnded()) { ?>
               <button class="reviewReservation" type="button">Review reservation</button>
             <?php } else { ?>
@@ -252,7 +252,7 @@
 
 
 <?php function draw_addHouse($countryOptions){?>
-  <section id="addHouse" class="profileTab genericForm reducedWidth">
+  <section id="manageHouse" class="profileTab genericForm reducedWidth">
     <h2>Add your place</h2>    
     <form method="post" action="../actions/action_addHouse.php" enctype="multipart/form-data">
 
@@ -297,7 +297,7 @@
         <input id="price" type="number" step="0.01" name="price" placeholder="€ / night">
       </section>
 
-      <div id="addHouseImages">
+      <div id="manageHouseImages">
         <input id="files" type="file" name="fileUpload[]" multiple class="requiresFiles">        
         <label for="files" class="clickable">Choose images</label>
         <ul id="result"></ul>
@@ -306,7 +306,6 @@
       <button type="submit">Add house</button>
     </form>
   </section>
-
 <?php } ?>
 
 <?php function draw_conversations($conversations) { ?>
