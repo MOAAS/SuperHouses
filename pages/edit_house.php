@@ -28,7 +28,7 @@
 
 
 
-  draw_header($_SESSION['username'], "../js/edithouse.js");
+  draw_header("edit_house",$_SESSION['username'], "../js/edithouse.js");
   draw_editHouse($house, $pictures);
   draw_footer();
   ?>

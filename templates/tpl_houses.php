@@ -1,4 +1,4 @@
-<?php function draw_houselist($houseList) {?>
+<?php function draw_houselist($houseList,$buttons) {?>
 <section id="houses">
     <ul>
     <?php foreach($houseList as $house)
@@ -10,6 +10,14 @@
             <img src="../database/houseImages/<?=$house->place_id?>/0" alt="House image">
             <figcaption><h3><?=toHTML($house->title)?></h3></figcaption>
           </figure>
+
+          <?php if($buttons){?>
+            <div class="houseButtons">
+              <a href="edit_house.php?id=<?=$house->place_id?>"><button class="editButton" type="button"><i class="fas fa-pen"></i></button> </a>
+              <a href="../actions/action_deleteHouse.php?houseID=<?=toHTML($house->place_id)?>"><button class="deleteButton" type="button"><i class="fas fa-trash"></i></button> </a>
+            </div>
+          <?php }?>
+
           <div class="houseInfo">
             <div class="priceTag">
               <p class="priceValue"><?=$house->pricePerDay?></p> 
@@ -44,10 +52,6 @@
     </div>
    
     <div id="place-body">
-      <?php if($username == $house->ownerUsername) { ?>
-        <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
-        <a href="../actions/action_deleteHouse.php?houseID=<?=toHTML($house->place_id)?>"><button id="deleteButton" type="button">Delete Place</button> </a>
-      <?php } ?>
       <section id="place-info">
         <h2><?=toHTML($house->title)?></h2>        
         <p id="houseOwner">

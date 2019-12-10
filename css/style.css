@@ -23,6 +23,7 @@
 
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(225, 0, 0);
+    --error-color-hl: rgb(255, 98, 98);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
@@ -53,6 +54,8 @@
 
     --success-color: rgb(130, 224, 93);
     --error-color: rgb(233, 72, 72);
+    --error-color-hl: rgb(255, 98, 98);
+
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
@@ -76,6 +79,12 @@ body{
 
 #pagebanner {
     background-color: var(--topbar-color);
+}
+
+#main #pagebanner{
+    background-color: rgb(0,0,0,0.5);
+    position:relative;
+    z-index:999;
 }
 
 #pagetop {
@@ -1100,7 +1109,9 @@ button:hover {
     padding: 0;
 }
 
+
 #houses li {
+    position:relative;
     background-color: var(--bg-color-2);
     border: 2px solid var(--topbar-color);
     border-radius: 1em; 
@@ -1154,6 +1165,26 @@ button:hover {
     display: grid;
     align-items: center;
     grid-template-columns: 1fr 1fr;
+}
+
+#houses button{
+    position: absolute;
+    left: 0.5em;
+    width:2em;
+    height:2em;
+    padding:0em;
+}
+
+#houses .editButton {
+    top:0.5em;
+}
+
+#houses .deleteButton {
+    background-color:var(--error-color);
+    top:3em;
+}
+#houses .deleteButton:hover {
+    background-color:var(--error-color-hl);
 }
 
 .houseInfo .priceTag {
@@ -1321,13 +1352,15 @@ button:hover {
     background-size:     cover;                     
     background-repeat:   no-repeat;
     background-position: center center;
-    position:fixed;
+    position:absolute;
+    top:0;
     width: 100%; 
     height: 100%; 
 }
 
 #mainPage #searchDialog{
-    top:-5em;
+    top:-1em;
+    margin-bottom:0;
 }
 
 

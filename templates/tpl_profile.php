@@ -111,7 +111,7 @@
     <h2>Your Places</h2>
     <?php
       if(count($houseList)>0)
-        draw_houselist($houseList);
+        draw_houselist($houseList,true);
       else { ?>
         <p>Looks like you dont have any place yet!</p>
         <button id="addHouseButton" type="button">Add a Place</button>

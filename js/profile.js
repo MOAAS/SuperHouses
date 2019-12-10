@@ -49,6 +49,9 @@ tabItems.forEach(tabItem => {
 });
 selectTabItem(decodeURIComponent(window.location.hash.substr(1)));
 
+// my places
+let deleteButton = document.querySelectorAll('.deleteButton')
+
 // Reservations
 
 function updateReservations() {
@@ -268,7 +271,6 @@ if (checkPlacesButton != null)
 
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
+if (currentTheme == 'dark') 
+    toggleSwitch.checked = true;
 toggleSwitch.addEventListener('change', switchTheme, false);
-
-

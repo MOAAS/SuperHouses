@@ -1,4 +1,4 @@
-<?php function draw_header($username, $script) { 
+<?php function draw_header($page_id,$username, $script) { 
   $notifications = getUnseenNotifications($username);
 ?>
   <!DOCTYPE html>
@@ -18,7 +18,7 @@
       <?php } ?>
     </head>
 
-    <body>
+    <body id=<?= $page_id?>>
 
       <header id="pagebanner">        
         <section id="pagetop">
