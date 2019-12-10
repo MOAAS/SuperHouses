@@ -53,6 +53,19 @@ if (urlHash == "Conversation " + username)
     selectTabItem('Messages');
 else selectTabItem(urlHash);
 
+// my places
+let deleteButton = document.querySelectorAll('.deleteButton').forEach(function (button) {
+    button.addEventListener('click', function (event) {
+        if (button.textContent == '<i class="fas fa-trash"></i>') {
+            addButtonAnimation(button, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
+            event.preventDefault();
+        }
+        
+    });
+    addButtonAnimation()
+
+});
+
 // Reservations
 
 function updateReservations() {
@@ -283,7 +296,6 @@ if (checkPlacesButton != null)
 
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
-
+if (currentTheme == 'dark') 
+    toggleSwitch.checked = true;
 toggleSwitch.addEventListener('change', switchTheme, false);
-
-

@@ -15,7 +15,7 @@
   if (!isset($_SESSION['username']))
     die(header('Location: login.php'));
 
-  draw_header($_SESSION['username'], "../js/profile.js");
+  draw_header("profilepage",$_SESSION['username'], "../js/profile.js");
   draw_profile($_SESSION['username']);
   draw_footer();
 ?>
