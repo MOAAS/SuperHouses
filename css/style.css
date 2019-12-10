@@ -490,9 +490,19 @@ button:hover {
 }
 
 /* Authentication */
+#loginpage{
+    background-image: url("bg.jpg");
+    background-size:     cover;                     
+    background-repeat:   no-repeat;
+    background-position: center center;
+}
 
-#login, #signup {
-    margin: 1em auto;
+#login {
+    margin: 4em 7em;
+    max-width: 20em;
+}
+#signup {
+    margin: 1.5em 7em 0 7em;
     max-width: 30em;
 }
 
@@ -508,7 +518,7 @@ button:hover {
 }
 
 #login footer a, #signup footer a {
-    color: var(--main-color);
+    color: var(--secondary-color);
     font-weight: bold;
 }
 
@@ -1113,8 +1123,7 @@ button:hover {
 #houses li {
     position:relative;
     background-color: var(--bg-color-2);
-    border: 2px solid var(--topbar-color);
-    border-radius: 1em; 
+    border-radius: 0.2em; 
     box-shadow: var(--simple-shadow); 
     transition: all 0.2s ease-in-out;
 }
@@ -1132,7 +1141,7 @@ button:hover {
     max-height: 12em;
     overflow: hidden;
     position: relative;
-    border-radius: 0.85em 0.85em 0 0;
+    border-radius: 0.2em 0.2em 0 0;
 }
 
 #houses img {
