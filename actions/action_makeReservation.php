@@ -31,7 +31,7 @@
     else if (reservationOverlaps($placeID, $checkIn, $checkOut))
         echo json_encode('Overlapping reservation');
     else { 
-        if ($place->ownerUsername != $_SESSION) {
+        if ($place->ownerUsername != $_SESSION['username']) {
             sendNotification(
                 $place->ownerUsername, 
                 $_SESSION['username'] . " just made a reservation for " . dateString(DateTime::createFromFormat('Y-m-d', $checkIn)) . " (" . $place->title . ")", 
