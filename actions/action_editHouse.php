@@ -76,6 +76,6 @@
             }
         }
     }
-   header('Location: ../pages/house.php?id='.$id);
+  header('Location: ../pages/house.php?id='.$id);
 
 ?>

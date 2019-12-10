@@ -46,6 +46,7 @@
     <div id="place-body">
       <?php if($username == $house->ownerUsername) { ?>
         <a href="edit_house.php?id=<?=$house->place_id?>"><button id="editButton" type="button">Edit Place</button> </a>
+        <a href="../actions/action_deleteHouse.php?houseID=<?=toHTML($house->place_id)?>"><button id="deleteButton" type="button">Delete Place</button> </a>
       <?php } ?>
       <section id="place-info">
         <h2><?=toHTML($house->title)?></h2>        

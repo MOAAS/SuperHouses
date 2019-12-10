@@ -32,10 +32,11 @@
         $statement = $db->prepare(
             'SELECT dateStart, dateEnd
             FROM Reservation
-            WHERE place = ?'
+            WHERE place = ? AND dateEnd >= ?'
         );
 
-        $statement->execute(array($placeID));
+        $now = date('Y-m-d');
+        $statement->execute(array($placeID, $now));
 
         return $statement->fetchAll();
     }

@@ -1411,6 +1411,15 @@ button:hover {
     background-color: var(--secondary-color-hl);
 }
 
+#house #deleteButton{
+    background-color: var(--secondary-color);
+    padding:0.5em;
+}
+
+#house #deleteButton:hover{
+    background-color: var(--secondary-color-hl);
+}
+
 #house #place-info {
     min-width: 0;
     padding: 1em;
