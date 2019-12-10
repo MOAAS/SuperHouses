@@ -16,7 +16,7 @@
     }
 
     if ($guestUsername != $_SESSION['username'] && $hostUsername != $_SESSION['username']) {
-        echo "No permission to remove reservation, Mr. " . $_SESSION['username'];
+        echo "No permission to remove reservation, Mr./Mrs. " . $_SESSION['username'];
         return;
     }
 

@@ -47,23 +47,24 @@ function updateTabs() {
 
 let tabItems = document.querySelectorAll('#profile nav li');
 tabItems.forEach(tabItem => {
-    tabItem.addEventListener('click', event => selectTabItem(tabItem.textContent));        
+    tabItem.addEventListener('click', _ => selectTabItem(tabItem.textContent));        
 });
 if (urlHash == "Conversation " + username)
     selectTabItem('Messages');
 else selectTabItem(urlHash);
 
 // my places
-let deleteButton = document.querySelectorAll('.deleteButton').forEach(function (button) {
-    button.addEventListener('click', function (event) {
-        if (button.textContent == '<i class="fas fa-trash"></i>') {
+let places = document.querySelectorAll('#houses li').forEach((place) => {
+    let button = place.querySelector('.deleteButton');
+    let houseID = place.querySelector('.houseID').textContent;
+    button.addEventListener('click', event => {
+        if (button.innerHTML == '<i class="fas fa-trash"></i>')
             addButtonAnimation(button, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
-            event.preventDefault();
-        }
-        
+        else {
+            sendPostRequest('../actions/action_deleteHouse.php', {houseID: houseID}, null) 
+            document.location.reload();
+        }       
     });
-    addButtonAnimation()
-
 });
 
 // Reservations
@@ -219,7 +220,7 @@ function findConversation(username) {
 
 function toConversation(username) {
     messageHistory.innerHTML = "";
-    sendGetRequest('../actions/get_conversation.php',
+    sendGetRequest('../api/get_conversation.php',
     {
         otherUser: username
     }, onConversationLoad);

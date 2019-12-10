@@ -5,6 +5,7 @@
     
     {?>
       <li>
+        <span class="houseID hidden"><?=$house->place_id?></span>
         <a href="house.php?id=<?=$house->place_id?>">
           <figure>
             <img src="../database/houseImages/<?=$house->place_id?>/0" alt="House image">
@@ -14,7 +15,7 @@
           <?php if($buttons){?>
             <div class="houseButtons">
               <a href="edit_house.php?id=<?=$house->place_id?>"><button class="editButton" type="button"><i class="fas fa-pen"></i></button> </a>
-              <a href="../actions/action_deleteHouse.php?houseID=<?=toHTML($house->place_id)?>"><button class="deleteButton" type="button"><i class="fas fa-trash"></i></button> </a>
+              <button class="deleteButton" type="button"><i class="fas fa-trash"></i></button>
             </div>
           <?php }?>
 
@@ -136,7 +137,10 @@
 <?php function draw_editHouse($house, $pictures) { 
   $countryOptions = getAllCountries();?>
   <section id="manageHouse" class="genericForm">
-    <h2>Edit your place</h2>    
+    <h2>Edit your place</h2> 
+    <a href="../pages/profile.php#Your places">
+      <button id="backToProfile" type="button"><i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back to profile</button>    
+    </a>
     <form method="post" action="../actions/action_editHouse.php" enctype="multipart/form-data">
       <input class="hidden" type="text" name="placeID" value="<?=toHTML($house->place_id)?>"/>
 
@@ -152,7 +156,7 @@
       <section id="location">
         <h3>Location</h3>
         <label for="houseCountry">Country</label>
-        <select id="<?=$id?>" name="country">
+        <select id="houseCountry" name="country">
           <?php foreach ($countryOptions as $country) {
             if($country == $house->country){ ?>
             <option selected value="<?=$country?>"><?=$country?></option>

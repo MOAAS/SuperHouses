@@ -5,7 +5,7 @@
   session_destroy();
   session_start();
 
-  addSuccessMessage('Successfully logged out!');
+  //addSuccessMessage('Successfully logged out!');
 
   header('Location: ../pages/login.php');
 ?>

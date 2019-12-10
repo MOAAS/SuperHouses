@@ -12,7 +12,7 @@ function addButtonAnimation(button, newColor, newText, finalText) {
         button.style.backgroundColor = "";
     }, 250);
     setTimeout(() => {
-        button.textContent = finalText;
+        button.innerHTML = finalText;
         button.style.transition = "";
     }, 3000);
 }

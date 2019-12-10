@@ -688,6 +688,23 @@ button:hover {
 
 #manageHouse h2 {
     text-align: center;
+    margin: 0.5em 0;
+}
+
+#manageHouse #backToProfile {
+    position: absolute;
+    top: 0; left: 0;
+    border-radius: 0;
+    max-width: 2em;
+    padding-right: 1.5em;
+    white-space: nowrap;
+    overflow: hidden;
+    transition: all 0.3s ease-in-out;
+}
+
+#manageHouse #backToProfile:hover {
+    border-radius: 0 0 20px / 50px 0;
+    max-width: 10em;
 }
 
 #manageHouse input[type="text"],
@@ -735,6 +752,7 @@ button:hover {
     background-color: var(--secondary-color);
     border-radius: 50px;
     overflow: hidden;
+    color: black;
 }
 
 #manageHouseImages [type="file"] + label::before {

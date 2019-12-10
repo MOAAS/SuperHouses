@@ -10,4 +10,12 @@
   if (!isset($_SESSION['csrf'])) {
     $_SESSION['csrf'] = generate_random_token();
   }
+
+  function verifyCSRF($onFail) {
+    if ($_SESSION['csrf'] != $_GET['csrf']) {
+      addErrorMessage('Invalid request!');
+      die(header("Location: $onFail"));
+    }  
+    else addSuccessMessage('SUPER SAFE BOIS');
+  }
 ?>

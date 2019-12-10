@@ -8,7 +8,7 @@
 
   if (validCredentials($username, $password)) {
     $_SESSION['username'] = $username;
-    addSuccessMessage('Successfully logged in!');
+    //addSuccessMessage('Successfully logged in!');
     header('Location: ../pages/main.php');
   } 
   else {

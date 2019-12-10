@@ -24,7 +24,7 @@
   else {
     addUser($username, $password, $fullName);
     $_SESSION['username'] = $username;
-    addSuccessMessage('Successfully signed up!');
+    //addSuccessMessage('Successfully signed up!');
     header('Location: ../pages/main.php');
   }
 ?>

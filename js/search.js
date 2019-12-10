@@ -19,7 +19,12 @@ maxPriceSlider.addEventListener('input', () => {
 });
 sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 
-
+let checkInDate = document.getElementById("startDate");
+let checkOutDate = document.getElementById("endDate");
+checkInDate.addEventListener('change', _ => checkOutDate.min = checkInDate.value);
+checkOutDate.addEventListener('change', _ => checkInDate.max = checkOutDate.value);
+  
+  
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {
     let counter = element.querySelector('.count');

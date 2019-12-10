@@ -40,7 +40,7 @@ let unavailableDate = bookingForm.querySelector('#booking #unavailableDate');
 let loadingIndicator = bookingForm.querySelector('#booking #loadingIndicator');
 
 let futureReservations;
-sendGetRequest('../actions/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
+sendGetRequest('../api/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
 
 function onGetReservationsLoad() {
   futureReservations = JSON.parse(this.responseText)

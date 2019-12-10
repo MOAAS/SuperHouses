@@ -5,18 +5,18 @@ include_once('../database/db_houses.php');
 include_once('../database/db_reservations.php');
 include_once('../database/db_notifications.php');
 
-$house_id = $_GET['houseID'];
+$house_id = $_POST['houseID'];
 
 $house = getHouseById($house_id);
 
 $ownerUsername = $house->ownerUsername;
 
 if ($ownerUsername != $_SESSION['username']) {
-    addErrorMessage("No permission to delete House, Mr. " . $_SESSION['username']);
-    header('Location: ../pages/house.php?id='.$house_id);
+    addErrorMessage("No permission to delete House, Mr./Mrs. " . $_SESSION['username']);
+    header('Location: ../pages/profile.php#Your%20place');
 } else if (count(getFutureReservations($house_id)) > 0) {
-    addErrorMessage("You can't delete a house with pending reservations");
-    header('Location: ../pages/house.php?id='.$house_id);
+    addErrorMessage("You can't delete a house with pending reservations!");
+    header('Location: ../pages/profile.php#Future%20guests');
 } else {
 
     deleteHouse($house_id);
@@ -31,7 +31,7 @@ if ($ownerUsername != $_SESSION['username']) {
     }
     rmdir('../database/houseImages/' . $house_id);
 
-    addSuccessMessage("House " . $house->title . " deleted successfully!");
+    addSuccessMessage($house->title . " was successfully deleted!");
     header('Location: ../pages/main.php');
 }
 
