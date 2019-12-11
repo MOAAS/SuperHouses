@@ -13,8 +13,13 @@
 
     --input-bg-color: rgb(200, 200, 200);
     --input-hint-color: rgb(80, 80, 80);
+
     --secondary-color-hl: #ffbe99;
     --secondary-color: #d48253;
+
+    --notifun-color:  rgb(123, 148, 160);
+    --notifun-color-hl:rgb(152, 185, 201);
+    --notif-color-hl:rgb(223, 223, 223);
 
     --border-color: rgba(175, 175, 175, 100);
 
@@ -24,6 +29,8 @@
     --success-color: rgb(97, 187, 61);
     --error-color: rgb(225, 0, 0);
     --error-color-hl: rgb(255, 98, 98);
+
+    --separator-color: rgb(200,200,200);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
@@ -41,21 +48,28 @@
     --main-color: #9dcbe2;
     --main-color-hl: #acc7d4;
 
+    
     --main-color-light: #7e9dac;
     --main-color-light-hl: #37474f;
-
+    
     --input-bg-color: rgb(50, 50, 50);
     --input-hint-color: rgb(80, 80, 80);
+
     --secondary-color-hl: #ffc7a7;
     --secondary-color: #ffae80;
+    
+    --notifun-color: rgb(50,50,50);
+    --notifun-color-hl: rgb(60,60,60);
+    --notif-color-hl:rgb(44, 44, 44);
 
     --text-color:rgb(240,240,240);
     --text-color-2:rgb(0,0,0);
-
+    
     --success-color: rgb(130, 224, 93);
     --error-color: rgb(233, 72, 72);
     --error-color-hl: rgb(255, 98, 98);
-
+    
+    --separator-color: rgb(40,40,40);
 
     --simple-shadow: 0px 1px 5px  rgba(0,0,0,0.75);
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
@@ -177,9 +191,9 @@ transition:all 0.1s ease-in-out;
 
 #pagetop #notificationNum {
     position: absolute;
-    top: -20px; right: -10px;  
+    top: -17px; right: -7px;  
     border-radius: 50%;
-    padding: 0.2em;
+    padding: 0em;
     width: 1.5em; height: 1.5em; line-height: 1.5em;
     text-align: center;
     cursor: pointer;
@@ -192,10 +206,11 @@ transition:all 0.1s ease-in-out;
     position: absolute;
     top: 20px; right: 10px;
     z-index: 3;
-    width: 25em;
+    width: 22em;
     max-height: 40em;
     overflow: auto;
-    padding: 0;   
+    padding: 0;
+    border-radius: 4px;   
     
     color: var(--text-color);
     box-shadow: var(--simple-shadow);
@@ -205,22 +220,18 @@ transition:all 0.1s ease-in-out;
 #notificationList li {
     display: grid;
     align-items: center;
-    grid-template-columns: 4fr 1fr;    
+    grid-template-columns: 7fr 1fr;    
     color: var(--text-color);
 }
 
+#notificationList li:hover{
+    background-color: var(--notif-color-hl);
+}
+
 #notificationList li:not(:last-child) {
-    border-bottom: 1px solid black;
+    border-bottom: var(--separator-color) 1px solid ;
 }
 
-#notificationList .notifClickable {    
-    justify-self: stretch;
-    border-right: 2px solid var(--main-color-light);
-}
-
-#notificationList .notifClickable:hover {
-    color: var(--main-color-light);
-}
 
 #notificationList .notifContent {
     margin: 1em;
@@ -228,7 +239,7 @@ transition:all 0.1s ease-in-out;
 
 #notificationList .notifDate {
     display: block;
-    text-align: right;
+    text-align: left;
     margin: 0.75em;
     font-size: 0.75em;
 }
@@ -242,21 +253,23 @@ transition:all 0.1s ease-in-out;
     color: var(--text-color);
 }
 
+
+#notificationList .notifUnseen {
+    background-color: var(--notifun-color);
+}
+
+#notificationList .notifSeen i{
+    display:none;
+}
+
+#notificationList .notifUnseen:hover {
+    background-color: var(--notifun-color-hl);
+}
+
 #notificationList .notifMarkAsSeen:hover {
     color: var(--main-color-light);
 }
 
-#notificationList .notifUnseen .notifMarkAsSeen {
-    color: var(--main-color-light);
-}
-
-#notificationList .notifUnseen .notifMarkAsSeen:hover {
-    color: var(--main-color-light-hl);
-}
-
-#notificationList .notifUnseen {
-    color: var(--main-color-hl);
-}
 
 
 #pagetop #loggeduser {

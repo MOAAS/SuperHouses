@@ -73,7 +73,7 @@
           <p class="notifContent"><?=toHTML($notif->getContent())?></p>
           <span class="notifDate"><?=toHTML($notif->getDateString())?></span>
         </a>
-        <span class="notifMarkAsSeen clickable"><i class="fas fa-eye"></i></span>
+        <span class="notifMarkAsSeen clickable"><i class="far fa-dot-circle"></i></span>
       </li>
     <?php } ?>
   </ul>
