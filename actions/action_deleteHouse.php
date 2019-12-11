@@ -12,11 +12,9 @@ $house = getHouseById($house_id);
 $ownerUsername = $house->ownerUsername;
 
 if ($ownerUsername != $_SESSION['username']) {
-    addErrorMessage("No permission to delete House, Mr./Mrs. " . $_SESSION['username']);
-    header('Location: ../pages/profile.php#Your%20place');
+    echo json_encode('No permission!');
 } else if (count(getFutureReservations($house_id)) > 0) {
-    addErrorMessage("You can't delete a house with pending reservations!");
-    header('Location: ../pages/profile.php#Future%20guests');
+    echo json_encode('Pending reservations!');
 } else {
 
     deleteHouse($house_id);
@@ -30,9 +28,7 @@ if ($ownerUsername != $_SESSION['username']) {
         }
     }
     rmdir('../database/houseImages/' . $house_id);
-
-    addSuccessMessage($house->title . " was successfully deleted!");
-    header('Location: ../pages/main.php');
+    echo json_encode(null);
 }
 
 ?>

@@ -1258,20 +1258,21 @@ button:hover {
 #houses button{
     position: absolute;
     left: 0.5em;
-    width:2em;
-    height:2em;
-    padding:0em;
-    border-radius:3px;
+    z-index: 200;
+    width:2em; height:2em;
+    padding: 0;
+    border-radius: 4px;
 }
 
 #houses .editButton {
-    top:0.5em;
+    top: 0.5em;
 }
 
 #houses .deleteButton {
     background-color:var(--error-color);
-    top:3em;
+    top: 3em;
 }
+
 #houses .deleteButton:hover {
     background-color:var(--error-color-hl);
 }

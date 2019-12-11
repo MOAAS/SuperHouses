@@ -181,7 +181,7 @@
     <h2>Your Reservations</h2>
     <?php if (count($goingReservations) == 0) { ?>
       <p>You haven't booked any reservations yet!</p>
-      <button type="button"><a href="../pages/main.php">Search for houses</a></button>      
+      <button id="searchPlacesButton" type="button">Search for houses</button>
     <?php } else { ?>
     <table>
       <thead>
@@ -249,8 +249,8 @@
         </tr>   
       <?php } ?> 
       </tbody>
+    </table>
     <?php } ?> 
-   </table>
   </section>
 <?php } ?>
 
