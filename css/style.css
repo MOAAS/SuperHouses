@@ -750,6 +750,15 @@ button:hover {
 
 /* Your Places*/
 
+#profile #yourPlaces li {
+    transition: all 0.2s ease-in-out;
+}
+
+#profile #yourPlaces li:hover {
+    box-shadow: var(--simple-shadow-hl);
+    transform: scale(1.05);
+}
+
 #yourPlaces h2 {
     margin: 1em;
     text-align: center;
@@ -1207,7 +1216,7 @@ button:hover {
     background-color: var(--bg-color-2);
     border-radius: 0.2em; 
     box-shadow: var(--simple-shadow);
-    transition:all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 #houses li:hover {
     box-shadow: -1px 1px var(--main-color), -2px 2px var(--main-color), -3px 3px var(--main-color), -4px 4px var(--main-color), -5px 5px var(--main-color), -6px 6px var(--main-color);

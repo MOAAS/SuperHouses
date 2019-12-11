@@ -67,6 +67,7 @@ function onHouseDeleted(house, response) {
                 '<h2>Your Places</h2>' + 
                 '<p>Looks like you dont have any place yet!</p>' +
                 '<button id="addHouseButton" type="button">Add a Place</button>';      
+            document.getElementById('addHouseButton').addEventListener('click', () => selectTabItem('Add place'))    
         }, 300);
     }
     else selectTabItem('Future guests');
