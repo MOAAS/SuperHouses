@@ -20,35 +20,34 @@
   $ownerId = getUserId($username);
   $house = getHouseById($id);
   
-  print_r("HELLO");
   if($username != $house->ownerUsername){
     addErrorMessage('Editing place failed. You are not the owner! id: ' . $id . ' usernam' . $username . ' owner:' . $house->ownerUsername);
-    die(header('Location: ../pages/house.php?id='.$id));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
   
   if ($price <= 0 || $price > 1000 || !is_numeric($price)) {
     addErrorMessage('Editing place failed! Price invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
   if ($capacity <= 0 || !is_numeric($capacity)) {
     addErrorMessage('Editing place failed! Capacity invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
   if ($numRooms <= 0 || !is_numeric($numRooms)) {
     addErrorMessage('Editing place failed! Number of rooms invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
   if ($numBeds <= 0 || !is_numeric($numBeds)) {
     addErrorMessage('Editing place failed! Number of beds invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
   if ($numBathrooms <= 0 || !is_numeric($numBathrooms)) {
     addErrorMessage('Editing place failed! Number of bathrooms invalid!');
-    die(header('Location: ../pages/house.php?id=${id}'));
+    die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
   if(!editHouse($id,$country,$city,$address,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){

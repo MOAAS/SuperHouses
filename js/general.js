@@ -43,7 +43,7 @@ function clearInvalidInput(input) {
     input.placeholder = "";
 }
 
-let addHouseForm = document.querySelector('#addHouse form');
+let addHouseForm = document.querySelector('#manageHouse form');
 if (addHouseForm != null) {
     addHouseForm.addEventListener('submit', event => {
         event.preventDefault();
