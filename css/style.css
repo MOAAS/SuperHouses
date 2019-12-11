@@ -76,6 +76,11 @@
     --strong-shadow: 0px 0px 10px  rgba(68, 47, 47, 0.5);
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body{
     margin:0;
     color: var(--text-color);
@@ -133,7 +138,8 @@ body{
 
 #pagetop h1 a{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #pagetop h1 svg{
@@ -404,11 +410,13 @@ input[type="number"],
 button, 
 textarea, 
 select {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
     background-color:  var(--input-bg-color);
-    border-radius: 10px;
+    border-radius: 4px;
     border: none;
     font-family: var(--regular-font-family)
 }
@@ -755,6 +763,15 @@ button:hover {
 
 /* Your Places*/
 
+#profile #yourPlaces li {
+    transition: all 0.2s ease-in-out;
+}
+
+#profile #yourPlaces li:hover {
+    box-shadow: var(--simple-shadow-hl);
+    transform: scale(1.05);
+}
+
 #yourPlaces h2 {
     margin: 1em;
     text-align: center;
@@ -916,7 +933,6 @@ button:hover {
 }
 
 .reservationList img {
-    width: 10em;
     height: 5.6em;
     vertical-align: middle;
 }
@@ -1083,7 +1099,7 @@ button:hover {
 
     display: grid;
     align-items: center;
-    grid-template-rows: minmax(1fr, 1.25fr) auto minmax(1fr, 1.25fr);
+    grid-template-rows: min-content 30em min-content;
 }
 
 #messages header {
@@ -1117,7 +1133,6 @@ button:hover {
 #messages #messageHistory {
     align-self: stretch;
     padding: 1em;
-    height: 30em;
     overflow: auto;  
 }
 
@@ -1214,7 +1229,7 @@ button:hover {
     background-color: var(--bg-color-2);
     border-radius: 0.2em; 
     box-shadow: var(--simple-shadow);
-    transition:all 0.1s ease-in-out;
+    transition: all 0.1s ease-in-out;
 }
 #houses li:hover {
     box-shadow: -1px 1px var(--main-color), -2px 2px var(--main-color), -3px 3px var(--main-color), -4px 4px var(--main-color), -5px 5px var(--main-color), -6px 6px var(--main-color);
@@ -1265,20 +1280,21 @@ button:hover {
 #houses button{
     position: absolute;
     left: 0.5em;
-    width:2em;
-    height:2em;
-    padding:0em;
-    border-radius:3px;
+    z-index: 200;
+    width:2em; height:2em;
+    padding: 0;
+    border-radius: 4px;
 }
 
 #houses .editButton {
-    top:0.5em;
+    top: 0.5em;
 }
 
 #houses .deleteButton {
     background-color:var(--error-color);
-    top:3em;
+    top: 3em;
 }
+
 #houses .deleteButton:hover {
     background-color:var(--error-color-hl);
 }
@@ -1437,9 +1453,6 @@ button:hover {
     font-size: 0.6em;    
     padding: 1em;
     margin: 0 1em;    
-}
-#mainPage{
-    height:100%;
 }
 
 #mainPage #searchBackground {

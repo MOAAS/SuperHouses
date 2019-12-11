@@ -6,18 +6,15 @@
     {?>
       <li>
         <span class="houseID hidden"><?=$house->place_id?></span>
+        <?php if($buttons){?>
+          <button class="editButton" type="button"><i class="fas fa-pen"></i></button>
+          <button class="deleteButton" type="button"><i class="fas fa-trash"></i></button>
+        <?php }?>
         <a href="house.php?id=<?=$house->place_id?>">
           <figure>
             <img src="../database/houseImages/<?=$house->place_id?>/0" alt="House image">
             <figcaption><h3><?=toHTML($house->title)?></h3></figcaption>
           </figure>
-
-          <?php if($buttons){?>
-            <div class="houseButtons">
-              <a href="edit_house.php?id=<?=$house->place_id?>"><button class="editButton" type="button"><i class="fas fa-pen"></i></button> </a>
-              <button class="deleteButton" type="button"><i class="fas fa-trash"></i></button>
-            </div>
-          <?php }?>
 
           <div class="houseInfo">
             <div class="priceTag">

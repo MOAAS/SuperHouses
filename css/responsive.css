@@ -1,0 +1,277 @@
+@media (max-width: 800px) {
+    /* sign up login */
+    #signup, #login {
+        margin: auto;
+    }
+
+    /* Profile page stretching */
+
+
+    #profilePage,  
+    #profilePage #profile {
+        display: flex;
+        flex-flow: column;
+        align-items: stretch;
+    }
+
+    #profilePage #profile,
+    #profile .profileTab {
+        flex-grow: 1;
+    }  
+
+     /* Header */
+
+    #pagetop #notificationList {
+        top: 2em;
+        left: -7.5em;
+        width: 20em;
+    }
+
+    /* Search */
+    #searchDialog {
+        max-width: 100%;
+        margin: 10em 0;
+        border-radius: 0;
+    }
+
+    #searchDialog form {
+        display: block;
+    }
+
+    #searchButton {
+        right: 1em;
+        bottom: 1em;
+    }
+
+    #startDate {
+        border-right: 0;
+    }
+
+    /* House page */
+    #house #place-body {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "house"
+            "book"
+            "comments";
+    }
+
+    #house #booking {
+        width: 30em;
+        margin: 0 auto;
+    }
+
+    
+    #house #photoCarousel img {
+        width: 30em;
+        height: 15em;
+    }
+
+    #house #photoCarousel {
+        width: 30em;
+        height: 15em;
+    }
+
+    /* Profile page */
+
+    #profile {
+        display: block;
+        margin: 0;
+    }
+
+    #profile #userProfileName {
+        display: none;
+    }
+
+    #profilePage #profile nav li:first-child,
+    #profilePage #profile nav li:last-child {
+        border-radius: 0;
+    }
+
+    #profile nav ul {
+        border-radius: 0;
+        max-height: 0;
+        transition: all .3s ease-in-out;
+    }
+    
+    #profile nav li {
+        box-shadow: none;
+        border-bottom: 1px solid var(--main-color);
+
+        max-height: 0;
+        padding: 0;
+        opacity: 0;
+        transition: all .3s ease-in-out;
+    }
+
+    #hamburger:checked ~ ul{
+        max-height: 100%;
+    }
+
+    #hamburger:checked ~ ul li{
+        max-height: 1em;
+        padding: 0.75em;
+        opacity: 1;
+    }
+    
+    #profile nav .hamburger {
+        display: block;
+        background-color: #2a2f33;
+        color: white;
+        padding: 1em;
+    }
+        
+    #profile nav .hamburger:before {
+        content:'\2630';
+    }
+
+    #hamburger:checked + .hamburger:before {
+       content:'\2715';
+    }
+
+    #profile nav li:hover, 
+    #profile nav li.selectedTab {
+        transform: none;
+    }
+
+    #profile .profileTab.noContent {
+        height: auto;
+        margin: 1em auto;
+    }
+
+    #profile .profileTab.reducedWidth {
+        margin: 0;
+    }
+
+    #editHousePage #manageHouse {
+        margin: 0;
+    }
+
+    /* Messages */
+    #messages {
+        height: 100%;
+        grid-template-rows: min-content 25em min-content
+    }
+}
+
+@media (max-width: 600px) {
+    
+    /* sign up sign in */
+    #login h2, #signup h2 {
+        font-size: 1.25em;
+        margin: 0.25em 0;
+    }
+
+    #login, #signup {
+        max-width: 100%;
+        height: 100%;
+        border-radius: 0;
+        margin: 0;
+        padding: 0 2em;
+    }
+    /* Header */
+    #pagetop > h1 div {
+        display: none;
+    }
+
+    /* House page */
+
+    #house #booking {
+        width: auto;
+        margin: 0;
+    }
+
+    #house #photoCarousel img {
+        width: 20em;
+        height: 10em;
+    }
+
+    #house #photoCarousel {
+        width: 20em;
+        height: 10em;
+    }
+
+    /* Edit profile */
+
+    #profile #editProfile {
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+            "header"
+            "edit-info"
+            "edit-cred";
+    }
+
+    #editProfile #editInfo,
+    #editProfile #editCredentials {
+        margin: 0;
+        padding: 0;
+        border: none;
+    }
+
+    #editProfile h3 {
+        margin: 1em 0 0.5em 0;
+        text-align: center;
+    }
+
+    /* Edit house */
+
+    #manageHouse button[type="submit"] {
+        width: 50%;
+    }
+
+    /* Reservation list */
+
+    .reservationList thead {
+        display:  none;
+    }
+
+    .reservationList .reservation {
+        display: grid;
+        padding: 0.5em 0;
+    }
+
+    #comingReservations .reservation {
+        grid-template-areas: 
+            "img guest"
+            "location date"
+            "price price"
+            "action action";
+            align-items: center;
+    }
+
+    #goingReservations .reservation {
+        grid-template-areas: 
+            "img img"
+            "location date"
+            "price price"
+            "action action";
+            align-items: center;
+    }
+
+
+    .reservationList .reservationGuest {
+        grid-area: guest;
+    }
+
+    .reservationList .reservationImg {
+        grid-area: img;
+    }
+
+    .reservationList .reservationInfo {
+        grid-area: location;
+    }
+
+    .reservationList .reservationDate {
+        grid-area: date;
+    }
+
+    .reservationList .reservationPrice {
+        grid-area: price;
+    }
+
+    .reservationList .reservationAction {
+        grid-area: action;
+    }
+
+
+}

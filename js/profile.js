@@ -53,18 +53,36 @@ if (urlHash == "Conversation " + username)
     selectTabItem('Messages');
 else selectTabItem(urlHash);
 
-// my places
-let places = document.querySelectorAll('#houses li').forEach((place) => {
-    let button = place.querySelector('.deleteButton');
+// Your places
+function onHouseDeleted(house, response) {
+    if (response == null) {
+        house.style.transform = "scale(0)";
+        setTimeout(() => {
+            house.remove();
+            if (document.querySelectorAll('#houses ul li').length != 0)
+                return;
+            let yourPlaces = document.getElementById('yourPlaces')
+            yourPlaces.classList.add('noContent');
+            yourPlaces.innerHTML =
+                '<h2>Your Places</h2>' + 
+                '<p>Looks like you dont have any place yet!</p>' +
+                '<button id="addHouseButton" type="button">Add a Place</button>';      
+            document.getElementById('addHouseButton').addEventListener('click', () => selectTabItem('Add place'))    
+        }, 300);
+    }
+    else selectTabItem('Future guests');
+}
+
+document.querySelectorAll('#houses li').forEach((place) => {
+    let deleteButton = place.querySelector('.deleteButton');
+    let editButton = place.querySelector('.editButton');
     let houseID = place.querySelector('.houseID').textContent;
-    button.addEventListener('click', event => {
-        if (button.innerHTML == '<i class="fas fa-trash"></i>')
-            addButtonAnimation(button, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
-        else {
-            sendPostRequest('../actions/action_deleteHouse.php', {houseID: houseID}, null) 
-            document.location.reload();
-        }       
+    deleteButton.addEventListener('click', event => {
+        if (deleteButton.innerHTML == '<i class="fas fa-trash"></i>')
+            addButtonAnimation(deleteButton, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
+        else sendPostRequest('../actions/action_deleteHouse.php', {houseID: houseID}, function() { onHouseDeleted(place, JSON.parse(this.responseText)) }) 
     });
+    editButton.addEventListener('click', _ => window.location.href = "edit_house.php?id=" + houseID)
 });
 
 // Reservations
@@ -172,7 +190,7 @@ function appendMessage(content, wasSent, sendTime) {
 }
 
 function updateConversation(conversation, content) {
-    let date = new Date().getHours() + ":" + new Date().getMinutes();
+    let date = timeToString(new Date());
     conversation.querySelector('p').innerHTML = htmlEntities(content);
     conversation.querySelector('.messageDate').innerHTML = htmlEntities(date);
     conversation.remove();
@@ -294,6 +312,10 @@ if (addHouseButton != null)
 const checkPlacesButton = document.getElementById('checkPlacesButton');
 if (checkPlacesButton != null)
     checkPlacesButton.addEventListener('click', () => selectTabItem('Your places'));
+
+const searchPlacesButton = document.getElementById('searchPlacesButton');
+if (searchPlacesButton != null)
+    searchPlacesButton.addEventListener('click', () => window.location.href =  "../pages/main.php");
 
 
 const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');

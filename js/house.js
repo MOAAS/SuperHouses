@@ -18,8 +18,14 @@ function advancePhotos(n) {
 }
 
 function showPhotos() {
+  let imgWidth;
+  if (window.innerWidth > 800)
+    imgWidth = 45 + 0.5;
+  else if (window.innerWidth > 600)
+    imgWidth = 30 + 0.5;
+  else imgWidth = 20 + 0.5;
   for (let i = 0; i < photos.length; i++) {
-    photos[i].style.transform = "translate(" + slideIndex * -45 + "em)";      
+    photos[i].style.transform = "translate(" + slideIndex * -imgWidth + "em)";      
   }
 }
 

@@ -9,6 +9,10 @@
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
     <nav>
+      <!-- just for the hamburguer menu in responsive layout -->
+      <input type="checkbox" id="hamburger" class="hidden"> 
+      <label class="hamburger hidden" for="hamburger"></label>
+
       <ul>
         <li>Profile</li>
         <li>Your places</li>
@@ -141,7 +145,7 @@
             $place = $reservation->getPlace();
           ?>
           <tr class="reservation">
-            <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
+            <td class="reservationImg"><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
             <td class="reservationInfo">
               <span class="hidden reservationID"><?=$reservation->getID()?></span>
               <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
@@ -153,11 +157,11 @@
               <p><?=$reservation->getEndString()?><p>
             </td>
             <td class="reservationGuest"><h3><?=$reservation->getGuest()?></h3></td>
-            <td>
+            <td class="reservationPrice">
               <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
               <p class="numNights"><span class="priceValue"><?=$reservation->getPricePerDay()?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
             </td>
-            <td>
+            <td class="reservationAction">
               <?php if ($reservation->isApproaching()) { ?>
                 <button class="cancelReservation" type="button" disabled>Too late to cancel</button>              
               <?php } else { ?>
@@ -177,7 +181,7 @@
     <h2>Your Reservations</h2>
     <?php if (count($goingReservations) == 0) { ?>
       <p>You haven't booked any reservations yet!</p>
-      <button type="button"><a href="../pages/main.php">Search for houses</a></button>      
+      <button id="searchPlacesButton" type="button">Search for houses</button>
     <?php } else { ?>
     <table>
       <thead>
@@ -194,7 +198,7 @@
           $reservation->isApproaching();
         ?>
         <tr class="reservation">
-          <td><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
+          <td class="reservationImg"><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
           <td class="reservationInfo">
             <span class="hidden reservationID"><?=$reservation->getID()?></span>
             <h3 class="houseTitle"><a href="house.php?id=<?=$place->place_id?>"><?=toHTML($place->title)?></a></h3>
@@ -205,11 +209,11 @@
             <p><i class="fas fa-long-arrow-alt-down"></i></p>
             <p><?=$reservation->getEndString()?><p>
           </td>
-          <td>
+          <td class="reservationPrice">
             <p class="totalPrice"><span class="priceValue"><?=$reservation->getTotalPrice()?></span> €</p>
             <p class="numNights"><span class="priceValue"><?=$reservation->getPricePerDay()?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
           </td>
-          <td>
+          <td class="reservationAction">
             <?php if (isReviewed($reservation->getID())) { ?>
               <button type="button" disabled>Reservation reviewed</button>    
             <?php } else if ($reservation->isCancellable()) { ?>
@@ -245,8 +249,8 @@
         </tr>   
       <?php } ?> 
       </tbody>
+    </table>
     <?php } ?> 
-   </table>
   </section>
 <?php } ?>
 

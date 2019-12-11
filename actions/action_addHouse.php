@@ -22,32 +22,32 @@
   
   if ($price <= 0 || $price > 1000 || !is_numeric($price)) {
     addErrorMessage('Adding place failed! Price invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
 
   if ($capacity <= 0 || !is_numeric($capacity)) {
     addErrorMessage('Adding place failed! Capacity invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
 
   if ($numRooms <= 0 || !is_numeric($numRooms)) {
     addErrorMessage('Adding place failed! Number of rooms invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
 
   if ($numBeds <= 0 || !is_numeric($numBeds)) {
     addErrorMessage('Adding place failed! Number of beds invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
 
   if ($numBathrooms <= 0 || !is_numeric($numBathrooms)) {
     addErrorMessage('Adding place failed! Number of bathrooms invalid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
   
   if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Adding place failed! Country is not valid!');
-    die(header('Location: ../pages/profile.php#Add Place'));
+    die(header('Location: ../pages/profile.php#Add place'));
   }
     
   //save files
