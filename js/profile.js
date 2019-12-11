@@ -172,7 +172,7 @@ function appendMessage(content, wasSent, sendTime) {
 }
 
 function updateConversation(conversation, content) {
-    let date = new Date().getHours() + ":" + new Date().getMinutes();
+    let date = timeToString(new Date());
     conversation.querySelector('p').innerHTML = htmlEntities(content);
     conversation.querySelector('.messageDate').innerHTML = htmlEntities(date);
     conversation.remove();

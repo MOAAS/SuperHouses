@@ -62,6 +62,11 @@
     --strong-shadow: 0px 0px 10px  rgba(68, 47, 47, 0.5);
 }
 
+html,
+body {
+    height: 100%;
+}
+
 body{
     margin:0;
     color: var(--text-color);
@@ -119,7 +124,8 @@ body{
 
 #pagetop h1 a{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    align-items: center;
 }
 
 #pagetop h1 svg{
@@ -391,11 +397,13 @@ input[type="number"],
 button, 
 textarea, 
 select {
+    -webkit-box-sizing: border-box; /* Safari/Chrome, other WebKit */
+    -moz-box-sizing: border-box;    /* Firefox, other Gecko */
     box-sizing: border-box;  
     font-size: 1em;
     padding: 0.75em;
     background-color:  var(--input-bg-color);
-    border-radius: 10px;
+    border-radius: 4px;
     border: none;
     font-family: var(--regular-font-family)
 }
@@ -903,7 +911,6 @@ button:hover {
 }
 
 .reservationList img {
-    width: 10em;
     height: 5.6em;
     vertical-align: middle;
 }
@@ -1070,7 +1077,7 @@ button:hover {
 
     display: grid;
     align-items: center;
-    grid-template-rows: minmax(1fr, 1.25fr) auto minmax(1fr, 1.25fr);
+    grid-template-rows: min-content 30em min-content;
 }
 
 #messages header {
@@ -1104,7 +1111,6 @@ button:hover {
 #messages #messageHistory {
     align-self: stretch;
     padding: 1em;
-    height: 30em;
     overflow: auto;  
 }
 
@@ -1424,9 +1430,6 @@ button:hover {
     font-size: 0.6em;    
     padding: 1em;
     margin: 0 1em;    
-}
-#mainPage{
-    height:100%;
 }
 
 #mainPage #searchBackground {

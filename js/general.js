@@ -22,6 +22,15 @@ function dateToString(date) {
     return date.getDate() + " " + months[date.getMonth()].substr(0, 3) + " " + date.getFullYear();
 }
 
+function timeToString(date) {
+    let hours = date.getHours();
+    let minutes = date.getMinutes();
+    if (minutes < 10) {
+        minutes = "0" + minutes;
+    }
+    return hours + ":" + minutes;
+}
+
 function setInvalidInput(input, placeholder) {
     input.classList.add('invalidInput');
     input.style.border = "2px solid red";
