@@ -115,6 +115,13 @@ body{
 
 #pagebanner {
     background-color: var(--topbar-color);
+    position: fixed;
+    top: 0;
+    width:100%;
+    z-index: 3;
+}
+#pagebanner + *{
+    padding-top:73px;
 }
 
 #mainPage #pagebanner{
@@ -311,60 +318,60 @@ transition:all 0.1s ease-in-out;
 }
 
 /*Dark theme switch*/
-                                                                                                                                    .theme-switch-wrapper {
-                                                                                                                                        display: flex;
-                                                                                                                                        align-items: center;
-                                                                                                                                        justify-content: space-between;
-                                                                                                                                        
-                                                                                                                                                                                                    }
-            /* isto  */                                                                                                                                                                                        .theme-switch {
-                                                                                                                                                                                                        display: inline-block;
-                        /* é  */                                                                                                                                                                       height: 34px;
-                                                                                                                                                                                                        position: relative;
-                                                                                                                                                                                                        width: 60px;
-                  /* mesmo  */                                                                                                                                                                          }
-                                                                                                                                                                                                    
-                                                                                                                                                                                                    .theme-switch input {
-                           /* fiiixe  */                                                                                                    display:none;
-                                                                                                                                    }
-                                                                                                                          
-                                                                                                                                    .slider {
-                                                                                                                                        background-color: var(--input-bg-color);
-                                                                                                                                        bottom: 0;
-                                                                                                                                        cursor: pointer;
-                                                                                                                                                                                            left: 0;
-                                                                                                                                                                                            position: absolute;
-                                                                                                                                                                                            right: 0;
-                                                                                                                                        top: 0;
-                                                                                                                                        transition: .4s;
-                                                                                                                                    }
-                                                                                                
-                                                                                                .slider:before {
-                                                                                                    background-color: var(--main-color);
-                                                                                                    bottom: 4px;
-                                                                                                    content: "";
-                                                                                                    height: 26px;
-                                                                                                    left: 4px;
-                                                                                                                                                                        position: absolute;
-                                                                                                                                                                        transition: .4s;
-                                                                                                                                                                        width: 26px;
-                                                                                                                                                                    }
-                                                                                                                                                                    
-                                                                                                                                                                    input:checked + .slider {
-                                                                                                                                                                        background-color:  var(--input-bg-color);
-                                                                                                                                                                    }
-                                                                                                                                                                    
-                                                                                                                                                                    input:checked + .slider:before {
-                                                                                                                                                                        transform: translateX(26px);
-                                                                                                                                                                    }
-                                                                                                
-                                                                                                .slider.round {
-                                                                                                    border-radius: 34px;
-                                                                                                }
+.theme-switch-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+.theme-switch {
+display: inline-block;
+height: 34px;
+position: relative;
+width: 60px;
+}
+
+.theme-switch input {
+    display:none;
+}
+
+.slider {
+    background-color: var(--input-bg-color);
+    bottom: 0;
+    cursor: pointer;
+    left: 0;
+    position: absolute;
+    right: 0;
+    top: 0;
+    transition: .4s;
+}
+
+.slider:before {
+    background-color: var(--main-color);
+    bottom: 4px;
+    content: "";
+    height: 26px;
+    left: 4px;
+    position: absolute;
+    transition: .4s;
+    width: 26px;
+}
+
+input:checked + .slider {
+    background-color:  var(--input-bg-color);
+}
+
+input:checked + .slider:before {
+    transform: translateX(26px);
+}
+
+.slider.round {
+    border-radius: 34px;
+}
                                                                                                                                     
-                                                                                                                                    .slider.round:before {
-                                                                                                                                        border-radius: 50%;
-                                                                                                                                    }
+.slider.round:before {
+    border-radius: 50%;
+}
 
 
 /* Generic */
@@ -1334,6 +1341,8 @@ button:hover {
     border-radius: 5px;
     box-shadow: var(--strong-shadow);
     cursor: pointer;
+    
+    transition: right 0.1s ease-in-out; 
 }
 
 #searchButton:hover {

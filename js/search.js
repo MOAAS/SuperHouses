@@ -76,3 +76,14 @@ searchForm.addEventListener('submit', () => {
     document.querySelector('#searchDialog input[name="numBabies"]').value = document.querySelector('#countBabies .count').textContent;
     searchForm.submit();
 });
+
+let prevScrollpos = window.pageYOffset;
+window.onscroll = function() {
+  var currentScrollPos = window.pageYOffset;
+  if (prevScrollpos >= currentScrollPos) {
+    document.getElementById("searchButton").style.right = "3em";
+    } else { 
+    document.getElementById("searchButton").style.right = "-3em";
+  }
+  prevScrollpos = currentScrollPos;
+} 
