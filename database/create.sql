@@ -34,7 +34,7 @@ CREATE TABLE PlaceLocation (
 
 CREATE TABLE Place (
     id INTEGER PRIMARY KEY,
-    location REFERENCES PlaceLocation UNIQUE NOT NULL,
+    location REFERENCES PlaceLocation UNIQUE NOT NULL ON DELETE CASCADE,
     owner REFERENCES User NOT NULL,
     title VARCHAR NOT NULL,
     description VARCHAR NOT NULL,

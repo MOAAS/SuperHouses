@@ -2,6 +2,8 @@
 
 function updateNotificationNum() {
     let notificationNum = document.getElementById('notificationNum');
+    if (notificationNum == null)
+        return;
     if (notificationNum.textContent == "0")
         notificationNum.style.display = "none";
     else notificationNum.style.display = "block";
