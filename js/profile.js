@@ -317,11 +317,23 @@ const searchPlacesButton = document.getElementById('searchPlacesButton');
 if (searchPlacesButton != null)
     searchPlacesButton.addEventListener('click', () => window.location.href =  "../pages/main.php");
 
-
-const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"]');
+const firstswitch = document.getElementById('one');
+const secondswitch = document.getElementById('two');
 if (currentTheme == 'dark') 
-    toggleSwitch.checked = true;
-toggleSwitch.addEventListener('change', switchTheme, false);
+   secondswitch.checked = true;
+const thirdswitch = document.getElementById('three');
+if (currentTheme == 'xmas') 
+    thirdswitch.checked = true;
+
+firstswitch.addEventListener('change', ()=>{
+    changeTheme('light');
+});
+secondswitch.addEventListener('change', ()=>{
+    changeTheme('dark');
+});
+thirdswitch.addEventListener('change', ()=>{
+    changeTheme('xmas');
+});
 
 
 let menuprofilebutton = document.getElementById('menuprofilebutton');

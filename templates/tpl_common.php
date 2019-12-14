@@ -6,6 +6,7 @@
   <html lang="en">
 
     <head>
+      <?=drawSnowflakes()?>
       <title>Super Houses</title>
       <meta charset="utf-8">
       <link rel="stylesheet" href="../css/style.css">
@@ -95,4 +96,21 @@
       </li>
     <?php } ?>
   </ul>
+<?php } ?>
+
+<?php function drawSnowflakes() { ?>
+  <div class="snowflakes" aria-hidden="true">
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+  <div class="snowflake">❅</div>
+</div>
 <?php } ?>

@@ -62,10 +62,15 @@
       <h3>Preferences</h3>
       <div class="theme-switch-wrapper">
         <p>Theme</p>
-          <label class="theme-switch" for="checkbox">
-            <input type="checkbox" id="checkbox" />
-            <div class="slider round"></div>
-          </label>
+          <div class="switch">
+            <input name="switch" id="one" type="radio" checked/>
+            <label for="one" class="switch__label"><i class="fas fa-sun"></i></label>
+            <input name="switch" id="two" type="radio" />
+            <label for="two" class="switch__label"><i class="fas fa-moon"></i></label>
+            <input name="switch" id="three" type="radio" />
+            <label for="three" class="switch__label" ><i class="fas fa-gift"></i></label>
+            <div class="switch__indicator"></div>
+          </div>         
       </div>
     </section>
 
