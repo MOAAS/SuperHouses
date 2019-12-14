@@ -1,5 +1,6 @@
 <?php function draw_header($page_id,$username, $script) { 
   $notifications = getUnseenNotifications($username);
+  $profilepic =getProfilePicture($username);
 ?>
   <!DOCTYPE html>
   <html lang="en">
@@ -42,8 +43,23 @@
                   <span id="notificationNum"><?=count($notifications)?></span>
                   <?=drawNotificationList($notifications)?> 
                 </li>
-                <li>Signed in as <a id="loggeduser" href="profile.php"><?=$username?></a></li>
-                <li><a id="logoutbutton" href="../actions/action_logout.php">Logout</a></li>
+                
+                
+                <li>
+                  <div id= "profilebutton" class="dropbtn">
+                    <img src="<?=$profilepic?>" alt="<?=toHTML($username)?>"> 
+                    <p><?=$username?></p>
+                  </div>
+                  <div id = "dropdownbackground"class = "dropdown-content">
+                    <a id="menuprofilebutton" href="profile.php#Profile">Profile</a>
+                    <a id="menuyourplacesbutton" href="profile.php#Your places">Your places</a>
+                    <a id="menuaddplacebutton" href="profile.php#Add place">Add place</a>
+                    <a id="menufutureguestsbutton" href="profile.php#Future guests">Future guests</a>
+                    <a id="menuyourreservationsbutton" href="profile.php#Your reservations">Your Reservations</a>
+                    <a id="menumessagesbutton" href="profile.php#Messages">Messages</a>
+                    <a id="logoutbutton" href="../actions/action_logout.php">Logout</a>
+                  </div>
+                </li>
               </ul>
             </nav>
           <?php } ?>

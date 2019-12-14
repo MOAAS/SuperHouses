@@ -322,3 +322,35 @@ const toggleSwitch = document.querySelector('.theme-switch input[type="checkbox"
 if (currentTheme == 'dark') 
     toggleSwitch.checked = true;
 toggleSwitch.addEventListener('change', switchTheme, false);
+
+
+let menuprofilebutton = document.getElementById('menuprofilebutton');
+menuprofilebutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Profile";
+    window.location.reload(false);
+});
+let menuyourplacesbutton = document.getElementById('menuyourplacesbutton');
+menuyourplacesbutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Your places";
+    window.location.reload(false);
+});
+let menuaddplacebutton = document.getElementById('menuaddplacebutton');
+menuaddplacebutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Add place";
+    window.location.reload(false);
+});
+let menufutureguestsbutton = document.getElementById('menufutureguestsbutton');
+menufutureguestsbutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Future guests";
+    window.location.reload(false);
+});
+let menuyourreservationsbutton = document.getElementById('menuyourreservationsbutton');
+menuyourreservationsbutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Your reservations";
+    window.location.reload(false);
+});
+let menumessagesbutton = document.getElementById('menumessagesbutton');
+menumessagesbutton.addEventListener("click",()=>{
+    window.location.href ="../pages/profile.php#Messages";
+    window.location.reload(false);
+});

@@ -104,31 +104,6 @@
         transition: all .3s ease-in-out;
     }
 
-    #hamburger:checked ~ ul{
-        max-height: 100%;
-    }
-
-    #hamburger:checked ~ ul li{
-        max-height: 1em;
-        padding: 0.75em;
-        opacity: 1;
-    }
-    
-    #profile nav .hamburger {
-        display: block;
-        background-color: #2a2f33;
-        color: white;
-        padding: 1em;
-    }
-        
-    #profile nav .hamburger:before {
-        content:'\2630';
-    }
-
-    #hamburger:checked + .hamburger:before {
-       content:'\2715';
-    }
-
     #profile nav li:hover, 
     #profile nav li.selectedTab {
         transform: none;

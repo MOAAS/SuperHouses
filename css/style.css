@@ -1,4 +1,6 @@
 /* Page header and body */
+@import url('https://fonts.googleapis.com/css?family=Open+Sans&display=swap');
+
 :root {
     margin: 0;
 
@@ -36,8 +38,8 @@
     --simple-shadow-hl: 0px 1px 15px rgba(0,0,0,0.75);
     --strong-shadow: 0px 0px 10px  rgba(0,0,0,0.5);
 
-    --regular-font-family: Futura, "Trebuchet MS", Arial, sans-serif;
-    --heading-font-family: Verdana, Geneva, Tahoma, sans-serif;
+    --regular-font-family: 'Open Sans', "Trebuchet MS", Arial, sans-serif;
+    --heading-font-family: 'Verdana', Geneva, Tahoma, sans-serif;
 }
 
 [data-theme="dark"] {
@@ -184,9 +186,15 @@ transition:all 0.1s ease-in-out;
 #pagetop h1 {
     font-weight: bold;
 }
+#pagetop nav > ul {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
 #pagetop nav > ul > li {
     display: inline;
+    position:relative;
     color: rgb(225, 225,225);
     margin: 0.25em;
 }
@@ -283,6 +291,61 @@ transition:all 0.1s ease-in-out;
     color: var(--main-color-light);
 }
 
+.dropbtn {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0.5em;
+    color: white;
+    cursor: pointer;
+}
+.dropbtn img{
+    width: 2.2em;
+    height: 2.2em;
+    border-radius: 50%;
+    margin-right: 0.75em;
+}
+
+.dropbtn p{
+    font-size:1.3em;
+    margin:0;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    overflow:hidden;
+    position: absolute;
+    width: 13em;
+    border-radius: 4px;   
+    z-index: 4;
+    right:10px;
+
+    color: var(--text-color);
+    box-shadow: var(--simple-shadow);
+    background-color: var(--bg-color-2);
+  }
+  
+  .dropdown-content a {
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+  .dropdown-content a:hover{
+    background-color: var(--notif-color-hl);
+}
+
+#logoutbutton{
+    background-color: var(--secondary-color);
+    color:var(--text-color-2);
+}
+  #logoutbutton:hover{
+    background-color: var(--secondary-color-hl);
+  }
 
 
 #pagetop #loggeduser {
@@ -290,15 +353,6 @@ transition:all 0.1s ease-in-out;
     font-weight: bold;
 }
 
-#pagetop #logoutbutton {
-    padding: 0.5em;
-    background-color: var(--main-color-light);
-    transition: background-color 200ms ease-in-out;
-}
-
-#pagetop #logoutbutton:hover {
-    background-color: var(--main-color-light-hl);
-}
 
 #sessionMessages {
     color: white;
@@ -582,12 +636,12 @@ button:hover {
 }
 
 #login {
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 5em 7em;
     max-width: 20em;
 }
 #signup {
-    border-radius: 5px;
+    border-radius: 4px;
     margin: 6em 7em 0 7em;
     max-width: 30em;
 }
@@ -673,11 +727,11 @@ button:hover {
 }
 
 #profile nav li:first-child {
-    border-radius: 5px 5px 0 0;
+    border-radius: 4px 4px 0 0;
 }
 
 #profile nav li:last-child {
-    border-radius: 0 0 5px 5px ;
+    border-radius: 0 0 4px 4px ;
 }
 
 #profile nav li:hover,
@@ -1338,7 +1392,7 @@ button:hover {
     background-color: var(--secondary-color);
     transition: background-color 200ms ease-in-out;
     
-    border-radius: 5px;
+    border-radius: 4px;
     box-shadow: var(--strong-shadow);
     cursor: pointer;
     
@@ -1419,17 +1473,17 @@ button:hover {
     width: auto;
     padding: 0.5em 1em;
     margin: 1em auto 0 auto;
-    border-radius: 3px;
+    border-radius: 4px;
     font-size: 1.25em;
 }
 
 #startDate {
-    border-radius: 3px 0 0 3px;
+    border-radius: 4px 0 0 4px;
     border-right: 1px solid gray;
 }
 
 #endDate {
-    border-radius: 0 3px 3px 0;
+    border-radius: 0 4px 4px 0;
 }
 
 #maxPriceSlider .priceTag {
@@ -1533,12 +1587,12 @@ button:hover {
 
 #house #photoLeftButton{
 	left:0%;
-	border-radius: 0 3px 3px 0;
+	border-radius: 0 4px 4px 0;
 }
 
 #house #photoRightButton{
 	right:0%;
-	border-radius: 3px 0 0 3px;
+	border-radius: 4px 0 0 4px;
 }
 
 #house #place-body {

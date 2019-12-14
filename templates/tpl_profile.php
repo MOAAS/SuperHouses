@@ -9,9 +9,6 @@
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
     <nav>
-      <!-- just for the hamburguer menu in responsive layout -->
-      <input type="checkbox" id="hamburger" class="hidden"> 
-      <label class="hamburger hidden" for="hamburger"></label>
 
       <ul>
         <li>Profile</li>
