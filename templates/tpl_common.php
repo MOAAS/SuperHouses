@@ -52,7 +52,7 @@
                     <a id="menufutureguestsbutton" href="profile.php#Future%20guests">Future guests</a>
                     <a id="menuyourreservationsbutton" href="profile.php#Your%20reservations">Your Reservations</a>
                     <a id="menumessagesbutton" href="profile.php#Messages">Messages</a>
-                    <a id="logoutbutton" href="../actions/action_logout.php">Logout</a>
+                    <a id="logoutbutton" href="../actions/action_logout.php"><i class="fas fa-sign-out-alt"></i> Logout</a>
                   </div>
                 </li>
               </ul>

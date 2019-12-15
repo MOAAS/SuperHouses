@@ -39,8 +39,8 @@
       <form method="post" action="../actions/action_editProfile.php" enctype="multipart/form-data">
         
         <div id="ppic">
-          <input id="profilePic" type="file" name="imageUpload" accept=".png, .jpg, .jpeg" />
-          <label for="profilePic"></label>
+          <label for="profilePic"><i class="fas fa-pen"></i></label>
+          <input id="profilePic" type="file" name="imageUpload" accept="image/*" />
           <ul id="preview">
             <li><img src= "<?=$user->profilePic?>" alt="Profile Pic"></li>
           </ul>
@@ -302,7 +302,7 @@
       </section>
 
       <div id="manageHouseImages">
-        <input id="files" type="file" name="fileUpload[]" multiple class="requiresFiles">        
+        <input id="files" type="file" name="fileUpload[]" multiple class="requiresFiles" accept="image/*">        
         <label for="files" class="clickable">Choose images</label>
         <ul id="result"></ul>
       </div>

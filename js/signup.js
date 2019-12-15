@@ -1,32 +1,58 @@
 let signUpForm = document.querySelector('#signup form');
 let signUpFormButton = signUpForm.querySelector('input[type="submit"]');
 let buttonText = signUpFormButton.textContent;
-let usernameInput = signUpForm.querySelector('#username');
 
 signUpForm.addEventListener('submit', event => {
     event.preventDefault();
+    let usernameInput = signUpForm.querySelector('#username');
     clearInvalidInput(usernameInput);
     let validForm = true;
 
-    if (usernameInput.value.length < 0) {
-        validForm = false;
-        setInvalidInput(usernameInput, "Username must be at least 8 characters long!");
-        usernameInput.value = "";
+    let validateUserInput = (input) => {
+        if (input.value.length < 8) {
+            validForm = false;
+            setInvalidInput(input, "Username must be at least 8 characters long!");
+            input.value = "";
+        } else if (!input.value.match(/^[a-zA-Z0-9]+$/)) {
+            validForm = false;
+            setInvalidInput(input, "Username may only contain letters and numbers!");
+            input.value = "";
+        }
+        else clearInvalidInput(input);
     }
-    else clearInvalidInput(usernameInput);
 
-    if (validForm)
-        sendGetRequest('../api/get_userExists.php', { username: usernameInput.value }, validateUser)
-    else addButtonAnimation(signUpFormButton, "red", "Invalid input", buttonText);
+    let validatePasswordInput = (input1, input2) => {
+        if (input1.value != input2.value) {
+            validForm = false;
+            setInvalidInput(input1, "Passwords don't match!");
+            setInvalidInput(input2, "Passwords don't match!");
+            input1.value = "";
+            input2.value = "";
+        } else {
+            clearInvalidInput(input1);
+            clearInvalidInput(input2);
+        }
+    }
+
+    validateUserInput(usernameInput);
+    validatePasswordInput(signUpForm.querySelector('#password'), signUpForm.querySelector('#confirmPassword'));
+
+    sendGetRequest('../api/get_userExists.php', { username: usernameInput.value }, function() {return validateUser(this.responseText, validForm)})
 });
 
-function validateUser() {
-    if(JSON.parse(this.responseText)) {
+function validateUser(responseText, validForm) {
+    let usernameInput = signUpForm.querySelector('#username');
+    if(JSON.parse(responseText)) {
+        validForm = false;
         setInvalidInput(usernameInput, "Username already exists!");
         usernameInput.value = "";
     }
     else {
         clearInvalidInput(usernameInput);
-        signUpForm.submit();
     }
+
+    if(validForm)
+        signUpForm.submit();
+    else
+        addButtonAnimation(signUpFormButton, "red", "Invalid input", buttonText);
 }
