@@ -1085,42 +1085,29 @@ button:hover {
     width: 100%;
 }
 
-.reviewForm .rating {
-    display: flex;
+.rating label{
+    display: block;
+    float: right;
+    position: relative;
+    background : url('star-off.svg');
+    transition      : all 0.2s ease-in-out;
+}
+ 
+.rating label:before{
+    content         : '';
+    display         : block;
+    width           : 1.5em;
+    height          : 1.5em;
+    background      : url('star-on.svg');
+    opacity         : 0;
+    transition      : all 0.2s ease-in-out;
 }
 
-.reviewForm .rating label,
-.reviewForm .rating label:hover ~ label {
-    color: var(--main-color);
+.rating label:hover:before,
+.rating label:hover ~ label:before,
+.rating:not(:hover) :checked ~ label:before{
+    opacity : 1;
 }
-
-.reviewForm .rating input:checked + label,
-.reviewForm .rating label:hover {
-    color: #ffc107;
-}
-
-.rating:hover label {
-    color: #ffdb70;
-}
-
-/*
-.reviewForm .rating input:checked + label {
-    color: #ffc107;
-}
-
-.reviewForm .rating input:checked ~ label {
-    color: #ffc107;
-}
-
-.reviewForm .rating label:hover ~ label {
-    color: #ffdb70;
-}
-
-.reviewForm .rating label:hover {
-    color: #ffc107;
-}
-
-*/
 
 
 
