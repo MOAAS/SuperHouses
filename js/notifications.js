@@ -48,3 +48,23 @@ notifications.forEach(notification => {
     });
 });
 
+function isDescendant(parent, child) {
+    let node = child.parentNode;
+    while (node != null) {
+        if (node == parent) {
+            return true;
+        }
+        node = node.parentNode;
+    }
+    return false;
+}
+
+let notificationList = document.getElementById('notificationList');
+let notification = document.getElementById('notifications');
+
+
+window.addEventListener('click', event => {
+    if (!isDescendant(notification,event.target))
+        notificationList.style.display = "none";
+});
+

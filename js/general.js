@@ -140,14 +140,16 @@ function changeTheme(theme){
 let profilebutton = document.getElementById('profilebutton');
 let dropdownbackground = document.querySelector(".dropdown-content");
 
-profilebutton.addEventListener('click', () => {
-    if (dropdownbackground.style.display == "block") 
-        dropdownbackground.style.display = "none";
-    else dropdownbackground.style.display = "block";
-});
+if(profilebutton != null){
+    profilebutton.addEventListener('click', () => {
+        if (dropdownbackground.style.display == "block") 
+            dropdownbackground.style.display = "none";
+        else dropdownbackground.style.display = "block";
+    });
+}
 
 window.addEventListener('click', event => {
-    if (event.target == dropdownbackground)
+    if (event.target.parentNode != profilebutton)
         dropdownbackground.style.display = "none";
 });
 
