@@ -71,7 +71,7 @@
 <?php } ?>
 
 <?php function draw_main() { ?>
-    <div id="mainPage">
+    <div id="mainPageSearch">
         <?php draw_search("","","",500,0,0,0); ?>
     </div>
 <?php } ?>
