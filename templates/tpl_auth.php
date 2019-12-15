@@ -13,7 +13,7 @@
       <label for="password">Password</label>
       <input id="password" type="password" name="password" placeholder="Type your password" required>
 
-      <input type="submit" value="Login">
+      <button type="submit">Login</button>
     </form>
 
     <footer>
@@ -41,7 +41,7 @@
       <label for="confirmPassword">Confirm Password</label>
       <input id="confirmPassword" type="password" name="confirmPassword" placeholder="Confirm your password" required>
 
-      <input type="submit" value="Sign Up">
+      <button type="submit">Sign Up</button>
     </form>
 
     <footer>

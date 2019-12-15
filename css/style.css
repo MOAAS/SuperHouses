@@ -696,7 +696,8 @@ button:hover {
     margin-top: 0.5em;
 }
 
-#login input[type="submit"], #signup input[type="submit"] {
+#login button[type="submit"], #signup button[type="submit"] {
+    width: 100%;   
     font-size: 1.5em;
     text-transform: uppercase;
 }

@@ -1,5 +1,5 @@
 let signUpForm = document.querySelector('#signup form');
-let signUpFormButton = signUpForm.querySelector('input[type="submit"]');
+let signUpFormButton = signUpForm.querySelector('button[type="submit"]');
 let buttonText = signUpFormButton.textContent;
 
 signUpForm.addEventListener('submit', event => {
@@ -47,12 +47,8 @@ function validateUser(responseText, validForm) {
         setInvalidInput(usernameInput, "Username already exists!");
         usernameInput.value = "";
     }
-    else {
-        clearInvalidInput(usernameInput);
-    }
 
     if(validForm)
         signUpForm.submit();
-    else
-        addButtonAnimation(signUpFormButton, "red", "Invalid input", buttonText);
+    else addButtonAnimation(signUpFormButton, "red", "Invalid input", buttonText);
 }
