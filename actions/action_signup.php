@@ -9,7 +9,11 @@
   $fullName = $_POST['fullName'];
 
 
-  if ( !preg_match ("/^[a-zA-Z0-9]+$/", $username)) {
+  if (strlen($username) < 8) {
+    addErrorMessage('Sign up failed! Username must be at least 8 characters long!');
+    header('Location: ../pages/signup.php');
+  }
+  else if ( !preg_match ("/^[a-zA-Z0-9]+$/", $username)) {
     addErrorMessage('Sign up failed! Username can only contain letters and numbers!');
     header('Location: ../pages/signup.php');
   }
