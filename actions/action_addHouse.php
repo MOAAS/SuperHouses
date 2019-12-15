@@ -45,38 +45,47 @@
     die(header('Location: ../pages/profile.php#Add place'));
   }
   
+  //checkfiles
+  if(!isset($_FILES['fileUpload']) || UPLOAD_ERR_NO_FILE == $_FILES['fileUpload']['error'][0]){
+    addErrorMessage("Adding place failed! No images uploaded");
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  $total_files = count($_FILES['fileUpload']['name']);
+  for($key = 0; $key < $total_files; $key++){
+   if ($_FILES['fileUpload']['error'][$key] !== UPLOAD_ERR_OK) {
+    addErrorMessage("Adding place failed!Upload failed with error code " . $_FILES['file']['error'][$key]);
+    die(header('Location: ../pages/profile.php#Add place'));
+   }     
+   $info = getimagesize($_FILES['fileUpload']['tmp_name'][$key]);
+   if ($info === FALSE) {
+    addErrorMessage("Adding place failed! Unable to determine image type of uploaded file");
+    die(header('Location: ../pages/profile.php#Add place'));
+   }
+   
+   if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+    addErrorMessage("Adding place failed!Not a gif/jpeg/png");
+    die(header('Location: ../pages/profile.php#Add place'));
+   }
+  } 
+
+  
   if(! addHouse($id,$country,$city,$address,$ownerId,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Adding place failed! Country is not valid!');
     die(header('Location: ../pages/profile.php#Add place'));
   }
     
   //save files
-  mkdir( '../database/houseImages/' . $id);
   $target_dir = '../database/houseImages/' . $id .'/' ;
-  if( isset($_FILES['fileUpload'])) {
-    $total_files = count($_FILES['fileUpload']['name']);
-    
-    for($key = 0; $key < $total_files; $key++) {
-      
-      // Check if file is selected
-      if(isset($_FILES['fileUpload']['name'][$key]) && $_FILES['fileUpload']['size'][$key] > 0) {
-        /*
-        $original_filename = $_FILES['fileUpload']['name'][$key];
-        $target = $target_dir . basename($original_filename);
-        $tmp  = $_FILES['fileUpload']['tmp_name'][$key];
-        move_uploaded_file($tmp, $target);
-        */
-        $original_filename = $_FILES['fileUpload']['name'][$key]; 
-       /* // Get the fileextension
-        $ext = pathinfo($original_filename, PATHINFO_EXTENSION); */ 
-        // Generate new filename
-        $new_filename = $key; 
-        // Upload the file with new name
-        move_uploaded_file($_FILES['fileUpload']['tmp_name'][$key], $target_dir . $new_filename);
-      }
-      
+  mkdir( '../database/houseImages/' . $id);
+  for($key = 0; $key < $total_files; $key++) {
+    if(isset($_FILES['fileUpload']['name'][$key]) && $_FILES['fileUpload']['size'][$key] > 0) {
+      $original_filename = $_FILES['fileUpload']['name'][$key]; 
+      $new_filename = $key; 
+      move_uploaded_file($_FILES['fileUpload']['tmp_name'][$key], $target_dir . $new_filename);
     }
+    
   }
+
   
   header('Location: ../pages/search_houses.php');
 

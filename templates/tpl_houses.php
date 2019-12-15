@@ -135,9 +135,7 @@
   $countryOptions = getAllCountries();?>
   <section id="manageHouse" class="genericForm">
     <h2>Edit your place</h2> 
-    <a href="../pages/profile.php#Your places">
-      <button id="backToProfile" type="button"><i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back to profile</button>    
-    </a>
+    <a id="backToProfile" href="../pages/profile.php#Your%20places"><i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back to profile</a>
     <form method="post" action="../actions/action_editHouse.php" enctype="multipart/form-data">
       <input class="hidden" type="text" name="placeID" value="<?=toHTML($house->place_id)?>"/>
 
@@ -192,8 +190,8 @@
       </section>
 
       <div id="manageHouseImages">
-        <input id="files" type="file" name="fileUpload[]" multiple>        
-        <label for="files">Choose images</label>
+        <input id="files" type="file" name="fileUpload[]"  accept="image/*" multiple>        
+        <label for="files" class="clickable">Choose images</label>
         <ul id="result">
           <?php foreach($pictures as $picture){?>
             <li><img src=<?=$picture?> alt="<?=toHTML($house->title)?>"></li>
