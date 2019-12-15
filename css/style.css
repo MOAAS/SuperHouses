@@ -123,12 +123,6 @@ body{
     margin:0;
     color: var(--text-color);
     background-color: var(--bg-color);
-    /*
-    background-image: url("hoss.jpg");
-    background-size: 100%;
-    background-position: center;
-    background-repeat: no-repeat;
-    */
 
     font-family: var(--regular-font-family);
 }
@@ -184,47 +178,37 @@ body{
     max-width: 80em;    
 }
 
-#pagetop h1 a{
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-}
-
-#pagetop h1 svg{
-    fill: rgb(230, 230,230);
-    width:2.1em;
-    height:2.1em;
-    margin-right:0.2em;
-}
-
-/*
-#pagetop h1 svg path{
-transition:all 0.1s ease-in-out;
-}
-#pagetop h1 svg:hover path {
-    filter: drop-shadow( 30px 30px 1px var(--secondary-color));
-    transform: translateX(-30px) translateY(-30px);
-}
-*/
-
-
-#pagetop h1 {
-    padding: 0.5em;
+#pagelogo{
+    display: grid;
+    grid-template-areas: 
+        "logo title"
+        "logo slogan";
+    justify-content: center;
     color: rgb(230, 230,230);
+    padding: 0.5em;
 }
 
-#pagetop h1 p{
-    margin:0;
+#pagelogo svg{
+    grid-area: logo;
+    fill: rgb(230, 230,230);
+    width: 3.5em;
+    height: 3.5em;
+    margin: 0 0.5em;
 }
 
-#pagetop h1 small {
-    display: block;
-    font-size: 0.5em;
+#pagelogo h1 {
+    align-self: flex-end;
+    grid-area: title;
 }
 
-#pagetop h1 {
-    font-weight: bold;
+#pagelogo h2 {
+    align-self: flex-start;
+    grid-area: slogan;
+    font-size: 0.8em;
 }
+
+
+
 #pagetop nav > ul {
     display: flex;
     justify-content: space-between;
@@ -905,6 +889,11 @@ button:hover {
 
 /*Add House*/
 
+#manageHouse {
+    max-width: 60em;
+    margin: 2em auto;
+}
+
 #manageHouse h2 {
     text-align: center;
     margin: 0.5em 0;
@@ -914,10 +903,12 @@ button:hover {
     position: absolute;
     top: 0; left: 0;
     border-radius: 0;
-    max-width: 2em;
-    padding-right: 1.5em;
+    max-width: 0.8em;
+    padding: 0.75em;
     white-space: nowrap;
     overflow: hidden;
+    color: white;
+    background-color: var(--main-color-light);
     transition: all 0.3s ease-in-out;
 }
 
@@ -1097,42 +1088,29 @@ button:hover {
     width: 100%;
 }
 
-.reviewForm .rating {
-    display: flex;
+.rating label{
+    display: block;
+    float: right;
+    position: relative;
+    background : url('star-off.svg');
+    transition      : all 0.2s ease-in-out;
+}
+ 
+.rating label:before{
+    content         : '';
+    display         : block;
+    width           : 1.5em;
+    height          : 1.5em;
+    background      : url('star-on.svg');
+    opacity         : 0;
+    transition      : all 0.2s ease-in-out;
 }
 
-.reviewForm .rating label,
-.reviewForm .rating label:hover ~ label {
-    color: var(--main-color);
+.rating label:hover:before,
+.rating label:hover ~ label:before,
+.rating:not(:hover) :checked ~ label:before{
+    opacity : 1;
 }
-
-.reviewForm .rating input:checked + label,
-.reviewForm .rating label:hover {
-    color: #ffc107;
-}
-
-.rating:hover label {
-    color: #ffdb70;
-}
-
-/*
-.reviewForm .rating input:checked + label {
-    color: #ffc107;
-}
-
-.reviewForm .rating input:checked ~ label {
-    color: #ffc107;
-}
-
-.reviewForm .rating label:hover ~ label {
-    color: #ffdb70;
-}
-
-.reviewForm .rating label:hover {
-    color: #ffc107;
-}
-
-*/
 
 
 
@@ -1858,9 +1836,4 @@ button:hover {
     to {
       transform: rotate(359deg);
     }
-}
-
-#editHousePage #manageHouse {
-    max-width: 60em;
-    margin: 2em auto;
 }

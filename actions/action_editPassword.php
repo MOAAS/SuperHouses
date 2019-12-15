@@ -10,15 +10,15 @@
   
   if ($newPassword != $confirmPassword) {
     addErrorMessage('Edit failed! Passwords do not match!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php#Profile');
   }
   else if (!validCredentials($username, $currPassword)) {
     addErrorMessage('Edit failed! Incorrect password!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php#Profile');
   }
   else {
     editPassword($username, $newPassword);
     addSuccessMessage('Successfully edited password!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php#Profile');
   }
 ?>
