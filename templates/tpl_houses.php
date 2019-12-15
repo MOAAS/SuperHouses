@@ -192,7 +192,7 @@
       </section>
 
       <div id="manageHouseImages">
-        <input id="files" type="file" name="fileUpload[]" multiple>        
+        <input id="files" type="file" name="fileUpload[]" accept="image/*" multiple>        
         <label for="files">Choose images</label>
         <ul id="result">
           <?php foreach($pictures as $picture){?>

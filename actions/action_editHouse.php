@@ -50,6 +50,30 @@
     die(header('Location: ../pages/profile.php#Your%20places'));
   }
 
+  //check files
+  $no_uploaded_files = (UPLOAD_ERR_NO_FILE == $_FILES['fileUpload']['error'][0]);
+  if(! $no_uploaded_files){
+    $total_files = count($_FILES['fileUpload']['name']);
+    for($key = 0; $key < $total_files; $key++){
+     if ($_FILES['fileUpload']['error'][$key] !== UPLOAD_ERR_OK) {
+      addErrorMessage("Editing place failed!Upload failed with error code " . $_FILES['file']['error'][$key]);
+       die(header('Location: ../pages/house.php?id='.$id));
+     }     
+     $info = getimagesize($_FILES['fileUpload']['tmp_name'][$key]);
+     if ($info === FALSE) {
+      addErrorMessage("Editing place failed! Unable to determine image type of uploaded file");
+       die(header('Location: ../pages/house.php?id='.$id));
+     }
+
+     if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
+      addErrorMessage("Editing place failed!Not a gif/jpeg/png");
+       die(header('Location: ../pages/house.php?id='.$id));
+     }
+    } 
+  }
+
+
+
   if(!editHouse($id,$country,$city,$address,$title,$description,round($price, 2),$capacity,$numRooms,$numBeds,$numBathrooms)){
     addErrorMessage('Editing place failed. Country is not valid!');
     die(header('Location: ../pages/house.php?id='.$id));
@@ -57,11 +81,8 @@
     
   //save files
   if(isset($_FILES['fileUpload']))
-    if(isset($_FILES['fileUpload']['name'][0]) && $_FILES['fileUpload']['size'][0] > 0){ //verifica se existe algum ficheiro , o total files da 1 com 1 ou 0 ficheiros n sei pq
-    
-        $total_files = count($_FILES['fileUpload']['name']);
+    if(! $no_uploaded_files){
         $target_dir = '../database/houseImages/' . $id .'/' ;
-
         $files = glob($target_dir . '*'); 
         foreach($files as $file){  //deletes all previous files
             if(is_file($file))

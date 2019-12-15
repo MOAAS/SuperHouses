@@ -153,12 +153,15 @@ body{
 
 #pagebanner {
     background-color: var(--topbar-color);
+}
+
+#searchHousesPage #pagebanner{
     position: fixed;
     top: 0;
     width:100%;
     z-index: 3;
 }
-#pagebanner + *{
+#searchHousesPage #pagebanner + *{
     padding-top:73px;
 }
 
@@ -823,13 +826,11 @@ button:hover {
 /*Edit profile pic*/
 
 #ppic{
+    display:flex;
+    justify-content: center;
     position:relative;
     width: 50%;
     margin:auto;
-}
-
-#ppic #preview {
-    text-align: center;
 }
 
 #preview img{
@@ -838,16 +839,18 @@ button:hover {
     height:8em;
 }
 
-#ppic [type="file"] + label {
+#ppic label {
+    color:var(--text-color-2);
     position:absolute;
+    bottom:-7px;
     background-color: var(--secondary-color);
     border-radius: 50%;
     margin:0;
-    padding: 0.8em;
+    padding: 0.5em;
     cursor:pointer;
 }
 
-#ppic [type="file"] + label:hover {
+#ppic label:hover {
     background-color: var(--secondary-color-hl);
 }
 /**/
@@ -968,14 +971,14 @@ button:hover {
     background-color: var(--secondary-color);
     border-radius: 50px;
     overflow: hidden;
-    color: black;
+    color: var(--text-color-2);
 }
 
 #manageHouseImages [type="file"] + label::before {
     content: "\f382";
     font-family: "Font Awesome 5 Free";    
     position: absolute;
-    top: 10px; right: 130%;
+    top: 8px; right: 130%;
     transition: all 0.3s;
 }
 
