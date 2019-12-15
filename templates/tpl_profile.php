@@ -9,7 +9,6 @@
   <section id="profile">
     <h2 id="userProfileName"><?=toHTML($user->username)?></h2>
     <nav>
-
       <ul>
         <li>Profile</li>
         <li>Your places</li>
@@ -51,7 +50,7 @@
         <input id="displayname" type="text" name="displayname" value="<?=toHTML($user->displayname)?>">  
 
         <label for="userCountry">Country</label>
-        <?php draw_countrySelect("userCountry", $countryOptions); ?>
+        <?php draw_countrySelect("userCountry", $countryOptions, $user->country); ?>
 
         <label for="userCity">City</label>
         <input id="userCity" type="text" name="city" value="<?=toHTML($user->city)?>">  
@@ -103,11 +102,11 @@
   </section>
 <?php } ?>
 
-<?php function draw_countrySelect($id, $countryOptions) { ?>
+<?php function draw_countrySelect($id, $countryOptions, $selected) { ?>
   <select id="<?=$id?>" name="country">
-    <option value="">None</option>
+    <option value="" <?=$selected==NULL?'selected':''?>>None</option>
     <?php foreach ($countryOptions as $country) { ?>
-      <option value="<?=$country?>"><?=$country?></option>
+      <option value="<?=$country?>" <?=$selected==$country?'selected':''?>><?=$country?></option>
     <?php } ?>
   </select>
 <?php } ?>
@@ -273,7 +272,7 @@
       <section id="location">
         <h3>Location</h3>
         <label for="houseCountry">Country</label>
-        <?php draw_countrySelect("houseCountry", $countryOptions); ?>
+        <?php draw_countrySelect("houseCountry", $countryOptions, NULL); ?>
 
         <label for="houseCity">City</label>
         <input id="houseCity" type="text" name="city" placeholder="City">

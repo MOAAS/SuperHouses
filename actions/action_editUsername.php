@@ -13,16 +13,16 @@
   }  
   else if (!validCredentials($username, $currPassword)) {
     addErrorMessage('Edit failed! Incorrect password!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php');
   }
   else if (userExists($newUsername)) {
     addErrorMessage('Edit failed! Username already exists!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php');
   }
   else {
     editUsername($username, $newUsername);
     $_SESSION['username'] = $newUsername;
     addSuccessMessage('Successfully changed username!');
-    header('Location: ../pages/editprofile.php');
+    header('Location: ../pages/profile.php');
   }
 ?>
