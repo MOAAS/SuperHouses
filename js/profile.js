@@ -249,7 +249,7 @@ function toConversation(username) {
     currentConversation.classList.add('seenMessage');
 
     hideAllTabs();
-    document.querySelector('#sendMessageInput input').value = "";
+    document.querySelector('#sendMessageInput textarea').value = "";
     document.querySelector('#messages header img').src = currentConversation.querySelector('img').src;
     document.getElementById('conversations').style.display = "none";
     document.querySelector('#messages header h2').textContent = username;

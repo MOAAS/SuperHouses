@@ -80,10 +80,10 @@ function searchHouses($location, $startDate, $endDate, $maxPrice, $numGuests, $n
     $statement = $db->prepare(
         "SELECT *
             FROM PlaceComplete
-            WHERE pricePerDay <= ? AND ? <= capacity AND (countryName LIKE ? OR city LIKE ?) AND id NOT IN (
-                SELECT id 
+            WHERE pricePerDay <= ? AND ? <= capacity AND (countryName LIKE ? OR city LIKE ?) AND PlaceComplete.id NOT IN (
+                SELECT place
                 FROM Reservation
-                WHERE place = id AND dateStart < ? AND dateEnd > ?
+                WHERE place = PlaceComplete.id AND dateStart < ? AND dateEnd > ?
             )
             ORDER BY pricePerDay
             "

@@ -36,7 +36,7 @@
             $daysToStart = $now->diff($this->start)->format('%R%a');
             $daysToEnd = $now->diff($this->end)->format('%R%a');
 
-            return ($daysToStart > 0 && $daysToStart < 3) || ($daysToEnd > 0 && $daysToEnd < 3);
+            return ($daysToStart >= 0 && $daysToStart < 3) || ($daysToEnd >= 0 && $daysToEnd < 3);
         }
 
         public function isCancellable() {

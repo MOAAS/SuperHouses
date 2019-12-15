@@ -11,12 +11,12 @@
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="date" name="startDate" value="<?=toHTML($startDate)?>">  
+            <input id="startDate" type="date" name="startDate" value="<?=toHTML($startDate)?>" min="<?=date("Y-m-d")?>">  
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="date" name="endDate" value="<?=toHTML($endDate)?>">  
+            <input id="endDate" type="date" name="endDate" value="<?=toHTML($endDate)?>" min="<?=date("Y-m-d")?>">  
         </div>
 
         <div id="maxPriceSlider">

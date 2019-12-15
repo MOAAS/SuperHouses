@@ -163,7 +163,7 @@
               <p class="numNights"><span class="priceValue"><?=$reservation->getPricePerDay()?></span> € x <?=$reservation->getNights()?> <?=$reservation->getNights()==1?'night':'nights'?></p>
             </td>
             <td class="reservationAction">
-              <?php if ($reservation->isApproaching()) { ?>
+              <?php if (!$reservation->isCancellable()) { ?>
                 <button class="cancelReservation" type="button" disabled>Too late to cancel</button>              
               <?php } else { ?>
                 <button class="cancelReservation" type="button">Cancel Reservation</button>
@@ -196,7 +196,6 @@
       <tbody>
         <?php foreach ($goingReservations as $reservation) { 
           $place = $reservation->getPlace();
-          $reservation->isApproaching();
         ?>
         <tr class="reservation">
           <td class="reservationImg"><a href="../pages/house.php?id=<?=$place->place_id?>"><img src="../database/houseImages/<?=$place->place_id?>/0" alt="<?=toHTML($place->title)?>"></a></td>
@@ -350,7 +349,7 @@
     </div>
     <div id="sendMessageInput">
       <form method="post" action="../actions/action_sendMessage.php">
-        <input id="sentMessage" type="text" name="content" placeholder="Type your message...">
+        <textarea id="sentMessage" type="text" name="content" placeholder="Type your message..."></textarea>
         <button type="submit"><i class="fas fa-paper-plane"></i></button>      
       </form>
     </div>
