@@ -53,71 +53,52 @@ function onGetReservationsLoad() {
   futureReservations = JSON.parse(this.responseText);
 }
 
-let checkInPicker =  addDatePicker(checkInDate, validateDate);
-let checkOutPicker = addDatePicker(checkOutDate, validateDate);
+let checkInPicker =  addDatePicker(checkInDate, validateCheckIn);
+let checkOutPicker = addDatePicker(checkOutDate, validateCheckOut);
+checkOutPicker.setMinDate(addDays(new Date(), 1))
   
-function validateDate(date) {
+function validateCheckIn(checkin) {
+  let checkout = new Date(checkOutDate.value);
+  if (checkout != "" && checkin >= checkout)
+    return true;
+
   for (let i = 0; i < futureReservations.length; i++) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
     let reservationEnd = new Date(futureReservations[i]['dateEnd']);
-
-    if (date < reservationEnd && date >= reservationStart)
+  
+    if (checkin >= reservationStart && checkin < reservationEnd)
+      return true;
+    if (checkout != "" && checkin < reservationStart && checkout > reservationEnd)
       return true;
   }
   return false;
 }
 
-checkInDate.addEventListener('change', function() {
-  let minCheckInDate = new Date(checkInDate.value);
-  minCheckInDate.setDate(minCheckInDate.getDate()+1)
-  checkOutPicker.setMaxDate(null);
-  checkOutPicker.setMinDate(minCheckInDate);
-  let maxCheckOutDate;
+function validateCheckOut(checkout) {
+  let checkin = new Date(checkInDate.value);
+  if (checkin != "" && checkin >= checkout)
+    return true;
+
   for (let i = 0; i < futureReservations.length; i++) {
-    let reservationStart = new Date(futureReservations[i]['dateStart']); 
+    let reservationStart = new Date(futureReservations[i]['dateStart']);
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
 
-    if(maxCheckOutDate != null) {
-      if(reservationStart > minCheckInDate && maxCheckOutDate > reservationStart)
-        maxCheckOutDate = reservationStart;
-    }
-    else if(reservationStart > minCheckInDate) 
-      maxCheckOutDate = reservationStart;
+    if (checkout > reservationStart && checkout <= reservationEnd)
+      return true;
+    if (checkin != "" && checkin < reservationStart && checkout > reservationEnd)
+      return true;
   }
-  if(maxCheckOutDate != null) {
-    checkOutPicker.setMaxDate(maxCheckOutDate);
-  }
-  updateBookingPrice();
-});
+  return false;
+}
 
-checkOutDate.addEventListener('change', function() {
-  let maxCheckOutDate = new Date(checkOutDate.value);
-  maxCheckOutDate.setDate(maxCheckOutDate.getDate()-1);
-  checkInPicker.setMinDate(new Date());
-  checkInPicker.setMaxDate(maxCheckOutDate);
-  let minCheckInDate;
-  for (let i = 0; i < futureReservations.length; i++) {
-    let reservationEnd = new Date(futureReservations[i]['dateEnd']);  
-
-    if(minCheckInDate != null) {
-      if(reservationEnd < maxCheckOutDate && minCheckInDate < reservationEnd)
-        minCheckInDate = reservationEnd;
-    }
-    else if(reservationEnd < maxCheckOutDate) 
-      minCheckInDate = reservationEnd;
-  }
-  if(minCheckInDate != null) {
-    console.log(minCheckInDate);
-    checkInPicker.setMinDate(minCheckInDate);
-  }
-  updateBookingPrice();
-});
+checkInDate.addEventListener('change', () => updateBookingPrice());
+checkOutDate.addEventListener('change', () => updateBookingPrice());
 
 bookingForm.addEventListener('submit', function(event){
   event.preventDefault();
   if (bookButton.textContent.includes('Confirm')) {
     bookButton.style.display = "none";
     loadingIndicator.style.display = "block";
-    console.log(checkInDate.value);
     sendPostRequest('../actions/action_makeReservation.php', { 
       placeID: houseID.textContent, 
       checkIn: checkInDate.value,
@@ -131,7 +112,7 @@ bookingForm.addEventListener('submit', function(event){
   if (unavailableDate.textContent != "")
     addButtonAnimation(bookButton, "red", 'Unavailable date', 'Book')
   else if (Number.isNaN(checkIn) || Number.isNaN(checkOut))
-    addButtonAnimation(bookButton, "red", 'Pick the dates', 'Book')
+    addButtonAnimation(bookButton, "red", 'Invalid dates', 'Book')
   else if (checkIn == checkOut)
     addButtonAnimation(bookButton, "red", 'Minimum of 1 night', 'Book')
   else addButtonAnimation(bookButton, "green", '<i class="fas fa-check"></i> Confirm', 'Book')

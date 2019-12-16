@@ -78,10 +78,10 @@
       </section>
       <form method="post" id="booking" class="genericForm" autocomplete="off">
         <label for="checkInDate">Check-in:</label>
-        <input id="checkInDate" type="text" name="checkInDate" placeholder="Pick a date">       
+        <input id="checkInDate" type="text" name="checkInDate" placeholder="Pick a date" readonly>       
 
         <label for="checkOutDate">Check-out:</label>
-        <input id="checkOutDate" type="text" name="checkOutDate" placeholder="Pick a date">
+        <input id="checkOutDate" type="text" name="checkOutDate" placeholder="Pick a date" readonly>
 
         <p id="unavailableDate"></p>
 

@@ -22,11 +22,12 @@ sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 let checkInDate = document.getElementById("startDate");
 let checkOutDate = document.getElementById("endDate");
 
-let checkInPicker =  addDatePicker(checkInDate, null);
+let checkInPicker = addDatePicker(checkInDate, null);
 let checkOutPicker = addDatePicker(checkOutDate, null);
-  
-checkInDate.addEventListener('change', _ => checkOutPicker.setMinDate(new Date(checkInDate.value)))
-checkOutDate.addEventListener('change', _ => checkInPicker.setMaxDate(new Date(checkOutDate.value)));
+checkOutPicker.setMinDate(addDays(new Date(), 1))
+
+checkInDate.addEventListener('change', _ => checkOutPicker.setMinDate(addDays(new Date(checkInDate.value), 1)))
+checkOutDate.addEventListener('change', _ => checkInPicker.setMaxDate(addDays(new Date(checkOutDate.value), -1)))
 
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {

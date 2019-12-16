@@ -17,6 +17,12 @@ function addButtonAnimation(button, newColor, newText, finalText) {
     }, 3000);
 }
 
+function addDays(date, numDays) {
+    let newDate = new Date(date);
+    newDate.setDate(newDate.getDate() + numDays);
+    return newDate;
+}
+
 function dateToString(date) {
     let months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
     return date.getDate() + " " + months[date.getMonth()].substr(0, 3) + " " + date.getFullYear();
