@@ -154,10 +154,12 @@ if(profilebutton != null){
     });
 }
 
+if(dropdownbackground != null){
 window.addEventListener('click', event => {
-    if (event.target.parentNode != profilebutton)
-        dropdownbackground.style.display = "none";
-});
+        if (event.target.parentNode != profilebutton)
+            dropdownbackground.style.display = "none";
+    });
+}
 
 function addDatePicker(field, disableDayFunction) {
     return new Pikaday({

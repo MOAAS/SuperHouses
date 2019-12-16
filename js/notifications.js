@@ -59,13 +59,14 @@ function isDescendant(parent, child) {
     return false;
 }
 
-let notificationList = document.getElementById('notificationList');
 let notification = document.getElementById('notifications');
+let notificationList = document.getElementById('notificationList');
 
-
+if(notificationList != null){
 window.addEventListener('click', event => {
-    if (!isDescendant(notification,event.target) && notificationList.style.display == "block"){
-        toggleNotificationList();
-    }
-});
+        if (!isDescendant(notification,event.target) && notificationList.style.display == "block"){
+            toggleNotificationList();
+        }
+    });
+}
 

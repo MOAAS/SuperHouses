@@ -635,19 +635,52 @@ button:hover {
     font-size: 1em;
 }
 
+.pika-single {
+    z-index: 9999;
+    border-radius:4px;
+    display: block;
+    position: relative;
+    background: var(--bg-color-2);
+    border-color: var(--input-bg-color);
+    font-family: inherit;
+}
+
+.pika-label {
+    font-size: inherit;
+    line-height: inherit;
+    font-weight: bold;
+    color:var(--text-color);
+    background-color: var(--bg-color-2);
+}
+
+
 .pika-row button {
     border-radius: 0;
 }
 
 .pika-row .is-today button {
-    color: var(--secondary-color-hl);
+    color: var(--main-color-hl);
 }
 
 .pika-row button:hover {
     border-radius: 0;
-    background-color: var(--secondary-color-hl);
+    background-color: var(--main-color-hl);
     color: var(--text-color);
 }
+
+.is-selected .pika-button,
+.has-event .pika-button {
+    color: var(--text-color);
+    background: var(--secondary-color);
+    border-radius: 0px;
+    box-shadow: none;
+}
+
+.is-selected .pika-button:hover,
+.has-event .pika-button:hover {
+    background: var(--secondary-color-hl);
+}
+
 
 /* Forms */
 
