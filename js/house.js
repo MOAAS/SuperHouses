@@ -47,10 +47,41 @@ let loadingIndicator = bookingForm.querySelector('#booking #loadingIndicator');
 
 let futureReservations;
 sendGetRequest('../api/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
+let occupiedDates;
 
 function onGetReservationsLoad() {
-  futureReservations = JSON.parse(this.responseText)
+  futureReservations = JSON.parse(this.responseText);
 }
+
+let checkInDatePicker = new Pikaday({
+  field: checkInDate,
+  toString(date) {
+    let day = date.getDate();
+    if(day<10)
+      day = "0"+day;
+    let month = date.getMonth() + 1;
+    if(month < 10)
+      month = "0"+month;
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  },
+  disableDayFn: validateCheckIn
+});
+
+let checkOutDatePicker = new Pikaday({
+  field: checkOutDate,
+  toString(date) {
+    let day = date.getDate();
+    if(day<10)
+      day = "0"+day;
+    let month = date.getMonth() + 1;
+    if(month < 10)
+      month = "0"+month;
+    const year = date.getFullYear();
+    return `${year}-${month}-${day}`;
+  },
+  disableDayFn: validateCheckOut
+});
 
 function validateDates() {
   let checkIn = Date.parse(checkInDate.value);
@@ -80,13 +111,11 @@ function validateDates() {
 
 checkInDate.addEventListener('change', function(event) {
   validateDates();
-  checkOutDate.min = checkInDate.value;
   updateBookingPrice();
 });
 
 checkOutDate.addEventListener('change', function() {
   validateDates();
-  checkInDate.max = checkOutDate.value;
   updateBookingPrice();
 });
 
@@ -95,9 +124,10 @@ bookingForm.addEventListener('submit', function(event){
   if (bookButton.textContent.includes('Confirm')) {
     bookButton.style.display = "none";
     loadingIndicator.style.display = "block";
+    console.log(checkInDate.value);
     sendPostRequest('../actions/action_makeReservation.php', { 
       placeID: houseID.textContent, 
-      checkIn: checkInDate.value,  
+      checkIn: checkInDate.value,
       checkOut: checkOutDate.value,  
     }, onReservationMade);
     return;
@@ -189,6 +219,40 @@ clickableComments.forEach(comment => {
     comment.append(reply);
     form.classList.toggle('hidden')
   })
-
-
 });
+
+function validateDate(date) {
+  let today = new Date();
+  if(date<=today) {
+    return true;
+  }
+
+  for (let i = 0; i < futureReservations.length; i++) {
+    let reservationStart = new Date(futureReservations[i]['dateStart']);
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
+    
+
+    if (date <= reservationEnd && date >= reservationStart) {
+      return true;
+    }
+  }
+  return false;
+}
+
+function validateCheckIn(date) {
+  if(checkOutDate.value != "") {
+    let checkOut = Date.parse(checkOutDate.value);
+    if(date>checkOut)
+      return true;
+  }
+  return validateDate(date);
+}
+
+function validateCheckOut(date) {
+  if(checkInDate.value != "") {
+    let checkIn = Date.parse(checkInDate.value);
+    if(date<checkIn)
+      return true;
+  }
+  else return validateDate(date);
+}

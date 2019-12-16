@@ -21,10 +21,63 @@ sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 
 let checkInDate = document.getElementById("startDate");
 let checkOutDate = document.getElementById("endDate");
-checkInDate.addEventListener('change', _ => checkOutDate.min = checkInDate.value);
-checkOutDate.addEventListener('change', _ => checkInDate.max = checkOutDate.value);
-  
-  
+
+let checkInDatePicker = new Pikaday({
+    field: checkInDate,
+    toString(date) {
+        let day = date.getDate();
+        if (day < 10)
+            day = "0" + day;
+        let month = date.getMonth() + 1;
+        if (month < 10)
+            month = "0" + month;
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
+    },
+    disableDayFn: validateCheckIn
+});
+
+let checkOutDatePicker = new Pikaday({
+    field: checkOutDate,
+    toString(date) {
+        let day = date.getDate();
+        if (day < 10)
+            day = "0" + day;
+        let month = date.getMonth() + 1;
+        if (month < 10)
+            month = "0" + month;
+        const year = date.getFullYear();
+        return `${year}-${month}-${day}`;
+    },
+    disableDayFn: validateCheckOut
+});
+
+function validateDate(date) {
+    let today = new Date();
+    if (date <= today) {
+        return true;
+    }
+    else return false;
+}
+
+function validateCheckIn(date) {
+    if (checkOutDate.value != "") {
+        let checkOut = Date.parse(checkOutDate.value);
+        if (date > checkOut)
+            return true;
+    }
+    return validateDate(date);
+}
+
+function validateCheckOut(date) {
+    if (checkInDate.value != "") {
+        let checkIn = Date.parse(checkInDate.value);
+        if (date < checkIn)
+            return true;
+    }
+    return validateDate(date);
+}
+
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {
     let counter = element.querySelector('.count');
@@ -78,12 +131,12 @@ searchForm.addEventListener('submit', () => {
 });
 
 let prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos >= currentScrollPos) {
-    document.getElementById("searchButton").style.right = "3em";
-    } else { 
-    document.getElementById("searchButton").style.right = "-3em";
-  }
-  prevScrollpos = currentScrollPos;
+window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos >= currentScrollPos) {
+        document.getElementById("searchButton").style.right = "3em";
+    } else {
+        document.getElementById("searchButton").style.right = "-3em";
+    }
+    prevScrollpos = currentScrollPos;
 } 

@@ -76,12 +76,12 @@
         </p>
         <p id="houseDescription" class="allowNewlines"><?=toHTML($house->description)?></p>
       </section>
-      <form method="post" id="booking" class="genericForm">
+      <form method="post" id="booking" class="genericForm" autocomplete="off">
         <label for="checkInDate">Check-in:</label>
-        <input id="checkInDate" type="date" name="checkInDate" min="<?=date("Y-m-d")?>">       
+        <input id="checkInDate" type="text" name="checkInDate">       
 
         <label for="checkOutDate">Check-out:</label>
-        <input id="checkOutDate" type="date" name="checkOutDate" min="<?=date("Y-m-d")?>">
+        <input id="checkOutDate" type="text" name="checkOutDate">
 
         <p id="unavailableDate"></p>
 

@@ -1,4 +1,4 @@
-<?php function draw_header($page_id,$username, $script) { 
+<?php function draw_header($page_id,$username, $scripts) { 
   $notifications = getUnseenNotifications($username);
   $profilepic =getProfilePicture($username);
 ?>
@@ -11,14 +11,17 @@
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="../css/responsive.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
+      <link rel="stylesheet" type="text/css" href="../dependencies/pikaday/css/pikaday.css">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="../js/ajax.js" defer></script>
       <script src="../js/general.js" defer></script>
       <script src="../js/notifications.js" defer></script>
-      <?php if ($script != null) { ?>
-        <script src="<?=$script?>" defer></script>
-      <?php } ?>
+      <?php if ($scripts != null) { 
+        foreach($scripts as $script) {?>
+          <script src="<?=$script?>" defer></script>
+        <?php }
+      }?>
     </head>
 
     <body id=<?= $page_id?>>

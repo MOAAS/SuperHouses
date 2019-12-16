@@ -3,7 +3,7 @@
   <div id="searchBackground">
     <section id="searchDialog" class="genericForm">
       <h3>Rent with us for the ultimate experience.</h3>
-      <form method="get" action="../pages/search_houses.php">
+      <form method="get" action="../pages/search_houses.php" autocomplete="off">
         <div id="locationField">
             <label for="location">Where?</label>
             <input id="location" type="text" name="location" value="<?=toHTML($location)?>">  
@@ -11,12 +11,12 @@
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="date" name="startDate" value="<?=toHTML($startDate)?>" min="<?=date("Y-m-d")?>">  
+            <input id="startDate" type="text" name="startDate" value="<?=toHTML($startDate)?>">
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="date" name="endDate" value="<?=toHTML($endDate)?>" min="<?=date("Y-m-d")?>">  
+            <input id="endDate" type="text" name="endDate" value="<?=toHTML($endDate)?>">  
         </div>
 
         <div id="maxPriceSlider">

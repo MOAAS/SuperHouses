@@ -1671,6 +1671,7 @@ button:hover {
     padding: 1.5em;
     grid-area: book;
 }
+
 #house #placeComments {
     padding: 1em;
     grid-area: comments;
