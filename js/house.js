@@ -46,47 +46,68 @@ let unavailableDate = bookingForm.querySelector('#booking #unavailableDate');
 let loadingIndicator = bookingForm.querySelector('#booking #loadingIndicator');
 
 let futureReservations;
+let occupiedDates;
 sendGetRequest('../api/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
 
 function onGetReservationsLoad() {
-  futureReservations = JSON.parse(this.responseText)
+  futureReservations = JSON.parse(this.responseText);
 }
 
-function validateDates() {
-  let checkIn = Date.parse(checkInDate.value);
-  let checkOut = Date.parse(checkOutDate.value); 
-
-  if (Number.isNaN(checkIn) || Number.isNaN(checkOut)) {
-    unavailableDate.innerHTML = "";
-    return;
-  }
-
+let checkInPicker =  addDatePicker(checkInDate, validateDate);
+let checkOutPicker = addDatePicker(checkOutDate, validateDate);
+  
+function validateDate(date) {
   for (let i = 0; i < futureReservations.length; i++) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
-    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
-    
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);   
 
-    if (checkIn < reservationEnd && checkOut > reservationStart) {
-      unavailableDate.innerHTML = 
-        "Unavailable date! <br> Clashes with " + 
-        dateToString(reservationStart) + 
-        ' to ' + 
-        dateToString(reservationEnd);
-      return;
-    }
+    if (date < reservationEnd && date >= reservationStart)
+      return true;
   }
-  unavailableDate.innerHTML = "";
+  return false;
 }
 
-checkInDate.addEventListener('change', function(event) {
-  validateDates();
-  checkOutDate.min = checkInDate.value;
+checkInDate.addEventListener('change', function() {
+  let minCheckInDate = new Date(checkInDate.value);
+  checkOutPicker.setMaxDate(null);
+  checkOutPicker.setMinDate(minCheckInDate);
+  let maxCheckOutDate;
+  for (let i = 0; i < futureReservations.length; i++) {
+    console.log(maxCheckOutDate);
+    let reservationStart = new Date(futureReservations[i]['dateStart']); 
+
+    if(maxCheckOutDate != null) {
+      if(reservationStart > minCheckInDate && maxCheckOutDate > reservationStart)
+        maxCheckOutDate = reservationStart;
+    }
+    else if(reservationStart > minCheckInDate) 
+      maxCheckOutDate = reservationStart;
+  }
+  if(maxCheckOutDate != null) {
+    checkOutPicker.setMaxDate(maxCheckOutDate);
+  }
   updateBookingPrice();
 });
 
 checkOutDate.addEventListener('change', function() {
-  validateDates();
-  checkInDate.max = checkOutDate.value;
+  let maxCheckOutDate = new Date(checkOutDate.value);
+  checkInPicker.setMinDate(null);
+  checkInPicker.setMaxDate(maxCheckOutDate);
+  let minCheckInDate;
+  for (let i = 0; i < futureReservations.length; i++) {
+    console.log(maxCheckOutDate);
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);  
+
+    if(minCheckInDate != null) {
+      if(reservationEnd < maxCheckOutDate && minCheckInDate < reservationEnd)
+        minCheckInDate = reservationEnd;
+    }
+    else if(reservationEnd < maxCheckOutDate) 
+      minCheckInDate = reservationEnd;
+  }
+  if(maxCheckOutDate != null) {
+    checkInPicker.setMinDate(minCheckInDate);
+  }
   updateBookingPrice();
 });
 
@@ -95,9 +116,10 @@ bookingForm.addEventListener('submit', function(event){
   if (bookButton.textContent.includes('Confirm')) {
     bookButton.style.display = "none";
     loadingIndicator.style.display = "block";
+    console.log(checkInDate.value);
     sendPostRequest('../actions/action_makeReservation.php', { 
       placeID: houseID.textContent, 
-      checkIn: checkInDate.value,  
+      checkIn: checkInDate.value,
       checkOut: checkOutDate.value,  
     }, onReservationMade);
     return;
@@ -116,7 +138,6 @@ bookingForm.addEventListener('submit', function(event){
 
 function onReservationMade() {
   let response = JSON.parse(this.responseText)
-  console.log(response);
   if(response == null) {
     window.location.href = "profile.php#Your reservations";
   }
@@ -189,6 +210,4 @@ clickableComments.forEach(comment => {
     comment.append(reply);
     form.classList.toggle('hidden')
   })
-
-
 });

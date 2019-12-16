@@ -21,10 +21,13 @@ sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 
 let checkInDate = document.getElementById("startDate");
 let checkOutDate = document.getElementById("endDate");
-checkInDate.addEventListener('change', _ => checkOutDate.min = checkInDate.value);
-checkOutDate.addEventListener('change', _ => checkInDate.max = checkOutDate.value);
+
+let checkInPicker =  addDatePicker(checkInDate, null);
+let checkOutPicker = addDatePicker(checkOutDate, null);
   
-  
+checkInDate.addEventListener('change', _ => checkOutPicker.setMinDate(new Date(checkInDate.value)))
+checkOutDate.addEventListener('change', _ => checkInPicker.setMaxDate(new Date(checkOutDate.value)));
+
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {
     let counter = element.querySelector('.count');
@@ -78,12 +81,12 @@ searchForm.addEventListener('submit', () => {
 });
 
 let prevScrollpos = window.pageYOffset;
-window.onscroll = function() {
-  var currentScrollPos = window.pageYOffset;
-  if (prevScrollpos >= currentScrollPos) {
-    document.getElementById("searchButton").style.right = "3em";
-    } else { 
-    document.getElementById("searchButton").style.right = "-3em";
-  }
-  prevScrollpos = currentScrollPos;
+window.onscroll = function () {
+    var currentScrollPos = window.pageYOffset;
+    if (prevScrollpos >= currentScrollPos) {
+        document.getElementById("searchButton").style.right = "3em";
+    } else {
+        document.getElementById("searchButton").style.right = "-3em";
+    }
+    prevScrollpos = currentScrollPos;
 } 
