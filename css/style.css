@@ -352,22 +352,24 @@ body{
     background-color: var(--bg-color-2);
   }
   
-  .dropdown-content a {
+.dropdown-content a {
     padding: 12px 16px;
     text-decoration: none;
     display: block;
-  }
-  .dropdown-content a:hover{
+}
+
+.dropdown-content a:hover {
     background-color: var(--notif-color-hl);
 }
 
-#logoutbutton{
+#logoutbutton {
     background-color: var(--secondary-color);
     color:var(--text-color-2);
 }
-  #logoutbutton:hover{
-    background-color: var(--secondary-color-hl);
-  }
+
+#logoutbutton:hover {
+   background-color: var(--secondary-color-hl);
+}
 
 
 #pagetop #loggeduser {
@@ -590,7 +592,7 @@ button:not(:disabled) {
     background-color: var(--main-color-light);
     border: none;
 
-    transition: background-color 0.3s ease-in-out;
+    transition: all 0.3s ease-in-out;
 }
 
 button:disabled {
@@ -631,6 +633,20 @@ button:hover {
 .priceTag .priceCurrency {
     display: inline;
     font-size: 1em;
+}
+
+.pika-row button {
+    border-radius: 0;
+}
+
+.pika-row .is-today button {
+    color: var(--secondary-color-hl);
+}
+
+.pika-row button:hover {
+    border-radius: 0;
+    background-color: var(--secondary-color-hl);
+    color: var(--text-color);
 }
 
 /* Forms */
