@@ -59,7 +59,7 @@ let checkOutPicker = addDatePicker(checkOutDate, validateDate);
 function validateDate(date) {
   for (let i = 0; i < futureReservations.length; i++) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
-    let reservationEnd = new Date(futureReservations[i]['dateEnd']);   
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
 
     if (date < reservationEnd && date >= reservationStart)
       return true;
@@ -69,11 +69,11 @@ function validateDate(date) {
 
 checkInDate.addEventListener('change', function() {
   let minCheckInDate = new Date(checkInDate.value);
+  minCheckInDate.setDate(minCheckInDate.getDate()+1)
   checkOutPicker.setMaxDate(null);
   checkOutPicker.setMinDate(minCheckInDate);
   let maxCheckOutDate;
   for (let i = 0; i < futureReservations.length; i++) {
-    console.log(maxCheckOutDate);
     let reservationStart = new Date(futureReservations[i]['dateStart']); 
 
     if(maxCheckOutDate != null) {
@@ -91,11 +91,11 @@ checkInDate.addEventListener('change', function() {
 
 checkOutDate.addEventListener('change', function() {
   let maxCheckOutDate = new Date(checkOutDate.value);
-  checkInPicker.setMinDate(null);
+  maxCheckOutDate.setDate(maxCheckOutDate.getDate()-1);
+  checkInPicker.setMinDate(new Date());
   checkInPicker.setMaxDate(maxCheckOutDate);
   let minCheckInDate;
   for (let i = 0; i < futureReservations.length; i++) {
-    console.log(maxCheckOutDate);
     let reservationEnd = new Date(futureReservations[i]['dateEnd']);  
 
     if(minCheckInDate != null) {
@@ -105,7 +105,8 @@ checkOutDate.addEventListener('change', function() {
     else if(reservationEnd < maxCheckOutDate) 
       minCheckInDate = reservationEnd;
   }
-  if(maxCheckOutDate != null) {
+  if(minCheckInDate != null) {
+    console.log(minCheckInDate);
     checkInPicker.setMinDate(minCheckInDate);
   }
   updateBookingPrice();
