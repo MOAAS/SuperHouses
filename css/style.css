@@ -126,19 +126,17 @@ body{
     font-family: var(--regular-font-family);
 }
 
-#login h1{
-    color: var(--text-color);
-    display: inline-block;
+#login h2 {
+    text-align: center;
 }
 
-#login h1 svg{
+#login svg {
     fill: var(--main-color);
-    width:60%;
-    height:60%;
-    padding:1em;
+    width: 60%;
+    height: 30%;
+    padding: 1em;
     display: block;
-    margin-left: auto;
-    margin-right: auto;
+    margin: 0 auto;
 }
 
 

@@ -152,7 +152,7 @@ INSERT INTO Country VALUES(NULL, 'El Salvador');
 INSERT INTO Country VALUES(NULL, 'Equatorial Guinea');
 INSERT INTO Country VALUES(NULL, 'Eritrea');
 INSERT INTO Country VALUES(NULL, 'Estonia');
-INSERT INTO Country VALUES(NULL, 'Eswatini (fmr. "Swaziland")');
+INSERT INTO Country VALUES(NULL, 'Eswatini');
 INSERT INTO Country VALUES(NULL, 'Ethiopia');
 INSERT INTO Country VALUES(NULL, 'Fiji');
 INSERT INTO Country VALUES(NULL, 'Finland');

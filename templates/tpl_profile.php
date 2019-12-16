@@ -354,7 +354,7 @@
     </div>
     <div id="sendMessageInput">
       <form method="post" action="../actions/action_sendMessage.php">
-        <textarea id="sentMessage" type="text" name="content" placeholder="Type your message..."></textarea>
+        <textarea id="sentMessage" name="content" placeholder="Type your message..."></textarea>
         <button type="submit"><i class="fas fa-paper-plane"></i></button>      
       </form>
     </div>
