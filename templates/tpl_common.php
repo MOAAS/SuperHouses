@@ -46,6 +46,7 @@
                   <div id= "profilebutton" class="dropbtn">
                     <img src="<?=$profilepic?>" alt="<?=toHTML($username)?>"> 
                     <p><?=$username?></p>
+                    <span id="csrfToken" class="hidden"><?=$_SESSION['csrf']?></span>
                   </div>
                   <div id="dropdownbackground" class="dropdown-content">
                     <a id="menuprofilebutton" href="profile.php#Profile">Profile</a>

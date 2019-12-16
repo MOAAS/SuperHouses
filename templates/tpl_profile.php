@@ -37,6 +37,7 @@
       <h3>Personal Information</h3>
 
       <form method="post" action="../actions/action_editProfile.php" enctype="multipart/form-data">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
         
         <div id="ppic">
           <label for="profilePic"><i class="fas fa-pen"></i></label>
@@ -76,6 +77,8 @@
     <section id="editCredentials">
       <h3>Edit Username</h3>
       <form method="post" action="../actions/action_editUsername.php">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
         <label for="currPassword1">Current Password</label>
         <input id="currPassword1" type="password" name="currPassword" required>  
 
@@ -87,6 +90,8 @@
 
       <h3>Edit Password</h3>
       <form id="editPasswordForm" method="post" action="../actions/action_editPassword.php">
+        <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
+
         <label for="currPassword2">Current Password</label>
         <input id="currPassword2" type="password" name="currPassword" required>  
 

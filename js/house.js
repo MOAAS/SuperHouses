@@ -1,7 +1,7 @@
 
 "use strict"
 
-
+let csrfToken = document.getElementById('csrfToken').textContent;
 let houseID = document.getElementById("houseID");
 let ownerPic = document.querySelector('#houseOwner img').src;
 let ownerName = document.querySelector('#houseOwnerName').textContent;
@@ -103,6 +103,7 @@ bookingForm.addEventListener('submit', function(event){
       placeID: houseID.textContent, 
       checkIn: checkInDate.value,
       checkOut: checkOutDate.value,  
+      csrf: csrfToken
     }, onReservationMade);
     return;
   }

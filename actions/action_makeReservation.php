@@ -4,6 +4,11 @@
     include_once('../database/db_reservations.php');
     include_once('../database/db_notifications.php');
 
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        echo json_encode('Illegitimate request!' . $_SESSION['csrf'] . '   ' . $_POST['csrf']);
+        return;
+    }
+
     function validDate($date) {
         $d = DateTime::createFromFormat('Y-m-d', $date);
         return $d && $d->format('Y-m-d') === $date;

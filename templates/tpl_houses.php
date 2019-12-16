@@ -137,7 +137,8 @@
     <h2>Edit your place</h2> 
     <a id="backToProfile" href="../pages/profile.php#Your%20places"><i class="fas fa-chevron-left"></i> &nbsp;&nbsp;Back to profile</a>
     <form method="post" action="../actions/action_editHouse.php" enctype="multipart/form-data">
-      <input class="hidden" type="text" name="placeID" value="<?=toHTML($house->place_id)?>"/>
+      <input type="hidden" name="placeID" value="<?=toHTML($house->place_id)?>"/>
+      <input type="hidden" name="csrf" value="<?=$_SESSION['csrf']?>">
 
       <div id="mainInfo">
         <label for="title">Title</label>      

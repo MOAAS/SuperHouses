@@ -3,6 +3,11 @@
   include_once('../includes/sessionMessages.php');
   include_once('../database/db_users.php');
   
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    addErrorMessage('Illegitimate request!');
+    die(header('Location: ../pages/main.php'));
+  }
+  
   $username = $_SESSION['username'];
   $currPassword = $_POST['currPassword'];
   $newUsername = $_POST['newUsername'];

@@ -2,6 +2,11 @@
     include_once('../includes/session.php');   
     include_once('../includes/sessionMessages.php');
     include_once('../database/db_users.php');
+
+    if ($_SESSION['csrf'] !== $_POST['csrf']) {
+        addErrorMessage('Illegitimate request!');
+        die(header('Location: ../pages/main.php'));
+    }
   
     updateUserInfo(new UserInfo($_SESSION['username'], $_POST['displayname'], $_POST['country'], $_POST['city'], null));
 

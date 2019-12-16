@@ -4,6 +4,11 @@
   include_once('../database/db_houses.php');
   include_once('../database/db_users.php');
   
+  if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    addErrorMessage('Illegitimate request!');
+    die(header('Location: ../pages/main.php'));
+  }
+  
   $id = $_POST['placeID'];
   $title = $_POST['title'];
   $description = $_POST['description'];

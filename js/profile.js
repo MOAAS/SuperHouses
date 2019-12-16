@@ -1,3 +1,5 @@
+let csrfToken = document.getElementById('csrfToken').textContent;
+
 let messageHistory = document.querySelector('#messageHistory ul');
 let conversations = document.querySelector('#conversations');
 let conversationList = document.querySelector('#conversations ul');
@@ -80,7 +82,7 @@ document.querySelectorAll('#houses li').forEach((place) => {
     deleteButton.addEventListener('click', event => {
         if (deleteButton.innerHTML == '<i class="fas fa-trash"></i>')
             addButtonAnimation(deleteButton, "green", '<i class="fas fa-check"></i>', '<i class="fas fa-trash"></i>')
-        else sendPostRequest('../actions/action_deleteHouse.php', {houseID: houseID}, function() { onHouseDeleted(place, JSON.parse(this.responseText)) }) 
+        else sendPostRequest('../actions/action_deleteHouse.php', {houseID: houseID, csrf: csrfToken}, function() { onHouseDeleted(place, JSON.parse(this.responseText)) }) 
     });
     editButton.addEventListener('click', _ => window.location.href = "edit_house.php?id=" + houseID)
 });
@@ -111,7 +113,7 @@ function removeReservation(reservation, button) {
     else {
         reservation.style.transform = "scale(0)";
         setTimeout(() => {
-            sendPostRequest('../actions/action_cancelReservation.php', {reservationID: reservation.querySelector('.reservationID').textContent });
+            sendPostRequest('../actions/action_cancelReservation.php', {reservationID: reservation.querySelector('.reservationID').textContent, csrf: csrfToken });
             reservation.remove(); 
             updateReservations(); 
         }, 300);

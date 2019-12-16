@@ -5,6 +5,11 @@ include_once('../database/db_houses.php');
 include_once('../database/db_reservations.php');
 include_once('../database/db_notifications.php');
 
+if ($_SESSION['csrf'] !== $_POST['csrf']) {
+    addErrorMessage('Illegitimate request!');
+    die(header('Location: ../pages/main.php'));
+}
+
 $house_id = $_POST['houseID'];
 
 $house = getHouseById($house_id);
