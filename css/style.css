@@ -123,7 +123,6 @@ body{
     margin:0;
     color: var(--text-color);
     background-color: var(--bg-color);
-
     font-family: var(--regular-font-family);
 }
 
@@ -1046,6 +1045,7 @@ button:hover {
 }
 
 .reservationList img {
+    max-width:9em;
     height: 5.6em;
     vertical-align: middle;
 }
