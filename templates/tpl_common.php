@@ -1,4 +1,4 @@
-<?php function draw_header($page_id,$username, $scripts) { 
+<?php function draw_header($page_id,$username, $script) { 
   $notifications = getUnseenNotifications($username);
   $profilepic =getProfilePicture($username);
 ?>
@@ -17,11 +17,10 @@
       <script src="../js/ajax.js" defer></script>
       <script src="../js/general.js" defer></script>
       <script src="../js/notifications.js" defer></script>
-      <?php if ($scripts != null) { 
-        foreach($scripts as $script) {?>
-          <script src="<?=$script?>" defer></script>
-        <?php }
-      }?>
+      <script src="../dependencies/pikaday/pikaday.js" defer></script>     
+      <?php if ($script != null) { ?>
+        <script src="<?=$script?>" defer></script>
+      <?php } ?>
     </head>
 
     <body id=<?= $page_id?>>

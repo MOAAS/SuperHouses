@@ -6,17 +6,17 @@
       <form method="get" action="../pages/search_houses.php" autocomplete="off">
         <div id="locationField">
             <label for="location">Where?</label>
-            <input id="location" type="text" name="location" value="<?=toHTML($location)?>">  
+            <input id="location" type="text" name="location" value="<?=toHTML($location)?>" placeholder="Choose any location you want">  
         </div>
 
         <div id="startDateField">
             <label for="startDate">From:</label>
-            <input id="startDate" type="text" name="startDate" value="<?=toHTML($startDate)?>">
+            <input id="startDate" type="text" name="startDate" value="<?=toHTML($startDate)?>" placeholder="year-month-day">
         </div>
 
         <div id="endDateField">
             <label for="endDate">To:</label>
-            <input id="endDate" type="text" name="endDate" value="<?=toHTML($endDate)?>">  
+            <input id="endDate" type="text" name="endDate" value="<?=toHTML($endDate)?>" placeholder="year-month-day">  
         </div>
 
         <div id="maxPriceSlider">

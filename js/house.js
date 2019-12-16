@@ -46,76 +46,34 @@ let unavailableDate = bookingForm.querySelector('#booking #unavailableDate');
 let loadingIndicator = bookingForm.querySelector('#booking #loadingIndicator');
 
 let futureReservations;
-sendGetRequest('../api/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
 let occupiedDates;
+sendGetRequest('../api/get_futureReservations.php', { placeID: houseID.textContent }, onGetReservationsLoad);
 
 function onGetReservationsLoad() {
   futureReservations = JSON.parse(this.responseText);
 }
 
-let checkInDatePicker = new Pikaday({
-  field: checkInDate,
-  toString(date) {
-    let day = date.getDate();
-    if(day<10)
-      day = "0"+day;
-    let month = date.getMonth() + 1;
-    if(month < 10)
-      month = "0"+month;
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
-  },
-  disableDayFn: validateCheckIn
-});
-
-let checkOutDatePicker = new Pikaday({
-  field: checkOutDate,
-  toString(date) {
-    let day = date.getDate();
-    if(day<10)
-      day = "0"+day;
-    let month = date.getMonth() + 1;
-    if(month < 10)
-      month = "0"+month;
-    const year = date.getFullYear();
-    return `${year}-${month}-${day}`;
-  },
-  disableDayFn: validateCheckOut
-});
-
-function validateDates() {
-  let checkIn = Date.parse(checkInDate.value);
-  let checkOut = Date.parse(checkOutDate.value); 
-
-  if (Number.isNaN(checkIn) || Number.isNaN(checkOut)) {
-    unavailableDate.innerHTML = "";
-    return;
-  }
-
+let checkInPicker =  addDatePicker(checkInDate, validateDate);
+let checkOutPicker = addDatePicker(checkOutDate, validateDate);
+  
+function validateDate(date) {
   for (let i = 0; i < futureReservations.length; i++) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
-    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
-    
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);   
 
-    if (checkIn < reservationEnd && checkOut > reservationStart) {
-      unavailableDate.innerHTML = 
-        "Unavailable date! <br> Clashes with " + 
-        dateToString(reservationStart) + 
-        ' to ' + 
-        dateToString(reservationEnd);
-      return;
-    }
+    if (date < reservationEnd && date > reservationStart)
+      return true;
   }
-  unavailableDate.innerHTML = "";
+  return false;
 }
 
-checkInDate.addEventListener('change', function(event) {
-  validateDates();
+checkInDate.addEventListener('change', function() {
+  checkOutPicker.setMinDate(new Date(checkInDate.value))
   updateBookingPrice();
 });
 
 checkOutDate.addEventListener('change', function() {
-  validateDates();
+  checkInPicker.setMaxDate(new Date(checkInDate.value))
   updateBookingPrice();
 });
 
@@ -146,7 +104,6 @@ bookingForm.addEventListener('submit', function(event){
 
 function onReservationMade() {
   let response = JSON.parse(this.responseText)
-  console.log(response);
   if(response == null) {
     window.location.href = "profile.php#Your reservations";
   }
@@ -220,39 +177,3 @@ clickableComments.forEach(comment => {
     form.classList.toggle('hidden')
   })
 });
-
-function validateDate(date) {
-  let today = new Date();
-  if(date<=today) {
-    return true;
-  }
-
-  for (let i = 0; i < futureReservations.length; i++) {
-    let reservationStart = new Date(futureReservations[i]['dateStart']);
-    let reservationEnd = new Date(futureReservations[i]['dateEnd']);
-    
-
-    if (date <= reservationEnd && date >= reservationStart) {
-      return true;
-    }
-  }
-  return false;
-}
-
-function validateCheckIn(date) {
-  if(checkOutDate.value != "") {
-    let checkOut = Date.parse(checkOutDate.value);
-    if(date>checkOut)
-      return true;
-  }
-  return validateDate(date);
-}
-
-function validateCheckOut(date) {
-  if(checkInDate.value != "") {
-    let checkIn = Date.parse(checkInDate.value);
-    if(date<checkIn)
-      return true;
-  }
-  else return validateDate(date);
-}

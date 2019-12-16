@@ -22,61 +22,11 @@ sliderPriceTag.textContent = parseFloat(maxPriceSlider.value).toFixed(2);
 let checkInDate = document.getElementById("startDate");
 let checkOutDate = document.getElementById("endDate");
 
-let checkInDatePicker = new Pikaday({
-    field: checkInDate,
-    toString(date) {
-        let day = date.getDate();
-        if (day < 10)
-            day = "0" + day;
-        let month = date.getMonth() + 1;
-        if (month < 10)
-            month = "0" + month;
-        const year = date.getFullYear();
-        return `${year}-${month}-${day}`;
-    },
-    disableDayFn: validateCheckIn
-});
-
-let checkOutDatePicker = new Pikaday({
-    field: checkOutDate,
-    toString(date) {
-        let day = date.getDate();
-        if (day < 10)
-            day = "0" + day;
-        let month = date.getMonth() + 1;
-        if (month < 10)
-            month = "0" + month;
-        const year = date.getFullYear();
-        return `${year}-${month}-${day}`;
-    },
-    disableDayFn: validateCheckOut
-});
-
-function validateDate(date) {
-    let today = new Date();
-    if (date <= today) {
-        return true;
-    }
-    else return false;
-}
-
-function validateCheckIn(date) {
-    if (checkOutDate.value != "") {
-        let checkOut = Date.parse(checkOutDate.value);
-        if (date > checkOut)
-            return true;
-    }
-    return validateDate(date);
-}
-
-function validateCheckOut(date) {
-    if (checkInDate.value != "") {
-        let checkIn = Date.parse(checkInDate.value);
-        if (date < checkIn)
-            return true;
-    }
-    return validateDate(date);
-}
+let checkInPicker =  addDatePicker(checkInDate, null);
+let checkOutPicker = addDatePicker(checkOutDate, null);
+  
+checkInDate.addEventListener('change', _ => checkOutPicker.setMinDate(new Date(checkInDate.value)))
+checkOutDate.addEventListener('change', _ => checkInPicker.setMaxDate(new Date(checkOutDate.value)));
 
 let guestCounters = document.querySelectorAll(".guestCounter");
 guestCounters.forEach(element => {

@@ -33,7 +33,7 @@
 
   $places = searchHouses($location, $startDate, $endDate, $maxPrice, $numAdults + $numChildren, $numBabies);
 
-  draw_header("searchHousesPage",$_SESSION['username'], ["../dependencies/pikaday/pikaday.js", "../js/search.js"]);
+  draw_header("searchHousesPage",$_SESSION['username'], "../js/search.js");
   draw_searchPage($location, $startDate, $endDate, $maxPrice, $numAdults, $numChildren, $numBabies);
   draw_houselist($places,false);
   draw_footer();
