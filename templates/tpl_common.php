@@ -8,10 +8,10 @@
     <head>
       <title>Super Houses</title>
       <meta charset="utf-8">
+      <link rel="stylesheet" type="text/css" href="../dependencies/pikaday/css/pikaday.css">
       <link rel="stylesheet" href="../css/style.css">
       <link rel="stylesheet" href="../css/responsive.css">
       <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" crossorigin="anonymous">
-      <link rel="stylesheet" type="text/css" href="../dependencies/pikaday/css/pikaday.css">
       <link rel="icon" type="image/png" href="../css/favicon-16x16.png">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <script src="../js/ajax.js" defer></script>
