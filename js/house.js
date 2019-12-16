@@ -61,19 +61,53 @@ function validateDate(date) {
     let reservationStart = new Date(futureReservations[i]['dateStart']);
     let reservationEnd = new Date(futureReservations[i]['dateEnd']);   
 
-    if (date < reservationEnd && date > reservationStart)
+    if (date < reservationEnd && date >= reservationStart)
       return true;
   }
   return false;
 }
 
 checkInDate.addEventListener('change', function() {
-  checkOutPicker.setMinDate(new Date(checkInDate.value))
+  let minCheckInDate = new Date(checkInDate.value);
+  checkOutPicker.setMaxDate(null);
+  checkOutPicker.setMinDate(minCheckInDate);
+  let maxCheckOutDate;
+  for (let i = 0; i < futureReservations.length; i++) {
+    console.log(maxCheckOutDate);
+    let reservationStart = new Date(futureReservations[i]['dateStart']); 
+
+    if(maxCheckOutDate != null) {
+      if(reservationStart > minCheckInDate && maxCheckOutDate > reservationStart)
+        maxCheckOutDate = reservationStart;
+    }
+    else if(reservationStart > minCheckInDate) 
+      maxCheckOutDate = reservationStart;
+  }
+  if(maxCheckOutDate != null) {
+    checkOutPicker.setMaxDate(maxCheckOutDate);
+  }
   updateBookingPrice();
 });
 
 checkOutDate.addEventListener('change', function() {
-  checkInPicker.setMaxDate(new Date(checkInDate.value))
+  let maxCheckOutDate = new Date(checkOutDate.value);
+  checkInPicker.setMinDate(null);
+  checkInPicker.setMaxDate(maxCheckOutDate);
+  let minCheckInDate;
+  for (let i = 0; i < futureReservations.length; i++) {
+    console.log(maxCheckOutDate);
+    let reservationEnd = new Date(futureReservations[i]['dateEnd']);  
+
+    if(minCheckInDate != null) {
+      if(reservationEnd < maxCheckOutDate && minCheckInDate < reservationEnd)
+        minCheckInDate = reservationEnd;
+    }
+    else if(reservationEnd < maxCheckOutDate) 
+      minCheckInDate = reservationEnd;
+  }
+  if(maxCheckOutDate != null) {
+    checkInPicker.setMinDate(minCheckInDate);
+  }
   updateBookingPrice();
 });
 
