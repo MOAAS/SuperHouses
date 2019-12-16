@@ -64,7 +64,8 @@ let notification = document.getElementById('notifications');
 
 
 window.addEventListener('click', event => {
-    if (!isDescendant(notification,event.target))
-        notificationList.style.display = "none";
+    if (!isDescendant(notification,event.target) && notificationList.style.display == "block"){
+        toggleNotificationList();
+    }
 });
 
