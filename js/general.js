@@ -146,7 +146,7 @@ function changeTheme(theme){
 let profilebutton = document.getElementById('profilebutton');
 let dropdownbackground = document.querySelector(".dropdown-content");
 
-if(profilebutton != null){
+if(profilebutton != null) {
     profilebutton.addEventListener('click', () => {
         if (dropdownbackground.style.display == "block") 
             dropdownbackground.style.display = "none";
@@ -154,8 +154,8 @@ if(profilebutton != null){
     });
 }
 
-if(dropdownbackground != null){
-window.addEventListener('click', event => {
+if(dropdownbackground != null) {
+    window.addEventListener('click', event => {
         if (event.target.parentNode != profilebutton)
             dropdownbackground.style.display = "none";
     });
