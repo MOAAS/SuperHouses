@@ -84,20 +84,28 @@
   $no_uploaded_files = (UPLOAD_ERR_NO_FILE == $_FILES['fileUpload']['error'][0]);
   if(! $no_uploaded_files){
     $total_files = count($_FILES['fileUpload']['name']);
+    if($total_files >= 30){
+      addErrorMessage("Editing place failed! Maximum of 30 photos exceded");
+      die(header('Location: ../pages/house.php?id='.$id));
+    }
     for($key = 0; $key < $total_files; $key++){
      if ($_FILES['fileUpload']['error'][$key] !== UPLOAD_ERR_OK) {
-      addErrorMessage("Editing place failed!Upload failed with error code " . $_FILES['file']['error'][$key]);
-       die(header('Location: ../pages/house.php?id='.$id));
+      addErrorMessage("Editing place failed! Upload failed with error code " . $_FILES['file']['error'][$key]);
+      die(header('Location: ../pages/house.php?id='.$id));
      }     
      $info = getimagesize($_FILES['fileUpload']['tmp_name'][$key]);
      if ($info === FALSE) {
       addErrorMessage("Editing place failed! Unable to determine image type of uploaded file");
-       die(header('Location: ../pages/house.php?id='.$id));
+      die(header('Location: ../pages/house.php?id='.$id));
      }
 
      if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
-      addErrorMessage("Editing place failed!Not a gif/jpeg/png");
+      addErrorMessage("Editing place failed! Not a gif/jpeg/png");
        die(header('Location: ../pages/house.php?id='.$id));
+     }
+     if($_FILES['fileUpload']['size'][$key] > 5242880) { //5 MB  
+      addErrorMessage("Editing place failed! Image size above 5MB");
+      die(header('Location: ../pages/house.php?id='.$id));
      }
     } 
   }

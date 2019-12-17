@@ -77,9 +77,13 @@
     die(header('Location: ../pages/profile.php#Add place'));
   }
   $total_files = count($_FILES['fileUpload']['name']);
+  if($total_files >= 30){
+    addErrorMessage("Adding place failed! Maximum of 30 photos exceded");
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
   for($key = 0; $key < $total_files; $key++){
    if ($_FILES['fileUpload']['error'][$key] !== UPLOAD_ERR_OK) {
-    addErrorMessage("Adding place failed!Upload failed with error code " . $_FILES['file']['error'][$key]);
+    addErrorMessage("Adding place failed! Upload failed with error code " . $_FILES['file']['error'][$key]);
     die(header('Location: ../pages/profile.php#Add place'));
    }     
    $info = getimagesize($_FILES['fileUpload']['tmp_name'][$key]);
@@ -89,7 +93,12 @@
    }
    
    if (($info[2] !== IMAGETYPE_GIF) && ($info[2] !== IMAGETYPE_JPEG) && ($info[2] !== IMAGETYPE_PNG)) {
-    addErrorMessage("Adding place failed!Not a gif/jpeg/png");
+    addErrorMessage("Adding place failed! Not a gif/jpeg/png");
+    die(header('Location: ../pages/profile.php#Add place'));
+   }
+
+   if($_FILES['fileUpload']['size'][$key] > 5242880) { //5 MB  
+    addErrorMessage("Adding place failed! Image size above 5MB");
     die(header('Location: ../pages/profile.php#Add place'));
    }
   } 
@@ -113,6 +122,6 @@
   }
 
   
-  header('Location: ../pages/search_houses.php');
+ header('Location: ../pages/search_houses.php');
 
 ?>
