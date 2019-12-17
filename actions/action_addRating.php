@@ -15,7 +15,7 @@
         return;
     }
 
-    if ($numStars < 1 || $numStars > 5) {
+    if (!is_numeric($numStars) || $numStars < 1 || $numStars > 5) {
         echo "Must rate from 1 to 5, rated $numStars";
         return;
     }
