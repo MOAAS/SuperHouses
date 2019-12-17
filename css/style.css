@@ -1277,6 +1277,11 @@ button:hover {
     clear: both;
 }
 
+#messageHistory .receivedMessage {
+    float: left;
+    clear: both;
+}
+
 #messageHistory .message p {
     white-space: pre-wrap;
     word-break: break-all;

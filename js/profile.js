@@ -169,7 +169,8 @@ reservations.forEach(reservation => {
 
 let reservationGuests = document.querySelectorAll('#comingReservations .reservationGuest h3');
 reservationGuests.forEach(guest => {
-    guest.addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
+    if (guest.textContent != username)
+        guest.addEventListener('click', () => selectTabItem('Conversation ' + guest.textContent));
 });
 
 // Conversations
