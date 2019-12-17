@@ -686,14 +686,10 @@ button:hover {
 }
 
 /* Authentication */
-#loginPage{
-    background-image: url("login.jpg");
-    background-size:     cover;                     
-    background-repeat:   no-repeat;
-    background-position: center center;
-}
-
+#loginPage, 
 #signupPage{
+    box-sizing: border-box;
+    padding: 5em 7em;
     background-image: url("login.jpg");
     background-size:     cover;                     
     background-repeat:   no-repeat;
@@ -702,12 +698,11 @@ button:hover {
 
 #login {
     border-radius: 4px;
-    margin: 5em 7em;
     max-width: 20em;
 }
+
 #signup {
     border-radius: 4px;
-    margin: 6em 7em 0 7em;
     max-width: 30em;
 }
 
