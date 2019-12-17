@@ -1285,11 +1285,6 @@ button:hover {
     color: var(--text-color-2);
 }
 
-#messageHistory .message .messageDate {
-    display: block;
-    margin: 0.25em;
-}
-
 #messageHistory .sentMessage p {
     border-radius: 20px 20px 1px 20px;
     background-color: var(--main-color);
@@ -1302,6 +1297,14 @@ button:hover {
     color:  var(--text-color)
 }
 
+#messageHistory .message .messageDate {
+    display: block;
+    margin: 0.25em;
+}
+
+#messageHistory .sentMessage .messageDate {
+    text-align: right;
+}
 
 #sendMessageInput form {
     display: flex;
