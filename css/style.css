@@ -689,7 +689,6 @@ button:hover {
 #loginPage, 
 #signupPage{
     box-sizing: border-box;
-    padding: 5em 7em;
     background-image: url("login.jpg");
     background-size:     cover;                     
     background-repeat:   no-repeat;
@@ -697,11 +696,17 @@ button:hover {
 }
 
 #login {
+    position:absolute;
+    left:5em;
+    top:7em;
     border-radius: 4px;
     max-width: 20em;
 }
 
 #signup {
+    position:absolute;
+    left:5em;
+    top:7em;
     border-radius: 4px;
     max-width: 30em;
 }

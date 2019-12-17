@@ -2,6 +2,9 @@
     /* sign up login */
     #signup, #login {
         margin: auto;
+        position: relative;
+        top: 3em;
+        left: 0;
     }
 
     /* Profile page stretching */
@@ -136,11 +139,12 @@
         font-size: 1.25em;
         margin: 0.25em 0;
     }
-
+    
     #login, #signup {
         max-width: 100%;
         height: 100%;
         border-radius: 0;
+        top: 0;
     }
 
     #loginPage, #signupPage {
