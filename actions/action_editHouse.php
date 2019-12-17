@@ -24,10 +24,35 @@
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
   $house = getHouseById($id);
+
+  if ($house == NULL) {
+    addErrorMessage('Editing place failed! Invalid house!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
   
   if($username != $house->ownerUsername){
-    addErrorMessage('Editing place failed. You are not the owner! id: ' . $id . ' usernam' . $username . ' owner:' . $house->ownerUsername);
+    addErrorMessage('Editing place failed. You are not the owner!');
     die(header('Location: ../pages/profile.php#Your%20places'));
+  }
+
+  if ($title == NULL || $title == "") {
+    addErrorMessage('Editing place failed! Invalid title!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+  if ($description == NULL || $description == "") {
+    addErrorMessage('Editing place failed! Invalid description!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+  if ($city == NULL || $city == "") {
+    addErrorMessage('Editing place failed! Invalid city!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+  if ($address == NULL || $address == "") {
+    addErrorMessage('Editing place failed! Invalid address!');
+    die(header('Location: ../pages/profile.php#Add place'));
   }
   
   if ($price <= 0 || $price > 1000 || !is_numeric($price)) {

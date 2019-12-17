@@ -114,7 +114,7 @@
               <section class="comment reply">
                 <img src="<?=$ownerProfilepic?>" alt="<?=toHTML($house->ownerDisplayname)?>"> 
                 <h3 class="commentPoster"><?=toHTML($house->ownerDisplayname)?></h3>
-                <p class="commentContent allowNewLines"><?=$comment['reply']?></p>
+                <p class="commentContent allowNewLines"><?=toHTML($comment['reply'])?></p>
               </section>
             <?php } else if ($canReply) { ?>
               <form method="post" action="" class="genericForm hidden">

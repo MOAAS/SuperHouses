@@ -19,7 +19,33 @@
 
   $username = $_SESSION['username'];
   $ownerId = getUserId($username);
+
+  if ($ownerId == NULL) {
+    addErrorMessage('Adding place failed! Invalid user!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+
+  if ($title == NULL || $title == "") {
+    addErrorMessage('Adding place failed! Invalid title!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
   
+  if ($description == NULL || $description == "") {
+    addErrorMessage('Adding place failed! Invalid description!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+  if ($city == NULL || $city == "") {
+    addErrorMessage('Adding place failed! Invalid city!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+  if ($address == NULL || $address == "") {
+    addErrorMessage('Adding place failed! Invalid address!');
+    die(header('Location: ../pages/profile.php#Add place'));
+  }
+  
+
   if ($price <= 0 || $price > 1000 || !is_numeric($price)) {
     addErrorMessage('Adding place failed! Price invalid!');
     die(header('Location: ../pages/profile.php#Add place'));

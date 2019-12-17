@@ -331,9 +331,9 @@
             <?=$conversation->seen?'seenMessage':''?>"
           >
             <img src="<?=getUserInfo($conversation->otherUser)->profilePic?>" alt="Photo"/>
-            <h3><?=$conversation->otherUser?></h3>
+            <h3><?=toHTML($conversation->otherUser)?></h3>
             <p><?=toHTML($conversation->content)?></p>
-            <small class="messageDate"> <?=$conversation->sendTime?></small>
+            <small class="messageDate"> <?=toHTML($conversation->sendTime)?></small>
           </li>
         <?php } ?>
       </ul>

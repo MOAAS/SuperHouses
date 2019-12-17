@@ -14,6 +14,11 @@ $house_id = $_POST['houseID'];
 
 $house = getHouseById($house_id);
 
+if ($house == NULL) {
+    echo json_encode('House does not exist!');
+    return;
+}
+
 $ownerUsername = $house->ownerUsername;
 
 if ($ownerUsername != $_SESSION['username']) {

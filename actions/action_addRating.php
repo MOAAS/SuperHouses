@@ -21,19 +21,24 @@
     }
 
     $reservation = getReservationByID($reservationID);
-    if (!$reservation->hasEnded()) {
-        echo "Reservation must have ended to be reviewed";
-        return;
-    }
-
     if ($reservation == null) {
         echo "Reservation does not exist";
+        return;
+    }  
+
+    if (!$reservation->hasEnded()) {
+        echo "Reservation must have ended to be reviewed";
         return;
     }
     
     if (getReservationHost($reservationID) == $username) {
         echo "The host cannot review his own house";
         return;
+    }
+
+    if ($reservation->getGuest() != $username) {
+        echo "This is not your reservation!";
+        return;        
     }
     
     $rating = getReservationRating($reservationID);

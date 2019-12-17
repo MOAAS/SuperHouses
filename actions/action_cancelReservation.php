@@ -12,6 +12,11 @@
 
     $reservation = getReservationByID($reservation_id);
 
+    if ($reservation == null) {
+        echo "Reservation does not exist";
+        return;
+    }
+
     $guestUsername = $reservation->getGuest();
     $hostUsername = $reservation->getPlace()->ownerUsername;
 
